@@ -1,0 +1,455 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Changelog &mdash; rpclib v1.0.0beta documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.0beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="rpclib v1.0.0beta documentation" href="../index.html" />
+    <link rel="prev" title="Rpclib FAQ" href="faq.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="faq.html" title="Rpclib FAQ"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">rpclib v1.0.0beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="changelog">
+<h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="rpclib-2-2-2-alpha">
+<h2>rpclib-2.2.2-alpha<a class="headerlink" href="#rpclib-2-2-2-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Fixed call to rpclib.application.Application.call_wrapper</li>
+<li>Fixed HttpRpc server tranport instantiation.</li>
+<li>Documentation improvements.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id1">
+<h2>rpclib-2.2.2-alpha<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Fixed call to rpclib.application.Application.call_wrapper introduced</li>
+<li>Documentation improvements.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-2-0-alpha">
+<h2>rpclib-2.2.0-alpha<a class="headerlink" href="#rpclib-2-2-0-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>The serialization / deserialization logic was redesigned. Now most of the
+serialization-related logic is under the responsibility of the ProtocolBase
+children.</li>
+<li>Interface generation logic was redesigned. The WSDL logic is separated to
+XmlSchema and Wsdl11 classes. &#8216;add_to_schema&#8217; calls were renamed to just
+&#8216;add&#8217; and were moved inside rpclib.interface.xml_schema package.</li>
+<li>Interface and Protocol assignment of an rpclib application is now more
+explicit. Both are also configurable during instantion. This doesn&#8217;t mean
+there&#8217;s much to configure :)</li>
+<li>WS-I Conformance is back!. See <a class="reference external" href="https://github.com/arskom/rpclib/blob/master/src/rpclib/test/interop/wsi-report-rpclib.xml">https://github.com/arskom/rpclib/blob/master/src/rpclib/test/interop/wsi-report-rpclib.xml</a>
+for the latest conformance report.</li>
+<li>Numeric types now support range restrictions. e.g. Integer(ge=0) will only
+accept positive integers.</li>
+<li>Any -&gt; AnyXml, AnyAsDict -&gt; AnyDict. AnyAsDict is not the child of the AnyXml
+anymore.</li>
+<li>rpclib.model.exception -&gt; rpclib.model.fault.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-1-0-alpha">
+<h2>rpclib-2.1.0-alpha<a class="headerlink" href="#rpclib-2-1-0-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>The method dispatch logic was rewritten: It&#8217;s now possible for the protocols
+to override how method request strings are matched to methods definitions.</li>
+<li>Unsigned integer primitives were added.</li>
+<li>ZeroMQ client was fixed.</li>
+<li>Header confusion in native http soap client was fixed.</li>
+<li>Grouped transport-specific context information under ctx.transport
+attribute.</li>
+<li>Added a self reference mechanism.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-0-10-alpha">
+<h2>rpclib-2.0.10-alpha<a class="headerlink" href="#rpclib-2-0-10-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>The inclusion of base xml schemas were made optional.</li>
+<li>WSDL: Fix out header being the same as in header.</li>
+<li>Added type checking to outgoing Integer types. it&#8217;s not handled as nicely as
+it should be.</li>
+<li>Fixed the case where changing the _in_message tag name of the method
+prevented it from being called.</li>
+<li>SOAP/WSDL: Added support for multiple {in,out}_header objects.</li>
+<li>Correct some bugs with the XMLAttribute model</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-0-9-alpha">
+<h2>rpclib-2.0.9-alpha<a class="headerlink" href="#rpclib-2-0-9-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Added inheritance support to rpclib.model.table.TableSerializer.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-0-8-alpha">
+<h2>rpclib-2.0.8-alpha<a class="headerlink" href="#rpclib-2-0-8-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>The NullServer now also returns context with the return object to have it
+survive past user-defined method return.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-0-7-alpha">
+<h2>rpclib-2.0.7-alpha<a class="headerlink" href="#rpclib-2-0-7-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>More tests are migrated to the new api.</li>
+<li>Function identifier strings are no more created directly from the function
+object itself. Function&#8217;s key in the class definition is used as default
+instead.</li>
+<li>Base xml schemas are no longer imported.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-0-6-alpha">
+<h2>rpclib-2.0.6-alpha<a class="headerlink" href="#rpclib-2-0-6-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Added rpclib.server.null.NullServer, which is a server class with a client
+interface that attempts to do no (de)serialization at all. It&#8217;s intended to
+be used in tests.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-0-5-alpha">
+<h2>rpclib-2.0.5-alpha<a class="headerlink" href="#rpclib-2-0-5-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Add late mapping support to sqlalchemy table serializer.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-0-4-alpha">
+<h2>rpclib-2.0.4-alpha<a class="headerlink" href="#rpclib-2-0-4-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Add preliminary support for a sqlalchemy-0.7-compatible serializer.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-0-3-alpha">
+<h2>rpclib-2.0.3-alpha<a class="headerlink" href="#rpclib-2-0-3-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Migrate the HttpRpc serializer to the new internal api.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-0-2-alpha">
+<h2>rpclib-2.0.2-alpha<a class="headerlink" href="#rpclib-2-0-2-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>SimpleType -&gt; SimpleModel</li>
+<li>Small bugfixes.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-0-1-alpha">
+<h2>rpclib-2.0.1-alpha<a class="headerlink" href="#rpclib-2-0-1-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>EventManager now uses ordered sets instead of normal sets to store event
+handlers.</li>
+<li>Implemented sort_wsdl, a small hack to sort wsdl output in order to ease
+debugging.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-0-0-alpha">
+<h2>rpclib-2.0.0-alpha<a class="headerlink" href="#rpclib-2-0-0-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul>
+<li><p class="first">Implemented EventManager and replaced hook calls with events.</p>
+</li>
+<li><p class="first">The rpc decorator now produces static methods. The methods still get an implicit
+first argument that holds the service contexts. It&#8217;s an instance of the
+MethodContext class, and not the ServiceBase (formerly DefinitionBase) class.</p>
+</li>
+<li><p class="first">The new srpc decorator doesn&#8217;t force the methods to have an implicit first
+argument.</p>
+</li>
+<li><p class="first">Fixed fault namespace resolution.</p>
+</li>
+<li><p class="first">Moved xml constants to rpclib.const.xml_ns</p>
+</li>
+<li><dl class="first docutils">
+<dt>The following changes to soaplib were ported to rpclib&#8217;s SOAP/WSDL parts:</dt>
+<dd><ul class="first last simple">
+<li>duration object is now compatible with Python&#8217;s native timedelta.</li>
+<li>WSDL: Support for multiple &lt;service&gt; tags in the wsdl (one for each class in the
+application)</li>
+<li>WSDL: Support for multiple &lt;portType&gt; tags and multiple ports.</li>
+<li>WSDL: Support for enumerating exceptions a method can throw was added.</li>
+<li>SOAP: Exceptions got some love to be more standards-compliant.</li>
+<li>SOAP: Xml attribute support</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Moved all modules with packagename.base to packagename._base.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Renamed classes to have module name as a prefix:</dt>
+<dd><ul class="first last simple">
+<li>rpclib.client._base.Base -&gt; rpclib.client._base.ClientBase</li>
+<li>rpclib.model._base.Base -&gt; rpclib.model._base.ModelBase</li>
+<li>rpclib.protocol._base.Base -&gt; rpclib.protocol._base.ProtocolBase</li>
+<li>rpclib.server._base.Base -&gt; rpclib.server._base.ServerBase</li>
+<li>rpclic.service.DefinitionBase -&gt; rpclib.service.ServiceBase</li>
+<li>rpclib.server.wsgi.Application  -&gt; rpclib.server.wsgi.WsgiApplication</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first">Moved some classes and modules around:
+* rpclib.model.clazz -&gt; rpclib.model.complex
+* rpclib.model.complex.ClassSerializer -&gt; rpclib.model.complex.ComplexModel
+* rpclib.Application -&gt; rpclib.application.Application
+* rpclib.service.rpc, srpc -&gt; rpclib.decorator.rpc, srpc</p>
+</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="soaplib-3-x-rpclib-1-1-1-alpha">
+<h2>soaplib-3.x -&gt; rpclib-1.1.1-alpha<a class="headerlink" href="#soaplib-3-x-rpclib-1-1-1-alpha" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Soaplib is now also protocol agnostic. As it now supports protocols other
+than soap (like Rest-minus-the-verbs HttpRpc), it&#8217;s renamed to rpclib. This
+also means soaplib can now support multiple versions of soap and wsdl
+standards.</li>
+<li>Mention of xml and soap removed from public api where it&#8217;s not directly
+related to soap or xml. (e.g. a hook rename: on_method_exception_xml -&gt;
+on_method_exception_doc)</li>
+<li>Protocol serializers now return iterables instead of complete messages. This
+is a first step towards eliminating the need to have the whole message in
+memory during processing.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="soaplib-2-x">
+<h2>soaplib-2.x<a class="headerlink" href="#soaplib-2-x" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>This release transformed soaplib from a soap server that exclusively supported
+http to a soap serialization/deserialization library that is architecture and
+transport agnostic.</li>
+<li>Hard dependency on WSGI removed.</li>
+<li>Sphinx docs with working examples: <a class="reference external" href="http://arskom.github.com/soaplib/2_0/">http://arskom.github.com/soaplib/2_0/</a></li>
+<li>Serializers renamed to Models.</li>
+<li>Standalone xsd generation for ClassSerializer objects has been added. This
+allows soaplib to be used to define generic XML schemas, without SOAP
+artifacts.</li>
+<li>Annotation Tags for primitive Models has been added.</li>
+<li>The soaplib client has been re-written after having been dropped from
+recent releases. It follows the suds API but is based on lxml for better
+performance.
+WARNING: the soaplib client is not well-tested and future support is tentative
+and dependent on community response.</li>
+<li>0mq support added.</li>
+<li>Twisted supported via WSGI wrappers.</li>
+<li>Increased test coverage for soaplib and supported servers</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="soaplib-1-0">
+<h2>soaplib-1.0<a class="headerlink" href="#soaplib-1-0" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Standards-compliant Soap Faults</li>
+<li>Allow multiple return values and return types</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="soaplib-0-9-4">
+<h2>soaplib-0.9.4<a class="headerlink" href="#soaplib-0-9-4" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>pritimitive.Array -&gt; clazz.Array</li>
+<li>Support for SimpleType restrictions (pattern, length, etc.)</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="soaplib-0-9-3">
+<h2>soaplib-0.9.3<a class="headerlink" href="#soaplib-0-9-3" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Soap header support</li>
+<li>Tried the WS-I Test first time. Many bug fixes.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="soaplib-0-9-2">
+<h2>soaplib-0.9.2<a class="headerlink" href="#soaplib-0-9-2" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Support for inheritance.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="soaplib-0-9-1">
+<h2>soaplib-0.9.1<a class="headerlink" href="#soaplib-0-9-1" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Support for publishing multiple service classes.</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="soaplib-0-9">
+<h2>soaplib-0.9<a class="headerlink" href="#soaplib-0-9" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Soap server logic almost completely rewritten.</li>
+<li>Soap client removed in favor of suds.</li>
+<li>Object definition api no longer needs a class types: under class definition.</li>
+<li>XML Schema validation is supported.</li>
+<li>Support for publishing multiple namespaces. (multiple &lt;schema&gt; tags in the wsdl)</li>
+<li>Support for enumerations.</li>
+<li>Application and Service Definition are separated. Application is instantiated
+on server start, and Service Definition is instantiated for each new request.</li>
+<li>&#64;soapmethod -&gt; &#64;rpc</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="soaplib-0-8">
+<h2>soaplib-0.8<a class="headerlink" href="#soaplib-0-8" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>Switched to lxml for proper xml namespace support.</li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Changelog</a><ul>
+<li><a class="reference internal" href="#rpclib-2-2-2-alpha">rpclib-2.2.2-alpha</a></li>
+<li><a class="reference internal" href="#id1">rpclib-2.2.2-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-2-0-alpha">rpclib-2.2.0-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-1-0-alpha">rpclib-2.1.0-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-0-10-alpha">rpclib-2.0.10-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-0-9-alpha">rpclib-2.0.9-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-0-8-alpha">rpclib-2.0.8-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-0-7-alpha">rpclib-2.0.7-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-0-6-alpha">rpclib-2.0.6-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-0-5-alpha">rpclib-2.0.5-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-0-4-alpha">rpclib-2.0.4-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-0-3-alpha">rpclib-2.0.3-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-0-2-alpha">rpclib-2.0.2-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-0-1-alpha">rpclib-2.0.1-alpha</a></li>
+<li><a class="reference internal" href="#rpclib-2-0-0-alpha">rpclib-2.0.0-alpha</a></li>
+<li><a class="reference internal" href="#soaplib-3-x-rpclib-1-1-1-alpha">soaplib-3.x -&gt; rpclib-1.1.1-alpha</a></li>
+<li><a class="reference internal" href="#soaplib-2-x">soaplib-2.x</a></li>
+<li><a class="reference internal" href="#soaplib-1-0">soaplib-1.0</a></li>
+<li><a class="reference internal" href="#soaplib-0-9-4">soaplib-0.9.4</a></li>
+<li><a class="reference internal" href="#soaplib-0-9-3">soaplib-0.9.3</a></li>
+<li><a class="reference internal" href="#soaplib-0-9-2">soaplib-0.9.2</a></li>
+<li><a class="reference internal" href="#soaplib-0-9-1">soaplib-0.9.1</a></li>
+<li><a class="reference internal" href="#soaplib-0-9">soaplib-0.9</a></li>
+<li><a class="reference internal" href="#soaplib-0-8">soaplib-0.8</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="faq.html"
+                        title="previous chapter">Rpclib FAQ</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/pages/changelog.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="faq.html" title="Rpclib FAQ"
+             >previous</a> |</li>
+        <li><a href="../index.html">rpclib v1.0.0beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Aaron Bickell.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

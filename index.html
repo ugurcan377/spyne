@@ -1,7 +1,283 @@
-<html>
-<head>
-</head>
-<body>
-   <a href="2_0">Soaplib 2.x Documentation</a>
-</body>
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Rpclib &mdash; rpclib v1.0.0beta documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.0.0beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="rpclib v1.0.0beta documentation" href="#" />
+    <link rel="next" title="Rpclib Tutorials" href="tutorial/index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial/index.html" title="Rpclib Tutorials"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">rpclib v1.0.0beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="rpclib">
+<h1>Rpclib<a class="headerlink" href="#rpclib" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="about">
+<h2>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
+<p>Rpclib is an unobstrusive Python library that helps you expose your APIs to a
+wider audience via various Remote Procedure Call protocols and transports.</p>
+<p>It currently supports the WSDL 1.1 interface definition standard, along with
+SOAP 1.1 and the rest-minus-the-verbs HttpRpc protocol which can be
+transported via HTTP or ZeroMQ in a both client or server architecture.</p>
+<p>The source code is <cite>here &lt;https://github.com/arskom/rpclib&gt;</cite>.</p>
+</div>
+<div class="section" id="installing">
+<h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
+<p>To install rpclib, you can use git to clone from github or install from pypi:</p>
+<div class="highlight-python"><pre>git clone git://github.com/arskom/rpclib.git
+cd rpclib
+python setup.py install
+
+# to run the non-interop tests use:
+python setup.py test
+
+# if you want to make any changes to the rpclib code, it's more comfortable
+# to use:
+python setup.py develop</pre>
+</div>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
+<p>The main developers of rpclib lurk in the official soap implementors forum
+in python.org, <cite>here &lt;http://mail.python.org/mailman/listinfo/soap/&gt;</cite>.
+That&#8217;s mostly because rpclib is the continuation of soaplib, but also
+because soap is an important part of rpclib.</p>
+<p>If you wish to contribute to rpclib&#8217;s development, create a personal fork
+on GitHub.  When you are ready to push to the mainstream repository,
+submit a pull request to bring your work to the attention of the core
+committers. They will respond to review your patch and act accordingly.</p>
+<p>To save both parties time, make sure the existing tests pass. If you are
+adding new functionality or fixing a bug, please have the accompanying test.
+This will both help us increase test coverage and insure your use-case
+is immunte to feature code changes. You could also summarize in one or
+two lines how your work will affect the life of rpclib users in the
+CHANGELOG file.</p>
+<p>Please follow the <cite>PEP 8 &lt;http://www.python.org/dev/peps/pep-0008/&gt;</cite>
+style guidelines for both source code and docstrings.</p>
+<p>We could also use help with the docs, which are built from reStructureText
+using Sphinx.</p>
+<p>Regular contributors may be invited to join as a core rpclib committer on
+GitHub. Even if this gives the core committers the power to commit directly
+to the core repository, we highly value code reviews and expect every
+significant change to be committed via pull requests. It also provides a
+stable home for the rpclib repository, despite any &#8220;changing of the guard&#8221;
+as team members join and leave the project.</p>
+</div>
+<div class="section" id="contents">
+<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Rpclib Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/helloworld.html">Hello World</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/usermanager.html">User Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/usermanager.html#what-s-next">What&#8217;s next?</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Rpclib API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/serializers.html">Serializers</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#primitives">Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#arrays">Arrays</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#class">Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#attachment">Attachment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#any">Any</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#anyasdict">AnyAsDict</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#custom">Custom</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pages/binaryfiles.html">Binary Files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/message_api.html">Message API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/hooks.html">Hooks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pages/apache_axis.html">Axis Interoperability</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/apache_axis.html#how-to-run-the-test">How to run the test</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pages/serializer_api.html">Serializer API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model._base">Base</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.binary">Binary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.complex">Clazz</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.enum">Enum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.fault">Exception</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.primitive">Primitive</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.table">Table</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pages/soap.html">SOAP API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/soap.html#module-rpclib.protocol.soap._base">soap</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pages/wsgi.html">WSGI API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/wsgi.html#module-rpclib.server.wsgi">wsgi</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="pages/service.html">Service</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/service.html#id1">service</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="frequently-asked-questions">
+<h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pages/faq.html">Rpclib FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/faq.html#does-rpclib-support-the-1-2-soap-spec">Does rpclib support the 1.2 SOAP spec?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/faq.html#how-do-i-implement-a-predefined-wsdl">How do I implement a predefined WSDL?</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div class="section" id="change-log">
+<h2>Change Log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="pages/changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-2-2-alpha">rpclib-2.2.2-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#id1">rpclib-2.2.2-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-2-0-alpha">rpclib-2.2.0-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-1-0-alpha">rpclib-2.1.0-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-10-alpha">rpclib-2.0.10-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-9-alpha">rpclib-2.0.9-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-8-alpha">rpclib-2.0.8-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-7-alpha">rpclib-2.0.7-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-6-alpha">rpclib-2.0.6-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-5-alpha">rpclib-2.0.5-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-4-alpha">rpclib-2.0.4-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-3-alpha">rpclib-2.0.3-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-2-alpha">rpclib-2.0.2-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-1-alpha">rpclib-2.0.1-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-0-alpha">rpclib-2.0.0-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-3-x-rpclib-1-1-1-alpha">soaplib-3.x -&gt; rpclib-1.1.1-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-2-x">soaplib-2.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-1-0">soaplib-1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-9-4">soaplib-0.9.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-9-3">soaplib-0.9.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-9-2">soaplib-0.9.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-9-1">soaplib-0.9.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-9">soaplib-0.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-8">soaplib-0.8</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><a class="reference internal" href="genindex.html"><em>Index</em></a></li>
+<li><a class="reference internal" href="py-modindex.html"><em>Module Index</em></a></li>
+<li><a class="reference internal" href="search.html"><em>Search Page</em></a></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Rpclib</a><ul>
+<li><a class="reference internal" href="#about">About</a></li>
+<li><a class="reference internal" href="#installing">Installing</a></li>
+<li><a class="reference internal" href="#contributing">Contributing</a></li>
+<li><a class="reference internal" href="#contents">Contents:</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a><ul>
+</ul>
+</li>
+<li><a class="reference internal" href="#change-log">Change Log</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tutorial/index.html"
+                        title="next chapter">Rpclib Tutorials</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="tutorial/index.html" title="Rpclib Tutorials"
+             >next</a> |</li>
+        <li><a href="#">rpclib v1.0.0beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Aaron Bickell.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
 </html>

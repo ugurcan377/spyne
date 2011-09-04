@@ -1,0 +1,176 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Service &mdash; rpclib v1.0.0beta documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.0beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="rpclib v1.0.0beta documentation" href="../index.html" />
+    <link rel="next" title="Rpclib FAQ" href="faq.html" />
+    <link rel="prev" title="WSGI API" href="wsgi.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="faq.html" title="Rpclib FAQ"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="wsgi.html" title="WSGI API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">rpclib v1.0.0beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="service">
+<h1>Service<a class="headerlink" href="#service" title="Permalink to this headline">¶</a></h1>
+<p>The service module provides the methods and classes for producing the soap service</p>
+<div class="section" id="id1">
+<h2>service<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-rpclib.service"></span><dl class="class">
+<dt id="rpclib.service.ServiceBase">
+<em class="property">class </em><tt class="descclassname">rpclib.service.</tt><tt class="descname">ServiceBase</tt><a class="headerlink" href="#rpclib.service.ServiceBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class serves as the base for all service definitions.  Subclasses of
+this class will use the rpc decorator to flag methods to be exposed via soap.</p>
+<p>It is a natural abstract base class, because it&#8217;s of no use without any
+method definitions, hence the &#8216;Base&#8217; suffix in the name.</p>
+<dl class="classmethod">
+<dt id="rpclib.service.ServiceBase.call_wrapper">
+<em class="property">classmethod </em><tt class="descname">call_wrapper</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.service.ServiceBase.call_wrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>Called in place of the original method call.</p>
+<p>&#64;param the original method call
+&#64;param the arguments to the call</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.service.ServiceBase.get_port_types">
+<em class="property">classmethod </em><tt class="descname">get_port_types</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.service.ServiceBase.get_port_types" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.service.ServiceBase.get_service_class_name">
+<em class="property">classmethod </em><tt class="descname">get_service_class_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.service.ServiceBase.get_service_class_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.service.ServiceBase.get_service_name">
+<em class="property">classmethod </em><tt class="descname">get_service_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.service.ServiceBase.get_service_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.service.ServiceBase.get_tns">
+<em class="property">classmethod </em><tt class="descname">get_tns</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.service.ServiceBase.get_tns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.service.ServiceBaseMeta">
+<em class="property">class </em><tt class="descclassname">rpclib.service.</tt><tt class="descname">ServiceBaseMeta</tt><big>(</big><em>cls_name</em>, <em>cls_bases</em>, <em>cls_dict</em><big>)</big><a class="headerlink" href="#rpclib.service.ServiceBaseMeta" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="rpclib.service.ServiceBaseMeta.mro">
+<tt class="descname">mro</tt><a class="headerlink" href="#rpclib.service.ServiceBaseMeta.mro" title="Permalink to this definition">¶</a></dt>
+<dd><p>mro() -&gt; list
+return a type&#8217;s method resolution order</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Service</a><ul>
+<li><a class="reference internal" href="#id1">service</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="wsgi.html"
+                        title="previous chapter">WSGI API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="faq.html"
+                        title="next chapter">Rpclib FAQ</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/pages/service.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="faq.html" title="Rpclib FAQ"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="wsgi.html" title="WSGI API"
+             >previous</a> |</li>
+        <li><a href="../index.html">rpclib v1.0.0beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Aaron Bickell.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

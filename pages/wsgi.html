@@ -1,0 +1,239 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>WSGI API &mdash; rpclib v1.0.0beta documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '1.0.0beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="rpclib v1.0.0beta documentation" href="../index.html" />
+    <link rel="next" title="Service" href="service.html" />
+    <link rel="prev" title="SOAP API" href="soap.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="service.html" title="Service"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="soap.html" title="SOAP API"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">rpclib v1.0.0beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="wsgi-api">
+<h1>WSGI API<a class="headerlink" href="#wsgi-api" title="Permalink to this headline">¶</a></h1>
+<p>The wsgi module provides a wsgi compliant interface for soap services.</p>
+<div class="section" id="module-rpclib.server.wsgi">
+<span id="wsgi"></span><h2>wsgi<a class="headerlink" href="#module-rpclib.server.wsgi" title="Permalink to this headline">¶</a></h2>
+<p>An rpc server that uses http as transport, and wsgi as bridge api</p>
+<dl class="exception">
+<dt id="rpclib.server.wsgi.ValidationError">
+<em class="property">exception </em><tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">ValidationError</tt><big>(</big><em>faultcode='Server'</em>, <em>faultstring=''</em>, <em>faultactor=''</em>, <em>detail=None</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.ValidationError" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="class">
+<dt id="rpclib.server.wsgi.ValidationError.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="rpclib.server.wsgi.ValidationError.Attributes">
+<em class="property">class </em><tt class="descclassname">ValidationError.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="class">
+<dt id="rpclib.server.wsgi.ValidationError.Empty">
+<em class="property">class </em><tt class="descclassname">ValidationError.</tt><tt class="descname">Empty</tt><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.Empty" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.wsgi.ValidationError.args">
+<tt class="descclassname">ValidationError.</tt><tt class="descname">args</tt><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.server.wsgi.ValidationError.customize">
+<em class="property">classmethod </em><tt class="descclassname">ValidationError.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.customize" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.server.wsgi.ValidationError.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">ValidationError.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.server.wsgi.ValidationError.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">ValidationError.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.server.wsgi.ValidationError.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">ValidationError.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.server.wsgi.ValidationError.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">ValidationError.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.server.wsgi.ValidationError.is_default">
+<em class="property">static </em><tt class="descclassname">ValidationError.</tt><tt class="descname">is_default</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.is_default" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.wsgi.ValidationError.message">
+<tt class="descclassname">ValidationError.</tt><tt class="descname">message</tt><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.message" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.server.wsgi.ValidationError.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">ValidationError.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.server.wsgi.ValidationError.to_dict">
+<em class="property">classmethod </em><tt class="descclassname">ValidationError.</tt><tt class="descname">to_dict</tt><big>(</big><em>string</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.to_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.server.wsgi.ValidationError.to_string">
+<em class="property">classmethod </em><tt class="descclassname">ValidationError.</tt><tt class="descname">to_string</tt><big>(</big><em>string</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.ValidationError.to_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.server.wsgi.WsgiApplication">
+<em class="property">class </em><tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">WsgiApplication</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="rpclib.server.wsgi.WsgiApplication.get_in_object">
+<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.get_in_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rpclib.server.wsgi.WsgiApplication.get_out_object">
+<tt class="descname">get_out_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.get_out_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rpclib.server.wsgi.WsgiApplication.get_out_string">
+<tt class="descname">get_out_string</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.get_out_string" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.server.wsgi.WsgiMethodContext">
+<em class="property">class </em><tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">WsgiMethodContext</tt><big>(</big><em>app</em>, <em>req_env</em>, <em>content_type</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiMethodContext.method_name">
+<tt class="descname">method_name</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.method_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="rpclib.server.wsgi.reconstruct_wsgi_request">
+<tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">reconstruct_wsgi_request</tt><big>(</big><em>http_env</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.reconstruct_wsgi_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reconstruct http payload using information in the http header</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">WSGI API</a><ul>
+<li><a class="reference internal" href="#module-rpclib.server.wsgi">wsgi</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="soap.html"
+                        title="previous chapter">SOAP API</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="service.html"
+                        title="next chapter">Service</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/pages/wsgi.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="service.html" title="Service"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="soap.html" title="SOAP API"
+             >previous</a> |</li>
+        <li><a href="../index.html">rpclib v1.0.0beta documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2010, Aaron Bickell.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
