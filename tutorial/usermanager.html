@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>User Manager &mdash; rpclib v1.0.0beta documentation</title>
+    <title>User Manager &mdash; rpclib v2.2.3-beta documentation</title>
     <link rel="stylesheet" href="../_static/default.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '1.0.0beta',
+        VERSION:     '2.2.3-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,9 +22,9 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="rpclib v1.0.0beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.2.3-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib Tutorials" href="index.html" />
-    <link rel="next" title="Rpclib API Reference" href="../reference/index.html" />
+    <link rel="next" title="SQLAlchemy Integration" href="sqlalchemy.html" />
     <link rel="prev" title="Hello World" href="helloworld.html" /> 
   </head>
   <body>
@@ -38,12 +38,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../reference/index.html" title="Rpclib API Reference"
+          <a href="sqlalchemy.html" title="SQLAlchemy Integration"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="helloworld.html" title="Hello World"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v1.0.0beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.2.3-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib Tutorials</a> &raquo;</li> 
       </ul>
     </div>  
@@ -57,10 +57,10 @@
 <h1>User Manager<a class="headerlink" href="#user-manager" title="Permalink to this headline">¶</a></h1>
 <p>Let&#8217;s try a more complicated example than just strings and integers!
 The following is an simple example using complex, nested data. It&#8217;s available
-here: <a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/user_manager/user_manager.py">http://github.com/arskom/rpclib/blob/master/examples/user_manager/user_manager.py</a></p>
+here: <a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_basic.py">http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_basic.py</a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;rpclib.protocol.soap._base&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;rpclib.protocol.soap.soap11&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">rpclib.application</span> <span class="kn">import</span> <span class="n">Application</span>
 <span class="kn">from</span> <span class="nn">rpclib.decorator</span> <span class="kn">import</span> <span class="n">rpc</span>
@@ -202,12 +202,13 @@ with no specific api it should adhere to, other than your own.</p>
 logging or to performance measurements. (see the events.py example in the
 examples directory in the source distribution for an example on using events to
 measure method performance.</p>
-</div>
 <div class="section" id="what-s-next">
-<h1>What&#8217;s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h1>
+<h2>What&#8217;s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial walks you through most of what you need to know to expose your
-services. You can refer to the rest of the documentation or the mailing list
-if you have further questions.</p>
+services. You can read the SQLAlchemy &amp; Rpclib integration tutorial if you plan
+to expose your database application using rpclib. Otherwise, you should refer to
+the rest of the documentation or the mailing list if you have further questions.</p>
+</div>
 </div>
 
 
@@ -218,16 +219,18 @@ if you have further questions.</p>
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">User Manager</a></li>
+<li><a class="reference internal" href="#">User Manager</a><ul>
 <li><a class="reference internal" href="#what-s-next">What&#8217;s next?</a></li>
+</ul>
+</li>
 </ul>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="helloworld.html"
                         title="previous chapter">Hello World</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../reference/index.html"
-                        title="next chapter">Rpclib API Reference</a></p>
+  <p class="topless"><a href="sqlalchemy.html"
+                        title="next chapter">SQLAlchemy Integration</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../_sources/tutorial/usermanager.txt"
@@ -260,17 +263,17 @@ if you have further questions.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../reference/index.html" title="Rpclib API Reference"
+          <a href="sqlalchemy.html" title="SQLAlchemy Integration"
              >next</a> |</li>
         <li class="right" >
           <a href="helloworld.html" title="Hello World"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v1.0.0beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.2.3-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib Tutorials</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010, Aaron Bickell.
+        &copy; Copyright Burak Arslan.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>

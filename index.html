@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Rpclib &mdash; rpclib v1.0.0beta documentation</title>
+    <title>Rpclib &mdash; rpclib v2.2.3-beta documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '1.0.0beta',
+        VERSION:     '2.2.3-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="rpclib v1.0.0beta documentation" href="#" />
+    <link rel="top" title="rpclib v2.2.3-beta documentation" href="#" />
     <link rel="next" title="Rpclib Tutorials" href="tutorial/index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="tutorial/index.html" title="Rpclib Tutorials"
              accesskey="N">next</a> |</li>
-        <li><a href="#">rpclib v1.0.0beta documentation</a> &raquo;</li> 
+        <li><a href="#">rpclib v2.2.3-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -55,7 +55,7 @@
 wider audience via various Remote Procedure Call protocols and transports.</p>
 <p>It currently supports the WSDL 1.1 interface definition standard, along with
 SOAP 1.1 and the rest-minus-the-verbs HttpRpc protocol which can be
-transported via HTTP or ZeroMQ in a both client or server architecture.</p>
+transported via HTTP or ZeroMQ in a both client or server environment.</p>
 <p>The source code is <cite>here &lt;https://github.com/arskom/rpclib&gt;</cite>.</p>
 </div>
 <div class="section" id="installing">
@@ -96,59 +96,27 @@ using Sphinx.</p>
 <p>Regular contributors may be invited to join as a core rpclib committer on
 GitHub. Even if this gives the core committers the power to commit directly
 to the core repository, we highly value code reviews and expect every
-significant change to be committed via pull requests. It also provides a
-stable home for the rpclib repository, despite any &#8220;changing of the guard&#8221;
-as team members join and leave the project.</p>
+significant change to be committed via pull requests.</p>
 </div>
 <div class="section" id="contents">
-<h2>Contents:<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Rpclib Tutorials</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="tutorial/helloworld.html">Hello World</a></li>
 <li class="toctree-l2"><a class="reference internal" href="tutorial/usermanager.html">User Manager</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/usermanager.html#what-s-next">What&#8217;s next?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorial/sqlalchemy.html">SQLAlchemy Integration</a></li>
 </ul>
 </li>
-What follows is not yet updated with the latest changes. They're pretty much useless.
-<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Rpclib API Reference</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pages/serializers.html">Serializers</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#primitives">Primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#arrays">Arrays</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#class">Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#attachment">Attachment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#any">Any</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#anyasdict">AnyAsDict</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializers.html#custom">Custom</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pages/binaryfiles.html">Binary Files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pages/message_api.html">Message API</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pages/hooks.html">Hooks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="pages/apache_axis.html">Axis Interoperability</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pages/apache_axis.html#how-to-run-the-test">How to run the test</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pages/serializer_api.html">Serializer API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model._base">Base</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.binary">Binary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.complex">Clazz</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.enum">Enum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.fault">Exception</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.primitive">Primitive</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/serializer_api.html#module-rpclib.model.table">Table</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pages/soap.html">SOAP API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pages/soap.html#module-rpclib.protocol.soap._base">soap</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pages/wsgi.html">WSGI API</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pages/wsgi.html#module-rpclib.server.wsgi">wsgi</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="pages/service.html">Service</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pages/service.html#id1">service</a></li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Rpclib API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/model.html">Models</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/interface.html">Interfaces</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/protocol.html">Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/client.html">Client Transports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/server.html">Server Transports</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/util.html">Miscellanous Rpclib Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/service.html">Service Definition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/application.html">Application Definition</a></li>
 </ul>
 </li>
 </ul>
@@ -158,9 +126,9 @@ What follows is not yet updated with the latest changes. They're pretty much use
 <h2>Frequently Asked Questions<a class="headerlink" href="#frequently-asked-questions" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="pages/faq.html">Rpclib FAQ</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pages/faq.html#does-rpclib-support-the-1-2-soap-spec">Does rpclib support the 1.2 SOAP spec?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/faq.html#how-do-i-implement-a-predefined-wsdl">How do I implement a predefined WSDL?</a></li>
+<li class="toctree-l1"><a class="reference internal" href="faq.html">Rpclib FAQ</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#does-rpclib-support-the-soap-1-2-standard">Does rpclib support the SOAP 1.2 standard?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-implement-a-predefined-wsdl">How do I implement a predefined WSDL?</a></li>
 </ul>
 </li>
 </ul>
@@ -170,31 +138,33 @@ What follows is not yet updated with the latest changes. They're pretty much use
 <h2>Change Log<a class="headerlink" href="#change-log" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="pages/changelog.html">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-2-2-alpha">rpclib-2.2.2-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#id1">rpclib-2.2.2-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-2-0-alpha">rpclib-2.2.0-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-1-0-alpha">rpclib-2.1.0-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-10-alpha">rpclib-2.0.10-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-9-alpha">rpclib-2.0.9-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-8-alpha">rpclib-2.0.8-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-7-alpha">rpclib-2.0.7-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-6-alpha">rpclib-2.0.6-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-5-alpha">rpclib-2.0.5-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-4-alpha">rpclib-2.0.4-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-3-alpha">rpclib-2.0.3-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-2-alpha">rpclib-2.0.2-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-1-alpha">rpclib-2.0.1-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#rpclib-2-0-0-alpha">rpclib-2.0.0-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-3-x-rpclib-1-1-1-alpha">soaplib-3.x -&gt; rpclib-1.1.1-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-2-x">soaplib-2.x</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-1-0">soaplib-1.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-9-4">soaplib-0.9.4</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-9-3">soaplib-0.9.3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-9-2">soaplib-0.9.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-9-1">soaplib-0.9.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-9">soaplib-0.9</a></li>
-<li class="toctree-l2"><a class="reference internal" href="pages/changelog.html#soaplib-0-8">soaplib-0.8</a></li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-2-3-beta">rpclib-2.2.3-beta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-2-2-beta">rpclib-2.2.2-beta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-2-1-beta">rpclib-2.2.1-beta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-2-0-beta">rpclib-2.2.0-beta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-1-0-alpha">rpclib-2.1.0-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-10-alpha">rpclib-2.0.10-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-9-alpha">rpclib-2.0.9-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-8-alpha">rpclib-2.0.8-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-7-alpha">rpclib-2.0.7-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-6-alpha">rpclib-2.0.6-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-5-alpha">rpclib-2.0.5-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-4-alpha">rpclib-2.0.4-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-3-alpha">rpclib-2.0.3-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-2-alpha">rpclib-2.0.2-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-1-alpha">rpclib-2.0.1-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-0-alpha">rpclib-2.0.0-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-3-x-rpclib-1-1-1-alpha">soaplib-3.x -&gt; rpclib-1.1.1-alpha</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-2-x">soaplib-2.x</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-1-0">soaplib-1.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-9-4">soaplib-0.9.4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-9-3">soaplib-0.9.3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-9-2">soaplib-0.9.2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-9-1">soaplib-0.9.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-9">soaplib-0.9</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-8-1">soaplib-0.8.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-8-0">soaplib-0.8.0</a></li>
 </ul>
 </li>
 </ul>
@@ -222,7 +192,7 @@ What follows is not yet updated with the latest changes. They're pretty much use
 <li><a class="reference internal" href="#about">About</a></li>
 <li><a class="reference internal" href="#installing">Installing</a></li>
 <li><a class="reference internal" href="#contributing">Contributing</a></li>
-<li><a class="reference internal" href="#contents">Contents:</a><ul>
+<li><a class="reference internal" href="#contents">Contents</a><ul>
 </ul>
 </li>
 <li><a class="reference internal" href="#frequently-asked-questions">Frequently Asked Questions</a><ul>
@@ -273,11 +243,11 @@ What follows is not yet updated with the latest changes. They're pretty much use
         <li class="right" >
           <a href="tutorial/index.html" title="Rpclib Tutorials"
              >next</a> |</li>
-        <li><a href="#">rpclib v1.0.0beta documentation</a> &raquo;</li> 
+        <li><a href="#">rpclib v2.2.3-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2010, Aaron Bickell.
+        &copy; Copyright Burak Arslan.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>

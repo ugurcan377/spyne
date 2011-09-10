@@ -1,0 +1,243 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Client Transports &mdash; rpclib v2.2.3-beta documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.2.3-beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="rpclib v2.2.3-beta documentation" href="../index.html" />
+    <link rel="up" title="Rpclib API Reference" href="index.html" />
+    <link rel="next" title="Server Transports" href="server.html" />
+    <link rel="prev" title="Protocols" href="protocol.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="server.html" title="Server Transports"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="protocol.html" title="Protocols"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.2.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="client-transports">
+<h1>Client Transports<a class="headerlink" href="#client-transports" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-rpclib.client._base">
+<span id="client-base-class"></span><h2>Client Base Class<a class="headerlink" href="#module-rpclib.client._base" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the ClientBase class and its helper objects.</p>
+<dl class="class">
+<dt id="rpclib.client._base.RemoteProcedureBase">
+<em class="property">class </em><tt class="descclassname">rpclib.client._base.</tt><tt class="descname">RemoteProcedureBase</tt><big>(</big><em>url</em>, <em>app</em>, <em>name</em>, <em>out_header</em><big>)</big><a class="headerlink" href="#rpclib.client._base.RemoteProcedureBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Abstract base class that handles all (de)serialization.</p>
+<p>Child classes must implement the client transport in the __call__ method
+using the following method signature:</p>
+<blockquote>
+<div>def __call__(self, <a href="#id1"><span class="problematic" id="id2">*</span></a>args, <a href="#id3"><span class="problematic" id="id4">**</span></a>kwargs):</div></blockquote>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>url</strong> &#8211; The url for the server endpoint.</li>
+<li><strong>app</strong> &#8211; The application instance the client belongs to.</li>
+<li><strong>name</strong> &#8211; The string identifier for the remote method.</li>
+<li><strong>out_header</strong> &#8211; The header that&#8217;s going to be sent with the remote call.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="rpclib.client._base.RemoteProcedureBase.get_in_object">
+<tt class="descname">get_in_object</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.client._base.RemoteProcedureBase.get_in_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deserializes the response bytestream to input document and native
+python object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.client._base.RemoteProcedureBase.get_out_object">
+<tt class="descname">get_out_object</tt><big>(</big><em>args</em>, <em>kwargs</em><big>)</big><a class="headerlink" href="#rpclib.client._base.RemoteProcedureBase.get_out_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serializes the method arguments to output document&lt;.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>args</strong> &#8211; Sequential arguments.</li>
+<li><strong>kwargs</strong> &#8211; Name-based arguments.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.client._base.RemoteProcedureBase.get_out_string">
+<tt class="descname">get_out_string</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.client._base.RemoteProcedureBase.get_out_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Serializes the output document to a bytestream.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rpclib.client.http">
+<span id="http"></span><h2>HTTP<a class="headerlink" href="#module-rpclib.client.http" title="Permalink to this headline">¶</a></h2>
+<p>The HTTP (urllib2) client transport.</p>
+<dl class="class">
+<dt id="rpclib.client.http.HttpClient">
+<em class="property">class </em><tt class="descclassname">rpclib.client.http.</tt><tt class="descname">HttpClient</tt><big>(</big><em>url</em>, <em>app</em><big>)</big><a class="headerlink" href="#rpclib.client.http.HttpClient" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="rpclib.client.http.HttpClient.set_options">
+<tt class="descname">set_options</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.client.http.HttpClient.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets call options.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>out_header</strong> &#8211; Sets the header object that&#8217;s going to be sent with
+the remote procedure call.</li>
+<li><strong>soapheaders</strong> &#8211; A suds-compatible alias for out_header.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rpclib.client.zeromq">
+<span id="zeromq"></span><h2>ZeroMQ<a class="headerlink" href="#module-rpclib.client.zeromq" title="Permalink to this headline">¶</a></h2>
+<p>A soap client that uses ZeroMQ (zmq.REQ) as transport</p>
+<dl class="class">
+<dt id="rpclib.client.zeromq.ZeroMQClient">
+<em class="property">class </em><tt class="descclassname">rpclib.client.zeromq.</tt><tt class="descname">ZeroMQClient</tt><big>(</big><em>url</em>, <em>app</em><big>)</big><a class="headerlink" href="#rpclib.client.zeromq.ZeroMQClient" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="method">
+<dt id="rpclib.client.zeromq.ZeroMQClient.set_options">
+<tt class="descname">set_options</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.client.zeromq.ZeroMQClient.set_options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets call options.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>out_header</strong> &#8211; Sets the header object that&#8217;s going to be sent with
+the remote procedure call.</li>
+<li><strong>soapheaders</strong> &#8211; A suds-compatible alias for out_header.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Client Transports</a><ul>
+<li><a class="reference internal" href="#module-rpclib.client._base">Client Base Class</a></li>
+<li><a class="reference internal" href="#module-rpclib.client.http">HTTP</a></li>
+<li><a class="reference internal" href="#module-rpclib.client.zeromq">ZeroMQ</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="protocol.html"
+                        title="previous chapter">Protocols</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="server.html"
+                        title="next chapter">Server Transports</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/reference/client.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="server.html" title="Server Transports"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="protocol.html" title="Protocols"
+             >previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.2.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright Burak Arslan.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

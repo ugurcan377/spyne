@@ -1,0 +1,423 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Interfaces &mdash; rpclib v2.2.3-beta documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.2.3-beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="rpclib v2.2.3-beta documentation" href="../index.html" />
+    <link rel="up" title="Rpclib API Reference" href="index.html" />
+    <link rel="next" title="Protocols" href="protocol.html" />
+    <link rel="prev" title="Models" href="model.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="protocol.html" title="Protocols"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="model.html" title="Models"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.2.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="interfaces">
+<h1>Interfaces<a class="headerlink" href="#interfaces" title="Permalink to this headline">¶</a></h1>
+<p>The <cite>rpclib.interface</cite> package contains the implementations of various schema
+definition standards.</p>
+<div class="section" id="module-rpclib.interface._base">
+<span id="interface-base-class"></span><h2>Interface Base Class<a class="headerlink" href="#module-rpclib.interface._base" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the InterfaceBase class and its helper objects.</p>
+<dl class="class">
+<dt id="rpclib.interface._base.InterfaceBase">
+<em class="property">class </em><tt class="descclassname">rpclib.interface._base.</tt><tt class="descname">InterfaceBase</tt><big>(</big><em>app=None</em><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base class for all interface document generators.</p>
+<dl class="method">
+<dt id="rpclib.interface._base.InterfaceBase.add">
+<tt class="descname">add</tt><big>(</big><em>cls</em><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.add" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is called by the populate_interface logic, which
+expects you to implement a way to manage incoming classes.</p>
+<p>In normal circumstances, the incoming classes are all ComplexModel
+children.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface._base.InterfaceBase.build_interface_document">
+<tt class="descname">build_interface_document</tt><big>(</big><em>cls</em><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.build_interface_document" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is supposed to be called just once, as late as possible
+into the process start. It builds the interface document and caches it
+somewhere.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface._base.InterfaceBase.get_class">
+<tt class="descname">get_class</tt><big>(</big><em>key</em><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.get_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class definition that corresponds to the given key.
+Keys are in &#8216;{namespace}class_name&#8217; form, a.k.a. XML QName format.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface._base.InterfaceBase.get_class_instance">
+<tt class="descname">get_class_instance</tt><big>(</big><em>key</em><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.get_class_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the default class instance that corresponds to the given key.
+Keys are in &#8216;{namespace}class_name&#8217; form, a.k.a. XML QName format.
+Classes should not enforce arguments to the constructor.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface._base.InterfaceBase.get_interface_document">
+<tt class="descname">get_interface_document</tt><big>(</big><em>cls</em><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.get_interface_document" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is called by server transports that try to satisfy the
+request for the interface document. This should just return previously-cached
+interface document.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface._base.InterfaceBase.get_name">
+<tt class="descname">get_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.get_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns service name that is seen in the name attribute of the
+definitions tag.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface._base.InterfaceBase.get_namespace_prefix">
+<tt class="descname">get_namespace_prefix</tt><big>(</big><em>ns</em><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given namespace. Creates a new
+one automatically if it doesn&#8217;t exist.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface._base.InterfaceBase.get_schema_info">
+<tt class="descname">get_schema_info</tt><big>(</big><em>prefix</em><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.get_schema_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the SchemaInfo object for the corresponding namespace. It
+creates it if it doesn&#8217;t exist.</p>
+<p>The SchemaInfo object holds the simple and complex type definitions
+for a given namespace.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface._base.InterfaceBase.get_tns">
+<tt class="descname">get_tns</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.get_tns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns default namespace that is seen in the targetNamespace
+attribute of the definitions tag.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface._base.InterfaceBase.has_class">
+<tt class="descname">has_class</tt><big>(</big><em>cls</em><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.has_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if the given class is already included in the interface
+object somewhere.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface._base.InterfaceBase.populate_interface">
+<tt class="descname">populate_interface</tt><big>(</big><em>types=None</em><big>)</big><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.populate_interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Harvests the information stored in individual classes&#8217; _type_info
+dictionaries. It starts from function definitions and includes only
+the used objects.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.interface._base.InterfaceBase.tns">
+<tt class="descname">tns</tt><a class="headerlink" href="#rpclib.interface._base.InterfaceBase.tns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns default namespace that is seen in the targetNamespace
+attribute of the definitions tag.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rpclib.interface.xml_schema._base">
+<span id="xml-schema"></span><h2>XML Schema<a class="headerlink" href="#module-rpclib.interface.xml_schema._base" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the implementation of the Xml Schema standard and its
+helper methods and objects.</p>
+<dl class="class">
+<dt id="rpclib.interface.xml_schema._base.XmlSchema">
+<em class="property">class </em><tt class="descclassname">rpclib.interface.xml_schema._base.</tt><tt class="descname">XmlSchema</tt><big>(</big><em>app</em>, <em>import_base_namespaces=False</em><big>)</big><a class="headerlink" href="#rpclib.interface.xml_schema._base.XmlSchema" title="Permalink to this definition">¶</a></dt>
+<dd><p>The implementation of the  Xml Schema object definition document
+standard.</p>
+<dl class="method">
+<dt id="rpclib.interface.xml_schema._base.XmlSchema.build_validation_schema">
+<tt class="descname">build_validation_schema</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.interface.xml_schema._base.XmlSchema.build_validation_schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build application schema specifically for xml validation purposes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.xml_schema._base.XmlSchema.get_class">
+<tt class="descname">get_class</tt><big>(</big><em>key</em><big>)</big><a class="headerlink" href="#rpclib.interface.xml_schema._base.XmlSchema.get_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class definition that corresponds to the given key.
+Keys are in &#8216;{namespace}class_name&#8217; form, a.k.a. XML QName format.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.xml_schema._base.XmlSchema.get_class_instance">
+<tt class="descname">get_class_instance</tt><big>(</big><em>key</em><big>)</big><a class="headerlink" href="#rpclib.interface.xml_schema._base.XmlSchema.get_class_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the default class instance that corresponds to the given key.
+Keys are in &#8216;{namespace}class_name&#8217; form, a.k.a. XML QName format.
+Classes should not enforce arguments to the constructor.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.xml_schema._base.XmlSchema.get_name">
+<tt class="descname">get_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.interface.xml_schema._base.XmlSchema.get_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns service name that is seen in the name attribute of the
+definitions tag.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.xml_schema._base.XmlSchema.get_namespace_prefix">
+<tt class="descname">get_namespace_prefix</tt><big>(</big><em>ns</em><big>)</big><a class="headerlink" href="#rpclib.interface.xml_schema._base.XmlSchema.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given namespace. Creates a new
+one automatically if it doesn&#8217;t exist.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.xml_schema._base.XmlSchema.get_schema_info">
+<tt class="descname">get_schema_info</tt><big>(</big><em>prefix</em><big>)</big><a class="headerlink" href="#rpclib.interface.xml_schema._base.XmlSchema.get_schema_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the SchemaInfo object for the corresponding namespace. It
+creates it if it doesn&#8217;t exist.</p>
+<p>The SchemaInfo object holds the simple and complex type definitions
+for a given namespace.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.xml_schema._base.XmlSchema.get_schema_node">
+<tt class="descname">get_schema_node</tt><big>(</big><em>pref</em><big>)</big><a class="headerlink" href="#rpclib.interface.xml_schema._base.XmlSchema.get_schema_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return schema node for the given namespace prefix.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.xml_schema._base.XmlSchema.get_tns">
+<tt class="descname">get_tns</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.interface.xml_schema._base.XmlSchema.get_tns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns default namespace that is seen in the targetNamespace
+attribute of the definitions tag.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.xml_schema._base.XmlSchema.populate_interface">
+<tt class="descname">populate_interface</tt><big>(</big><em>types=None</em><big>)</big><a class="headerlink" href="#rpclib.interface.xml_schema._base.XmlSchema.populate_interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Harvests the information stored in individual classes&#8217; _type_info
+dictionaries. It starts from function definitions and includes only
+the used objects.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.interface.xml_schema._base.XmlSchema.tns">
+<tt class="descname">tns</tt><a class="headerlink" href="#rpclib.interface.xml_schema._base.XmlSchema.tns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns default namespace that is seen in the targetNamespace
+attribute of the definitions tag.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rpclib.interface.wsdl.wsdl11">
+<span id="wsdl-1-1"></span><h2>Wsdl 1.1<a class="headerlink" href="#module-rpclib.interface.wsdl.wsdl11" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the Wsdl 1.1 document standard implementation and
+its helper methods.</p>
+<dl class="class">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11">
+<em class="property">class </em><tt class="descclassname">rpclib.interface.wsdl.wsdl11.</tt><tt class="descname">Wsdl11</tt><big>(</big><em>app=None</em>, <em>import_base_namespaces=False</em>, <em>_with_partnerlink=False</em><big>)</big><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11" title="Permalink to this definition">¶</a></dt>
+<dd><p>The implementation of the Wsdl 1.1 interface definition document standard.</p>
+<dl class="method">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11.build_interface_document">
+<tt class="descname">build_interface_document</tt><big>(</big><em>url</em><big>)</big><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11.build_interface_document" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build the wsdl for the application.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11.build_validation_schema">
+<tt class="descname">build_validation_schema</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11.build_validation_schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Build application schema specifically for xml validation purposes.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11.get_class">
+<tt class="descname">get_class</tt><big>(</big><em>key</em><big>)</big><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11.get_class" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class definition that corresponds to the given key.
+Keys are in &#8216;{namespace}class_name&#8217; form, a.k.a. XML QName format.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11.get_class_instance">
+<tt class="descname">get_class_instance</tt><big>(</big><em>key</em><big>)</big><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11.get_class_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the default class instance that corresponds to the given key.
+Keys are in &#8216;{namespace}class_name&#8217; form, a.k.a. XML QName format.
+Classes should not enforce arguments to the constructor.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11.get_name">
+<tt class="descname">get_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11.get_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns service name that is seen in the name attribute of the
+definitions tag.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11.get_namespace_prefix">
+<tt class="descname">get_namespace_prefix</tt><big>(</big><em>ns</em><big>)</big><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given namespace. Creates a new
+one automatically if it doesn&#8217;t exist.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11.get_schema_info">
+<tt class="descname">get_schema_info</tt><big>(</big><em>prefix</em><big>)</big><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11.get_schema_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the SchemaInfo object for the corresponding namespace. It
+creates it if it doesn&#8217;t exist.</p>
+<p>The SchemaInfo object holds the simple and complex type definitions
+for a given namespace.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11.get_schema_node">
+<tt class="descname">get_schema_node</tt><big>(</big><em>pref</em><big>)</big><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11.get_schema_node" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return schema node for the given namespace prefix.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11.get_tns">
+<tt class="descname">get_tns</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11.get_tns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns default namespace that is seen in the targetNamespace
+attribute of the definitions tag.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11.populate_interface">
+<tt class="descname">populate_interface</tt><big>(</big><em>types=None</em><big>)</big><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11.populate_interface" title="Permalink to this definition">¶</a></dt>
+<dd><p>Harvests the information stored in individual classes&#8217; _type_info
+dictionaries. It starts from function definitions and includes only
+the used objects.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.interface.wsdl.wsdl11.Wsdl11.tns">
+<tt class="descname">tns</tt><a class="headerlink" href="#rpclib.interface.wsdl.wsdl11.Wsdl11.tns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns default namespace that is seen in the targetNamespace
+attribute of the definitions tag.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Interfaces</a><ul>
+<li><a class="reference internal" href="#module-rpclib.interface._base">Interface Base Class</a></li>
+<li><a class="reference internal" href="#module-rpclib.interface.xml_schema._base">XML Schema</a></li>
+<li><a class="reference internal" href="#module-rpclib.interface.wsdl.wsdl11">Wsdl 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="model.html"
+                        title="previous chapter">Models</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="protocol.html"
+                        title="next chapter">Protocols</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/reference/interface.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="protocol.html" title="Protocols"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="model.html" title="Models"
+             >previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.2.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright Burak Arslan.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

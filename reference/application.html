@@ -1,0 +1,168 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Application Definition &mdash; rpclib v2.2.3-beta documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.2.3-beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="rpclib v2.2.3-beta documentation" href="../index.html" />
+    <link rel="up" title="Rpclib API Reference" href="index.html" />
+    <link rel="next" title="Rpclib FAQ" href="../faq.html" />
+    <link rel="prev" title="Service Definition" href="service.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../faq.html" title="Rpclib FAQ"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="service.html" title="Service Definition"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.2.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-rpclib.application">
+<span id="application-definition"></span><h1>Application Definition<a class="headerlink" href="#module-rpclib.application" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the Application class that exposes multiple service
+definitions to the outside world.</p>
+<dl class="class">
+<dt id="rpclib.application.Application">
+<em class="property">class </em><tt class="descclassname">rpclib.application.</tt><tt class="descname">Application</tt><big>(</big><em>services</em>, <em>tns</em>, <em>interface</em>, <em>in_protocol</em>, <em>out_protocol</em>, <em>name=None</em><big>)</big><a class="headerlink" href="#rpclib.application.Application" title="Permalink to this definition">¶</a></dt>
+<dd><p>This class is the glue between one or more service definitions,
+interface and protocol choices.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>services</strong> &#8211; An iterable of ServiceBase subclasses that define
+the exposed services.</li>
+<li><strong>tns</strong> &#8211; The targetNamespace attribute of the exposed
+service.</li>
+<li><strong>interface</strong> &#8211; An InterfaceBase instance that sets the service
+definition document standard.</li>
+<li><strong>in_protocol</strong> &#8211; A ProtocolBase instance that defines the input
+protocol.</li>
+<li><strong>out_protocol</strong> &#8211; A ProtocolBase instance that defines the output
+protocol.</li>
+<li><strong>name</strong> &#8211; The optional name attribute of the exposed service.
+The default is the name of the application class
+which is, by default, &#8216;Application&#8217;.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<dl class="method">
+<dt id="rpclib.application.Application.call_wrapper">
+<tt class="descname">call_wrapper</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.application.Application.call_wrapper" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method calls the call_wrapper method in the service definition.
+This can be overridden to make an application-wide custom exception
+management.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.application.Application.process_request">
+<tt class="descname">process_request</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.application.Application.process_request" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a MethodContext instance. Returns the response to the request
+as a native python object. If the function throws an exception, it
+returns None and sets the exception object to ctx.out_error.</p>
+<p>Overriding this method would break event management. So this is not
+meant to be overridden unless you know what you&#8217;re doing.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="service.html"
+                        title="previous chapter">Service Definition</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../faq.html"
+                        title="next chapter">Rpclib FAQ</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/reference/application.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../faq.html" title="Rpclib FAQ"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="service.html" title="Service Definition"
+             >previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.2.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright Burak Arslan.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

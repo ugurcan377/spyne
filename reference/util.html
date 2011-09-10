@@ -1,0 +1,195 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Miscellanous Rpclib Utilities &mdash; rpclib v2.2.3-beta documentation</title>
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.2.3-beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="rpclib v2.2.3-beta documentation" href="../index.html" />
+    <link rel="up" title="Rpclib API Reference" href="index.html" />
+    <link rel="next" title="Service Definition" href="service.html" />
+    <link rel="prev" title="Server Transports" href="server.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="service.html" title="Service Definition"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="server.html" title="Server Transports"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.2.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="miscellanous-rpclib-utilities">
+<h1>Miscellanous Rpclib Utilities<a class="headerlink" href="#miscellanous-rpclib-utilities" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="module-rpclib.util.cdict">
+<span id="class-dictionary"></span><h2>Class Dictionary<a class="headerlink" href="#module-rpclib.util.cdict" title="Permalink to this headline">¶</a></h2>
+<p>cdict (ClassDict) is a funny kind of dict that tries to return the values for
+the base classes of a key when the entry for the key is not found.</p>
+</div>
+<div class="section" id="module-rpclib.util.etreeconv">
+<span id="element-tree-conversion"></span><h2>Element Tree Conversion<a class="headerlink" href="#module-rpclib.util.etreeconv" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the utility methods that convert an ElementTree
+hierarchy to python dicts and vice versa.</p>
+<dl class="function">
+<dt id="rpclib.util.etreeconv.dict_to_etree">
+<tt class="descclassname">rpclib.util.etreeconv.</tt><tt class="descname">dict_to_etree</tt><big>(</big><em>parent</em>, <em>d</em><big>)</big><a class="headerlink" href="#rpclib.util.etreeconv.dict_to_etree" title="Permalink to this definition">¶</a></dt>
+<dd><p>the dict values are either dicts or iterables</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-rpclib.util.model_utils">
+<span id="model-utilities"></span><h2>Model Utilities<a class="headerlink" href="#module-rpclib.util.model_utils" title="Permalink to this headline">¶</a></h2>
+<p>This module contains the classes and methods for converting and validating
+rpclib.model.ComplexModel instances</p>
+<dl class="class">
+<dt id="rpclib.util.model_utils.ComplexModelConverter">
+<em class="property">class </em><tt class="descclassname">rpclib.util.model_utils.</tt><tt class="descname">ComplexModelConverter</tt><big>(</big><em>model_instance</em>, <em>tns</em>, <em>include_parent=False</em>, <em>parent_tag='root'</em>, <em>include_ns=True</em><big>)</big><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class to handle exporting a ComplexModel to different representations</p>
+<p>Currently supported export targets are lxml.etree.Element, string and
+xml documents.</p>
+<p>This functionality will most likely be moved into the ComplexModel itself if
+it proves useful and there is a willingness to modify the current
+ComplexModel API.</p>
+<dl class="method">
+<dt id="rpclib.util.model_utils.ComplexModelConverter.to_etree">
+<tt class="descname">to_etree</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_etree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a lxml.etree.Element from a rpclib.model.complex.ComplexModel
+instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.util.model_utils.ComplexModelConverter.to_file">
+<tt class="descname">to_file</tt><big>(</big><em>file_path</em><big>)</big><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Writes a model instance to a XML document</p>
+<p>&#64;param The output file path for the xml file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.util.model_utils.ComplexModelConverter.to_xml">
+<tt class="descname">to_xml</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a xml string from a rpclib.model.complex.ComplexModel instance.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-rpclib.util.odict">
+<span id="ordered-dictionary"></span><h2>Ordered Dictionary<a class="headerlink" href="#module-rpclib.util.odict" title="Permalink to this headline">¶</a></h2>
+<p>This module contains a sort of an ordered dictionary implementation.</p>
+<dl class="class">
+<dt id="rpclib.util.odict.odict">
+<em class="property">class </em><tt class="descclassname">rpclib.util.odict.</tt><tt class="descname">odict</tt><big>(</big><em>data=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#rpclib.util.odict.odict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sort of an ordered dictionary implementation.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-rpclib.util.oset">
+<span id="ordered-set"></span><h2>Ordered Set<a class="headerlink" href="#module-rpclib.util.oset" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Miscellanous Rpclib Utilities</a><ul>
+<li><a class="reference internal" href="#module-rpclib.util.cdict">Class Dictionary</a></li>
+<li><a class="reference internal" href="#module-rpclib.util.etreeconv">Element Tree Conversion</a></li>
+<li><a class="reference internal" href="#module-rpclib.util.model_utils">Model Utilities</a></li>
+<li><a class="reference internal" href="#module-rpclib.util.odict">Ordered Dictionary</a></li>
+<li><a class="reference internal" href="#module-rpclib.util.oset">Ordered Set</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="server.html"
+                        title="previous chapter">Server Transports</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="service.html"
+                        title="next chapter">Service Definition</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/reference/util.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="service.html" title="Service Definition"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="server.html" title="Server Transports"
+             >previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.2.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright Burak Arslan.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
