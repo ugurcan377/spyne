@@ -7,22 +7,22 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Running Tests &mdash; rpclib v2.3.0-beta documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <title>Running Tests &mdash; rpclib v2.3.1-beta documentation</title>
+    <link rel="stylesheet" href="static/default.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.3.0-beta',
+        VERSION:     '2.3.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.0-beta documentation" href="index.html" />
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="rpclib v2.3.1-beta documentation" href="index.html" />
     <link rel="next" title="Rpclib FAQ" href="faq.html" />
     <link rel="prev" title="Application Definition" href="reference/application.html" /> 
   </head>
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="reference/application.html" title="Application Definition"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">rpclib v2.3.0-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -61,19 +61,33 @@ which may cause incompatibilities with your existing code base. The only way to
 detect such corner cases is to have a great test suite.</p>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
-<p>While the stock unittest package is normally enough to run Python tests, using
-py.test from pytest package is just a more pleasant way to run them. Simply
-easy_install pytest to get it. You can run the following command in the test
-directory:</p>
+<p>While simply executing test modules is normally enough to run Python tests,
+using py.test from pytest package is just a more pleasant way to run them.
+Simply easy_install pytest to get it. You can run the following command in the
+test directory:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">py</span><span class="o">.</span><span class="n">test</span> <span class="o">-</span><span class="n">v</span> <span class="o">--</span><span class="n">tb</span><span class="o">=</span><span class="n">short</span>
 </pre></div>
 </div>
+<p>You can use the module name as an argument:</p>
+<div class="highlight-python"><pre>py.test -v --tb=short test_sqla.py</pre>
+</div>
+<p>You can also choose which test to run:</p>
+<div class="highlight-python"><pre>py.test -v --tb=short test_sqla.py -k test_same_table_inheritance</pre>
+</div>
+<p>See [pytest documentation](<a class="reference external" href="http://pytest.org/latest/">http://pytest.org/latest/</a>) for more info.</p>
 <p>Note that you need to do several other preparations to have the interop tests
 working. See the next section for the specifics.</p>
 </div>
 <div class="section" id="interoperability-tests">
 <h2>Interoperability Tests<a class="headerlink" href="#interoperability-tests" title="Permalink to this headline">¶</a></h2>
 <p>The interoperability servers require twisted.web.</p>
+<div class="section" id="python">
+<h3>.Python<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<p>Python interop tests currently use Rpclib&#8217;s own clients and suds. The suds test
+is the first thing we check and try not to break.</p>
+<p>Two tests that fail in the suds interop tests due to the lack of proper assert
+statements, so they&#8217;re false alarms.</p>
+</div>
 <div class="section" id="net">
 <h3>.Net<a class="headerlink" href="#net" title="Permalink to this headline">¶</a></h3>
 <p>There isn&#8217;t any .Net tests for rpclib. WS-I test compliance reportedly covers
@@ -128,6 +142,7 @@ well, you should get a new wsi-report-rpclib.xml file in the same directory.</p>
 <li><a class="reference internal" href="#">Running Tests</a><ul>
 <li><a class="reference internal" href="#requirements">Requirements</a></li>
 <li><a class="reference internal" href="#interoperability-tests">Interoperability Tests</a><ul>
+<li><a class="reference internal" href="#python">.Python</a></li>
 <li><a class="reference internal" href="#net">.Net</a></li>
 <li><a class="reference internal" href="#ruby">Ruby</a></li>
 <li><a class="reference internal" href="#java">Java</a></li>
@@ -145,7 +160,7 @@ well, you should get a new wsi-report-rpclib.xml file in the same directory.</p>
                         title="next chapter">Rpclib FAQ</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="_sources/tests.txt"
+    <li><a href="sources/tests.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -180,11 +195,11 @@ well, you should get a new wsi-report-rpclib.xml file in the same directory.</p>
         <li class="right" >
           <a href="reference/application.html" title="Application Definition"
              >previous</a> |</li>
-        <li><a href="index.html">rpclib v2.3.0-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright Rpclib Contributors.
+        &copy; Copyright 2011, Rpclib Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>

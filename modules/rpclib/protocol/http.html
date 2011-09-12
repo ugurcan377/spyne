@@ -1,0 +1,188 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>rpclib.protocol.http &mdash; rpclib v2.3.1-beta documentation</title>
+    <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../../',
+        VERSION:     '2.3.1-beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../../../static/jquery.js"></script>
+    <script type="text/javascript" src="../../../static/underscore.js"></script>
+    <script type="text/javascript" src="../../../static/doctools.js"></script>
+    <link rel="top" title="rpclib v2.3.1-beta documentation" href="../../../index.html" />
+    <link rel="up" title="Module code" href="../../index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
+          <li><a href="../../index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for rpclib.protocol.http</h1><div class="highlight"><pre>
+<span class="c">#</span>
+<span class="c"># rpclib - Copyright (C) Rpclib contributors.</span>
+<span class="c">#</span>
+<span class="c"># This library is free software; you can redistribute it and/or</span>
+<span class="c"># modify it under the terms of the GNU Lesser General Public</span>
+<span class="c"># License as published by the Free Software Foundation; either</span>
+<span class="c"># version 2.1 of the License, or (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c"># This library is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span>
+<span class="c"># Lesser General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c"># You should have received a copy of the GNU Lesser General Public</span>
+<span class="c"># License along with this library; if not, write to the Free Software</span>
+<span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
+<span class="c">#</span>
+
+<span class="sd">&quot;&quot;&quot;This module contains the HttpRpc protocol implementation.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">urlparse</span>
+
+<span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">NotFoundError</span>
+<span class="kn">from</span> <span class="nn">rpclib.server.wsgi</span> <span class="kn">import</span> <span class="n">HTTP_404</span>
+<span class="kn">from</span> <span class="nn">rpclib.protocol</span> <span class="kn">import</span> <span class="n">ProtocolBase</span>
+
+<span class="c"># this is not exactly rest, because it ignores http verbs.</span>
+
+<span class="k">def</span> <span class="nf">_get_http_headers</span><span class="p">(</span><span class="n">req_env</span><span class="p">):</span>
+    <span class="n">retval</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">req_env</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;HTTP_&quot;</span><span class="p">):</span>
+            <span class="n">retval</span><span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">=</span> <span class="n">v</span>
+
+    <span class="k">return</span> <span class="n">retval</span>
+
+<span class="k">class</span> <span class="nc">HttpRpc</span><span class="p">(</span><span class="n">ProtocolBase</span><span class="p">):</span>
+<div class="viewcode-block" id="HttpRpc"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc">[docs]</a>    <span class="sd">&quot;&quot;&quot;The so-called ReST-minus-the-verbs HttpRpc protocol implementation.</span>
+<span class="sd">    It only works with the http server (wsgi) transport.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">create_in_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">in_string_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="HttpRpc.create_in_document"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.create_in_document">[docs]</a>        <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s">&#39;wsgi&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;This protocol only works with &quot;</span>
+                                              <span class="s">&quot;the wsgi api.&quot;</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;PATH_INFO: </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">])</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;QUERY_STRING: </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span><span class="p">[</span><span class="s">&#39;QUERY_STRING&#39;</span><span class="p">])</span>
+
+        <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span> <span class="o">=</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">get_tns</span><span class="p">(),</span>
+                              <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[92mMethod name: </span><span class="si">%r</span><span class="se">\033</span><span class="s">[0m&quot;</span> <span class="o">%</span> <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span><span class="p">)</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">set_method_descriptor</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">NotFoundError</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">resp_code</span> <span class="o">=</span> <span class="n">HTTP_404</span>
+            <span class="k">raise</span>
+
+        <span class="n">ctx</span><span class="o">.</span><span class="n">in_header_doc</span> <span class="o">=</span> <span class="n">_get_http_headers</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span><span class="p">)</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span> <span class="o">=</span> <span class="n">urlparse</span><span class="o">.</span><span class="n">parse_qs</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span><span class="p">[</span><span class="s">&#39;QUERY_STRING&#39;</span><span class="p">])</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span>
+
+    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.deserialize"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.deserialize">[docs]</a>        <span class="n">body_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_message</span>
+        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="n">body_class</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">body_class</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.serialize"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.serialize">[docs]</a>        <span class="n">result_message_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_message</span>
+
+        <span class="c"># assign raw result to its wrapper, result_message</span>
+        <span class="n">out_type_info</span> <span class="o">=</span> <span class="n">result_message_class</span><span class="o">.</span><span class="n">_type_info</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">out_class</span> <span class="o">=</span> <span class="n">out_type_info</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_object</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">out_document</span> <span class="o">=</span> <span class="s">u&#39;&#39;</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">out_document</span> <span class="o">=</span> <span class="n">out_class</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">out_object</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;HttpRpc protocol can only serialize primitives.&quot;</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;serialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_out_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">out_string_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.create_out_string"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.create_out_string">[docs]</a>        <span class="n">ctx</span><span class="o">.</span><span class="n">out_string</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">out_document</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf8&#39;</span><span class="p">)]</span>
+</pre></div></div></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../../../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
+          <li><a href="../../index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Rpclib Contributors.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

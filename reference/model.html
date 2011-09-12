@@ -7,22 +7,22 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Models &mdash; rpclib v2.3.0-beta documentation</title>
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <title>Models &mdash; rpclib v2.3.1-beta documentation</title>
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.0-beta',
+        VERSION:     '2.3.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.0-beta documentation" href="../index.html" />
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="rpclib v2.3.1-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Interfaces" href="interface.html" />
     <link rel="prev" title="Rpclib API Reference" href="index.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="index.html" title="Rpclib API Reference"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -70,20 +70,20 @@ those who&#8217;d like to implement their own.</p>
 Iterable that are container classes that organize other values.</p>
 <dl class="class">
 <dt id="rpclib.model.complex.Alias">
-<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">Alias</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.complex.Alias" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">Alias</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#Alias"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.Alias" title="Permalink to this definition">¶</a></dt>
 <dd><p>Different type_name, same _type_info.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.complex.Array">
-<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">Array</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.complex.Array" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">Array</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#Array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.Array" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class generates a ComplexModel child that has one attribute that has
 the same name as the serialized class. It&#8217;s contained in a Python list.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.complex.ComplexModel">
-<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">ComplexModel</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.complex.ComplexModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">ComplexModel</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>The general complexType factory. The __call__ method of this class will
 return instances, contrary to primivites where the same call will result in
 customized duplicates of the original class definition.
@@ -93,12 +93,12 @@ Those who&#8217;d like to customize the class should use the customize method.
 
 <dl class="class">
 <dt id="rpclib.model.complex.ComplexModelBase">
-<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">ComplexModelBase</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">ComplexModelBase</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>If you want to make a better class type, this is what you should inherit
 from.</p>
 <dl class="staticmethod">
 <dt id="rpclib.model.complex.ComplexModelBase.alias">
-<em class="property">static </em><tt class="descname">alias</tt><big>(</big><em>type_name</em>, <em>namespace</em>, <em>target</em><big>)</big><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.alias" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descname">alias</tt><big>(</big><em>type_name</em>, <em>namespace</em>, <em>target</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase.alias"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.alias" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return an alias class for the given target class.</p>
 <p>This function is a variation on &#8216;ComplexModel.produce&#8217;. The alias will
 borrow the target&#8217;s _type_info.</p>
@@ -106,7 +106,7 @@ borrow the target&#8217;s _type_info.</p>
 
 <dl class="staticmethod">
 <dt id="rpclib.model.complex.ComplexModelBase.produce">
-<em class="property">static </em><tt class="descname">produce</tt><big>(</big><em>namespace</em>, <em>type_name</em>, <em>members</em><big>)</big><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.produce" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descname">produce</tt><big>(</big><em>namespace</em>, <em>type_name</em>, <em>members</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase.produce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.produce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lets you create a class programmatically.</p>
 </dd></dl>
 
@@ -114,27 +114,27 @@ borrow the target&#8217;s _type_info.</p>
 
 <dl class="class">
 <dt id="rpclib.model.complex.ComplexModelMeta">
-<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">ComplexModelMeta</tt><big>(</big><em>cls_name</em>, <em>cls_bases</em>, <em>cls_dict</em><big>)</big><a class="headerlink" href="#rpclib.model.complex.ComplexModelMeta" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">ComplexModelMeta</tt><big>(</big><em>cls_name</em>, <em>cls_bases</em>, <em>cls_dict</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelMeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelMeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the metaclass that populates ComplexModel instances with the
 appropriate datatypes for (de)serialization.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.complex.Iterable">
-<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">Iterable</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.complex.Iterable" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">Iterable</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#Iterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.Iterable" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class generates a ComplexModel child that has one attribute that has
 the same name as the serialized class. It&#8217;s contained in a Python iterable.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.complex.XMLAttribute">
-<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XMLAttribute</tt><big>(</big><em>typ</em>, <em>use=None</em><big>)</big><a class="headerlink" href="#rpclib.model.complex.XMLAttribute" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XMLAttribute</tt><big>(</big><em>typ</em>, <em>use=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#XMLAttribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.XMLAttribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Items which are marshalled as attributes of the parent element.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.complex.XMLAttributeRef">
-<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XMLAttributeRef</tt><big>(</big><em>ref</em>, <em>use=None</em><big>)</big><a class="headerlink" href="#rpclib.model.complex.XMLAttributeRef" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XMLAttributeRef</tt><big>(</big><em>ref</em>, <em>use=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#XMLAttributeRef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.XMLAttributeRef" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reference to stock XML attribute.</p>
 </dd></dl>
 
@@ -148,7 +148,7 @@ the same name as the serialized class. It&#8217;s contained in a Python iterable
 <p>This module defines the Fault class.</p>
 <dl class="exception">
 <dt id="rpclib.model.fault.Fault">
-<em class="property">exception </em><tt class="descclassname">rpclib.model.fault.</tt><tt class="descname">Fault</tt><big>(</big><em>faultcode='Server'</em>, <em>faultstring=''</em>, <em>faultactor=''</em>, <em>detail=None</em><big>)</big><a class="headerlink" href="#rpclib.model.fault.Fault" title="Permalink to this definition">¶</a></dt>
+<em class="property">exception </em><tt class="descclassname">rpclib.model.fault.</tt><tt class="descname">Fault</tt><big>(</big><em>faultcode='Server'</em>, <em>faultstring=''</em>, <em>faultactor=''</em>, <em>detail=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/fault.html#Fault"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.fault.Fault" title="Permalink to this definition">¶</a></dt>
 <dd><p>Use this class as a base for public exceptions.</p>
 </dd></dl>
 
@@ -158,7 +158,7 @@ the same name as the serialized class. It&#8217;s contained in a Python iterable
 <p>This module defines primitives that are atomic, basic types.</p>
 <dl class="class">
 <dt id="rpclib.model.primitive.AnyDict">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">AnyDict</tt><a class="headerlink" href="#rpclib.model.primitive.AnyDict" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">AnyDict</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#AnyDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.AnyDict" title="Permalink to this definition">¶</a></dt>
 <dd><p>An xml node that can contain any number of sub nodes. It&#8217;s represented by
 a dict instance that can contain other dicts or iterables of strings as
 values.</p>
@@ -166,76 +166,76 @@ values.</p>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.AnyUri">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">AnyUri</tt><a class="headerlink" href="#rpclib.model.primitive.AnyUri" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">AnyUri</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#AnyUri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.AnyUri" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is an xml schema type with is a special kind of String.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.AnyXml">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">AnyXml</tt><a class="headerlink" href="#rpclib.model.primitive.AnyXml" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">AnyXml</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#AnyXml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.AnyXml" title="Permalink to this definition">¶</a></dt>
 <dd><p>An xml node that can contain any number of sub nodes. It&#8217;s represented by
 an ElementTree object.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Boolean">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Boolean</tt><a class="headerlink" href="#rpclib.model.primitive.Boolean" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Boolean</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Boolean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Boolean" title="Permalink to this definition">¶</a></dt>
 <dd><p>Life is simple here. Just true or false.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Date">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Date</tt><a class="headerlink" href="#rpclib.model.primitive.Date" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Date</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Date" title="Permalink to this definition">¶</a></dt>
 <dd><p>Just that, Date. It also supports time zones.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.DateTime">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">DateTime</tt><a class="headerlink" href="#rpclib.model.primitive.DateTime" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">DateTime</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#DateTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.DateTime" title="Permalink to this definition">¶</a></dt>
 <dd><p>A compact way to represent dates and times together. Supports time zones.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Decimal">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Decimal</tt><a class="headerlink" href="#rpclib.model.primitive.Decimal" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Decimal</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Decimal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Decimal" title="Permalink to this definition">¶</a></dt>
 <dd><p>The primitive that corresponds to the native python Decimal.</p>
 <p>This is also the base class for representing numbers.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Double">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Double</tt><a class="headerlink" href="#rpclib.model.primitive.Double" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Double</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Double"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Double" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is serialized as the python float. So this type comes with its
 gotchas.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Duration">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Duration</tt><a class="headerlink" href="#rpclib.model.primitive.Duration" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Duration</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Duration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Duration" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is how the native datetime.timedelta objects are serialized.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Float">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Float</tt><a class="headerlink" href="#rpclib.model.primitive.Float" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Float</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Float" title="Permalink to this definition">¶</a></dt>
 <dd><p>Synonym for Double. This is here for compatibility purposes.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Int">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Int</tt><a class="headerlink" href="#rpclib.model.primitive.Int" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Int</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Int" title="Permalink to this definition">¶</a></dt>
 <dd><p>The 32-Bit signed integer.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Integer">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Integer</tt><a class="headerlink" href="#rpclib.model.primitive.Integer" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Integer</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Integer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Integer" title="Permalink to this definition">¶</a></dt>
 <dd><p>The arbitrary-size signed integer.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Mandatory">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Mandatory</tt><a class="headerlink" href="#rpclib.model.primitive.Mandatory" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Mandatory</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Mandatory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Mandatory" title="Permalink to this definition">¶</a></dt>
 <dd><p>Class that contains mandatory variants of primitives.</p>
 <dl class="class">
 <dt id="rpclib.model.primitive.Mandatory.Integer">
@@ -254,38 +254,38 @@ serializer. Currently, it&#8217;s utf8.</p>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.String">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">String</tt><a class="headerlink" href="#rpclib.model.primitive.String" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">String</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#String"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.String" title="Permalink to this definition">¶</a></dt>
 <dd><p>A string instance that has the same encoding as the underlying
 serializer. Currently, it&#8217;s utf8.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.UnsignedInteger">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger</tt><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#UnsignedInteger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger" title="Permalink to this definition">¶</a></dt>
 <dd><p>The arbitrary-size unsigned integer.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.UnsignedInteger16">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger16</tt><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger16" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger16</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#UnsignedInteger16"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger16" title="Permalink to this definition">¶</a></dt>
 <dd><p>The 16-bit unsigned integer.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.UnsignedInteger32">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger32</tt><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger32" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger32</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#UnsignedInteger32"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger32" title="Permalink to this definition">¶</a></dt>
 <dd><p>The 32-bit unsigned integer.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.UnsignedInteger64">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger64</tt><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger64" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger64</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#UnsignedInteger64"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger64" title="Permalink to this definition">¶</a></dt>
 <dd><p>The 64-bit unsigned integer.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.UnsignedInteger8">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger8</tt><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger8" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger8</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#UnsignedInteger8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger8" title="Permalink to this definition">¶</a></dt>
 <dd><p>The 8-bit unsigned integer.</p>
 </dd></dl>
 
@@ -303,7 +303,7 @@ and do bring up any issues you experience with this module to the attention of
 rpclib or SQLAlchemy developers.</p>
 <dl class="class">
 <dt id="rpclib.model.table.TableModel">
-<em class="property">class </em><tt class="descclassname">rpclib.model.table.</tt><tt class="descname">TableModel</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.table.TableModel" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.table.</tt><tt class="descname">TableModel</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/table.html#TableModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.table.TableModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>The main base class for complex types shared by both SQLAlchemy and
 rpclib. Classes that inherit from this class should also inherit from
 an sqlalchemy.declarative base class.</p>
@@ -318,7 +318,7 @@ an sqlalchemy.declarative base class.</p>
 
 <dl class="class">
 <dt id="rpclib.model.table.TableSerializerMeta">
-<em class="property">class </em><tt class="descclassname">rpclib.model.table.</tt><tt class="descname">TableSerializerMeta</tt><big>(</big><em>classname</em>, <em>bases</em>, <em>dict_</em><big>)</big><a class="headerlink" href="#rpclib.model.table.TableSerializerMeta" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.model.table.</tt><tt class="descname">TableSerializerMeta</tt><big>(</big><em>classname</em>, <em>bases</em>, <em>dict_</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/table.html#TableSerializerMeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.table.TableSerializerMeta" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class uses the information in class definition dictionary to build
 the _type_info dictionary that rpclib relies on. It otherwise leaves
 SQLAlchemy and its information alone.</p>
@@ -354,7 +354,7 @@ SQLAlchemy and its information alone.</p>
                         title="next chapter">Interfaces</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/reference/model.txt"
+    <li><a href="../sources/reference/model.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -389,12 +389,12 @@ SQLAlchemy and its information alone.</p>
         <li class="right" >
           <a href="index.html" title="Rpclib API Reference"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright Rpclib Contributors.
+        &copy; Copyright 2011, Rpclib Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>

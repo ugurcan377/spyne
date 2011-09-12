@@ -7,22 +7,22 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Miscellanous Rpclib Utilities &mdash; rpclib v2.3.0-beta documentation</title>
-    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <title>Miscellanous Rpclib Utilities &mdash; rpclib v2.3.1-beta documentation</title>
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.0-beta',
+        VERSION:     '2.3.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.0-beta documentation" href="../index.html" />
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="rpclib v2.3.1-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Service Definition" href="service.html" />
     <link rel="prev" title="Server Transports" href="server.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="server.html" title="Server Transports"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -58,7 +58,9 @@
 <div class="section" id="module-rpclib.util.cdict">
 <span id="class-dictionary"></span><h2>Class Dictionary<a class="headerlink" href="#module-rpclib.util.cdict" title="Permalink to this headline">¶</a></h2>
 <p>cdict (ClassDict) is a funny kind of dict that tries to return the values for
-the base classes of a key when the entry for the key is not found.</p>
+the base classes of a key when the entry for the key is not found. It is not a
+generalized dictionary that can handle any type of key &#8211; it relies on
+rpclib.model api to look for classes.</p>
 </div>
 <div class="section" id="module-rpclib.util.etreeconv">
 <span id="element-tree-conversion"></span><h2>Element Tree Conversion<a class="headerlink" href="#module-rpclib.util.etreeconv" title="Permalink to this headline">¶</a></h2>
@@ -66,8 +68,39 @@ the base classes of a key when the entry for the key is not found.</p>
 hierarchy to python dicts and vice versa.</p>
 <dl class="function">
 <dt id="rpclib.util.etreeconv.dict_to_etree">
-<tt class="descclassname">rpclib.util.etreeconv.</tt><tt class="descname">dict_to_etree</tt><big>(</big><em>parent</em>, <em>d</em><big>)</big><a class="headerlink" href="#rpclib.util.etreeconv.dict_to_etree" title="Permalink to this definition">¶</a></dt>
-<dd><p>the dict values are either dicts or iterables</p>
+<tt class="descclassname">rpclib.util.etreeconv.</tt><tt class="descname">dict_to_etree</tt><big>(</big><em>d</em>, <em>parent</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/etreeconv.html#dict_to_etree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.etreeconv.dict_to_etree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a the dict whose values are either dicts, odicts or iterables. The
+iterables can contain either other dicts/odicts or text.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rpclib.util.etreeconv.etree_strip_namespaces">
+<tt class="descclassname">rpclib.util.etreeconv.</tt><tt class="descname">etree_strip_namespaces</tt><big>(</big><em>element</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/etreeconv.html#etree_strip_namespaces"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.etreeconv.etree_strip_namespaces" title="Permalink to this definition">¶</a></dt>
+<dd><p>Removes any namespace information form the given element recursively.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rpclib.util.etreeconv.etree_to_dict">
+<tt class="descclassname">rpclib.util.etreeconv.</tt><tt class="descname">etree_to_dict</tt><big>(</big><em>element</em>, <em>iterable=(&lt;type 'list'&gt;</em>, <em>&lt;method 'append' of 'list' objects&gt;)</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/etreeconv.html#etree_to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.etreeconv.etree_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an xml root element and returns the corresponding dict. The second
+argument is a pair of iterable type and the function used to add elements to
+the iterable. The xml attributes are ignored.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rpclib.util.etreeconv.root_dict_to_etree">
+<tt class="descclassname">rpclib.util.etreeconv.</tt><tt class="descname">root_dict_to_etree</tt><big>(</big><em>d</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/etreeconv.html#root_dict_to_etree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.etreeconv.root_dict_to_etree" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts a dictionary to an xml hiearchy. Just like a valid xml document,
+the dictionary must have a single element. The format of the child
+dictionaries is the same as <a class="reference internal" href="#rpclib.util.etreeconv.dict_to_etree" title="rpclib.util.etreeconv.dict_to_etree"><tt class="xref py py-func docutils literal"><span class="pre">dict_to_etree()</span></tt></a>.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rpclib.util.etreeconv.root_etree_to_dict">
+<tt class="descclassname">rpclib.util.etreeconv.</tt><tt class="descname">root_etree_to_dict</tt><big>(</big><em>element</em>, <em>iterable=(&lt;type 'list'&gt;</em>, <em>&lt;method 'append' of 'list' objects&gt;)</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/etreeconv.html#root_etree_to_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.etreeconv.root_etree_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes an xml root element and returns the corresponding dict. The second
+argument is a pair of iterable type and the function used to add elements to
+the iterable. The xml attributes are ignored.</p>
 </dd></dl>
 
 </div>
@@ -77,7 +110,7 @@ hierarchy to python dicts and vice versa.</p>
 rpclib.model.ComplexModel instances</p>
 <dl class="class">
 <dt id="rpclib.util.model_utils.ComplexModelConverter">
-<em class="property">class </em><tt class="descclassname">rpclib.util.model_utils.</tt><tt class="descname">ComplexModelConverter</tt><big>(</big><em>model_instance</em>, <em>tns</em>, <em>include_parent=False</em>, <em>parent_tag='root'</em>, <em>include_ns=True</em><big>)</big><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.util.model_utils.</tt><tt class="descname">ComplexModelConverter</tt><big>(</big><em>model_instance</em>, <em>tns</em>, <em>include_parent=False</em>, <em>parent_tag='root'</em>, <em>include_ns=True</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/model_utils.html#ComplexModelConverter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter" title="Permalink to this definition">¶</a></dt>
 <dd><p>A class to handle exporting a ComplexModel to different representations</p>
 <p>Currently supported export targets are lxml.etree.Element, string and
 xml documents.</p>
@@ -86,21 +119,21 @@ it proves useful and there is a willingness to modify the current
 ComplexModel API.</p>
 <dl class="method">
 <dt id="rpclib.util.model_utils.ComplexModelConverter.to_etree">
-<tt class="descname">to_etree</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_etree" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">to_etree</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/util/model_utils.html#ComplexModelConverter.to_etree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_etree" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a lxml.etree.Element from a rpclib.model.complex.ComplexModel
 instance.</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="rpclib.util.model_utils.ComplexModelConverter.to_file">
-<tt class="descname">to_file</tt><big>(</big><em>file_path</em><big>)</big><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_file" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">to_file</tt><big>(</big><em>file_path</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/model_utils.html#ComplexModelConverter.to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_file" title="Permalink to this definition">¶</a></dt>
 <dd><p>Writes a model instance to a XML document</p>
 <p>&#64;param The output file path for the xml file</p>
 </dd></dl>
 
 <dl class="method">
 <dt id="rpclib.util.model_utils.ComplexModelConverter.to_xml">
-<tt class="descname">to_xml</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_xml" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">to_xml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/util/model_utils.html#ComplexModelConverter.to_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_xml" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a xml string from a rpclib.model.complex.ComplexModel instance.</p>
 </dd></dl>
 
@@ -112,7 +145,7 @@ instance.</p>
 <p>This module contains a sort of an ordered dictionary implementation.</p>
 <dl class="class">
 <dt id="rpclib.util.odict.odict">
-<em class="property">class </em><tt class="descclassname">rpclib.util.odict.</tt><tt class="descname">odict</tt><big>(</big><em>data=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#rpclib.util.odict.odict" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.util.odict.</tt><tt class="descname">odict</tt><big>(</big><em>data=</em><span class="optional">[</span><span class="optional">]</span><big>)</big><a class="reference internal" href="../modules/rpclib/util/odict.html#odict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.odict.odict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sort of an ordered dictionary implementation.</p>
 </dd></dl>
 
@@ -148,7 +181,7 @@ instance.</p>
                         title="next chapter">Service Definition</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../_sources/reference/util.txt"
+    <li><a href="../sources/reference/util.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -183,12 +216,12 @@ instance.</p>
         <li class="right" >
           <a href="server.html" title="Server Transports"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright Rpclib Contributors.
+        &copy; Copyright 2011, Rpclib Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>

@@ -7,22 +7,22 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Rpclib &mdash; rpclib v2.3.0-beta documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
-    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <title>Rpclib &mdash; rpclib v2.3.1-beta documentation</title>
+    <link rel="stylesheet" href="static/default.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.3.0-beta',
+        VERSION:     '2.3.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
-    <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.0-beta documentation" href="#" />
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="rpclib v2.3.1-beta documentation" href="#" />
     <link rel="next" title="Rpclib Tutorials" href="tutorial/index.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="tutorial/index.html" title="Rpclib Tutorials"
              accesskey="N">next</a> |</li>
-        <li><a href="#">rpclib v2.3.0-beta documentation</a> &raquo;</li> 
+        <li><a href="#">rpclib v2.3.1-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -49,39 +49,44 @@
             
   <div class="section" id="rpclib">
 <h1>Rpclib<a class="headerlink" href="#rpclib" title="Permalink to this headline">¶</a></h1>
+<p>Warning! This is from rpclib&#8217;s unstable development branch.</p>
 <div class="section" id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
 <p>Rpclib is an unobstrusive Python library that helps you expose your APIs to a
-wider audience via various Remote Procedure Call protocols and transports.</p>
+wider audience via various remote procedure call protocols and transports.</p>
 <p>It currently supports the WSDL 1.1 interface definition standard, along with
-SOAP 1.1 and the rest-minus-the-verbs HttpRpc protocol which can be
+SOAP 1.1 and the rest-minus-the-verbs HttpRpc protocols which can be
 transported via HTTP or ZeroMQ in a both client or server environment.</p>
-<p>The source code is <cite>[here](https://github.com/arskom/rpclib)</cite>.</p>
-<p>The official rpclib discussion forum can be found [here](<a class="reference external" href="http://mail.python.org/mailman/listinfo/soap">http://mail.python.org/mailman/listinfo/soap</a>).</p>
-<p>See the [downloads section](<a class="reference external" href="http://github.com/arskom/rpclib/downloads">http://github.com/arskom/rpclib/downloads</a>) for related downloads.</p>
-<p>The documentation is [here](<a class="reference external" href="http://arskom.github.com/rpclib">http://arskom.github.com/rpclib</a>).</p>
+<p>The source code is <a class="reference external" href="https://github.com/arskom/rpclib">here</a>.</p>
+<p>The official rpclib discussion forum can be found <a class="reference external" href="http://mail.python.org/mailman/listinfo/soap">here</a>.</p>
+<p>See the <a class="reference external" href="http://github.com/arskom/rpclib/downloads">downloads section</a> for related downloads.</p>
+<p>The documentation is <a class="reference external" href="http://arskom.github.com/rpclib">here</a>.</p>
 <p>Rpclib is a generalized version of a soap processing library known as soaplib.
-The following legacy versions of soaplib are also available:
-See [here](<a class="reference external" href="http://github.com/arskom/rpclib/tree/soaplib-0_8">http://github.com/arskom/rpclib/tree/soaplib-0_8</a>) for the stable soaplib-0.8 branch.
-See [here](<a class="reference external" href="http://github.com/arskom/rpclib/tree/soaplib-1_0">http://github.com/arskom/rpclib/tree/soaplib-1_0</a>) for the stable soaplib-1.0 branch.
-See [here](<a class="reference external" href="http://github.com/arskom/rpclib/tree/soaplib-2_0">http://github.com/arskom/rpclib/tree/soaplib-2_0</a>) for the stable soaplib-2.0 branch.</p>
+The following legacy versions of soaplib are also available:</p>
+<blockquote>
+<div><ul class="simple">
+<li>See <a class="reference external" href="http://github.com/arskom/rpclib/tree/soaplib-0_8">here</a> for the stable soaplib-0.8 branch.</li>
+<li>See <a class="reference external" href="http://github.com/arskom/rpclib/tree/soaplib-1_0">here</a> for the stable soaplib-1.0 branch.</li>
+<li>See <a class="reference external" href="http://github.com/arskom/rpclib/tree/soaplib-2_0">here</a> for the stable soaplib-2.0 branch.</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="requirements">
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>Rpclib reportedly runs on any version of Python from 2.4 through 2.7. We&#8217;re also
 looking for volunteers to test Python 3.x.</p>
 <p>The aim is to have no requirements besides the standard Python library for the
-Rpclib core. While much ground was covered towards this goal, there&#8217;s still some
+Rpclib core. While much progress was made towards this goal, there&#8217;s still some
 work to be done. So currently, the following is needed if you want to run any
 Rpclib service at all:</p>
 <ul class="simple">
-<li>[lxml](<a class="reference external" href="http://codespeak.net/lxml/">http://codespeak.net/lxml/</a>). (available through easy_install)</li>
-<li>[pytz](<a class="reference external" href="http://pytz.sourceforge.net/">http://pytz.sourceforge.net/</a>). (available through easy_install)</li>
+<li><a class="reference external" href="http://codespeak.net/lxml/">lxml</a>. (available through easy_install)</li>
+<li><a class="reference external" href="http://pytz.sourceforge.net/">pytz</a>. (available through easy_install)</li>
 </ul>
 <p>And the following is needed for various subsystems that Rpclib supports:</p>
 <ul class="simple">
-<li>[SQLAlchemy](<a class="reference external" href="http://sqlalchemy.org">http://sqlalchemy.org</a>) for <a class="reference internal" href="reference/model.html#rpclib.model.table.TableModel" title="rpclib.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.table.TableModel</span></tt></a>.</li>
-<li>[pyzmq](<a class="reference external" href="https://github.com/zeromq/pyzmq">https://github.com/zeromq/pyzmq</a>) for
+<li><a class="reference external" href="http://sqlalchemy.org">SQLAlchemy</a> for <a class="reference internal" href="reference/model.html#rpclib.model.table.TableModel" title="rpclib.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.table.TableModel</span></tt></a>.</li>
+<li><a class="reference external" href="https://github.com/zeromq/pyzmq">pyzmq</a> for
 <a class="reference internal" href="reference/client.html#rpclib.client.zeromq.ZeroMQClient" title="rpclib.client.zeromq.ZeroMQClient"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.client.zeromq.ZeroMQClient</span></tt></a> and
 <a class="reference internal" href="reference/server.html#rpclib.server.zeromq.ZeroMQServer" title="rpclib.server.zeromq.ZeroMQServer"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server.zeromq.ZeroMQServer</span></tt></a>.</li>
 <li>A Wsgi server of your choice to wrap <a class="reference internal" href="reference/server.html#rpclib.server.wsgi.WsgiApplication" title="rpclib.server.wsgi.WsgiApplication"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server.wsgi.WsgiApplication</span></tt></a>.</li>
@@ -106,7 +111,7 @@ python setup.py develop</pre>
 <div class="section" id="contributing">
 <h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
 <p>The main developers of rpclib lurk in the official soap implementors forum
-in python.org, <cite>here &lt;http://mail.python.org/mailman/listinfo/soap/&gt;</cite>.
+in python.org, <a class="reference external" href="http://mail.python.org/mailman/listinfo/soap/">here</a>.
 That&#8217;s mostly because rpclib is the continuation of soaplib, but also
 because soap is an important part of rpclib.</p>
 <p>If you wish to contribute to rpclib&#8217;s development, create a personal fork
@@ -116,13 +121,14 @@ committers. They will respond to review your patch and act accordingly.</p>
 <p>To save both parties time, make sure the existing tests pass. If you are
 adding new functionality or fixing a bug, please have the accompanying test.
 This will both help us increase test coverage and insure your use-case
-is immunte to feature code changes. You could also summarize in one or
+is immune to feature code changes. You could also summarize in one or
 two lines how your work will affect the life of rpclib users in the
 CHANGELOG file.</p>
-<p>Please follow the <cite>PEP 8 &lt;http://www.python.org/dev/peps/pep-0008/&gt;</cite>
+<p>Please follow the <a class="reference external" href="http://www.python.org/dev/peps/pep-0008/">PEP 8</a>
 style guidelines for both source code and docstrings.</p>
-<p>We could also use help with the docs, which are built from reStructureText
-using Sphinx.</p>
+<p>We could also use help with the docs, which are built from
+<a class="reference external" href="http://docutils.sourceforge.net/rst.html">restructured text</a> using
+<a class="reference external" href="http://sphinx.pocoo.org">Sphinx</a>.</p>
 <p>Regular contributors may be invited to join as a core rpclib committer on
 GitHub. Even if this gives the core committers the power to commit directly
 to the core repository, we highly value code reviews and expect every
@@ -160,6 +166,8 @@ significant change to be committed via pull requests.</p>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-3-1-beta">rpclib-2.3.1-beta</a></li>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-3-0-beta">rpclib-2.3.0-beta</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-2-3-beta">rpclib-2.2.3-beta</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-2-2-beta">rpclib-2.2.2-beta</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-2-1-beta">rpclib-2.2.1-beta</a></li>
@@ -227,7 +235,7 @@ significant change to be committed via pull requests.</p>
                         title="next chapter">Rpclib Tutorials</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="_sources/index.txt"
+    <li><a href="sources/index.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -259,11 +267,11 @@ significant change to be committed via pull requests.</p>
         <li class="right" >
           <a href="tutorial/index.html" title="Rpclib Tutorials"
              >next</a> |</li>
-        <li><a href="#">rpclib v2.3.0-beta documentation</a> &raquo;</li> 
+        <li><a href="#">rpclib v2.3.1-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright Rpclib Contributors.
+        &copy; Copyright 2011, Rpclib Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>
