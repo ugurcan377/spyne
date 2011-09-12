@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Protocols &mdash; rpclib v2.3.1-beta documentation</title>
+    <title>Protocols &mdash; rpclib v2.3.2-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.1-beta',
+        VERSION:     '2.3.2-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.1-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.3.2-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Client Transports" href="client.html" />
     <link rel="prev" title="Interfaces" href="interface.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="interface.html" title="Interfaces"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -65,7 +65,19 @@ protocol implementations.</p>
 <dt id="rpclib.protocol._base.ProtocolBase">
 <em class="property">class </em><tt class="descclassname">rpclib.protocol._base.</tt><tt class="descname">ProtocolBase</tt><big>(</big><em>app=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the abstract base class for all protocol implementations. Child
-classes can implement only the required subset of the public methods</p>
+classes can implement only the required subset of the public methods.</p>
+<p>The ProtocolBase class supports the following events:
+* <tt class="docutils literal"><span class="pre">deserialize</span></tt></p>
+<blockquote>
+<div>Called right after the deserialization operation is finished.</div></blockquote>
+<ul>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">serialize</span></tt></dt>
+<dd><p class="first last">Called right after the serialization operation is finished.</p>
+</dd>
+</dl>
+</li>
+</ul>
 <dl class="attribute">
 <dt id="rpclib.protocol._base.ProtocolBase.app">
 <tt class="descname">app</tt><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase.app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase.app" title="Permalink to this definition">¶</a></dt>
@@ -271,7 +283,7 @@ procedure call standard.</p>
         <li class="right" >
           <a href="interface.html" title="Interfaces"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

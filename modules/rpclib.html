@@ -7,7 +7,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Rpclib Tutorials &mdash; rpclib v2.3.2-beta documentation</title>
+    <title>rpclib &mdash; rpclib v2.3.2-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
@@ -23,8 +23,7 @@
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
     <link rel="top" title="rpclib v2.3.2-beta documentation" href="../index.html" />
-    <link rel="next" title="Hello World" href="helloworld.html" />
-    <link rel="prev" title="Rpclib" href="../index.html" /> 
+    <link rel="up" title="Module code" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -36,13 +35,8 @@
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="helloworld.html" title="Hello World"
-             accesskey="N">next</a> |</li>
-        <li class="right" >
-          <a href="../index.html" title="Rpclib"
-             accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li> 
+        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -51,48 +45,39 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="rpclib-tutorials">
-<span id="tutorial-index"></span><h1>Rpclib Tutorials<a class="headerlink" href="#rpclib-tutorials" title="Permalink to this headline">¶</a></h1>
-<p>Here we document tutorials that aim to introduce you most of the rpclib concepts
-with examples.</p>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="helloworld.html">Hello World</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="helloworld.html#defining-an-rpclib-service">Defining an Rpclib Service</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helloworld.html#deploying-the-service-using-soap">Deploying the service using SOAP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helloworld.html#deploying-service-using-httprpc">Deploying service using HttpRpc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="helloworld.html#what-s-next">What&#8217;s next?</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="usermanager.html">User Manager</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="usermanager.html#what-s-next">What&#8217;s next?</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="sqlalchemy.html">SQLAlchemy Integration</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="sqlalchemy.html#what-s-next">What&#8217;s next?</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
+  <h1>Source code for rpclib</h1><div class="highlight"><pre>
+<span class="c">#</span>
+<span class="c"># rpclib - Copyright (C) Rpclib contributors.</span>
+<span class="c">#</span>
+<span class="c"># This library is free software; you can redistribute it and/or</span>
+<span class="c"># modify it under the terms of the GNU Lesser General Public</span>
+<span class="c"># License as published by the Free Software Foundation; either</span>
+<span class="c"># version 2.1 of the License, or (at your option) any later version.</span>
+<span class="c">#</span>
+<span class="c"># This library is distributed in the hope that it will be useful,</span>
+<span class="c"># but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c"># MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU</span>
+<span class="c"># Lesser General Public License for more details.</span>
+<span class="c">#</span>
+<span class="c"># You should have received a copy of the GNU Lesser General Public</span>
+<span class="c"># License along with this library; if not, write to the Free Software</span>
+<span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
+<span class="c">#</span>
 
+<span class="n">__version__</span> <span class="o">=</span> <span class="s">&#39;2.3.2-beta&#39;</span>
+
+<span class="kn">from</span> <span class="nn">_base</span> <span class="kn">import</span> <span class="n">TransportContext</span>
+<span class="kn">from</span> <span class="nn">_base</span> <span class="kn">import</span> <span class="n">EventContext</span>
+<span class="kn">from</span> <span class="nn">_base</span> <span class="kn">import</span> <span class="n">MethodContext</span>
+<span class="kn">from</span> <span class="nn">_base</span> <span class="kn">import</span> <span class="n">MethodDescriptor</span>
+<span class="kn">from</span> <span class="nn">_base</span> <span class="kn">import</span> <span class="n">EventManager</span>
+</pre></div>
 
           </div>
         </div>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="../index.html"
-                        title="previous chapter">Rpclib</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="helloworld.html"
-                        title="next chapter">Hello World</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="../sources/tutorial/index.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
@@ -119,13 +104,8 @@ with examples.</p>
         <li class="right" >
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li class="right" >
-          <a href="helloworld.html" title="Hello World"
-             >next</a> |</li>
-        <li class="right" >
-          <a href="../index.html" title="Rpclib"
-             >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li> 
+        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

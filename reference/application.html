@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Application Definition &mdash; rpclib v2.3.1-beta documentation</title>
+    <title>Application Definition &mdash; rpclib v2.3.2-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.1-beta',
+        VERSION:     '2.3.2-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.1-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.3.2-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Running Tests" href="../tests.html" />
     <link rel="prev" title="Service Definition" href="service.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="service.html" title="Service Definition"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -55,8 +55,8 @@
             
   <div class="section" id="module-rpclib.application">
 <span id="application-definition"></span><h1>Application Definition<a class="headerlink" href="#module-rpclib.application" title="Permalink to this headline">¶</a></h1>
-<p>This module contains the Application class that exposes multiple service
-definitions to the outside world.</p>
+<p>This module contains the Application class, to which every other rpclib
+component is integrated.</p>
 <dl class="class">
 <dt id="rpclib.application.Application">
 <em class="property">class </em><tt class="descclassname">rpclib.application.</tt><tt class="descname">Application</tt><big>(</big><em>services</em>, <em>tns</em>, <em>interface</em>, <em>in_protocol</em>, <em>out_protocol</em>, <em>name=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/application.html#Application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.application.Application" title="Permalink to this definition">¶</a></dt>
@@ -85,6 +85,31 @@ which is, by default, &#8216;Application&#8217;.</li>
 </tr>
 </tbody>
 </table>
+<dl class="docutils">
+<dt>Supported events:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt>method_call</dt>
+<dd><p class="first last">Called right before the service method is executed</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>method_return_object</dt>
+<dd><p class="first last">Called right after the service method is executed</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>method_exception_object</dt>
+<dd><p class="first last">Called when an exception occurred in a service method, before the
+exception is serialized.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
 <dl class="method">
 <dt id="rpclib.application.Application.call_wrapper">
 <tt class="descname">call_wrapper</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/application.html#Application.call_wrapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.application.Application.call_wrapper" title="Permalink to this definition">¶</a></dt>
@@ -156,7 +181,7 @@ meant to be overridden unless you know what you&#8217;re doing.</p>
         <li class="right" >
           <a href="service.html" title="Service Definition"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

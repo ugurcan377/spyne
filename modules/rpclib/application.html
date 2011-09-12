@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.application &mdash; rpclib v2.3.1-beta documentation</title>
+    <title>rpclib.application &mdash; rpclib v2.3.2-beta documentation</title>
     <link rel="stylesheet" href="../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '2.3.1-beta',
+        VERSION:     '2.3.2-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,8 +22,8 @@
     <script type="text/javascript" src="../../static/jquery.js"></script>
     <script type="text/javascript" src="../../static/underscore.js"></script>
     <script type="text/javascript" src="../../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.1-beta documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
+    <link rel="top" title="rpclib v2.3.2-beta documentation" href="../../index.html" />
+    <link rel="up" title="rpclib" href="../rpclib.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,8 +35,9 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li><a href="../../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -64,8 +65,8 @@
 <span class="c"># Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301</span>
 <span class="c">#</span>
 
-<span class="sd">&quot;&quot;&quot;This module contains the Application class that exposes multiple service</span>
-<span class="sd">definitions to the outside world.</span>
+<span class="sd">&quot;&quot;&quot;This module contains the Application class, to which every other rpclib</span>
+<span class="sd">component is integrated.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
 
@@ -92,6 +93,17 @@
 <span class="sd">    :param name:         The optional name attribute of the exposed service.</span>
 <span class="sd">                         The default is the name of the application class</span>
 <span class="sd">                         which is, by default, &#39;Application&#39;.</span>
+
+<span class="sd">    Supported events:</span>
+<span class="sd">        * method_call</span>
+<span class="sd">            Called right before the service method is executed</span>
+
+<span class="sd">        * method_return_object</span>
+<span class="sd">            Called right after the service method is executed</span>
+
+<span class="sd">        * method_exception_object</span>
+<span class="sd">            Called when an exception occurred in a service method, before the</span>
+<span class="sd">            exception is serialized.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">transport</span> <span class="o">=</span> <span class="bp">None</span>
@@ -151,7 +163,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;method_exception_object&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">service_class</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">ctx</span><span class="o">.</span><span class="n">service_class</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span>
-                                                    <span class="s">&#39;method_return_object&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
+                                                <span class="s">&#39;method_exception_object&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
@@ -162,7 +174,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;method_exception_object&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">service_class</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
                 <span class="n">ctx</span><span class="o">.</span><span class="n">service_class</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span>
-                                                    <span class="s">&#39;method_return_object&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
+                                                <span class="s">&#39;method_exception_object&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">call_wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
 <div class="viewcode-block" id="Application.call_wrapper"><a class="viewcode-back" href="../../reference/application.html#rpclib.application.Application.call_wrapper">[docs]</a>        <span class="sd">&quot;&quot;&quot;This method calls the call_wrapper method in the service definition.</span>
@@ -206,8 +218,9 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
-          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+        <li><a href="../../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

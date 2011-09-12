@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Server Transports &mdash; rpclib v2.3.1-beta documentation</title>
+    <title>Server Transports &mdash; rpclib v2.3.2-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.1-beta',
+        VERSION:     '2.3.2-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.1-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.3.2-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Miscellanous Rpclib Utilities" href="util.html" />
     <link rel="prev" title="Client Transports" href="client.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="client.html" title="Client Transports"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -100,11 +100,52 @@ definition.</p>
 </div>
 <div class="section" id="module-rpclib.server.wsgi">
 <span id="http-wsgi"></span><h2>HTTP (WSGI)<a class="headerlink" href="#module-rpclib.server.wsgi" title="Permalink to this headline">¶</a></h2>
-<p>An rpc server that uses http as transport, and wsgi as bridge api</p>
+<p>An rpc server that uses http as transport, and wsgi as bridge api.</p>
 <dl class="class">
 <dt id="rpclib.server.wsgi.WsgiApplication">
 <em class="property">class </em><tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">WsgiApplication</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiApplication"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="method">
+<dd><p>A <a class="reference external" href="http://www.python.org/dev/peps/pep-3333/#preface-for-readers-of-pep-333">PEP-3333</a>
+compliant callable class.</p>
+<dl class="docutils">
+<dt>Supported events:</dt>
+<dd><ul class="first last">
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">wsdl</span></tt></dt>
+<dd><p class="first last">Called right before the wsdl data is returned to the client.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">wsdl_exception</span></tt></dt>
+<dd><p class="first last">Called right after an exception is thrown during wsdl generation. The
+exception object is stored in ctx.transport.wsdl_error attribute.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">wsgi_call</span></tt></dt>
+<dd><p class="first last">Called first when the incoming http request is identified as a rpc
+request.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">wsgi_return</span></tt></dt>
+<dd><p class="first last">Called right before the output stream is returned to the WSGI handler.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><tt class="docutils literal"><span class="pre">wsgi_resource_not_found</span></tt></dt>
+<dd><p class="first last">Called right before returning a 404 when the requested resource was not
+found.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
 <dt id="rpclib.server.wsgi.WsgiApplication.get_in_object">
 <tt class="descname">get_in_object</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.get_in_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.in_string to set ctx.in_body_doc, which in turn is used
@@ -130,17 +171,64 @@ ctx.out_object.</p>
 <dl class="class">
 <dt id="rpclib.server.wsgi.WsgiMethodContext">
 <em class="property">class </em><tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">WsgiMethodContext</tt><big>(</big><em>app</em>, <em>req_env</em>, <em>content_type</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiMethodContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext" title="Permalink to this definition">¶</a></dt>
-<dd><dl class="attribute">
+<dd><p>The WSGI-Specific method context. WSGI-Specific information is stored in
+the transport attribute using the <a class="reference internal" href="#rpclib.server.wsgi.WsgiTransportContext" title="rpclib.server.wsgi.WsgiTransportContext"><tt class="xref py py-class docutils literal"><span class="pre">WsgiTransportContext</span></tt></a> class.</p>
+<dl class="attribute">
 <dt id="rpclib.server.wsgi.WsgiMethodContext.method_name">
 <tt class="descname">method_name</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.method_name" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiMethodContext.transport">
+<tt class="descname">transport</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.transport" title="Permalink to this definition">¶</a></dt>
+<dd><p>Holds the WSGI-specific information</p>
+</dd></dl>
 
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.server.wsgi.WsgiTransportContext">
 <em class="property">class </em><tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">WsgiTransportContext</tt><big>(</big><em>req_env</em>, <em>content_type</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiTransportContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
+<dd><p>The class that is used in the transport attribute of the
+<a class="reference internal" href="#rpclib.server.wsgi.WsgiMethodContext" title="rpclib.server.wsgi.WsgiMethodContext"><tt class="xref py py-class docutils literal"><span class="pre">WsgiMethodContext</span></tt></a> class.</p>
+<dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiTransportContext.req_env">
+<tt class="descname">req_env</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.req_env" title="Permalink to this definition">¶</a></dt>
+<dd><p>WSGI Request environment</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiTransportContext.req_method">
+<tt class="descname">req_method</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.req_method" title="Permalink to this definition">¶</a></dt>
+<dd><p>HTTP Request verb, as a convenience to users.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiTransportContext.resp_code">
+<tt class="descname">resp_code</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.resp_code" title="Permalink to this definition">¶</a></dt>
+<dd><p>HTTP Response code.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiTransportContext.resp_headers">
+<tt class="descname">resp_headers</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.resp_headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>HTTP Response headers.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiTransportContext.wsdl">
+<tt class="descname">wsdl</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.wsdl" title="Permalink to this definition">¶</a></dt>
+<dd><p>The WSDL document that is being returned. Only relevant when handling
+WSDL requests.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiTransportContext.wsdl_error">
+<tt class="descname">wsdl_error</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.wsdl_error" title="Permalink to this definition">¶</a></dt>
+<dd><p>The error when handling WSDL requests.</p>
+</dd></dl>
+
+</dd></dl>
 
 <dl class="function">
 <dt id="rpclib.server.wsgi.reconstruct_wsgi_request">
@@ -264,7 +352,7 @@ ctx.out_object.</p>
         <li class="right" >
           <a href="client.html" title="Client Transports"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

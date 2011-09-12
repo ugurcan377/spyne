@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.service &mdash; rpclib v2.3.1-beta documentation</title>
+    <title>rpclib.service &mdash; rpclib v2.3.2-beta documentation</title>
     <link rel="stylesheet" href="../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '2.3.1-beta',
+        VERSION:     '2.3.2-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,8 +22,8 @@
     <script type="text/javascript" src="../../static/jquery.js"></script>
     <script type="text/javascript" src="../../static/underscore.js"></script>
     <script type="text/javascript" src="../../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.1-beta documentation" href="../../index.html" />
-    <link rel="up" title="Module code" href="../index.html" /> 
+    <link rel="top" title="rpclib v2.3.2-beta documentation" href="../../index.html" />
+    <link rel="up" title="rpclib" href="../rpclib.html" /> 
   </head>
   <body>
     <div class="related">
@@ -35,8 +35,9 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
-          <li><a href="../index.html" accesskey="U">Module code</a> &raquo;</li> 
+        <li><a href="../../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -108,6 +109,37 @@
 
 <span class="sd">    It is a natural abstract base class, because it&#39;s of no use without any</span>
 <span class="sd">    method definitions, hence the &#39;Base&#39; suffix in the name.</span>
+
+<span class="sd">    The WsgiApplication class supports the following events:</span>
+<span class="sd">        * ``method_call``</span>
+<span class="sd">            Called right before the service method is executed</span>
+
+<span class="sd">        * ``method_return_object``</span>
+<span class="sd">            Called right after the service method is executed</span>
+
+<span class="sd">        * ``method_exception_object``</span>
+<span class="sd">            Called when an exception occurred in a service method, before the</span>
+<span class="sd">            exception is serialized.</span>
+
+<span class="sd">        * ``method_accept_document``</span>
+<span class="sd">            Called by the transport right after the incoming stream is parsed to</span>
+<span class="sd">            the incoming protocol&#39;s document type.</span>
+
+<span class="sd">        * ``method_return_document``</span>
+<span class="sd">            Called by the transport right after the outgoing object is</span>
+<span class="sd">            serialized to the outgoing protocol&#39;s document type.</span>
+
+<span class="sd">        * ``method_exception_document``</span>
+<span class="sd">            Called by the transport right before the outgoing exception object</span>
+<span class="sd">            is serialized to the outgoing protocol&#39;s document type.</span>
+
+<span class="sd">        * ``method_return_string``</span>
+<span class="sd">            Called by the transport right before passing the return string to</span>
+<span class="sd">            the client.</span>
+
+<span class="sd">        * ``method_exception_string``</span>
+<span class="sd">            Called by the transport right before passing the exception string to</span>
+<span class="sd">            the client.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">__metaclass__</span> <span class="o">=</span> <span class="n">ServiceBaseMeta</span>
@@ -209,8 +241,9 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">rpclib v2.3.1-beta documentation</a> &raquo;</li>
-          <li><a href="../index.html" >Module code</a> &raquo;</li> 
+        <li><a href="../../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
+          <li><a href="../index.html" >Module code</a> &raquo;</li>
+          <li><a href="../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
