@@ -75,13 +75,13 @@ tucking a Soap message in the Http byte-stream. Whereas the HttpRpc protocol
 exposes Http as a protocol. One could use Soap as a transport by tucking a
 message in its base64-encoded ByteArray container.</p>
 <p class="last">Transports are separated to two packages in Rpclib source code:
-<tt class="xref py py-mod docutils literal"><span class="pre">rpclib.client</span></tt> and <tt class="xref py py-mod docutils literal"><span class="pre">rpclib.server</span></tt> packages.</p>
+<tt class="xref py py-mod docutils literal"><span class="pre">rpclib.client</span></tt> and <tt class="xref py py-mod docutils literal"><span class="pre">rpclib.server</span></tt>.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>Models:</strong></dt>
-<dd><p class="first last">Models are used to define schemas. They are mere magic cookies who contain
+<dd><p class="first last">Models are used to define schemas. They are mere magic cookies that contain
 very little amount of serialization code They reside in the
 <tt class="xref py py-mod docutils literal"><span class="pre">rpclib.model</span></tt> package.</p>
 </dd>
@@ -114,7 +114,9 @@ used as xml serializer, and a custom wsgi callable is used as http serializer.</
 </div>
 <div class="section" id="how-your-code-is-wrapped">
 <h2>How your code is wrapped<a class="headerlink" href="#how-your-code-is-wrapped" title="Permalink to this headline">¶</a></h2>
-<p>As a user of the Rpclib library, you will</p>
+<p>A typical user of the Rpclib will just write methods that will be exposed as
+remote procedure calls to the outside world. The following is used to wrap that
+code:</p>
 <ul>
 <li><dl class="first docutils">
 <dt><strong>Decorators</strong>:</dt>
