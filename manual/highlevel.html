@@ -1,0 +1,265 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>High-Level Introduction to Rpclib &mdash; rpclib v2.3.3-beta documentation</title>
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.3.3-beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../index.html" />
+    <link rel="up" title="Rpclib Manual" href="index.html" />
+    <link rel="next" title="Hello World" href="helloworld.html" />
+    <link rel="prev" title="Rpclib Manual" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="helloworld.html" title="Hello World"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Rpclib Manual"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Rpclib Manual</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="high-level-introduction-to-rpclib">
+<span id="manual-highlevel"></span><h1>High-Level Introduction to Rpclib<a class="headerlink" href="#high-level-introduction-to-rpclib" title="Permalink to this headline">¶</a></h1>
+<p>The impatient can just jump to the <a class="reference internal" href="#manual-highlevel-nutshell"><em>In a nutshell</em></a> section.</p>
+<div class="section" id="concepts">
+<h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
+<p>The following is most of the Rpclib jargon:</p>
+<ul>
+<li><dl class="first docutils">
+<dt><strong>Protocols:</strong></dt>
+<dd><p class="first last">Protocols define the rules for transmission of structured data. E.g., Rpclib
+implements a subset of Soap 1.1 protocol.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>Transports:</strong></dt>
+<dd><p class="first">Transports, also protocols themselves, encapsulate protocol data in their
+free-form data sections. E.g. Http is used as a transport for Soap, by
+tucking a Soap message in the Http byte-stream. Whereas the HttpRpc protocol
+exposes Http as a protocol. One could use Soap as a transport by tucking a
+message in its base64-encoded ByteArray container.</p>
+<p class="last">Transports are separated to two packages in Rpclib source code:
+<tt class="xref py py-mod docutils literal"><span class="pre">rpclib.client</span></tt> and <tt class="xref py py-mod docutils literal"><span class="pre">rpclib.server</span></tt> packages.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>Models:</strong></dt>
+<dd><p class="first last">Models are used to define schemas. They are mere magic cookies who contain
+very little amount of serialization code They reside in the
+<tt class="xref py py-mod docutils literal"><span class="pre">rpclib.model</span></tt> package.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>Interfaces:</strong></dt>
+<dd><p class="first">Interface documents strive to serialize, in a portable fashion, the
+information that is normally stored inside a, say, C header file. It a rigorous
+fashion the method calls, the kind of input expected by those method calls and
+the kind of output that should be expected as a result of calling those methods.</p>
+<p class="last"><tt class="xref py py-mod docutils literal"><span class="pre">rpclib.interface</span></tt> package is where you can find them.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>Serializers:</strong></dt>
+<dd><p class="first">Serializers can be considered mostly as apis around hiearchical key-value
+stores. Various xml apis like <tt class="docutils literal"><span class="pre">lxml.etree.Element</span></tt>, Python&#8217;s own
+<tt class="docutils literal"><span class="pre">xml.etree.ElementTree</span></tt>, or pickle, simplejson, YaML and the like fall in this
+category. They&#8217;re a little bit more difficult to abstract away because each has
+their own strenghts and weaknesses when dealing with complex, hiearchical data
+with mixed types.</p>
+<p class="last">Serializers are currently not distinguished in rpclib code. lxml.etree is
+used as xml serializer, and a custom wsgi callable is used as http serializer.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="how-your-code-is-wrapped">
+<h2>How your code is wrapped<a class="headerlink" href="#how-your-code-is-wrapped" title="Permalink to this headline">¶</a></h2>
+<p>As a user of the Rpclib library, you will</p>
+<ul>
+<li><dl class="first docutils">
+<dt><strong>Decorators</strong>:</dt>
+<dd><p class="first last">the <tt class="docutils literal"><span class="pre">&#64;rpc</span></tt> and <tt class="docutils literal"><span class="pre">&#64;srpc</span></tt> decorators from <tt class="xref py py-mod docutils literal"><span class="pre">rpclib.decorator</span></tt> module
+are used to flag methods that will be exposed to the outside world, along
+with marking its input and output types.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>Service Definition</strong>:</dt>
+<dd><p class="first">The <a class="reference internal" href="../reference/service.html#rpclib.service.ServiceBase" title="rpclib.service.ServiceBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.service.ServiceBase</span></tt></a> is an abstract base class for
+service definitions. It is the smallest exposable service unit in rpclib. You
+can use one service class per method definition or you can use, say, a service
+class for read-only or read/write services or you can cram everything into one
+service class, it&#8217;s up to you.</p>
+<p class="last">You can define events, header classes, and other goodies on service classes,
+which make them suitable for grouping services that have common properties like
+logging, transaction management, header objects and whatnot. It&#8217;s often a good
+idea to base your application services your own ServiceBase children.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt><strong>Application</strong>:</dt>
+<dd><p class="first">The <a class="reference internal" href="../reference/application.html#rpclib.application.Application" title="rpclib.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.application.Application</span></tt></a> object is what ties services,
+interfaces protocols together, ready to be wrapped by a transport. It also lets
+you define events and hooks like ServiceBase does, so you can do more general,
+application-wide customizations like exception management.</p>
+<ul class="last">
+<li><dl class="first docutils">
+<dt><strong>Namespaces</strong>: You might know that rpclib is a generalized version of a</dt>
+<dd><p class="first">soap library. So some artifacts of the Xml world creep off from here and
+there inevitably.</p>
+<p>So, namespaces are another artifact of the Xml world. There are varying
+opinions about the usefulness of the concept of the namespaces in Xml, but we
+generally think it to be A Nice Thing, so we chose to keep it around.</p>
+<p>When instantiating the application, you should also give it a
+targetNamespace (the <tt class="docutils literal"><span class="pre">tns</span></tt> argument to the <tt class="xref py py-class docutils literal"><span class="pre">Application</span></tt> constructor)
+string and an optional application name (the <tt class="docutils literal"><span class="pre">name</span></tt> argument to the
+<tt class="xref py py-class docutils literal"><span class="pre">Application</span></tt> constructor), which are used to generally distinguish your
+application from other applications. While it&#8217;s conventionally the URL and
+the name of the class of your application, you can put
+<tt class="docutils literal"><span class="pre">tns=&quot;Hogwarts&quot;,</span> <span class="pre">name=&quot;Harry&quot;</span></tt> there and just be done with it.</p>
+<p class="last">Every object in the Rpclib world has a name and belongs to a namespace.
+Public functions (and the implicit <a class="reference internal" href="../reference/model.html#rpclib.model.complex.ComplexModel" title="rpclib.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.ComplexModel</span></tt></a>
+children that are created for the input and output types of the functions you
+defined) are forced to be in the Application namespace, and have whatever you
+give them as public name in the <tt class="xref py py-func docutils literal"><span class="pre">rpclib.decorator.srpc()</span></tt> decorator.
+Rpclib-defined types generally belong to the relevant Xml namespace by default.
+User-defined objects have the module name as namespace string and class name as
+name string by default.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="section" id="in-a-nutshell">
+<span id="manual-highlevel-nutshell"></span><h3>In a nutshell<a class="headerlink" href="#in-a-nutshell" title="Permalink to this headline">¶</a></h3>
+<p>So in a nutshell, your code is inside a &#64;rpc-wrapped method in a ServiceBase child,
+wrapped by a decorator, which are grouped in an Application instance, which
+communicates with the outside world using given interface and protocol classes,
+and which is finally wrapped by a client or server transport that takes the
+responsibility of moving the bits around.</p>
+</div>
+</div>
+<div class="section" id="what-s-next">
+<h2>What&#8217;s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
+<p>Now that you have a general idea about how Rpclib is supposed to work, let&#8217;s get
+coding. You can start by <a class="reference internal" href="helloworld.html#manual-helloworld"><em>Hello World</em></a> tutorial right now.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">High-Level Introduction to Rpclib</a><ul>
+<li><a class="reference internal" href="#concepts">Concepts</a></li>
+<li><a class="reference internal" href="#how-your-code-is-wrapped">How your code is wrapped</a><ul>
+<li><a class="reference internal" href="#in-a-nutshell">In a nutshell</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#what-s-next">What&#8217;s next?</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Rpclib Manual</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="helloworld.html"
+                        title="next chapter">Hello World</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/manual/highlevel.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="helloworld.html" title="Hello World"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Rpclib Manual"
+             >previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" >Rpclib Manual</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Rpclib Contributors.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

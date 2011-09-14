@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Models &mdash; rpclib v2.3.2-beta documentation</title>
+    <title>Models &mdash; rpclib v2.3.3-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.2-beta',
+        VERSION:     '2.3.3-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.2-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Interfaces" href="interface.html" />
     <link rel="prev" title="Fundamental Data Structures" href="base.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="base.html" title="Fundamental Data Structures"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -63,6 +63,38 @@ like WSDL are designed to exposed.</p>
 those who&#8217;d like to implement their own.</p>
 <div class="section" id="module-rpclib.model.binary">
 <span id="binary"></span><h2>Binary<a class="headerlink" href="#module-rpclib.model.binary" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rpclib.model.binary.Attachment">
+<em class="property">class </em><tt class="descclassname">rpclib.model.binary.</tt><tt class="descname">Attachment</tt><big>(</big><em>data=None</em>, <em>file_name=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/binary.html#Attachment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.binary.Attachment" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED! Use ByteArray instead.</p>
+<dl class="method">
+<dt id="rpclib.model.binary.Attachment.load_from_file">
+<tt class="descname">load_from_file</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/model/binary.html#Attachment.load_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.binary.Attachment.load_from_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method loads the data from the specified file, and does
+no encoding/decoding of the data</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.model.binary.Attachment.save_to_file">
+<tt class="descname">save_to_file</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/model/binary.html#Attachment.save_to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.binary.Attachment.save_to_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method writes the data to the specified file.  This method
+assumes that the file_name is the full path to the file to be written.
+This method also assumes that self.data is the base64 decoded data,
+and will do no additional transformations on it, simply write it to
+disk.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.binary.ByteArray">
+<em class="property">class </em><tt class="descclassname">rpclib.model.binary.</tt><tt class="descname">ByteArray</tt><a class="reference internal" href="../modules/rpclib/model/binary.html#ByteArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.binary.ByteArray" title="Permalink to this definition">¶</a></dt>
+<dd><p>Handles anything other than ascii or unicode-encoded data. Every protocol
+has a different way to handle arbitrary data. E.g. xml-based protocols
+encode this as base64, while HttpRpc just hands it over.</p>
+<p>Its native python format is an iterable of strings.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-rpclib.model.complex">
 <span id="complex"></span><h2>Complex<a class="headerlink" href="#module-rpclib.model.complex" title="Permalink to this headline">¶</a></h2>
@@ -246,8 +278,8 @@ gotchas.</p>
 <dl class="class">
 <dt id="rpclib.model.primitive.Mandatory.String">
 <em class="property">class </em><tt class="descclassname">Mandatory.</tt><tt class="descname">String</tt><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String" title="Permalink to this definition">¶</a></dt>
-<dd><p>A string instance that has the same encoding as the underlying
-serializer. Currently, it&#8217;s utf8.</p>
+<dd><p>The type to represent human-readable data. Its native format is unicode.
+Currently, it can read from only utf8-compatible encodings.</p>
 </dd></dl>
 
 </dd></dl>
@@ -255,8 +287,8 @@ serializer. Currently, it&#8217;s utf8.</p>
 <dl class="class">
 <dt id="rpclib.model.primitive.String">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">String</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#String"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.String" title="Permalink to this definition">¶</a></dt>
-<dd><p>A string instance that has the same encoding as the underlying
-serializer. Currently, it&#8217;s utf8.</p>
+<dd><p>The type to represent human-readable data. Its native format is unicode.
+Currently, it can read from only utf8-compatible encodings.</p>
 </dd></dl>
 
 <dl class="class">
@@ -389,7 +421,7 @@ SQLAlchemy and its information alone.</p>
         <li class="right" >
           <a href="base.html" title="Fundamental Data Structures"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

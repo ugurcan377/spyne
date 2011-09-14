@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Rpclib &mdash; rpclib v2.3.2-beta documentation</title>
+    <title>Rpclib &mdash; rpclib v2.3.3-beta documentation</title>
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.3.2-beta',
+        VERSION:     '2.3.3-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,8 +22,8 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.2-beta documentation" href="#" />
-    <link rel="next" title="Rpclib Tutorials" href="tutorial/index.html" /> 
+    <link rel="top" title="rpclib v2.3.3-beta documentation" href="#" />
+    <link rel="next" title="Rpclib Manual" href="manual/index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -36,9 +36,9 @@
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tutorial/index.html" title="Rpclib Tutorials"
+          <a href="manual/index.html" title="Rpclib Manual"
              accesskey="N">next</a> |</li>
-        <li><a href="#">rpclib v2.3.2-beta documentation</a> &raquo;</li> 
+        <li><a href="#">rpclib v2.3.3-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -52,15 +52,20 @@
 <p>Warning! This is from rpclib&#8217;s unstable development branch.</p>
 <div class="section" id="about">
 <h2>About<a class="headerlink" href="#about" title="Permalink to this headline">¶</a></h2>
-<p>Rpclib is an unobstrusive Python library that helps you expose your APIs to a
-wider audience via various remote procedure call protocols and transports.</p>
-<p>It currently supports the WSDL 1.1 interface definition standard, along with
-SOAP 1.1 and the rest-minus-the-verbs HttpRpc protocols which can be
-transported via HTTP or ZeroMQ in a both client or server environment.</p>
+<p>Rpclib aims to save the protocol implementers the hassle of implementing their
+own remote procedure call api and the application programmers the hassle of
+jumping through hoops just to expose a service using multiple protocols and
+transports.</p>
+<p>Rpclib comes with the implementations of popular transports, protocols and
+interface documents along with an easy-to-use API that lets you extend existing
+functionality. It currently supports the WSDL 1.1 interface definition standard,
+along with SOAP 1.1 and the rest-minus-the-verbs HttpRpc protocols which can be
+transported mainly via HTTP. We also support ZeroMQ tranport where appropriate.
+The transports can be used in a both client or server environment.</p>
+<p>The documentation for Rpclib can be found <a class="reference external" href="http://arskom.github.com/rpclib">here</a>.</p>
 <p>The source code is <a class="reference external" href="https://github.com/arskom/rpclib">here</a>.</p>
 <p>The official rpclib discussion forum can be found <a class="reference external" href="http://mail.python.org/mailman/listinfo/soap">here</a>.</p>
 <p>See the <a class="reference external" href="http://github.com/arskom/rpclib/downloads">downloads section</a> for related downloads.</p>
-<p>The documentation is <a class="reference external" href="http://arskom.github.com/rpclib">here</a>.</p>
 <p>Rpclib is a generalized version of a soap processing library known as soaplib.
 The following legacy versions of soaplib are also available:</p>
 <blockquote>
@@ -75,14 +80,15 @@ The following legacy versions of soaplib are also available:</p>
 <h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>Rpclib reportedly runs on any version of Python from 2.4 through 2.7. We&#8217;re also
 looking for volunteers to test Python 3.x.</p>
-<p>The aim is to have no requirements besides the standard Python library for the
+<p>Our aim is to have no requirements besides the standard Python library for the
 Rpclib core. While much progress was made towards this goal, there&#8217;s still some
 work to be done. So currently, the following is needed if you want to run any
 Rpclib service at all:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://codespeak.net/lxml/">lxml</a>. (available through easy_install)</li>
-<li><a class="reference external" href="http://pytz.sourceforge.net/">pytz</a>. (available through easy_install)</li>
+<li><a class="reference external" href="http://codespeak.net/lxml/">lxml</a></li>
+<li><a class="reference external" href="http://pytz.sourceforge.net/">pytz</a></li>
 </ul>
+<p>both of which are available through <tt class="docutils literal"><span class="pre">easy_install</span></tt>.</p>
 <p>And the following is needed for various subsystems that Rpclib supports:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://sqlalchemy.org">SQLAlchemy</a> for <a class="reference internal" href="reference/model.html#rpclib.model.table.TableModel" title="rpclib.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.table.TableModel</span></tt></a>.</li>
@@ -91,21 +97,21 @@ Rpclib service at all:</p>
 <a class="reference internal" href="reference/server.html#rpclib.server.zeromq.ZeroMQServer" title="rpclib.server.zeromq.ZeroMQServer"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server.zeromq.ZeroMQServer</span></tt></a>.</li>
 <li>A Wsgi server of your choice to wrap <a class="reference internal" href="reference/server.html#rpclib.server.wsgi.WsgiApplication" title="rpclib.server.wsgi.WsgiApplication"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server.wsgi.WsgiApplication</span></tt></a>.</li>
 </ul>
-<p>Please note that the examples assume Python 2.5 and up.</p>
 </div>
 <div class="section" id="installing">
 <h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
 <p>To install rpclib, you can use git to clone from github or install from pypi:</p>
-<div class="highlight-python"><pre>git clone git://github.com/arskom/rpclib.git
-cd rpclib
-python setup.py install
-
-# to run the non-interop tests use:
-python setup.py test
-
-# if you want to make any changes to the rpclib code, it's more comfortable
-# to use:
-python setup.py develop</pre>
+<div class="highlight-python"><pre>git clone git://github.com/arskom/rpclib.git</pre>
+</div>
+<p>and run its setup script as usual:</p>
+<div class="highlight-python"><pre>cd rpclib
+python setup.py install</pre>
+</div>
+<p>To run the non-interop tests use:</p>
+<div class="highlight-python"><pre>python setup.py test</pre>
+</div>
+<p>And if you want to make any changes to the rpclib code, it&#8217;s more comfortable to use:</p>
+<div class="highlight-python"><pre>python setup.py develop</pre>
 </div>
 </div>
 <div class="section" id="contributing">
@@ -138,10 +144,12 @@ significant change to be committed via pull requests.</p>
 <h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="tutorial/index.html">Rpclib Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/helloworld.html">Hello World</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/usermanager.html">User Manager</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorial/sqlalchemy.html">SQLAlchemy Integration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="manual/index.html">Rpclib Manual</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="manual/highlevel.html">High-Level Introduction to Rpclib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/helloworld.html">Hello World</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/usermanager.html">User Manager</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/sqlalchemy.html">SQLAlchemy Integration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="manual/devman.html">Developer Manual</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="reference/index.html">Rpclib API Reference</a><ul>
@@ -166,36 +174,9 @@ significant change to be committed via pull requests.</p>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-implement-a-predefined-wsdl">How do I implement a predefined WSDL?</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-3-2-beta">rpclib-2.3.2-beta</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-3-1-beta">rpclib-2.3.1-beta</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-3-0-beta">rpclib-2.3.0-beta</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-2-3-beta">rpclib-2.2.3-beta</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-2-2-beta">rpclib-2.2.2-beta</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-2-1-beta">rpclib-2.2.1-beta</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-2-0-beta">rpclib-2.2.0-beta</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-1-0-alpha">rpclib-2.1.0-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-10-alpha">rpclib-2.0.10-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-9-alpha">rpclib-2.0.9-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-8-alpha">rpclib-2.0.8-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-7-alpha">rpclib-2.0.7-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-6-alpha">rpclib-2.0.6-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-5-alpha">rpclib-2.0.5-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-4-alpha">rpclib-2.0.4-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-3-alpha">rpclib-2.0.3-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-2-alpha">rpclib-2.0.2-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-1-alpha">rpclib-2.0.1-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#rpclib-2-0-0-alpha">rpclib-2.0.0-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-3-x-rpclib-1-1-1-alpha">soaplib-3.x -&gt; rpclib-1.1.1-alpha</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-2-x">soaplib-2.x</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-1-0">soaplib-1.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-9-4">soaplib-0.9.4</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-9-3">soaplib-0.9.3</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-9-2">soaplib-0.9.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-9-1">soaplib-0.9.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-9">soaplib-0.9</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-8-1">soaplib-0.8.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#soaplib-0-8-0">soaplib-0.8.0</a></li>
+<li class="toctree-l1"><a class="reference internal" href="h_and_f.html">History and Future</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="h_and_f.html#roadmap-and-criticism">Roadmap and Criticism</a></li>
+<li class="toctree-l2"><a class="reference internal" href="h_and_f.html#id1">Changelog</a></li>
 </ul>
 </li>
 </ul>
@@ -233,8 +214,8 @@ significant change to be committed via pull requests.</p>
 </ul>
 
   <h4>Next topic</h4>
-  <p class="topless"><a href="tutorial/index.html"
-                        title="next chapter">Rpclib Tutorials</a></p>
+  <p class="topless"><a href="manual/index.html"
+                        title="next chapter">Rpclib Manual</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="sources/index.txt"
@@ -267,9 +248,9 @@ significant change to be committed via pull requests.</p>
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="tutorial/index.html" title="Rpclib Tutorials"
+          <a href="manual/index.html" title="Rpclib Manual"
              >next</a> |</li>
-        <li><a href="#">rpclib v2.3.2-beta documentation</a> &raquo;</li> 
+        <li><a href="#">rpclib v2.3.3-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

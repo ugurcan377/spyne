@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Server Transports &mdash; rpclib v2.3.2-beta documentation</title>
+    <title>Server Transports &mdash; rpclib v2.3.3-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.2-beta',
+        VERSION:     '2.3.3-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.2-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Miscellanous Rpclib Utilities" href="util.html" />
     <link rel="prev" title="Client Transports" href="client.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="client.html" title="Client Transports"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -117,8 +117,8 @@ compliant callable class.</p>
 </li>
 <li><dl class="first docutils">
 <dt><tt class="docutils literal"><span class="pre">wsdl_exception</span></tt></dt>
-<dd><p class="first last">Called right after an exception is thrown during wsdl generation. The
-exception object is stored in ctx.transport.wsdl_error attribute.</p>
+<dd><p class="first last">Called right after an exception is thrown during wsdl generation.
+The exception object is stored in ctx.transport.wsdl_error attribute.</p>
 </dd>
 </dl>
 </li>
@@ -136,9 +136,8 @@ request.</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><tt class="docutils literal"><span class="pre">wsgi_resource_not_found</span></tt></dt>
-<dd><p class="first last">Called right before returning a 404 when the requested resource was not
-found.</p>
+<dt><tt class="docutils literal"><span class="pre">wsgi_error</span></tt></dt>
+<dd><p class="first last">Called right before returning the exception to the client.</p>
 </dd>
 </dl>
 </li>
@@ -352,7 +351,7 @@ ctx.out_object.</p>
         <li class="right" >
           <a href="client.html" title="Client Transports"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

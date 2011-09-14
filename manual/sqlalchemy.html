@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>SQLAlchemy Integration &mdash; rpclib v2.3.2-beta documentation</title>
+    <title>SQLAlchemy Integration &mdash; rpclib v2.3.3-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.2-beta',
+        VERSION:     '2.3.3-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,9 +22,9 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.2-beta documentation" href="../index.html" />
-    <link rel="up" title="Rpclib Tutorials" href="index.html" />
-    <link rel="next" title="Rpclib API Reference" href="../reference/index.html" />
+    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../index.html" />
+    <link rel="up" title="Rpclib Manual" href="index.html" />
+    <link rel="next" title="Developer Manual" href="devman.html" />
     <link rel="prev" title="User Manager" href="usermanager.html" /> 
   </head>
   <body>
@@ -38,13 +38,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../reference/index.html" title="Rpclib API Reference"
+          <a href="devman.html" title="Developer Manual"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="usermanager.html" title="User Manager"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Rpclib Tutorials</a> &raquo;</li> 
+        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -54,8 +54,8 @@
           <div class="body">
             
   <div class="section" id="sqlalchemy-integration">
-<span id="tutorial-sqlalchemy"></span><h1>SQLAlchemy Integration<a class="headerlink" href="#sqlalchemy-integration" title="Permalink to this headline">¶</a></h1>
-<p>This tutorial builds on the <a class="reference internal" href="usermanager.html#tutorial-user-manager"><em>User Manager</em></a> tutorial. If you haven&#8217;t
+<span id="manual-sqlalchemy"></span><h1>SQLAlchemy Integration<a class="headerlink" href="#sqlalchemy-integration" title="Permalink to this headline">¶</a></h1>
+<p>This tutorial builds on the <a class="reference internal" href="usermanager.html#manual-user-manager"><em>User Manager</em></a> tutorial. If you haven&#8217;t
 done so, we recommended you to read it first.</p>
 <p>Let&#8217;s try a more complicated example than storing our data in a mere dictionary.</p>
 <p>The following example shows how to integrate SQLAlchemy and Rpclib objects, and
@@ -166,7 +166,7 @@ how to do painless transaction management using Rpclib events.</p>
     <span class="n">server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Again, focusing on what&#8217;s different from previous <a class="reference internal" href="usermanager.html#tutorial-user-manager"><em>User Manager</em></a>
+<p>Again, focusing on what&#8217;s different from previous <a class="reference internal" href="usermanager.html#manual-user-manager"><em>User Manager</em></a>
 example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">TableModel</span><span class="p">,</span> <span class="n">DeclarativeBase</span><span class="p">):</span>
     <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;rpclib.examples.user_manager&#39;</span>
@@ -264,11 +264,11 @@ list if you have further questions.</p>
   <p class="topless"><a href="usermanager.html"
                         title="previous chapter">User Manager</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="../reference/index.html"
-                        title="next chapter">Rpclib API Reference</a></p>
+  <p class="topless"><a href="devman.html"
+                        title="next chapter">Developer Manual</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
-    <li><a href="../sources/tutorial/sqlalchemy.txt"
+    <li><a href="../sources/manual/sqlalchemy.txt"
            rel="nofollow">Show Source</a></li>
   </ul>
 <div id="searchbox" style="display: none">
@@ -298,13 +298,13 @@ list if you have further questions.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../reference/index.html" title="Rpclib API Reference"
+          <a href="devman.html" title="Developer Manual"
              >next</a> |</li>
         <li class="right" >
           <a href="usermanager.html" title="User Manager"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.2-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" >Rpclib Tutorials</a> &raquo;</li> 
+        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" >Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
