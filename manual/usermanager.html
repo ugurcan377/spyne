@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>User Manager &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>User Manager &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib Manual" href="index.html" />
     <link rel="next" title="SQLAlchemy Integration" href="sqlalchemy.html" />
     <link rel="prev" title="Hello World" href="helloworld.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="helloworld.html" title="Hello World"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>  
@@ -57,12 +57,17 @@
 <span id="manual-user-manager"></span><h1>User Manager<a class="headerlink" href="#user-manager" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial builds on the <a class="reference internal" href="helloworld.html#manual-helloworld"><em>Hello World</em></a> tutorial. If you haven&#8217;t
 done so, we recommended you to read it first.</p>
-<p>Let&#8217;s try a more complicated example than just strings and integers!
-The following is an simple example using complex, nested data. It&#8217;s available
+<p>In this tutorial, we will talk about:</p>
+<ul class="simple">
+<li>Defining complex types.</li>
+<li>Customizing types.</li>
+<li>Defining events.</li>
+</ul>
+<p>The following is an simple example using complex, nested data. It&#8217;s available
 here: <a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_basic.py">http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_basic.py</a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;rpclib.protocol.soap.soap11&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;rpclib.protocol.xml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
 <span class="kn">from</span> <span class="nn">rpclib.application</span> <span class="kn">import</span> <span class="n">Application</span>
 <span class="kn">from</span> <span class="nn">rpclib.decorator</span> <span class="kn">import</span> <span class="n">rpc</span>
@@ -152,25 +157,53 @@ here: <a class="reference external" href="http://github.com/arskom/rpclib/blob/m
     <span class="n">server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Jumping into what&#8217;s new.</p>
+<p>Juping into what&#8217;s new: Rpclib uses <tt class="docutils literal"><span class="pre">ComplexModel</span></tt> as a general type that when extended will produce complex
+serializable types that can be used in a public service. The <tt class="docutils literal"><span class="pre">Permission</span></tt> class is a
+fairly simple class with just two members:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Permission</span><span class="p">(</span><span class="n">ComplexModel</span><span class="p">):</span>
     <span class="n">application</span> <span class="o">=</span> <span class="n">String</span>
     <span class="n">feature</span> <span class="o">=</span> <span class="n">String</span>
-
-<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">ComplexModel</span><span class="p">):</span>
+</pre></div>
+</div>
+<p>Let&#8217;s also look at the <tt class="docutils literal"><span class="pre">User</span></tt> class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">ComplexModel</span><span class="p">):</span>
     <span class="n">user_id</span> <span class="o">=</span> <span class="n">Integer</span>
     <span class="n">username</span> <span class="o">=</span> <span class="n">String</span>
     <span class="n">firstname</span> <span class="o">=</span> <span class="n">String</span>
     <span class="n">lastname</span> <span class="o">=</span> <span class="n">String</span>
-    <span class="n">permissions</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Permission</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The <cite>Permission</cite> and <cite>User</cite> structures in the example are standard python
-objects that extend <cite>ComplexModel</cite>.  Rpclib uses <cite>ComplexModel</cite> as a general
-type that when extended will produce complex serializable types that can be used
-in a public service.</p>
+<p>Nothing new so far.</p>
+<p>Below, you can see that the <tt class="docutils literal"><span class="pre">email</span></tt> member which has a regular expression
+restriction defined. The String type accepts other restrictions, please refer to
+the <a class="reference internal" href="../reference/model.html#rpclib.model.primitive.String" title="rpclib.model.primitive.String"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.String</span></tt></a> documentation for more information:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">email</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s">r&#39;\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[A-Z]{2,4}\b&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">permissions</span></tt> attribute is an array, whose native type is a <tt class="docutils literal"><span class="pre">list</span></tt> of <tt class="docutils literal"><span class="pre">Permission</span></tt>
+objects.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">permissions</span> <span class="o">=</span> <span class="n">Array</span><span class="p">(</span><span class="n">Permission</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following is deserialized as a generator, but looks the same from the protocol and
+interface points of view:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">permissions</span> <span class="o">=</span> <span class="n">Iterable</span><span class="p">(</span><span class="n">Permission</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following is deserialized as a list of <tt class="docutils literal"><span class="pre">Permission</span></tt> objects, just like with
+the <tt class="docutils literal"><span class="pre">Array</span></tt> example, but is shown and serialized differently in Wsdl and Soap
+representations.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">permissions</span> <span class="o">=</span> <span class="n">Permission</span><span class="o">.</span><span class="n">customize</span><span class="p">(</span><span class="n">max_occurs</span><span class="o">=</span><span class="s">&#39;unbounded&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Here, we need to use the <a class="reference internal" href="../reference/model.html#rpclib.model._base.ModelBase.customize" title="rpclib.model._base.ModelBase.customize"><tt class="xref py py-func docutils literal"><span class="pre">rpclib.model._base.ModelBase.customize()</span></tt></a> call
+because calling a <tt class="docutils literal"><span class="pre">ComplexModel</span></tt> child instantiates that class, whereas
+calling a <tt class="docutils literal"><span class="pre">SimpleModel</span></tt> child returns a duplicate of that class. The
+<tt class="docutils literal"><span class="pre">customize</span></tt> function just sets given arguments as class attributes to
+<tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> class. You can refer to the documentation of each class to
+see which member of the <tt class="docutils literal"><span class="pre">Attributes</span></tt> class is used for the given object.</p>
 <p>Here, we define a function to be called for every method call. It instantiates
-an object called UserDefinedContext and sets it to the context object&#8217;s udc
+the <tt class="docutils literal"><span class="pre">UserDefinedContext</span></tt> class and sets it to the context object&#8217;s <tt class="docutils literal"><span class="pre">udc</span></tt>
 attribute, which is in fact short for &#8216;user defined context&#8217;.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">_on_method_call</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
     <span class="n">ctx</span><span class="o">.</span><span class="n">udc</span> <span class="o">=</span> <span class="n">UserDefinedContext</span><span class="p">()</span>
@@ -201,17 +234,19 @@ with no specific api it should adhere to, other than your own.</p>
 </pre></div>
 </div>
 <p>Such custom objects could be used to manage everything from transactions to
-logging or to performance measurements. (see the events.py example in the
-examples directory in the source distribution for an example on using events to
-measure method performance.</p>
+logging or to performance measurements. You can have a look at the
+<a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_basic.py">events.py example</a>
+in the examples directory in the source distribution for an example on using
+events to measure method performance)</p>
 <div class="section" id="what-s-next">
 <h2>What&#8217;s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
-<p>This tutorial walks you through most of what you need to know to expose your
-services. You can read the <a class="reference internal" href="sqlalchemy.html#manual-sqlalchemy"><em>SQLAlchemy Integration</em></a> document where tools
-(the event subsystem and <a class="reference internal" href="../reference/model.html#rpclib.model.table.TableModel" title="rpclib.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.table.TableModel</span></tt></a> class) for those
-who plan to to expose their database application using rpclib are introduced.
-Otherwise, you should refer to the rest of the documentation or the mailing
-list if you have further questions.</p>
+<p>This tutorial walks you through what you need to know to expose basic
+services. You can read the <a class="reference internal" href="sqlalchemy.html#manual-sqlalchemy"><em>SQLAlchemy Integration</em></a> document where the
+<a class="reference internal" href="../reference/model.html#rpclib.model.table.TableModel" title="rpclib.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.table.TableModel</span></tt></a> class and its helpers are introduced.
+You can also have look at the <a class="reference internal" href="metadata.html#manual-metadata"><em>Working with RPC Metadata</em></a> section where service
+metadata management apis are introduced.</p>
+<p>Otherwise, please refer to the rest of the documentation or the mailing list
+if you have further questions.</p>
 </div>
 </div>
 
@@ -272,7 +307,7 @@ list if you have further questions.</p>
         <li class="right" >
           <a href="helloworld.html" title="Hello World"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>

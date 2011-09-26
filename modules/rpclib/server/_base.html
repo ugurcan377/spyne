@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.server._base &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>rpclib.server._base &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -104,7 +104,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">decompose_incoming_envelope</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
 
             <span class="c"># sets ctx.in_object and ctx.in_header</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&#39;request&#39;</span><span class="p">)</span>
 
         <span class="k">except</span> <span class="n">Fault</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="bp">None</span>
@@ -114,6 +114,8 @@
     <span class="k">def</span> <span class="nf">get_out_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
 <div class="viewcode-block" id="ServerBase.get_out_object"><a class="viewcode-back" href="../../../reference/server.html#rpclib.server._base.ServerBase.get_out_object">[docs]</a>        <span class="sd">&quot;&quot;&quot;Calls the matched method using the ctx.in_object to get</span>
 <span class="sd">        ctx.out_object.&quot;&quot;&quot;</span>
+
+        <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_error</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">,</span><span class="s">&quot;There was an error processing input string&quot;</span>
 
         <span class="c"># event firing is done in the rpclib.application.Application</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">process_request</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
@@ -125,7 +127,7 @@
         <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_document</span> <span class="ow">is</span> <span class="bp">None</span>
         <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_string</span> <span class="ow">is</span> <span class="bp">None</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">out_protocol</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">out_protocol</span><span class="o">.</span><span class="n">serialize</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&#39;response&#39;</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">service_class</span> <span class="o">!=</span> <span class="bp">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -180,7 +182,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

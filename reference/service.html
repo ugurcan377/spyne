@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Service Definition &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>Service Definition &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,10 +22,10 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
-    <link rel="next" title="Application Definition" href="application.html" />
-    <link rel="prev" title="Miscellanous Rpclib Utilities" href="util.html" /> 
+    <link rel="next" title="RPC Decorators" href="decorator.html" />
+    <link rel="prev" title="Application Definition" href="application.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,12 +38,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="application.html" title="Application Definition"
+          <a href="decorator.html" title="RPC Decorators"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="util.html" title="Miscellanous Rpclib Utilities"
+          <a href="application.html" title="Application Definition"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -53,12 +53,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="service-definition">
-<h1>Service Definition<a class="headerlink" href="#service-definition" title="Permalink to this headline">¶</a></h1>
-<p>The <cite>rpclib.protocol</cite> package contains the implementations of various remote
-procedure call protocols.</p>
-<div class="section" id="module-rpclib.service">
-<span id="service-base-class"></span><h2>Service Base Class<a class="headerlink" href="#module-rpclib.service" title="Permalink to this headline">¶</a></h2>
+  <div class="section" id="module-rpclib.service">
+<span id="service-definition"></span><h1>Service Definition<a class="headerlink" href="#module-rpclib.service" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
 <dt id="rpclib.service.ServiceBase">
 <em class="property">class </em><tt class="descclassname">rpclib.service.</tt><tt class="descname">ServiceBase</tt><a class="reference internal" href="../modules/rpclib/service.html#ServiceBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.service.ServiceBase" title="Permalink to this definition">¶</a></dt>
@@ -145,7 +141,20 @@ do your own exception handling.</p>
 
 </dd></dl>
 
-</div>
+<dl class="class">
+<dt id="rpclib.service.ServiceBaseMeta">
+<em class="property">class </em><tt class="descclassname">rpclib.service.</tt><tt class="descname">ServiceBaseMeta</tt><big>(</big><em>cls_name</em>, <em>cls_bases</em>, <em>cls_dict</em><big>)</big><a class="reference internal" href="../modules/rpclib/service.html#ServiceBaseMeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.service.ServiceBaseMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the <a class="reference internal" href="base.html#rpclib.MethodDescriptor" title="rpclib.MethodDescriptor"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.MethodDescriptor</span></tt></a> objects by iterating over
+tagged methods.</p>
+<dl class="attribute">
+<dt id="rpclib.service.ServiceBaseMeta.mro">
+<tt class="descname">mro</tt><a class="headerlink" href="#rpclib.service.ServiceBaseMeta.mro" title="Permalink to this definition">¶</a></dt>
+<dd><p>mro() -&gt; list
+return a type&#8217;s method resolution order</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 
 
@@ -154,20 +163,12 @@ do your own exception handling.</p>
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="../index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Service Definition</a><ul>
-<li><a class="reference internal" href="#module-rpclib.service">Service Base Class</a></li>
-</ul>
-</li>
-</ul>
-
   <h4>Previous topic</h4>
-  <p class="topless"><a href="util.html"
-                        title="previous chapter">Miscellanous Rpclib Utilities</a></p>
-  <h4>Next topic</h4>
   <p class="topless"><a href="application.html"
-                        title="next chapter">Application Definition</a></p>
+                        title="previous chapter">Application Definition</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="decorator.html"
+                        title="next chapter">RPC Decorators</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../sources/reference/service.txt"
@@ -200,12 +201,12 @@ do your own exception handling.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="application.html" title="Application Definition"
+          <a href="decorator.html" title="RPC Decorators"
              >next</a> |</li>
         <li class="right" >
-          <a href="util.html" title="Miscellanous Rpclib Utilities"
+          <a href="application.html" title="Application Definition"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

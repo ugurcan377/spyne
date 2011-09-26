@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>Index &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="index.html" /> 
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -34,7 +34,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -57,14 +57,21 @@
     <dt><a href="reference/model.html#rpclib.model.complex.Alias">Alias (class in rpclib.model.complex)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.complex.ComplexModelBase.alias">alias() (rpclib.model.complex.ComplexModelBase static method)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.AnyDict">AnyDict (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.AnyDict.Annotations">AnyDict.Annotations (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.AnyDict.Attributes">AnyDict.Attributes (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.AnyUri">AnyUri (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.AnyUri.Annotations">AnyUri.Annotations (class in rpclib.model.primitive)</a></dt>
 </dl></td>
   <td style="width: 33%" valign="top"><dl>
+    <dt><a href="reference/model.html#rpclib.model.primitive.AnyUri.Attributes">AnyUri.Attributes (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.AnyXml">AnyXml (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.AnyXml.Annotations">AnyXml.Annotations (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.AnyXml.Attributes">AnyXml.Attributes (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodContext.app">app (rpclib.MethodContext attribute)</a></dt>
     <dd><dl>
       <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase.app">(rpclib.protocol._base.ProtocolBase attribute)</a></dt>
       <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.app">(rpclib.protocol.http.HttpRpc attribute)</a></dt>
+      <dt><a href="reference/protocol.html#rpclib.protocol.soap.soap11.Soap11.app">(rpclib.protocol.soap.soap11.Soap11 attribute)</a></dt>
   </dl></dd>
     <dt><a href="reference/application.html#rpclib.application.Application">Application (class in rpclib.application)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.complex.Array">Array (class in rpclib.model.complex)</a></dt>
@@ -76,12 +83,14 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/model.html#rpclib.model.primitive.Boolean">Boolean (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Boolean.Annotations">Boolean.Annotations (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Boolean.Attributes">Boolean.Attributes (class in rpclib.model.primitive)</a></dt>
+</dl></td>
+  <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/interface.html#rpclib.interface._base.InterfaceBase.build_interface_document">build_interface_document() (rpclib.interface._base.InterfaceBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/interface.html#rpclib.interface.wsdl.wsdl11.Wsdl11.build_interface_document">(rpclib.interface.wsdl.wsdl11.Wsdl11 method)</a></dt>
   </dl></dd>
-</dl></td>
-  <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/interface.html#rpclib.interface.wsdl.wsdl11.Wsdl11.build_validation_schema">build_validation_schema() (rpclib.interface.wsdl.wsdl11.Wsdl11 method)</a></dt>
     <dd><dl>
       <dt><a href="reference/interface.html#rpclib.interface.xml_schema._base.XmlSchema.build_validation_schema">(rpclib.interface.xml_schema._base.XmlSchema method)</a></dt>
@@ -97,9 +106,14 @@
     <dd><dl>
       <dt><a href="reference/service.html#rpclib.service.ServiceBase.call_wrapper">(rpclib.service.ServiceBase class method)</a></dt>
   </dl></dd>
+    <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase.check_validator">check_validator() (rpclib.protocol._base.ProtocolBase method)</a></dt>
+    <dd><dl>
+      <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.check_validator">(rpclib.protocol.http.HttpRpc method)</a></dt>
+  </dl></dd>
+    <dt><a href="reference/util.html#rpclib.util.oset.oset.clear">clear() (rpclib.util.oset.oset method)</a></dt>
+    <dt><a href="reference/client.html#rpclib.client._base.ClientBase">ClientBase (class in rpclib.client._base)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.complex.ComplexModel">ComplexModel (class in rpclib.model.complex)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.complex.ComplexModelBase">ComplexModelBase (class in rpclib.model.complex)</a></dt>
-    <dt><a href="reference/util.html#rpclib.util.model_utils.ComplexModelConverter">ComplexModelConverter (class in rpclib.util.model_utils)</a></dt>
 </dl></td>
   <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/model.html#rpclib.model.complex.ComplexModelMeta">ComplexModelMeta (class in rpclib.model.complex)</a></dt>
@@ -111,6 +125,30 @@
     <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase.create_out_string">create_out_string() (rpclib.protocol._base.ProtocolBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.create_out_string">(rpclib.protocol.http.HttpRpc method)</a></dt>
+      <dt><a href="reference/protocol.html#rpclib.protocol.soap.soap11.Soap11.create_out_string">(rpclib.protocol.soap.soap11.Soap11 method)</a></dt>
+  </dl></dd>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.customize">customize() (rpclib.model._base.ModelBase class method)</a></dt>
+    <dd><dl>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyDict.customize">(rpclib.model.primitive.AnyDict class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyUri.customize">(rpclib.model.primitive.AnyUri class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyXml.customize">(rpclib.model.primitive.AnyXml class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Boolean.customize">(rpclib.model.primitive.Boolean class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Date.customize">(rpclib.model.primitive.Date class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.DateTime.customize">(rpclib.model.primitive.DateTime class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Decimal.customize">(rpclib.model.primitive.Decimal class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Double.customize">(rpclib.model.primitive.Double class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Duration.customize">(rpclib.model.primitive.Duration class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Float.customize">(rpclib.model.primitive.Float class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Int.customize">(rpclib.model.primitive.Int class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Integer.customize">(rpclib.model.primitive.Integer class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.Integer.customize">(rpclib.model.primitive.Mandatory.Integer class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.String.customize">(rpclib.model.primitive.Mandatory.String class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.String.customize">(rpclib.model.primitive.String class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger.customize">(rpclib.model.primitive.UnsignedInteger class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger16.customize">(rpclib.model.primitive.UnsignedInteger16 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger32.customize">(rpclib.model.primitive.UnsignedInteger32 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger64.customize">(rpclib.model.primitive.UnsignedInteger64 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger8.customize">(rpclib.model.primitive.UnsignedInteger8 class method)</a></dt>
   </dl></dd>
 </dl></td>
 </tr></table>
@@ -119,8 +157,13 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/model.html#rpclib.model.primitive.Date">Date (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Date.Annotations">Date.Annotations (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Date.Attributes">Date.Attributes (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.DateTime">DateTime (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.DateTime.Annotations">DateTime.Annotations (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.DateTime.Attributes">DateTime.Attributes (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.Decimal">Decimal (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Decimal.Annotations">Decimal.Annotations (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase.decompose_incoming_envelope">decompose_incoming_envelope() (rpclib.protocol._base.ProtocolBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.decompose_incoming_envelope">(rpclib.protocol.http.HttpRpc method)</a></dt>
@@ -131,11 +174,19 @@
     <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase.deserialize">deserialize() (rpclib.protocol._base.ProtocolBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.deserialize">(rpclib.protocol.http.HttpRpc method)</a></dt>
+      <dt><a href="reference/protocol.html#rpclib.protocol.soap.soap11.Soap11.deserialize">(rpclib.protocol.soap.soap11.Soap11 method)</a></dt>
   </dl></dd>
     <dt><a href="reference/util.html#rpclib.util.etreeconv.dict_to_etree">dict_to_etree() (in module rpclib.util.etreeconv)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodDescriptor.doc">doc (rpclib.MethodDescriptor attribute)</a></dt>
+    <dd><dl>
+      <dt><a href="reference/model.html#rpclib.model._base.ModelBase.Annotations.doc">(rpclib.model._base.ModelBase.Annotations attribute)</a></dt>
+  </dl></dd>
     <dt><a href="reference/model.html#rpclib.model.primitive.Double">Double (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Double.Annotations">Double.Annotations (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Double.Attributes">Double.Attributes (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.Duration">Duration (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Duration.Annotations">Duration.Annotations (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Duration.Attributes">Duration.Attributes (class in rpclib.model.primitive)</a></dt>
 </dl></td>
 </tr></table>
 
@@ -158,9 +209,11 @@
     <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.fault_to_http_response_code">fault_to_http_response_code() (rpclib.protocol.http.HttpRpc method)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodDescriptor.faults">faults (rpclib.MethodDescriptor attribute)</a></dt>
     <dt><a href="reference/base.html#rpclib.EventManager.fire_event">fire_event() (rpclib.EventManager method)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Float">Float (class in rpclib.model.primitive)</a></dt>
 </dl></td>
   <td style="width: 33%" valign="top"><dl>
-    <dt><a href="reference/model.html#rpclib.model.primitive.Float">Float (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Float.Annotations">Float.Annotations (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Float.Attributes">Float.Attributes (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodContext.frozen">frozen (rpclib.MethodContext attribute)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodDescriptor.function">function (rpclib.MethodDescriptor attribute)</a></dt>
 </dl></td>
@@ -179,9 +232,11 @@
       <dt><a href="reference/interface.html#rpclib.interface.wsdl.wsdl11.Wsdl11.get_class_instance">(rpclib.interface.wsdl.wsdl11.Wsdl11 method)</a></dt>
       <dt><a href="reference/interface.html#rpclib.interface.xml_schema._base.XmlSchema.get_class_instance">(rpclib.interface.xml_schema._base.XmlSchema method)</a></dt>
   </dl></dd>
+    <dt><a href="reference/model.html#rpclib.model.complex.ComplexModelBase.get_flat_type_info">get_flat_type_info() (rpclib.model.complex.ComplexModelBase static method)</a></dt>
     <dt><a href="reference/client.html#rpclib.client._base.RemoteProcedureBase.get_in_object">get_in_object() (rpclib.client._base.RemoteProcedureBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/server.html#rpclib.server._base.ServerBase.get_in_object">(rpclib.server._base.ServerBase method)</a></dt>
+      <dt><a href="reference/server.html#rpclib.server.null.NullServer.get_in_object">(rpclib.server.null.NullServer method)</a></dt>
       <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiApplication.get_in_object">(rpclib.server.wsgi.WsgiApplication method)</a></dt>
       <dt><a href="reference/server.html#rpclib.server.zeromq.ZeroMQServer.get_in_object">(rpclib.server.zeromq.ZeroMQServer method)</a></dt>
   </dl></dd>
@@ -191,25 +246,73 @@
       <dt><a href="reference/interface.html#rpclib.interface.wsdl.wsdl11.Wsdl11.get_name">(rpclib.interface.wsdl.wsdl11.Wsdl11 method)</a></dt>
       <dt><a href="reference/interface.html#rpclib.interface.xml_schema._base.XmlSchema.get_name">(rpclib.interface.xml_schema._base.XmlSchema method)</a></dt>
   </dl></dd>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.get_namespace">get_namespace() (rpclib.model._base.ModelBase class method)</a></dt>
+    <dd><dl>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyDict.get_namespace">(rpclib.model.primitive.AnyDict class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyUri.get_namespace">(rpclib.model.primitive.AnyUri class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyXml.get_namespace">(rpclib.model.primitive.AnyXml class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Boolean.get_namespace">(rpclib.model.primitive.Boolean class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Date.get_namespace">(rpclib.model.primitive.Date class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.DateTime.get_namespace">(rpclib.model.primitive.DateTime class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Decimal.get_namespace">(rpclib.model.primitive.Decimal class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Double.get_namespace">(rpclib.model.primitive.Double class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Duration.get_namespace">(rpclib.model.primitive.Duration class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Float.get_namespace">(rpclib.model.primitive.Float class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Int.get_namespace">(rpclib.model.primitive.Int class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Integer.get_namespace">(rpclib.model.primitive.Integer class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.Integer.get_namespace">(rpclib.model.primitive.Mandatory.Integer class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.String.get_namespace">(rpclib.model.primitive.Mandatory.String class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.String.get_namespace">(rpclib.model.primitive.String class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger.get_namespace">(rpclib.model.primitive.UnsignedInteger class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger16.get_namespace">(rpclib.model.primitive.UnsignedInteger16 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger32.get_namespace">(rpclib.model.primitive.UnsignedInteger32 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger64.get_namespace">(rpclib.model.primitive.UnsignedInteger64 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger8.get_namespace">(rpclib.model.primitive.UnsignedInteger8 class method)</a></dt>
+  </dl></dd>
     <dt><a href="reference/interface.html#rpclib.interface._base.InterfaceBase.get_namespace_prefix">get_namespace_prefix() (rpclib.interface._base.InterfaceBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/interface.html#rpclib.interface.wsdl.wsdl11.Wsdl11.get_namespace_prefix">(rpclib.interface.wsdl.wsdl11.Wsdl11 method)</a></dt>
       <dt><a href="reference/interface.html#rpclib.interface.xml_schema._base.XmlSchema.get_namespace_prefix">(rpclib.interface.xml_schema._base.XmlSchema method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model._base.ModelBase.get_namespace_prefix">(rpclib.model._base.ModelBase class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyDict.get_namespace_prefix">(rpclib.model.primitive.AnyDict class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyUri.get_namespace_prefix">(rpclib.model.primitive.AnyUri class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyXml.get_namespace_prefix">(rpclib.model.primitive.AnyXml class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Boolean.get_namespace_prefix">(rpclib.model.primitive.Boolean class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Date.get_namespace_prefix">(rpclib.model.primitive.Date class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.DateTime.get_namespace_prefix">(rpclib.model.primitive.DateTime class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Decimal.get_namespace_prefix">(rpclib.model.primitive.Decimal class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Double.get_namespace_prefix">(rpclib.model.primitive.Double class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Duration.get_namespace_prefix">(rpclib.model.primitive.Duration class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Float.get_namespace_prefix">(rpclib.model.primitive.Float class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Int.get_namespace_prefix">(rpclib.model.primitive.Int class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Integer.get_namespace_prefix">(rpclib.model.primitive.Integer class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.Integer.get_namespace_prefix">(rpclib.model.primitive.Mandatory.Integer class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.String.get_namespace_prefix">(rpclib.model.primitive.Mandatory.String class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.String.get_namespace_prefix">(rpclib.model.primitive.String class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger.get_namespace_prefix">(rpclib.model.primitive.UnsignedInteger class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger16.get_namespace_prefix">(rpclib.model.primitive.UnsignedInteger16 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger32.get_namespace_prefix">(rpclib.model.primitive.UnsignedInteger32 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger64.get_namespace_prefix">(rpclib.model.primitive.UnsignedInteger64 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger8.get_namespace_prefix">(rpclib.model.primitive.UnsignedInteger8 class method)</a></dt>
   </dl></dd>
-</dl></td>
-  <td style="width: 33%" valign="top"><dl>
+    <dt><a href="reference/util.html#rpclib.util.xml.get_object_as_xml">get_object_as_xml() (in module rpclib.util.xml)</a></dt>
     <dt><a href="reference/client.html#rpclib.client._base.RemoteProcedureBase.get_out_object">get_out_object() (rpclib.client._base.RemoteProcedureBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/server.html#rpclib.server._base.ServerBase.get_out_object">(rpclib.server._base.ServerBase method)</a></dt>
+      <dt><a href="reference/server.html#rpclib.server.null.NullServer.get_out_object">(rpclib.server.null.NullServer method)</a></dt>
       <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiApplication.get_out_object">(rpclib.server.wsgi.WsgiApplication method)</a></dt>
       <dt><a href="reference/server.html#rpclib.server.zeromq.ZeroMQServer.get_out_object">(rpclib.server.zeromq.ZeroMQServer method)</a></dt>
   </dl></dd>
+</dl></td>
+  <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/client.html#rpclib.client._base.RemoteProcedureBase.get_out_string">get_out_string() (rpclib.client._base.RemoteProcedureBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/server.html#rpclib.server._base.ServerBase.get_out_string">(rpclib.server._base.ServerBase method)</a></dt>
+      <dt><a href="reference/server.html#rpclib.server.null.NullServer.get_out_string">(rpclib.server.null.NullServer method)</a></dt>
       <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiApplication.get_out_string">(rpclib.server.wsgi.WsgiApplication method)</a></dt>
       <dt><a href="reference/server.html#rpclib.server.zeromq.ZeroMQServer.get_out_string">(rpclib.server.zeromq.ZeroMQServer method)</a></dt>
   </dl></dd>
+    <dt><a href="reference/util.html#rpclib.util.xml.get_schema_documents">get_schema_documents() (in module rpclib.util.xml)</a></dt>
     <dt><a href="reference/interface.html#rpclib.interface._base.InterfaceBase.get_schema_info">get_schema_info() (rpclib.interface._base.InterfaceBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/interface.html#rpclib.interface.wsdl.wsdl11.Wsdl11.get_schema_info">(rpclib.interface.wsdl.wsdl11.Wsdl11 method)</a></dt>
@@ -224,6 +327,54 @@
       <dt><a href="reference/interface.html#rpclib.interface.wsdl.wsdl11.Wsdl11.get_tns">(rpclib.interface.wsdl.wsdl11.Wsdl11 method)</a></dt>
       <dt><a href="reference/interface.html#rpclib.interface.xml_schema._base.XmlSchema.get_tns">(rpclib.interface.xml_schema._base.XmlSchema method)</a></dt>
   </dl></dd>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.get_type_name">get_type_name() (rpclib.model._base.ModelBase class method)</a></dt>
+    <dd><dl>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyDict.get_type_name">(rpclib.model.primitive.AnyDict class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyUri.get_type_name">(rpclib.model.primitive.AnyUri class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyXml.get_type_name">(rpclib.model.primitive.AnyXml class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Boolean.get_type_name">(rpclib.model.primitive.Boolean class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Date.get_type_name">(rpclib.model.primitive.Date class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.DateTime.get_type_name">(rpclib.model.primitive.DateTime class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Decimal.get_type_name">(rpclib.model.primitive.Decimal class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Double.get_type_name">(rpclib.model.primitive.Double class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Duration.get_type_name">(rpclib.model.primitive.Duration class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Float.get_type_name">(rpclib.model.primitive.Float class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Int.get_type_name">(rpclib.model.primitive.Int class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Integer.get_type_name">(rpclib.model.primitive.Integer class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.Integer.get_type_name">(rpclib.model.primitive.Mandatory.Integer class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.String.get_type_name">(rpclib.model.primitive.Mandatory.String class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.String.get_type_name">(rpclib.model.primitive.String class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger.get_type_name">(rpclib.model.primitive.UnsignedInteger class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger16.get_type_name">(rpclib.model.primitive.UnsignedInteger16 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger32.get_type_name">(rpclib.model.primitive.UnsignedInteger32 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger64.get_type_name">(rpclib.model.primitive.UnsignedInteger64 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger8.get_type_name">(rpclib.model.primitive.UnsignedInteger8 class method)</a></dt>
+  </dl></dd>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.get_type_name_ns">get_type_name_ns() (rpclib.model._base.ModelBase class method)</a></dt>
+    <dd><dl>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyDict.get_type_name_ns">(rpclib.model.primitive.AnyDict class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyUri.get_type_name_ns">(rpclib.model.primitive.AnyUri class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyXml.get_type_name_ns">(rpclib.model.primitive.AnyXml class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Boolean.get_type_name_ns">(rpclib.model.primitive.Boolean class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Date.get_type_name_ns">(rpclib.model.primitive.Date class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.DateTime.get_type_name_ns">(rpclib.model.primitive.DateTime class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Decimal.get_type_name_ns">(rpclib.model.primitive.Decimal class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Double.get_type_name_ns">(rpclib.model.primitive.Double class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Duration.get_type_name_ns">(rpclib.model.primitive.Duration class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Float.get_type_name_ns">(rpclib.model.primitive.Float class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Int.get_type_name_ns">(rpclib.model.primitive.Int class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Integer.get_type_name_ns">(rpclib.model.primitive.Integer class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.Integer.get_type_name_ns">(rpclib.model.primitive.Mandatory.Integer class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.String.get_type_name_ns">(rpclib.model.primitive.Mandatory.String class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.String.get_type_name_ns">(rpclib.model.primitive.String class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger.get_type_name_ns">(rpclib.model.primitive.UnsignedInteger class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger16.get_type_name_ns">(rpclib.model.primitive.UnsignedInteger16 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger32.get_type_name_ns">(rpclib.model.primitive.UnsignedInteger32 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger64.get_type_name_ns">(rpclib.model.primitive.UnsignedInteger64 class method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger8.get_type_name_ns">(rpclib.model.primitive.UnsignedInteger8 class method)</a></dt>
+  </dl></dd>
+    <dt><a href="reference/util.html#rpclib.util.xml.get_validation_schema">get_validation_schema() (in module rpclib.util.xml)</a></dt>
+    <dt><a href="reference/server.html#rpclib.server.null.NullServer.get_wsdl">get_wsdl() (rpclib.server.null.NullServer method)</a></dt>
 </dl></td>
 </tr></table>
 
@@ -250,12 +401,14 @@
   </dl></dd>
     <dt><a href="reference/base.html#rpclib.MethodContext.in_header_doc">in_header_doc (rpclib.MethodContext attribute)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodDescriptor.in_message">in_message (rpclib.MethodDescriptor attribute)</a></dt>
+    <dt><a href="reference/base.html#rpclib.MethodContext.in_object">in_object (rpclib.MethodContext attribute)</a></dt>
 </dl></td>
   <td style="width: 33%" valign="top"><dl>
-    <dt><a href="reference/base.html#rpclib.MethodContext.in_object">in_object (rpclib.MethodContext attribute)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodContext.in_string">in_string (rpclib.MethodContext attribute)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.Int">Int (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Int.Annotations">Int.Annotations (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.Integer">Integer (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.Integer.Annotations">Integer.Annotations (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/interface.html#rpclib.interface._base.InterfaceBase">InterfaceBase (class in rpclib.interface._base)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.complex.Iterable">Iterable (class in rpclib.model.complex)</a></dt>
 </dl></td>
@@ -281,15 +434,24 @@
     <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory">Mandatory (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.Integer">Mandatory.Integer (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.String">Mandatory.String (class in rpclib.model.primitive)</a></dt>
-    <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiMethodContext.method_name">method_name (rpclib.server.wsgi.WsgiMethodContext attribute)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.String.Attributes.max_len">max_len (rpclib.model.primitive.String.Attributes attribute)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.Attributes.max_occurs">max_occurs (rpclib.model._base.ModelBase.Attributes attribute)</a></dt>
+    <dt><a href="reference/base.html#rpclib.MethodContext.method_name">method_name (rpclib.MethodContext attribute)</a></dt>
     <dd><dl>
+      <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiMethodContext.method_name">(rpclib.server.wsgi.WsgiMethodContext attribute)</a></dt>
       <dt><a href="reference/server.html#rpclib.server.zeromq.ZmqMethodContext.method_name">(rpclib.server.zeromq.ZmqMethodContext attribute)</a></dt>
   </dl></dd>
-</dl></td>
-  <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/base.html#rpclib.MethodContext.method_request_string">method_request_string (rpclib.MethodContext attribute)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodContext">MethodContext (class in rpclib)</a></dt>
+</dl></td>
+  <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/base.html#rpclib.MethodDescriptor">MethodDescriptor (class in rpclib)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.String.Attributes.min_len">min_len (rpclib.model.primitive.String.Attributes attribute)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.Attributes.min_occurs">min_occurs (rpclib.model._base.ModelBase.Attributes attribute)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase">ModelBase (class in rpclib.model._base)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.Annotations">ModelBase.Annotations (class in rpclib.model._base)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.Attributes">ModelBase.Attributes (class in rpclib.model._base)</a></dt>
+    <dt><a href="reference/service.html#rpclib.service.ServiceBaseMeta.mro">mro (rpclib.service.ServiceBaseMeta attribute)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodDescriptor.mtom">mtom (rpclib.MethodDescriptor attribute)</a></dt>
 </dl></td>
 </tr></table>
@@ -298,9 +460,14 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/base.html#rpclib.MethodDescriptor.name">name (rpclib.MethodDescriptor attribute)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.Attributes.nillable">nillable (rpclib.model._base.ModelBase.Attributes attribute)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.nillable_dict">nillable_dict() (in module rpclib.model._base)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.nillable_iterable">nillable_iterable() (in module rpclib.model._base)</a></dt>
 </dl></td>
   <td style="width: 33%" valign="top"><dl>
+    <dt><a href="reference/model.html#rpclib.model._base.nillable_string">nillable_string() (in module rpclib.model._base)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodDescriptor.no_ctx">no_ctx (rpclib.MethodDescriptor attribute)</a></dt>
+    <dt><a href="reference/server.html#rpclib.server.null.NullServer">NullServer (class in rpclib.server.null)</a></dt>
 </dl></td>
 </tr></table>
 
@@ -308,15 +475,16 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/util.html#rpclib.util.odict.odict">odict (class in rpclib.util.odict)</a></dt>
+    <dt><a href="reference/util.html#rpclib.util.oset.oset">oset (class in rpclib.util.oset)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodContext.out_body_doc">out_body_doc (rpclib.MethodContext attribute)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodContext.out_document">out_document (rpclib.MethodContext attribute)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodContext.out_error">out_error (rpclib.MethodContext attribute)</a></dt>
+</dl></td>
+  <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/base.html#rpclib.MethodContext.out_header">out_header (rpclib.MethodContext attribute)</a></dt>
     <dd><dl>
       <dt><a href="reference/base.html#rpclib.MethodDescriptor.out_header">(rpclib.MethodDescriptor attribute)</a></dt>
   </dl></dd>
-</dl></td>
-  <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/base.html#rpclib.MethodContext.out_header_doc">out_header_doc (rpclib.MethodContext attribute)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodDescriptor.out_message">out_message (rpclib.MethodDescriptor attribute)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodContext.out_object">out_object (rpclib.MethodContext attribute)</a></dt>
@@ -327,15 +495,16 @@
 <h2 id="P">P</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
+    <dt><a href="reference/model.html#rpclib.model.primitive.String.Attributes.pattern">pattern (rpclib.model.primitive.String.Attributes attribute)</a></dt>
     <dt><a href="reference/interface.html#rpclib.interface._base.InterfaceBase.populate_interface">populate_interface() (rpclib.interface._base.InterfaceBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/interface.html#rpclib.interface.wsdl.wsdl11.Wsdl11.populate_interface">(rpclib.interface.wsdl.wsdl11.Wsdl11 method)</a></dt>
       <dt><a href="reference/interface.html#rpclib.interface.xml_schema._base.XmlSchema.populate_interface">(rpclib.interface.xml_schema._base.XmlSchema method)</a></dt>
   </dl></dd>
     <dt><a href="reference/base.html#rpclib.MethodDescriptor.port_type">port_type (rpclib.MethodDescriptor attribute)</a></dt>
-    <dt><a href="reference/application.html#rpclib.application.Application.process_request">process_request() (rpclib.application.Application method)</a></dt>
 </dl></td>
   <td style="width: 33%" valign="top"><dl>
+    <dt><a href="reference/application.html#rpclib.application.Application.process_request">process_request() (rpclib.application.Application method)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.complex.ComplexModelBase.produce">produce() (rpclib.model.complex.ComplexModelBase static method)</a></dt>
     <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase">ProtocolBase (class in rpclib.protocol._base)</a></dt>
 </dl></td>
@@ -346,8 +515,32 @@
   <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/server.html#rpclib.server.wsgi.reconstruct_wsgi_request">reconstruct_wsgi_request() (in module rpclib.server.wsgi)</a></dt>
     <dt><a href="reference/client.html#rpclib.client._base.RemoteProcedureBase">RemoteProcedureBase (class in rpclib.client._base)</a></dt>
+    <dt><a href="reference/util.html#rpclib.util.oset.oset.remove">remove() (rpclib.util.oset.oset method)</a></dt>
     <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiTransportContext.req_env">req_env (rpclib.server.wsgi.WsgiTransportContext attribute)</a></dt>
     <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiTransportContext.req_method">req_method (rpclib.server.wsgi.WsgiTransportContext attribute)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.resolve_namespace">resolve_namespace() (rpclib.model._base.ModelBase static method)</a></dt>
+    <dd><dl>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyDict.resolve_namespace">(rpclib.model.primitive.AnyDict static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyUri.resolve_namespace">(rpclib.model.primitive.AnyUri static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyXml.resolve_namespace">(rpclib.model.primitive.AnyXml static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Boolean.resolve_namespace">(rpclib.model.primitive.Boolean static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Date.resolve_namespace">(rpclib.model.primitive.Date static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.DateTime.resolve_namespace">(rpclib.model.primitive.DateTime static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Decimal.resolve_namespace">(rpclib.model.primitive.Decimal static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Double.resolve_namespace">(rpclib.model.primitive.Double static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Duration.resolve_namespace">(rpclib.model.primitive.Duration static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Float.resolve_namespace">(rpclib.model.primitive.Float static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Int.resolve_namespace">(rpclib.model.primitive.Int static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Integer.resolve_namespace">(rpclib.model.primitive.Integer static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.Integer.resolve_namespace">(rpclib.model.primitive.Mandatory.Integer static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.String.resolve_namespace">(rpclib.model.primitive.Mandatory.String static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.String.resolve_namespace">(rpclib.model.primitive.String static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger.resolve_namespace">(rpclib.model.primitive.UnsignedInteger static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger16.resolve_namespace">(rpclib.model.primitive.UnsignedInteger16 static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger32.resolve_namespace">(rpclib.model.primitive.UnsignedInteger32 static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger64.resolve_namespace">(rpclib.model.primitive.UnsignedInteger64 static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger8.resolve_namespace">(rpclib.model.primitive.UnsignedInteger8 static method)</a></dt>
+  </dl></dd>
     <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiTransportContext.resp_code">resp_code (rpclib.server.wsgi.WsgiTransportContext attribute)</a></dt>
     <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiTransportContext.resp_headers">resp_headers (rpclib.server.wsgi.WsgiTransportContext attribute)</a></dt>
     <dt><a href="reference/util.html#rpclib.util.etreeconv.root_dict_to_etree">root_dict_to_etree() (in module rpclib.util.etreeconv)</a></dt>
@@ -356,13 +549,16 @@
     <dt><a href="reference/client.html#module-rpclib.client._base">rpclib.client._base (module)</a></dt>
     <dt><a href="reference/client.html#module-rpclib.client.http">rpclib.client.http (module)</a></dt>
     <dt><a href="reference/client.html#module-rpclib.client.zeromq">rpclib.client.zeromq (module)</a></dt>
+    <dt><a href="reference/decorator.html#module-rpclib.decorator">rpclib.decorator (module)</a></dt>
     <dt><a href="reference/interface.html#module-rpclib.interface._base">rpclib.interface._base (module)</a></dt>
     <dt><a href="reference/interface.html#module-rpclib.interface.wsdl.wsdl11">rpclib.interface.wsdl.wsdl11 (module)</a></dt>
     <dt><a href="reference/interface.html#module-rpclib.interface.xml_schema._base">rpclib.interface.xml_schema._base (module)</a></dt>
-    <dt><a href="reference/model.html#module-rpclib.model.binary">rpclib.model.binary (module)</a></dt>
-    <dt><a href="reference/model.html#module-rpclib.model.complex">rpclib.model.complex (module)</a></dt>
+    <dt><a href="reference/model.html#module-rpclib.model">rpclib.model (module)</a></dt>
+    <dt><a href="reference/model.html#module-rpclib.model._base">rpclib.model._base (module)</a></dt>
 </dl></td>
   <td style="width: 33%" valign="top"><dl>
+    <dt><a href="reference/model.html#module-rpclib.model.binary">rpclib.model.binary (module)</a></dt>
+    <dt><a href="reference/model.html#module-rpclib.model.complex">rpclib.model.complex (module)</a></dt>
     <dt><a href="reference/model.html#module-rpclib.model.enum">rpclib.model.enum (module)</a></dt>
     <dt><a href="reference/model.html#module-rpclib.model.fault">rpclib.model.fault (module)</a></dt>
     <dt><a href="reference/model.html#module-rpclib.model.primitive">rpclib.model.primitive (module)</a></dt>
@@ -371,14 +567,15 @@
     <dt><a href="reference/protocol.html#module-rpclib.protocol.http">rpclib.protocol.http (module)</a></dt>
     <dt><a href="reference/protocol.html#module-rpclib.protocol.soap.soap11">rpclib.protocol.soap.soap11 (module)</a></dt>
     <dt><a href="reference/server.html#module-rpclib.server._base">rpclib.server._base (module)</a></dt>
+    <dt><a href="reference/server.html#module-rpclib.server.null">rpclib.server.null (module)</a></dt>
     <dt><a href="reference/server.html#module-rpclib.server.wsgi">rpclib.server.wsgi (module)</a></dt>
     <dt><a href="reference/server.html#module-rpclib.server.zeromq">rpclib.server.zeromq (module)</a></dt>
     <dt><a href="reference/service.html#module-rpclib.service">rpclib.service (module)</a></dt>
     <dt><a href="reference/util.html#module-rpclib.util.cdict">rpclib.util.cdict (module)</a></dt>
     <dt><a href="reference/util.html#module-rpclib.util.etreeconv">rpclib.util.etreeconv (module)</a></dt>
-    <dt><a href="reference/util.html#module-rpclib.util.model_utils">rpclib.util.model_utils (module)</a></dt>
     <dt><a href="reference/util.html#module-rpclib.util.odict">rpclib.util.odict (module)</a></dt>
     <dt><a href="reference/util.html#module-rpclib.util.oset">rpclib.util.oset (module)</a></dt>
+    <dt><a href="reference/util.html#module-rpclib.util.xml">rpclib.util.xml (module)</a></dt>
 </dl></td>
 </tr></table>
 
@@ -389,24 +586,35 @@
     <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase.serialize">serialize() (rpclib.protocol._base.ProtocolBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.serialize">(rpclib.protocol.http.HttpRpc method)</a></dt>
+      <dt><a href="reference/protocol.html#rpclib.protocol.soap.soap11.Soap11.serialize">(rpclib.protocol.soap.soap11.Soap11 method)</a></dt>
   </dl></dd>
     <dt><a href="reference/server.html#rpclib.server.zeromq.ZeroMQServer.serve_forever">serve_forever() (rpclib.server.zeromq.ZeroMQServer method)</a></dt>
     <dt><a href="reference/server.html#rpclib.server._base.ServerBase">ServerBase (class in rpclib.server._base)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodContext.service_class">service_class (rpclib.MethodContext attribute)</a></dt>
     <dt><a href="reference/service.html#rpclib.service.ServiceBase">ServiceBase (class in rpclib.service)</a></dt>
-</dl></td>
-  <td style="width: 33%" valign="top"><dl>
+    <dt><a href="reference/service.html#rpclib.service.ServiceBaseMeta">ServiceBaseMeta (class in rpclib.service)</a></dt>
     <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.set_app">set_app() (rpclib.protocol.http.HttpRpc method)</a></dt>
     <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase.set_method_descriptor">set_method_descriptor() (rpclib.protocol._base.ProtocolBase method)</a></dt>
     <dd><dl>
       <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.set_method_descriptor">(rpclib.protocol.http.HttpRpc method)</a></dt>
+      <dt><a href="reference/protocol.html#rpclib.protocol.soap.soap11.Soap11.set_method_descriptor">(rpclib.protocol.soap.soap11.Soap11 method)</a></dt>
   </dl></dd>
-    <dt><a href="reference/client.html#rpclib.client.http.HttpClient.set_options">set_options() (rpclib.client.http.HttpClient method)</a></dt>
+</dl></td>
+  <td style="width: 33%" valign="top"><dl>
+    <dt><a href="reference/client.html#rpclib.client._base.ClientBase.set_options">set_options() (rpclib.client._base.ClientBase method)</a></dt>
     <dd><dl>
+      <dt><a href="reference/client.html#rpclib.client.http.HttpClient.set_options">(rpclib.client.http.HttpClient method)</a></dt>
       <dt><a href="reference/client.html#rpclib.client.zeromq.ZeroMQClient.set_options">(rpclib.client.zeromq.ZeroMQClient method)</a></dt>
+      <dt><a href="reference/server.html#rpclib.server.null.NullServer.set_options">(rpclib.server.null.NullServer method)</a></dt>
   </dl></dd>
-    <dt><a href="reference/protocol.html#rpclib.protocol.soap.soap11.Soap11">Soap11() (in module rpclib.protocol.soap.soap11)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.complex.SimpleContent">SimpleContent (class in rpclib.model.complex)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.SimpleModel">SimpleModel (class in rpclib.model._base)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.SimpleModel.Attributes">SimpleModel.Attributes (class in rpclib.model._base)</a></dt>
+    <dt><a href="reference/protocol.html#rpclib.protocol.soap.soap11.Soap11">Soap11 (class in rpclib.protocol.soap.soap11)</a></dt>
+    <dt><a href="reference/decorator.html#rpclib.decorator.srpc">srpc() (in module rpclib.decorator)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.String">String (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.String.Annotations">String.Annotations (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.String.Attributes">String.Attributes (class in rpclib.model.primitive)</a></dt>
 </dl></td>
 </tr></table>
 
@@ -414,18 +622,15 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/model.html#rpclib.model.table.TableModel">TableModel (class in rpclib.model.table)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.table.TableModelMeta">TableModelMeta (class in rpclib.model.table)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.table.TableSerializer">TableSerializer (in module rpclib.model.table)</a></dt>
-    <dt><a href="reference/model.html#rpclib.model.table.TableSerializerMeta">TableSerializerMeta (class in rpclib.model.table)</a></dt>
+</dl></td>
+  <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/interface.html#rpclib.interface._base.InterfaceBase.tns">tns (rpclib.interface._base.InterfaceBase attribute)</a></dt>
     <dd><dl>
       <dt><a href="reference/interface.html#rpclib.interface.wsdl.wsdl11.Wsdl11.tns">(rpclib.interface.wsdl.wsdl11.Wsdl11 attribute)</a></dt>
       <dt><a href="reference/interface.html#rpclib.interface.xml_schema._base.XmlSchema.tns">(rpclib.interface.xml_schema._base.XmlSchema attribute)</a></dt>
   </dl></dd>
-</dl></td>
-  <td style="width: 33%" valign="top"><dl>
-    <dt><a href="reference/util.html#rpclib.util.model_utils.ComplexModelConverter.to_etree">to_etree() (rpclib.util.model_utils.ComplexModelConverter method)</a></dt>
-    <dt><a href="reference/util.html#rpclib.util.model_utils.ComplexModelConverter.to_file">to_file() (rpclib.util.model_utils.ComplexModelConverter method)</a></dt>
-    <dt><a href="reference/util.html#rpclib.util.model_utils.ComplexModelConverter.to_xml">to_xml() (rpclib.util.model_utils.ComplexModelConverter method)</a></dt>
     <dt><a href="reference/base.html#rpclib.MethodContext.transport">transport (rpclib.MethodContext attribute)</a></dt>
     <dd><dl>
       <dt><a href="reference/server.html#rpclib.server._base.ServerBase.transport">(rpclib.server._base.ServerBase attribute)</a></dt>
@@ -439,22 +644,47 @@
   <td style="width: 33%" valign="top"><dl>
     <dt><a href="reference/base.html#rpclib.MethodContext.udc">udc (rpclib.MethodContext attribute)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger">UnsignedInteger (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger.Annotations">UnsignedInteger.Annotations (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger16">UnsignedInteger16 (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger16.Annotations">UnsignedInteger16.Annotations (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger32">UnsignedInteger32 (class in rpclib.model.primitive)</a></dt>
 </dl></td>
   <td style="width: 33%" valign="top"><dl>
-    <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger32">UnsignedInteger32 (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger32.Annotations">UnsignedInteger32.Annotations (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger64">UnsignedInteger64 (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger64.Annotations">UnsignedInteger64.Annotations (class in rpclib.model.primitive)</a></dt>
     <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger8">UnsignedInteger8 (class in rpclib.model.primitive)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model.primitive.UnsignedInteger8.Annotations">UnsignedInteger8.Annotations (class in rpclib.model.primitive)</a></dt>
 </dl></td>
 </tr></table>
 
 <h2 id="V">V</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
-    <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase.validate">validate() (rpclib.protocol._base.ProtocolBase method)</a></dt>
+    <dt><a href="reference/protocol.html#rpclib.protocol.soap.soap11.Soap11.validate_body">validate_body() (rpclib.protocol.soap.soap11.Soap11 method)</a></dt>
+    <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase.validate_document">validate_document() (rpclib.protocol._base.ProtocolBase method)</a></dt>
     <dd><dl>
-      <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.validate">(rpclib.protocol.http.HttpRpc method)</a></dt>
+      <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.validate_document">(rpclib.protocol.http.HttpRpc method)</a></dt>
+      <dt><a href="reference/protocol.html#rpclib.protocol.soap.soap11.Soap11.validate_document">(rpclib.protocol.soap.soap11.Soap11 method)</a></dt>
   </dl></dd>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.validate_native">validate_native() (rpclib.model._base.ModelBase static method)</a></dt>
+    <dd><dl>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyDict.validate_native">(rpclib.model.primitive.AnyDict static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyUri.validate_native">(rpclib.model.primitive.AnyUri static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.AnyXml.validate_native">(rpclib.model.primitive.AnyXml static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Boolean.validate_native">(rpclib.model.primitive.Boolean static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Date.validate_native">(rpclib.model.primitive.Date static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.DateTime.validate_native">(rpclib.model.primitive.DateTime static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Double.validate_native">(rpclib.model.primitive.Double static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Duration.validate_native">(rpclib.model.primitive.Duration static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Float.validate_native">(rpclib.model.primitive.Float static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.String.validate_native">(rpclib.model.primitive.Mandatory.String static method)</a></dt>
+      <dt><a href="reference/model.html#rpclib.model.primitive.String.validate_native">(rpclib.model.primitive.String static method)</a></dt>
+  </dl></dd>
+</dl></td>
+  <td style="width: 33%" valign="top"><dl>
+    <dt><a href="reference/model.html#rpclib.model._base.ModelBase.validate_string">validate_string() (rpclib.model._base.ModelBase static method)</a></dt>
+    <dt><a href="reference/model.html#rpclib.model._base.SimpleModel.Attributes.values">values (rpclib.model._base.SimpleModel.Attributes attribute)</a></dt>
 </dl></td>
 </tr></table>
 
@@ -530,7 +760,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

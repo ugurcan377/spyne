@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Protocols &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>Protocols &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Client Transports" href="client.html" />
     <link rel="prev" title="Interfaces" href="interface.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="interface.html" title="Interfaces"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -63,24 +63,31 @@ procedure call protocols.</p>
 protocol implementations.</p>
 <dl class="class">
 <dt id="rpclib.protocol._base.ProtocolBase">
-<em class="property">class </em><tt class="descclassname">rpclib.protocol._base.</tt><tt class="descname">ProtocolBase</tt><big>(</big><em>app=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.protocol._base.</tt><tt class="descname">ProtocolBase</tt><big>(</big><em>app=None</em>, <em>validator=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>This is the abstract base class for all protocol implementations. Child
 classes can implement only the required subset of the public methods.</p>
-<dl class="docutils">
-<dt>The ProtocolBase class supports the following events:</dt>
-<dd><ul class="first last simple">
-<li><tt class="docutils literal"><span class="pre">deserialize</span></tt>:
-Called right after the deserialization operation is finished.</li>
-<li><tt class="docutils literal"><span class="pre">serialize</span></tt>:
-Called right after the serialization operation is finished.</li>
+<p>The ProtocolBase class supports the following events:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">before_deserialize</span></tt>:
+Called before the deserialization operation is attempted.</li>
+<li><tt class="docutils literal"><span class="pre">after_deserialize</span></tt>:
+Called after the deserialization operation is finished.</li>
+<li><tt class="docutils literal"><span class="pre">before_serialize</span></tt>:
+Called before after the serialization operation is attempted.</li>
+<li><tt class="docutils literal"><span class="pre">after_serialize</span></tt>:
+Called after the serialization operation is finished.</li>
 </ul>
-</dd>
-</dl>
 <dl class="attribute">
 <dt id="rpclib.protocol._base.ProtocolBase.app">
 <tt class="descname">app</tt><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase.app"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase.app" title="Permalink to this definition">¶</a></dt>
 <dd><p>The <a class="reference internal" href="application.html#rpclib.application.Application" title="rpclib.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.application.Application</span></tt></a> instance this protocol
 belongs to.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.protocol._base.ProtocolBase.check_validator">
+<tt class="descname">check_validator</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase.check_validator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase.check_validator" title="Permalink to this definition">¶</a></dt>
+<dd><p>You must override this function if your protocol supports validation.</p>
 </dd></dl>
 
 <dl class="method">
@@ -128,10 +135,10 @@ the method_request_string and the methods.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.protocol._base.ProtocolBase.validate">
-<tt class="descname">validate</tt><big>(</big><em>payload</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase.validate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase.validate" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.protocol._base.ProtocolBase.validate_document">
+<tt class="descname">validate_document</tt><big>(</big><em>payload</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase.validate_document"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase.validate_document" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to be overriden to perform any sort of custom input
-validation.</p>
+validation on the parsed input document.</p>
 </dd></dl>
 
 </dd></dl>
@@ -142,7 +149,7 @@ validation.</p>
 <p>This module contains the HttpRpc protocol implementation.</p>
 <dl class="class">
 <dt id="rpclib.protocol.http.HttpRpc">
-<em class="property">class </em><tt class="descclassname">rpclib.protocol.http.</tt><tt class="descname">HttpRpc</tt><big>(</big><em>app=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.protocol.http.</tt><tt class="descname">HttpRpc</tt><big>(</big><em>app=None</em>, <em>validator=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc" title="Permalink to this definition">¶</a></dt>
 <dd><p>The so-called ReST-minus-the-verbs HttpRpc protocol implementation.
 It only works with the http server (wsgi) transport.</p>
 <p>It only parses GET requests where the whole data is in the &#8216;QUERY_STRING&#8217;.</p>
@@ -152,6 +159,11 @@ It only works with the http server (wsgi) transport.</p>
 <dd><p>The <a class="reference internal" href="application.html#rpclib.application.Application" title="rpclib.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.application.Application</span></tt></a> instance this protocol
 belongs to.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="rpclib.protocol.http.HttpRpc.check_validator">
+<tt class="descname">check_validator</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc.check_validator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.check_validator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
 <dt id="rpclib.protocol.http.HttpRpc.create_in_document">
@@ -170,7 +182,7 @@ belongs to.</p>
 
 <dl class="method">
 <dt id="rpclib.protocol.http.HttpRpc.deserialize">
-<tt class="descname">deserialize</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc.deserialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.deserialize" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">deserialize</tt><big>(</big><em>ctx</em>, <em>message</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc.deserialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.deserialize" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -180,7 +192,7 @@ belongs to.</p>
 
 <dl class="method">
 <dt id="rpclib.protocol.http.HttpRpc.serialize">
-<tt class="descname">serialize</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc.serialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.serialize" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">serialize</tt><big>(</big><em>ctx</em>, <em>message</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc.serialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.serialize" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -196,10 +208,10 @@ the method_request_string and the methods.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.protocol.http.HttpRpc.validate">
-<tt class="descname">validate</tt><big>(</big><em>payload</em><big>)</big><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.validate" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.protocol.http.HttpRpc.validate_document">
+<tt class="descname">validate_document</tt><big>(</big><em>payload</em><big>)</big><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.validate_document" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method to be overriden to perform any sort of custom input
-validation.</p>
+validation on the parsed input document.</p>
 </dd></dl>
 
 </dd></dl>
@@ -209,18 +221,61 @@ validation.</p>
 <span id="soap-1-1"></span><h2>Soap 1.1<a class="headerlink" href="#module-rpclib.protocol.soap.soap11" title="Permalink to this headline">¶</a></h2>
 <p>This module contains the implementation of a subset of the SOAP 1.1 remote
 procedure call standard.</p>
-<dl class="function">
+<dl class="class">
 <dt id="rpclib.protocol.soap.soap11.Soap11">
-<tt class="descclassname">rpclib.protocol.soap.soap11.</tt><tt class="descname">Soap11</tt><big>(</big><em>validator=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/soap/soap11.html#Soap11"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11" title="Permalink to this definition">¶</a></dt>
-<dd><p>The Soap11 class factory method.</p>
-<table class="docutils field-list" frame="void" rules="none">
-<col class="field-name" />
-<col class="field-body" />
-<tbody valign="top">
-<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>validator</strong> &#8211; either None or &#8216;lxml&#8217;</td>
-</tr>
-</tbody>
-</table>
+<em class="property">class </em><tt class="descclassname">rpclib.protocol.soap.soap11.</tt><tt class="descname">Soap11</tt><big>(</big><em>app=None</em>, <em>validator=None</em>, <em>wrapped=True</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/soap/soap11.html#Soap11"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11" title="Permalink to this definition">¶</a></dt>
+<dd><p>The base implementation of the Soap 1.1 protocol.</p>
+<dl class="attribute">
+<dt id="rpclib.protocol.soap.soap11.Soap11.app">
+<tt class="descname">app</tt><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11.app" title="Permalink to this definition">¶</a></dt>
+<dd><p>The <a class="reference internal" href="application.html#rpclib.application.Application" title="rpclib.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.application.Application</span></tt></a> instance this protocol
+belongs to.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.protocol.soap.soap11.Soap11.create_out_string">
+<tt class="descname">create_out_string</tt><big>(</big><em>ctx</em>, <em>charset=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/soap/soap11.html#Soap11.create_out_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11.create_out_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets an iterable of string fragments to ctx.out_string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.protocol.soap.soap11.Soap11.deserialize">
+<tt class="descname">deserialize</tt><big>(</big><em>ctx</em>, <em>message</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/soap/soap11.html#Soap11.deserialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11.deserialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Takes a MethodContext instance and a string containing ONE soap
+message.
+Returns the corresponding native python object</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.protocol.soap.soap11.Soap11.serialize">
+<tt class="descname">serialize</tt><big>(</big><em>ctx</em>, <em>message</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/soap/soap11.html#Soap11.serialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11.serialize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uses ctx.out_object, ctx.out_header or ctx.out_error to set
+ctx.out_body_doc, ctx.out_header_doc and ctx.out_document as an
+lxml.etree._Element instance.</p>
+<p>Not meant to be overridden.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.protocol.soap.soap11.Soap11.set_method_descriptor">
+<tt class="descname">set_method_descriptor</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11.set_method_descriptor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to be overriden to perform any sort of custom matching between
+the method_request_string and the methods.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.protocol.soap.soap11.Soap11.validate_body">
+<tt class="descname">validate_body</tt><big>(</big><em>ctx</em>, <em>body_document</em><big>)</big><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11.validate_body" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets ctx.method_request_string and calls <a class="reference internal" href="#rpclib.protocol.soap.soap11.Soap11.set_method_descriptor" title="rpclib.protocol.soap.soap11.Soap11.set_method_descriptor"><tt class="xref py py-func docutils literal"><span class="pre">set_method_descriptor()</span></tt></a></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.protocol.soap.soap11.Soap11.validate_document">
+<tt class="descname">validate_document</tt><big>(</big><em>payload</em><big>)</big><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11.validate_document" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to be overriden to perform any sort of custom input
+validation on the parsed input document.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -285,7 +340,7 @@ procedure call standard.</p>
         <li class="right" >
           <a href="interface.html" title="Interfaces"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

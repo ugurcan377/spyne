@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.interface._base &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>rpclib.interface._base &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -188,6 +188,7 @@
 <span class="sd">        dictionaries. It starts from function definitions and includes only</span>
 <span class="sd">        the used objects.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+
         <span class="c"># FIXME: should also somehow freeze child classes&#39; _type_info</span>
         <span class="c">#        dictionaries, or at least warn about them.</span>
 
@@ -195,7 +196,7 @@
 
         <span class="c"># populate types</span>
         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;populating &#39;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s">&#39; types...&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">__name__</span><span class="p">))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;populating &#39;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s"> (</span><span class="si">%s</span><span class="s">) &#39; types...&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">get_service_key</span><span class="p">()))</span>
             <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">public_methods</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
                 <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">in_header</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="n">method</span><span class="o">.</span><span class="n">in_header</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">__in_header__</span>
@@ -221,6 +222,15 @@
                         <span class="n">out_header</span><span class="o">.</span><span class="n">resolve_namespace</span><span class="p">(</span><span class="n">out_header</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tns</span><span class="p">())</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">out_header</span><span class="p">)</span>
 
+                <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">faults</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">method</span><span class="o">.</span><span class="n">faults</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">elif</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">faults</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span><span class="nb">tuple</span><span class="p">))):</span>
+                    <span class="n">method</span><span class="o">.</span><span class="n">faults</span> <span class="o">=</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">faults</span><span class="p">,)</span>
+
+                <span class="k">for</span> <span class="n">fault</span> <span class="ow">in</span> <span class="n">method</span><span class="o">.</span><span class="n">faults</span><span class="p">:</span>
+                    <span class="n">fault</span><span class="o">.</span><span class="n">__namespace__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tns</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">fault</span><span class="p">)</span>
+
                 <span class="n">method</span><span class="o">.</span><span class="n">in_message</span><span class="o">.</span><span class="n">resolve_namespace</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">in_message</span><span class="p">,</span>
                                                                  <span class="bp">self</span><span class="o">.</span><span class="n">get_tns</span><span class="p">())</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">in_message</span><span class="p">)</span>
@@ -229,9 +239,6 @@
                                                                  <span class="bp">self</span><span class="o">.</span><span class="n">get_tns</span><span class="p">())</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">out_message</span><span class="p">)</span>
 
-                <span class="k">for</span> <span class="n">fault</span> <span class="ow">in</span> <span class="n">method</span><span class="o">.</span><span class="n">faults</span><span class="p">:</span>
-                    <span class="n">fault</span><span class="o">.</span><span class="n">resolve_namespace</span><span class="p">(</span><span class="n">fault</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tns</span><span class="p">())</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">fault</span><span class="p">)</span>
 
         <span class="c"># populate call routes</span>
         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">:</span>
@@ -342,7 +349,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

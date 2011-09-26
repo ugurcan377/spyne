@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>High-Level Introduction to Rpclib &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>High-Level Introduction to Rpclib &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib Manual" href="index.html" />
     <link rel="next" title="Hello World" href="helloworld.html" />
     <link rel="prev" title="Rpclib Manual" href="index.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="index.html" title="Rpclib Manual"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>  
@@ -58,55 +58,61 @@
 <p>The impatient can just jump to the <a class="reference internal" href="#manual-highlevel-nutshell"><em>In a nutshell</em></a> section.</p>
 <div class="section" id="concepts">
 <h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
-<p>The following is most of the Rpclib jargon:</p>
+<p>The following is a quick introduction to the Rpclib way of naming things:</p>
 <ul>
 <li><dl class="first docutils">
 <dt><strong>Protocols:</strong></dt>
-<dd><p class="first last">Protocols define the rules for transmission of structured data. E.g., Rpclib
-implements a subset of Soap 1.1 protocol.</p>
+<dd><p class="first">Protocols define the rules for transmission of structured data. They are
+children of <a class="reference internal" href="../reference/protocol.html#rpclib.protocol._base.ProtocolBase" title="rpclib.protocol._base.ProtocolBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.protocol._base.ProtocolBase</span></tt></a> class.</p>
+<p class="last">For example: Rpclib implements a subset of the Soap 1.1 protocol.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>Transports:</strong></dt>
 <dd><p class="first">Transports, also protocols themselves, encapsulate protocol data in their
-free-form data sections. E.g. Http is used as a transport for Soap, by
-tucking a Soap message in the Http byte-stream. Whereas the HttpRpc protocol
-exposes Http as a protocol. One could use Soap as a transport by tucking a
-message in its base64-encoded ByteArray container.</p>
-<p class="last">Transports are separated to two packages in Rpclib source code:
+free-form data sections. They are
+children of either <a class="reference internal" href="../reference/client.html#rpclib.client._base.ClientBase" title="rpclib.client._base.ClientBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.client._base.ClientBase</span></tt></a> or
+<a class="reference internal" href="../reference/server.html#rpclib.server._base.ServerBase" title="rpclib.server._base.ServerBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server._base.ServerBase</span></tt></a> classes.</p>
+<p>For example, Http is used as a transport for Soap, by
+tucking a Soap message in the Http byte-stream part of a Http POST request.
+The same Http is exposed as a &#8220;protocol&#8221; using the
+<a class="reference internal" href="../reference/protocol.html#rpclib.protocol.http.HttpRpc" title="rpclib.protocol.http.HttpRpc"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.protocol.http.HttpRpc</span></tt></a>
+class. One could use Soap as a transport by tucking a protocol message in its
+base64-encoded ByteArray container.</p>
+<p class="last">Transports appear under two packages in Rpclib source code:
 <tt class="xref py py-mod docutils literal"><span class="pre">rpclib.client</span></tt> and <tt class="xref py py-mod docutils literal"><span class="pre">rpclib.server</span></tt>.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>Models:</strong></dt>
-<dd><p class="first last">Models are used to define schemas. They are mere magic cookies that contain
-very little amount of serialization code They reside in the
-<tt class="xref py py-mod docutils literal"><span class="pre">rpclib.model</span></tt> package.</p>
+<dd><p class="first">Models are used to define schemas. They are mere magic cookies that contain
+very little amount of serialization logic. They are
+children of <a class="reference internal" href="../reference/model.html#rpclib.model._base.ModelBase" title="rpclib.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.ModelBase</span></tt></a> class.</p>
+<p class="last">Types like <tt class="docutils literal"><span class="pre">String</span></tt>, <tt class="docutils literal"><span class="pre">Integer</span></tt> or <tt class="docutils literal"><span class="pre">ByteArray</span></tt> are all models. They
+reside in the
+<a class="reference internal" href="../reference/model.html#module-rpclib.model" title="rpclib.model"><tt class="xref py py-mod docutils literal"><span class="pre">rpclib.model</span></tt></a> package,</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>Interfaces:</strong></dt>
-<dd><p class="first">Interface documents strive to serialize, in a portable fashion, the
-information that is normally stored inside a, say, C header file. It a rigorous
-fashion the method calls, the kind of input expected by those method calls and
-the kind of output that should be expected as a result of calling those methods.</p>
+<dd><p class="first">Interface documents provide a machine-readable description of the input
+the services expect and output they emit. It thus serves a roughly similar
+purpose as a method signature in a programming language. They are
+children of <a class="reference internal" href="../reference/interface.html#rpclib.interface._base.InterfaceBase" title="rpclib.interface._base.InterfaceBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.interface._base.InterfaceBase</span></tt></a> class.</p>
 <p class="last"><tt class="xref py py-mod docutils literal"><span class="pre">rpclib.interface</span></tt> package is where you can find them.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>Serializers:</strong></dt>
-<dd><p class="first">Serializers can be considered mostly as apis around hiearchical key-value
-stores. Various xml apis like <tt class="docutils literal"><span class="pre">lxml.etree.Element</span></tt>, Python&#8217;s own
-<tt class="docutils literal"><span class="pre">xml.etree.ElementTree</span></tt>, or pickle, simplejson, YaML and the like fall in this
-category. They&#8217;re a little bit more difficult to abstract away because each has
-their own strenghts and weaknesses when dealing with complex, hiearchical data
-with mixed types.</p>
-<p class="last">Serializers are currently not distinguished in rpclib code. lxml.etree is
-used as xml serializer, and a custom wsgi callable is used as http serializer.</p>
+<dd><p class="first">Serializers are currently not distinguished in rpclib code. They are the
+protocol-specific representations of a serialized python object.</p>
+<p class="last">They can be anything between an lxml.etree.Element instance to a gzipped
+byte stream. Apis around pickle, simplejson, YaML and the like also
+fall in this category.</p>
 </dd>
 </dl>
 </li>
@@ -114,76 +120,82 @@ used as xml serializer, and a custom wsgi callable is used as http serializer.</
 </div>
 <div class="section" id="how-your-code-is-wrapped">
 <h2>How your code is wrapped<a class="headerlink" href="#how-your-code-is-wrapped" title="Permalink to this headline">¶</a></h2>
-<p>A typical user of the Rpclib will just write methods that will be exposed as
-remote procedure calls to the outside world. The following is used to wrap that
+<p>While the information in the previous section gave you an idea about how Rpclib
+code is organized, this section is supposed to give you an idea about how <em>you</em>
+should organize your code using the tools provided by Rpclib.</p>
+<p>A typical Rpclib user will just write methods that will be exposed as remote
+procedure calls to the outside world. The following is used to wrap that
 code:</p>
 <ul>
 <li><dl class="first docutils">
 <dt><strong>Decorators</strong>:</dt>
-<dd><p class="first last">the <tt class="docutils literal"><span class="pre">&#64;rpc</span></tt> and <tt class="docutils literal"><span class="pre">&#64;srpc</span></tt> decorators from <tt class="xref py py-mod docutils literal"><span class="pre">rpclib.decorator</span></tt> module
-are used to flag methods that will be exposed to the outside world, along
-with marking its input and output types.</p>
+<dd><p class="first last">the <tt class="docutils literal"><span class="pre">&#64;rpc</span></tt> and <tt class="docutils literal"><span class="pre">&#64;srpc</span></tt> decorators from <a class="reference internal" href="../reference/decorator.html#module-rpclib.decorator" title="rpclib.decorator"><tt class="xref py py-mod docutils literal"><span class="pre">rpclib.decorator</span></tt></a> module
+are used to flag methods that will be exposed to the outside world by
+marking their input and output types, as well as other properties.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>Service Definition</strong>:</dt>
 <dd><p class="first">The <a class="reference internal" href="../reference/service.html#rpclib.service.ServiceBase" title="rpclib.service.ServiceBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.service.ServiceBase</span></tt></a> is an abstract base class for
-service definitions. It is the smallest exposable service unit in rpclib. You
-can use one service class per method definition or you can use, say, a service
-class for read-only or read/write services or you can cram everything into one
-service class, it&#8217;s up to you.</p>
-<p class="last">You can define events, header classes, and other goodies on service classes,
-which make them suitable for grouping services that have common properties like
-logging, transaction management, header objects and whatnot. It&#8217;s often a good
-idea to base your application services your own ServiceBase children.</p>
+service definitions, which are the smallest exposable service unit in rpclib.
+You can use one service class per method definition or you can use, say, a
+service class for read-only or read/write services or you can cram
+everything into one service class, it&#8217;s up to you.</p>
+<p class="last">Service definition classes are suitable
+for grouping services that have common properties like logging, transaction
+management and security policy. It&#8217;s often a good idea to base your
+service definitions on your own ServiceBase children instead of using the
+vanilla <tt class="docutils literal"><span class="pre">ServiceBase</span></tt> class offered by Rpclib.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>Application</strong>:</dt>
-<dd><p class="first">The <a class="reference internal" href="../reference/application.html#rpclib.application.Application" title="rpclib.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.application.Application</span></tt></a> object is what ties services,
-interfaces protocols together, ready to be wrapped by a transport. It also lets
-you define events and hooks like ServiceBase does, so you can do more general,
-application-wide customizations like exception management.</p>
-<ul class="last">
-<li><dl class="first docutils">
-<dt><strong>Namespaces</strong>: You might know that rpclib is a generalized version of a</dt>
-<dd><p class="first">soap library. So some artifacts of the Xml world creep off from here and
-there inevitably.</p>
-<p>So, namespaces are another artifact of the Xml world. There are varying
-opinions about the usefulness of the concept of the namespaces in Xml, but we
-generally think it to be A Nice Thing, so we chose to keep it around.</p>
-<p>When instantiating the application, you should also give it a
-targetNamespace (the <tt class="docutils literal"><span class="pre">tns</span></tt> argument to the <tt class="xref py py-class docutils literal"><span class="pre">Application</span></tt> constructor)
-string and an optional application name (the <tt class="docutils literal"><span class="pre">name</span></tt> argument to the
-<tt class="xref py py-class docutils literal"><span class="pre">Application</span></tt> constructor), which are used to generally distinguish your
-application from other applications. While it&#8217;s conventionally the URL and
-the name of the class of your application, you can put
-<tt class="docutils literal"><span class="pre">tns=&quot;Hogwarts&quot;,</span> <span class="pre">name=&quot;Harry&quot;</span></tt> there and just be done with it.</p>
+<dd><p class="first">The <a class="reference internal" href="../reference/application.html#rpclib.application.Application" title="rpclib.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.application.Application</span></tt></a> class is what ties services,
+interfaces and protocols together, ready to be wrapped by a transport.
+It also lets you define events and hooks like ServiceBase does, so you can
+do more general, application-wide customizations like exception management.</p>
+<div class="last admonition note">
+<p class="first admonition-title">Note</p>
+<p>You may know that rpclib is a generalized version of a
+soap library. So inevitably, some artifacts of the Soap world creep in
+from here and there.</p>
+<p>One of those artifacts is xml namespaces. There are varying
+opinions about the usefulness of the concept of the namespace in the
+Xml standard, but we generally think it to be A Nice Thing, so we chose
+to keep it around.</p>
+<p>When instantiating the <a class="reference internal" href="../reference/application.html#rpclib.application.Application" title="rpclib.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.application.Application</span></tt></a> class,
+you should also give it a targetNamespace (the <tt class="docutils literal"><span class="pre">tns</span></tt> argument to its
+constructor) string and an optional application name (the <tt class="docutils literal"><span class="pre">name</span></tt>
+argument to the <tt class="xref py py-class docutils literal"><span class="pre">Application</span></tt> constructor), which are used to
+generally distinguish your application from other applications. While
+it&#8217;s conventionally the URL and the name of the class of your
+application, you can put <tt class="docutils literal"><span class="pre">tns=&quot;Hogwarts&quot;,</span> <span class="pre">name=&quot;Harry&quot;</span></tt> there and
+just be done with it.</p>
 <p class="last">Every object in the Rpclib world has a name and belongs to a namespace.
 Public functions (and the implicit <a class="reference internal" href="../reference/model.html#rpclib.model.complex.ComplexModel" title="rpclib.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.ComplexModel</span></tt></a>
-children that are created for the input and output types of the functions you
-defined) are forced to be in the Application namespace, and have whatever you
-give them as public name in the <tt class="xref py py-func docutils literal"><span class="pre">rpclib.decorator.srpc()</span></tt> decorator.
-Rpclib-defined types generally belong to the relevant Xml namespace by default.
-User-defined objects have the module name as namespace string and class name as
-name string by default.</p>
+children that are created for the input and output types of the
+functions you defined) are forced to be in the Application namespace,
+and have whatever you give them as public name in the
+<a class="reference internal" href="../reference/decorator.html#rpclib.decorator.srpc" title="rpclib.decorator.srpc"><tt class="xref py py-func docutils literal"><span class="pre">rpclib.decorator.srpc()</span></tt></a> decorator. Rpclib-defined types generally
+belong to a pre-defined namespace by default. User-defined objects
+have the module name as namespace string and class name as name string
+by default.</p>
+</div>
 </dd>
 </dl>
 </li>
 </ul>
-</dd>
-</dl>
-</li>
-</ul>
+<p>In case you&#8217;d like to read on how <em>exactly</em> your code is wrapped, you can refer
+to the relevant part in the <a class="reference internal" href="t_and_p.html#manual-t-and-p"><em>Implementing Transports and Protocols</em></a> section.</p>
 <div class="section" id="in-a-nutshell">
 <span id="manual-highlevel-nutshell"></span><h3>In a nutshell<a class="headerlink" href="#in-a-nutshell" title="Permalink to this headline">¶</a></h3>
-<p>So in a nutshell, your code is inside a &#64;rpc-wrapped method in a ServiceBase child,
-wrapped by a decorator, which are grouped in an Application instance, which
-communicates with the outside world using given interface and protocol classes,
-and which is finally wrapped by a client or server transport that takes the
-responsibility of moving the bits around.</p>
+<p>Your code is inside &#64;rpc-wrapped methods in ServiceBase children, which are
+grouped in an Application instance, which communicates with the outside world
+using given interface and protocol classes, and which is finally wrapped by a
+client or server transport that takes the responsibility of moving the bits
+around.</p>
 </div>
 </div>
 <div class="section" id="what-s-next">
@@ -255,7 +267,7 @@ coding. You can start by <a class="reference internal" href="helloworld.html#man
         <li class="right" >
           <a href="index.html" title="Rpclib Manual"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>

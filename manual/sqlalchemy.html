@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>SQLAlchemy Integration &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>SQLAlchemy Integration &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,9 +22,9 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib Manual" href="index.html" />
-    <link rel="next" title="Developer Manual" href="devman.html" />
+    <link rel="next" title="Working with RPC Metadata" href="metadata.html" />
     <link rel="prev" title="User Manager" href="usermanager.html" /> 
   </head>
   <body>
@@ -38,12 +38,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="devman.html" title="Developer Manual"
+          <a href="metadata.html" title="Working with RPC Metadata"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="usermanager.html" title="User Manager"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>  
@@ -57,13 +57,13 @@
 <span id="manual-sqlalchemy"></span><h1>SQLAlchemy Integration<a class="headerlink" href="#sqlalchemy-integration" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial builds on the <a class="reference internal" href="usermanager.html#manual-user-manager"><em>User Manager</em></a> tutorial. If you haven&#8217;t
 done so, we recommended you to read it first.</p>
-<p>Let&#8217;s try a more complicated example than storing our data in a mere dictionary.</p>
-<p>The following example shows how to integrate SQLAlchemy and Rpclib objects, and
-how to do painless transaction management using Rpclib events.</p>
+<p>In this tutorial, we talk about using Rpclib tools that make it easy to deal with
+database-related operations. We will show how to integrate SQLAlchemy and Rpclib
+object definitions, and how to do painless transaction management using Rpclib events.</p>
 <p>The full example is available here: <a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_sqlalchemy.py">http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_sqlalchemy.py</a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;rpclib.protocol.soap._base&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;rpclib.protocol.xml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;sqlalchemy.engine.base.Engine&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">sqlalchemy</span>
@@ -183,8 +183,8 @@ anywhere the regular Rpclib types go. The definition for the <cite>User</cite> o
 quite similar to vanilla SQLAlchemy declarative syntax, save for two elements:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>The object also bases on TableModel, which bridges SQLAlchemy and Rpclib
-types.</li>
+<li>The object also bases on <a class="reference internal" href="../reference/model.html#rpclib.model.table.TableModel" title="rpclib.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.table.TableModel</span></tt></a>, which
+bridges SQLAlchemy and Rpclib types.</li>
 <li>It has a namespace declaration, which is just so the service looks good
 on wsdl.</li>
 </ol>
@@ -200,7 +200,7 @@ form of <cite>relationship</cite> (no string arguments) are not supported.</li>
 </div></blockquote>
 <p>If you need any of the above features, you need to separate the rpclib and
 sqlalchemy object definitions.</p>
-<p>Rpclib supports this with the following syntax:</p>
+<p>Rpclib makes it easy to an extent with the following syntax:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AlternativeUser</span><span class="p">(</span><span class="n">TableSerializer</span><span class="p">,</span> <span class="n">DeclarativeBase</span><span class="p">):</span>
     <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;rpclib.examples.user_manager&#39;</span>
     <span class="n">__table__</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">__table__</span>
@@ -236,12 +236,14 @@ call is complete.</p>
 <span class="n">application</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">add_listener</span><span class="p">(</span><span class="s">&#39;method_return_object&#39;</span><span class="p">,</span> <span class="n">_on_method_return_object</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Note that the <tt class="docutils literal"><span class="pre">method_return_object</span></tt> event is only run when the method call
-was completed without throwing any exceptions.</p>
+<p>Note that the <tt class="docutils literal"><span class="pre">method_return_object</span></tt> event is only fired when the method call
+completes without throwing any exceptions.</p>
 <div class="section" id="what-s-next">
 <h2>What&#8217;s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial walks you through most of what you need to know to expose your
-services. You can refer to the reference of the documentation or the mailing
+services. You can read the <a class="reference internal" href="metadata.html#manual-metadata"><em>Working with RPC Metadata</em></a> section where service metadata
+management apis are introduced.</p>
+<p>Otherwise, you can refer to the reference of the documentation or the mailing
 list if you have further questions.</p>
 </div>
 </div>
@@ -264,8 +266,8 @@ list if you have further questions.</p>
   <p class="topless"><a href="usermanager.html"
                         title="previous chapter">User Manager</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="devman.html"
-                        title="next chapter">Developer Manual</a></p>
+  <p class="topless"><a href="metadata.html"
+                        title="next chapter">Working with RPC Metadata</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../sources/manual/sqlalchemy.txt"
@@ -298,12 +300,12 @@ list if you have further questions.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="devman.html" title="Developer Manual"
+          <a href="metadata.html" title="Working with RPC Metadata"
              >next</a> |</li>
         <li class="right" >
           <a href="usermanager.html" title="User Manager"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>

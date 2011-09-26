@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.application &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>rpclib.application &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../../static/jquery.js"></script>
     <script type="text/javascript" src="../../static/underscore.js"></script>
     <script type="text/javascript" src="../../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../../index.html" />
     <link rel="up" title="rpclib" href="../rpclib.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li>
           <li><a href="../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -149,6 +149,15 @@
             <span class="c"># call the method</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">out_object</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call_wrapper</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
 
+            <span class="c"># out object is always an iterable of return values. see</span>
+            <span class="c"># MethodContext docstrings for more info</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_message</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">out_object</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_message</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">out_object</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctx</span><span class="o">.</span><span class="n">out_object</span><span class="p">]</span>
+            <span class="c"># otherwise, the return value should already be wrapped in an</span>
+            <span class="c"># iterable.</span>
+
             <span class="c"># fire events</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;method_return_object&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">service_class</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span>
@@ -218,7 +227,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li>
           <li><a href="../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

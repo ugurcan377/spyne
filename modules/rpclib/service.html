@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.service &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>rpclib.service &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../../static/jquery.js"></script>
     <script type="text/javascript" src="../../static/underscore.js"></script>
     <script type="text/javascript" src="../../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../../index.html" />
     <link rel="up" title="rpclib" href="../rpclib.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li>
           <li><a href="../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -71,7 +71,14 @@
 <span class="kn">from</span> <span class="nn">rpclib._base</span> <span class="kn">import</span> <span class="n">EventManager</span>
 <span class="kn">from</span> <span class="nn">rpclib.util.oset</span> <span class="kn">import</span> <span class="n">oset</span>
 
+<span class="sd">&#39;&#39;&#39;This module contains the :class:`ServiceBase` class and its helper objects.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
 <span class="k">class</span> <span class="nc">ServiceBaseMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
+<div class="viewcode-block" id="ServiceBaseMeta"><a class="viewcode-back" href="../../reference/service.html#rpclib.service.ServiceBaseMeta">[docs]</a>    <span class="sd">&#39;&#39;&#39;Creates the :class:`rpclib.MethodDescriptor` objects by iterating over</span>
+<span class="sd">    tagged methods.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cls_name</span><span class="p">,</span> <span class="n">cls_bases</span><span class="p">,</span> <span class="n">cls_dict</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ServiceBaseMeta</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="n">cls_name</span><span class="p">,</span> <span class="n">cls_bases</span><span class="p">,</span> <span class="n">cls_dict</span><span class="p">)</span>
 
@@ -102,7 +109,7 @@
 
         <span class="k">return</span> <span class="n">handlers</span>
 
-<span class="k">class</span> <span class="nc">ServiceBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">ServiceBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
 <div class="viewcode-block" id="ServiceBase"><a class="viewcode-back" href="../../reference/service.html#rpclib.service.ServiceBase">[docs]</a>    <span class="sd">&#39;&#39;&#39;This class serves as the base for all service definitions. Subclasses of</span>
 <span class="sd">    this class will use the srpc decorator or its wrappers to flag methods to be</span>
 <span class="sd">    exposed.</span>
@@ -168,8 +175,15 @@
         <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">__name__</span>
 
     <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_service_key</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">get_tns</span><span class="p">(),</span> <span class="n">cls</span><span class="o">.</span><span class="n">get_service_name</span><span class="p">())</span>
+
+    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_service_name</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">__service_name__</span>
+        <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">__service_name__</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">__name__</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">__service_name__</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_port_types</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
@@ -206,6 +220,7 @@
 
 <span class="sd">        The overriding function must call this function by convention.</span>
 <span class="sd">        &#39;&#39;&#39;</span>
+
         <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">no_ctx</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -243,7 +258,7 @@
         <li class="right" >
           <a href="../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="../index.html" >Module code</a> &raquo;</li>
           <li><a href="../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

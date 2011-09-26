@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.protocol.http &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>rpclib.protocol.http &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -67,15 +67,16 @@
 
 <span class="sd">&quot;&quot;&quot;This module contains the HttpRpc protocol implementation.&quot;&quot;&quot;</span>
 
+<span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">Fault</span>
+<span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">ValidationError</span>
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">urlparse</span>
 
-<span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">Fault</span>
 <span class="kn">from</span> <span class="nn">rpclib.protocol</span> <span class="kn">import</span> <span class="n">ProtocolBase</span>
 
-<span class="c"># this is not exactly rest, because it ignores http verbs.</span>
+<span class="c"># this is not exactly ReST, because it ignores http verbs.</span>
 
 <span class="k">def</span> <span class="nf">_get_http_headers</span><span class="p">(</span><span class="n">req_env</span><span class="p">):</span>
     <span class="n">retval</span> <span class="o">=</span> <span class="p">{}</span>
@@ -93,18 +94,19 @@
 <span class="sd">    It only parses GET requests where the whole data is in the &#39;QUERY_STRING&#39;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">create_in_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">in_string_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">check_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="HttpRpc.check_validator"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.check_validator">[docs]</a>        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;soft&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">create_in_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">in_string_encoding</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
 <div class="viewcode-block" id="HttpRpc.create_in_document"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.create_in_document">[docs]</a>        <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s">&#39;wsgi&#39;</span><span class="p">,</span> <span class="p">(</span><span class="s">&quot;This protocol only works with &quot;</span>
                                               <span class="s">&quot;the wsgi api.&quot;</span><span class="p">)</span>
 
         <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span>
 
     <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
-<div class="viewcode-block" id="HttpRpc.decompose_incoming_envelope"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.decompose_incoming_envelope">[docs]</a>        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;PATH_INFO: </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">])</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;QUERY_STRING: </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span><span class="p">[</span><span class="s">&#39;QUERY_STRING&#39;</span><span class="p">])</span>
-
-        <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span> <span class="o">=</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">get_tns</span><span class="p">(),</span>
+<div class="viewcode-block" id="HttpRpc.decompose_incoming_envelope"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.decompose_incoming_envelope">[docs]</a>        <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span> <span class="o">=</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">get_tns</span><span class="p">(),</span>
                               <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[92mMethod name: </span><span class="si">%r</span><span class="se">\033</span><span class="s">[0m&quot;</span> <span class="o">%</span> <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">set_method_descriptor</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
@@ -113,21 +115,82 @@
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
-<div class="viewcode-block" id="HttpRpc.deserialize"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.deserialize">[docs]</a>        <span class="n">body_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_message</span>
+    <span class="k">def</span> <span class="nf">deserialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.deserialize"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.deserialize">[docs]</a>        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;request&#39;</span><span class="p">,)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;before_deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
+
+        <span class="n">body_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_message</span>
+        <span class="n">flat_type_info</span> <span class="o">=</span> <span class="n">body_class</span><span class="o">.</span><span class="n">get_flat_type_info</span><span class="p">(</span><span class="n">body_class</span><span class="p">)</span>
+
         <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="n">body_class</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">)</span>
+            <span class="n">inst</span> <span class="o">=</span> <span class="n">body_class</span><span class="o">.</span><span class="n">get_deserialization_instance</span><span class="p">()</span>
+
+            <span class="c"># this is for validating cls.Attributes.{min,max}_occurs</span>
+            <span class="n">frequencies</span> <span class="o">=</span> <span class="p">{}</span>
+
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="nb">setattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="n">member</span> <span class="o">=</span> <span class="n">flat_type_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">member</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="k">continue</span>
+
+                <span class="n">mo</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_occurs</span>
+                <span class="k">if</span> <span class="n">mo</span> <span class="o">==</span> <span class="s">&#39;unbounded&#39;</span> <span class="ow">or</span> <span class="n">mo</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                        <span class="n">value</span> <span class="o">=</span> <span class="p">[]</span>
+
+                    <span class="k">for</span> <span class="n">v2</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">==</span> <span class="s">&#39;soft&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">member</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">v2</span><span class="p">):</span>
+                            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+                        <span class="n">native_v2</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">==</span> <span class="s">&#39;soft&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">member</span><span class="o">.</span><span class="n">validate_native</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">native_v2</span><span class="p">):</span>
+                            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+
+                        <span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">native_v2</span><span class="p">)</span>
+                        <span class="n">freq</span> <span class="o">=</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+                        <span class="n">freq</span><span class="o">+=</span><span class="mi">1</span>
+                        <span class="n">frequencies</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span>
+
+                    <span class="nb">setattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">v</span><span class="p">,</span>  <span class="o">=</span> <span class="n">v</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">==</span> <span class="s">&#39;soft&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">member</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">v</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                    <span class="n">native_v</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">==</span> <span class="s">&#39;soft&#39;</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">member</span><span class="o">.</span><span class="n">validate_native</span><span class="p">(</span><span class="n">member</span><span class="p">,</span> <span class="n">native_v</span><span class="p">):</span>
+                        <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+                    <span class="nb">setattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">native_v</span><span class="p">)</span>
+                    <span class="n">freq</span> <span class="o">=</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">freq</span><span class="o">+=</span><span class="mi">1</span>
+                    <span class="n">frequencies</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span>
+
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">==</span> <span class="s">&#39;soft&#39;</span><span class="p">:</span>
+                <span class="k">print</span> <span class="n">frequencies</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="n">flat_type_info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">val</span> <span class="o">=</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="n">c</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">min_occurs</span> \
+                            <span class="ow">or</span>  <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_occurs</span> <span class="o">!=</span> <span class="s">&#39;unbounded&#39;</span>
+                                            <span class="ow">and</span> <span class="n">val</span> <span class="o">&gt;</span> <span class="n">c</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_occurs</span> <span class="p">):</span>
+                        <span class="k">raise</span> <span class="n">Fault</span><span class="p">(</span><span class="s">&#39;Client.ValidationError&#39;</span><span class="p">,</span>
+                            <span class="s">&#39;</span><span class="si">%r</span><span class="s"> member does not respect frequency constraints&#39;</span> <span class="o">%</span> <span class="n">k</span><span class="p">)</span>
+
+            <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="n">inst</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">body_class</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">flat_type_info</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;after_deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
-<div class="viewcode-block" id="HttpRpc.serialize"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.serialize">[docs]</a>        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.serialize"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.serialize">[docs]</a>        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;response&#39;</span><span class="p">,)</span>
+
+        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">result_message_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_message</span>
 
             <span class="c"># assign raw result to its wrapper, result_message</span>
-            <span class="n">out_type_info</span> <span class="o">=</span> <span class="n">result_message_class</span><span class="o">.</span><span class="n">_type_info</span>
+            <span class="n">out_type_info</span> <span class="o">=</span> <span class="n">result_message_class</span><span class="o">.</span><span class="n">get_flat_type_info</span><span class="p">(</span><span class="n">result_message_class</span><span class="p">)</span>
             <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">out_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">out_class</span> <span class="o">=</span> <span class="n">out_type_info</span><span class="o">.</span><span class="n">values</span><span class="p">()[</span><span class="mi">0</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_object</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -176,7 +239,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

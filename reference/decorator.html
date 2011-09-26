@@ -1,0 +1,136 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>RPC Decorators &mdash; rpclib v2.4.0-beta documentation</title>
+    <link rel="stylesheet" href="../static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '2.4.0-beta',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../static/jquery.js"></script>
+    <script type="text/javascript" src="../static/underscore.js"></script>
+    <script type="text/javascript" src="../static/doctools.js"></script>
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../index.html" />
+    <link rel="up" title="Rpclib API Reference" href="index.html" />
+    <link rel="next" title="Running Tests" href="../tests.html" />
+    <link rel="prev" title="Service Definition" href="service.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../tests.html" title="Running Tests"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="service.html" title="Service Definition"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="module-rpclib.decorator">
+<span id="rpc-decorators"></span><h1>RPC Decorators<a class="headerlink" href="#module-rpclib.decorator" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the the &#64;srpc decorator and its helper methods. The
+&#64;srpc decorator is responsible for tagging methods as remote procedure calls,
+and also for dynamically defining complex objects that carry the method&#8217;s input
+parameters and output value(s).</p>
+<p>It&#8217;s possible to create custom decorators that wrap the &#64;srpc decorator in order
+to have a more elegant way of passing frequently-used parameter values. The &#64;rpc
+decorator is a simple example of this.</p>
+<dl class="function">
+<dt id="rpclib.decorator.srpc">
+<tt class="descclassname">rpclib.decorator.</tt><tt class="descname">srpc</tt><big>(</big><em>*params</em>, <em>**kparams</em><big>)</big><a class="reference internal" href="../modules/rpclib/decorator.html#srpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.decorator.srpc" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method decorator to tag a method as a remote procedure call.</p>
+<p>The methods tagged with this decorator do not behave like a normal python
+method but return &#8216;MethodDescriptor&#8217; object when called.</p>
+<p>You should use the <a class="reference internal" href="server.html#rpclib.server.null.NullServer" title="rpclib.server.null.NullServer"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server.null.NullServer</span></tt></a> transport if you
+want to call the methods directly. You can also use the &#8216;function&#8217; attribute
+of the returned object to call the function itself.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="service.html"
+                        title="previous chapter">Service Definition</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../tests.html"
+                        title="next chapter">Running Tests</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../sources/reference/decorator.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../tests.html" title="Running Tests"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="service.html" title="Service Definition"
+             >previous</a> |</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
+          <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2011, Rpclib Contributors.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

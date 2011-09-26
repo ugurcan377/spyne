@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Models &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>Models &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Interfaces" href="interface.html" />
     <link rel="prev" title="Fundamental Data Structures" href="base.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="base.html" title="Fundamental Data Structures"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -61,12 +61,161 @@ information, and holds actually THE information interface document standards
 like WSDL are designed to exposed.</p>
 <p>Rpclib&#8217;s has built-in support most common data types and provides an API to
 those who&#8217;d like to implement their own.</p>
+<div class="section" id="module-rpclib.model">
+<span id="base-classes"></span><h2>Base Classes<a class="headerlink" href="#module-rpclib.model" title="Permalink to this headline">¶</a></h2>
+<p>Models are mere type markers, they are not of much use without protocols.</p>
+<span class="target" id="module-rpclib.model._base"></span><dl class="class">
+<dt id="rpclib.model._base.ModelBase">
+<em class="property">class </em><tt class="descclassname">rpclib.model._base.</tt><tt class="descname">ModelBase</tt><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The base class for type markers. It defines the model interface for the
+interface generators to use and also manages class customizations that are
+mainly used for defining constraints on input values.</p>
+<dl class="class">
+<dt id="rpclib.model._base.ModelBase.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.Annotations"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+<dl class="attribute">
+<dt id="rpclib.model._base.ModelBase.Annotations.doc">
+<tt class="descname">doc</tt><a class="headerlink" href="#rpclib.model._base.ModelBase.Annotations.doc" title="Permalink to this definition">¶</a></dt>
+<dd><p>The documentation for the given type.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model._base.ModelBase.Attributes">
+<em class="property">class </em><tt class="descclassname">ModelBase.</tt><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+<dl class="attribute">
+<dt id="rpclib.model._base.ModelBase.Attributes.max_occurs">
+<tt class="descname">max_occurs</tt><a class="headerlink" href="#rpclib.model._base.ModelBase.Attributes.max_occurs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Can be set to any strictly positive integer. Values greater than 1
+will imply an iterable of objects as native python type. Can be set to
+&#8216;unbounded&#8217; for arbitrary number of arguments.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.model._base.ModelBase.Attributes.min_occurs">
+<tt class="descname">min_occurs</tt><a class="headerlink" href="#rpclib.model._base.ModelBase.Attributes.min_occurs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set this to 0 to make the type mandatory. Can be set to any positive
+integer.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.model._base.ModelBase.Attributes.nillable">
+<tt class="descname">nillable</tt><a class="headerlink" href="#rpclib.model._base.ModelBase.Attributes.nillable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set this to false to reject null values.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model._base.ModelBase.customize">
+<em class="property">classmethod </em><tt class="descclassname">ModelBase.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.customize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model._base.ModelBase.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">ModelBase.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.get_namespace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model._base.ModelBase.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">ModelBase.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.get_namespace_prefix"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model._base.ModelBase.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">ModelBase.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.get_type_name"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model._base.ModelBase.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">ModelBase.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.get_type_name_ns"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model._base.ModelBase.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">ModelBase.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.resolve_namespace"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model._base.ModelBase.validate_native">
+<em class="property">static </em><tt class="descclassname">ModelBase.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.validate_native"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model._base.ModelBase.validate_string">
+<em class="property">static </em><tt class="descclassname">ModelBase.</tt><tt class="descname">validate_string</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.validate_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.validate_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the input
+string.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model._base.SimpleModel">
+<em class="property">class </em><tt class="descclassname">rpclib.model._base.</tt><tt class="descname">SimpleModel</tt><a class="reference internal" href="../modules/rpclib/model/_base.html#SimpleModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.SimpleModel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.ModelBase" title="rpclib.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.ModelBase</span></tt></a></p>
+<p>The base class for primitives.</p>
+<dl class="class">
+<dt id="rpclib.model._base.SimpleModel.Attributes">
+<em class="property">class </em><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/rpclib/model/_base.html#SimpleModel.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.SimpleModel.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+<dl class="attribute">
+<dt id="rpclib.model._base.SimpleModel.Attributes.values">
+<tt class="descname">values</tt><a class="headerlink" href="#rpclib.model._base.SimpleModel.Attributes.values" title="Permalink to this definition">¶</a></dt>
+<dd><p>The set of possible values for this type.</p>
+</dd></dl>
+
+</dd></dl>
+
+</dd></dl>
+
+<dl class="function">
+<dt id="rpclib.model._base.nillable_dict">
+<tt class="descclassname">rpclib.model._base.</tt><tt class="descname">nillable_dict</tt><big>(</big><em>func</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#nillable_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.nillable_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that retuns empty dictionary if input is None</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rpclib.model._base.nillable_iterable">
+<tt class="descclassname">rpclib.model._base.</tt><tt class="descname">nillable_iterable</tt><big>(</big><em>func</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#nillable_iterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.nillable_iterable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that retuns [] if input is None.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="rpclib.model._base.nillable_string">
+<tt class="descclassname">rpclib.model._base.</tt><tt class="descname">nillable_string</tt><big>(</big><em>func</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#nillable_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.nillable_string" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator that retuns None if input is None.</p>
+</dd></dl>
+
+</div>
 <div class="section" id="module-rpclib.model.binary">
 <span id="binary"></span><h2>Binary<a class="headerlink" href="#module-rpclib.model.binary" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="rpclib.model.binary.Attachment">
 <em class="property">class </em><tt class="descclassname">rpclib.model.binary.</tt><tt class="descname">Attachment</tt><big>(</big><em>data=None</em>, <em>file_name=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/binary.html#Attachment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.binary.Attachment" title="Permalink to this definition">¶</a></dt>
-<dd><p>DEPRECATED! Use ByteArray instead.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.ModelBase" title="rpclib.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.ModelBase</span></tt></a></p>
+<p><strong>DEPRECATED!</strong> Use ByteArray instead.</p>
 <dl class="method">
 <dt id="rpclib.model.binary.Attachment.load_from_file">
 <tt class="descname">load_from_file</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/model/binary.html#Attachment.load_from_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.binary.Attachment.load_from_file" title="Permalink to this definition">¶</a></dt>
@@ -89,7 +238,8 @@ disk.</p>
 <dl class="class">
 <dt id="rpclib.model.binary.ByteArray">
 <em class="property">class </em><tt class="descclassname">rpclib.model.binary.</tt><tt class="descname">ByteArray</tt><a class="reference internal" href="../modules/rpclib/model/binary.html#ByteArray"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.binary.ByteArray" title="Permalink to this definition">¶</a></dt>
-<dd><p>Handles anything other than ascii or unicode-encoded data. Every protocol
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.ModelBase" title="rpclib.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.ModelBase</span></tt></a></p>
+<p>Handles anything other than ascii or unicode-encoded data. Every protocol
 has a different way to handle arbitrary data. E.g. xml-based protocols
 encode this as base64, while HttpRpc just hands it over.</p>
 <p>Its native python format is an iterable of strings.</p>
@@ -103,20 +253,23 @@ Iterable that are container classes that organize other values.</p>
 <dl class="class">
 <dt id="rpclib.model.complex.Alias">
 <em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">Alias</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#Alias"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.Alias" title="Permalink to this definition">¶</a></dt>
-<dd><p>Different type_name, same _type_info.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.complex.ComplexModel" title="rpclib.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.ComplexModel</span></tt></a></p>
+<p>Different type_name, same _type_info.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.complex.Array">
 <em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">Array</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#Array"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.Array" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class generates a ComplexModel child that has one attribute that has
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.complex.ComplexModel" title="rpclib.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.ComplexModel</span></tt></a></p>
+<p>This class generates a ComplexModel child that has one attribute that has
 the same name as the serialized class. It&#8217;s contained in a Python list.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.complex.ComplexModel">
 <em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">ComplexModel</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>The general complexType factory. The __call__ method of this class will
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.complex.ComplexModelBase" title="rpclib.model.complex.ComplexModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.ComplexModelBase</span></tt></a></p>
+<p>The general complexType factory. The __call__ method of this class will
 return instances, contrary to primivites where the same call will result in
 customized duplicates of the original class definition.
 Those who&#8217;d like to customize the class should use the customize method.
@@ -126,7 +279,8 @@ Those who&#8217;d like to customize the class should use the customize method.
 <dl class="class">
 <dt id="rpclib.model.complex.ComplexModelBase">
 <em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">ComplexModelBase</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase" title="Permalink to this definition">¶</a></dt>
-<dd><p>If you want to make a better class type, this is what you should inherit
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.ModelBase" title="rpclib.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.ModelBase</span></tt></a></p>
+<p>If you want to make a better class type, this is what you should inherit
 from.</p>
 <dl class="staticmethod">
 <dt id="rpclib.model.complex.ComplexModelBase.alias">
@@ -134,6 +288,12 @@ from.</p>
 <dd><p>Return an alias class for the given target class.</p>
 <p>This function is a variation on &#8216;ComplexModel.produce&#8217;. The alias will
 borrow the target&#8217;s _type_info.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.complex.ComplexModelBase.get_flat_type_info">
+<em class="property">static </em><tt class="descname">get_flat_type_info</tt><big>(</big><em>retval=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase.get_flat_type_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.get_flat_type_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a _type_info dict that includes members from all base classes.</p>
 </dd></dl>
 
 <dl class="staticmethod">
@@ -147,27 +307,39 @@ borrow the target&#8217;s _type_info.</p>
 <dl class="class">
 <dt id="rpclib.model.complex.ComplexModelMeta">
 <em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">ComplexModelMeta</tt><big>(</big><em>cls_name</em>, <em>cls_bases</em>, <em>cls_dict</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelMeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelMeta" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is the metaclass that populates ComplexModel instances with the
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">type</span></tt></p>
+<p>This is the metaclass that populates ComplexModel instances with the
 appropriate datatypes for (de)serialization.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.complex.Iterable">
 <em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">Iterable</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#Iterable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.Iterable" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class generates a ComplexModel child that has one attribute that has
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.complex.Array" title="rpclib.model.complex.Array"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.Array</span></tt></a></p>
+<p>This class generates a ComplexModel child that has one attribute that has
 the same name as the serialized class. It&#8217;s contained in a Python iterable.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.complex.SimpleContent">
+<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">SimpleContent</tt><a class="reference internal" href="../modules/rpclib/model/complex.html#SimpleContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.SimpleContent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.ModelBase" title="rpclib.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.ModelBase</span></tt></a></p>
+<p>Implementation of a limited version on SimpleContent ComplexType.
+Actually, it can only do the extension part (no restriction of simpleType)</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.complex.XMLAttribute">
 <em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XMLAttribute</tt><big>(</big><em>typ</em>, <em>use=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#XMLAttribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.XMLAttribute" title="Permalink to this definition">¶</a></dt>
-<dd><p>Items which are marshalled as attributes of the parent element.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.ModelBase" title="rpclib.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.ModelBase</span></tt></a></p>
+<p>Items which are marshalled as attributes of the parent element.</p>
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.complex.XMLAttributeRef">
 <em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XMLAttributeRef</tt><big>(</big><em>ref</em>, <em>use=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#XMLAttributeRef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.XMLAttributeRef" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reference to stock XML attribute.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.complex.XMLAttribute" title="rpclib.model.complex.XMLAttribute"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.XMLAttribute</span></tt></a></p>
+<p>Reference to stock XML attribute.</p>
 </dd></dl>
 
 </div>
@@ -181,7 +353,8 @@ the same name as the serialized class. It&#8217;s contained in a Python iterable
 <dl class="exception">
 <dt id="rpclib.model.fault.Fault">
 <em class="property">exception </em><tt class="descclassname">rpclib.model.fault.</tt><tt class="descname">Fault</tt><big>(</big><em>faultcode='Server'</em>, <em>faultstring=''</em>, <em>faultactor=''</em>, <em>detail=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/fault.html#Fault"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.fault.Fault" title="Permalink to this definition">¶</a></dt>
-<dd><p>Use this class as a base for public exceptions.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.ModelBase" title="rpclib.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.ModelBase</span></tt></a>, <tt class="xref py py-class docutils literal"><span class="pre">exceptions.Exception</span></tt></p>
+<p>Use this class as a base for public exceptions.</p>
 </dd></dl>
 
 </div>
@@ -191,95 +364,915 @@ the same name as the serialized class. It&#8217;s contained in a Python iterable
 <dl class="class">
 <dt id="rpclib.model.primitive.AnyDict">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">AnyDict</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#AnyDict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.AnyDict" title="Permalink to this definition">¶</a></dt>
-<dd><p>An xml node that can contain any number of sub nodes. It&#8217;s represented by
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
+<p>An xml node that can contain any number of sub nodes. It&#8217;s represented by
 a dict instance that can contain other dicts or iterables of strings as
 values.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.AnyDict.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.AnyDict.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.primitive.AnyDict.Attributes">
+<em class="property">class </em><tt class="descclassname">AnyDict.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#rpclib.model.primitive.AnyDict.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyDict.customize">
+<em class="property">classmethod </em><tt class="descclassname">AnyDict.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyDict.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyDict.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">AnyDict.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyDict.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyDict.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">AnyDict.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyDict.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyDict.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">AnyDict.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyDict.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyDict.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">AnyDict.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyDict.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.AnyDict.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">AnyDict.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyDict.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.AnyDict.validate_native">
+<em class="property">static </em><tt class="descclassname">AnyDict.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyDict.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.AnyUri">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">AnyUri</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#AnyUri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.AnyUri" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is an xml schema type with is a special kind of String.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.String" title="rpclib.model.primitive.String"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.String</span></tt></a></p>
+<p>This is an xml schema type with is a special kind of String.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.AnyUri.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.AnyUri.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.primitive.AnyUri.Attributes">
+<em class="property">class </em><tt class="descclassname">AnyUri.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#rpclib.model.primitive.AnyUri.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyUri.customize">
+<em class="property">classmethod </em><tt class="descclassname">AnyUri.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyUri.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyUri.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">AnyUri.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyUri.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyUri.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">AnyUri.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyUri.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyUri.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">AnyUri.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyUri.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyUri.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">AnyUri.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyUri.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.AnyUri.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">AnyUri.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyUri.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.AnyUri.validate_native">
+<em class="property">static </em><tt class="descclassname">AnyUri.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyUri.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.AnyXml">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">AnyXml</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#AnyXml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.AnyXml" title="Permalink to this definition">¶</a></dt>
-<dd><p>An xml node that can contain any number of sub nodes. It&#8217;s represented by
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
+<p>An xml node that can contain any number of sub nodes. It&#8217;s represented by
 an ElementTree object.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.AnyXml.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.AnyXml.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.primitive.AnyXml.Attributes">
+<em class="property">class </em><tt class="descclassname">AnyXml.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#rpclib.model.primitive.AnyXml.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyXml.customize">
+<em class="property">classmethod </em><tt class="descclassname">AnyXml.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyXml.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyXml.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">AnyXml.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyXml.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyXml.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">AnyXml.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyXml.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyXml.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">AnyXml.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyXml.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.AnyXml.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">AnyXml.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyXml.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.AnyXml.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">AnyXml.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyXml.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.AnyXml.validate_native">
+<em class="property">static </em><tt class="descclassname">AnyXml.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyXml.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Boolean">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Boolean</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Boolean"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Boolean" title="Permalink to this definition">¶</a></dt>
-<dd><p>Life is simple here. Just true or false.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
+<p>Life is simple here. Just true or false.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.Boolean.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.Boolean.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.primitive.Boolean.Attributes">
+<em class="property">class </em><tt class="descclassname">Boolean.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#rpclib.model.primitive.Boolean.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Boolean.customize">
+<em class="property">classmethod </em><tt class="descclassname">Boolean.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Boolean.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Boolean.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">Boolean.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Boolean.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Boolean.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">Boolean.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Boolean.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Boolean.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">Boolean.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Boolean.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Boolean.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">Boolean.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Boolean.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Boolean.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">Boolean.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Boolean.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Boolean.validate_native">
+<em class="property">static </em><tt class="descclassname">Boolean.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Boolean.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Date">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Date</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Date"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Date" title="Permalink to this definition">¶</a></dt>
-<dd><p>Just that, Date. It also supports time zones.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
+<p>Just that, Date. It also supports time zones.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.Date.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.Date.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.primitive.Date.Attributes">
+<em class="property">class </em><tt class="descclassname">Date.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#rpclib.model.primitive.Date.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Date.customize">
+<em class="property">classmethod </em><tt class="descclassname">Date.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Date.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Date.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">Date.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Date.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Date.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">Date.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Date.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Date.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">Date.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Date.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Date.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">Date.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Date.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Date.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">Date.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Date.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Date.validate_native">
+<em class="property">static </em><tt class="descclassname">Date.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Date.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.DateTime">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">DateTime</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#DateTime"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.DateTime" title="Permalink to this definition">¶</a></dt>
-<dd><p>A compact way to represent dates and times together. Supports time zones.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
+<p>A compact way to represent dates and times together. Supports time zones.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.DateTime.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.DateTime.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.primitive.DateTime.Attributes">
+<em class="property">class </em><tt class="descclassname">DateTime.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#rpclib.model.primitive.DateTime.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.DateTime.customize">
+<em class="property">classmethod </em><tt class="descclassname">DateTime.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.DateTime.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.DateTime.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">DateTime.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.DateTime.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.DateTime.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">DateTime.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.DateTime.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.DateTime.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">DateTime.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.DateTime.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.DateTime.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">DateTime.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.DateTime.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.DateTime.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">DateTime.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.DateTime.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.DateTime.validate_native">
+<em class="property">static </em><tt class="descclassname">DateTime.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.DateTime.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Decimal">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Decimal</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Decimal"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Decimal" title="Permalink to this definition">¶</a></dt>
-<dd><p>The primitive that corresponds to the native python Decimal.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
+<p>The primitive that corresponds to the native python Decimal.</p>
 <p>This is also the base class for representing numbers.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.Decimal.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.Decimal.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Decimal.customize">
+<em class="property">classmethod </em><tt class="descclassname">Decimal.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Decimal.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Decimal.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">Decimal.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Decimal.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Decimal.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">Decimal.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Decimal.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Decimal.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">Decimal.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Decimal.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Decimal.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">Decimal.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Decimal.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Decimal.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">Decimal.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Decimal.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Double">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Double</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Double"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Double" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is serialized as the python float. So this type comes with its
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
+<p>This is serialized as the python float. So this type comes with its
 gotchas.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.Double.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.Double.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.primitive.Double.Attributes">
+<em class="property">class </em><tt class="descclassname">Double.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#rpclib.model.primitive.Double.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Double.customize">
+<em class="property">classmethod </em><tt class="descclassname">Double.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Double.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Double.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">Double.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Double.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Double.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">Double.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Double.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Double.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">Double.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Double.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Double.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">Double.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Double.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Double.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">Double.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Double.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Double.validate_native">
+<em class="property">static </em><tt class="descclassname">Double.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Double.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Duration">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Duration</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Duration"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Duration" title="Permalink to this definition">¶</a></dt>
-<dd><p>This is how the native datetime.timedelta objects are serialized.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
+<p>This is how the native datetime.timedelta objects are serialized.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.Duration.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.Duration.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.primitive.Duration.Attributes">
+<em class="property">class </em><tt class="descclassname">Duration.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#rpclib.model.primitive.Duration.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Duration.customize">
+<em class="property">classmethod </em><tt class="descclassname">Duration.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Duration.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Duration.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">Duration.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Duration.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Duration.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">Duration.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Duration.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Duration.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">Duration.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Duration.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Duration.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">Duration.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Duration.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Duration.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">Duration.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Duration.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Duration.validate_native">
+<em class="property">static </em><tt class="descclassname">Duration.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Duration.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Float">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Float</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Float"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Float" title="Permalink to this definition">¶</a></dt>
-<dd><p>Synonym for Double. This is here for compatibility purposes.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.Double" title="rpclib.model.primitive.Double"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.Double</span></tt></a></p>
+<p>Synonym for Double. This is here for compatibility purposes.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.Float.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.Float.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.primitive.Float.Attributes">
+<em class="property">class </em><tt class="descclassname">Float.</tt><tt class="descname">Attributes</tt><a class="headerlink" href="#rpclib.model.primitive.Float.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Float.customize">
+<em class="property">classmethod </em><tt class="descclassname">Float.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Float.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Float.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">Float.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Float.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Float.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">Float.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Float.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Float.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">Float.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Float.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Float.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">Float.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Float.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Float.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">Float.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Float.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Float.validate_native">
+<em class="property">static </em><tt class="descclassname">Float.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Float.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Int">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Int</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Int"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Int" title="Permalink to this definition">¶</a></dt>
-<dd><p>The 32-Bit signed integer.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.Decimal" title="rpclib.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.Decimal</span></tt></a></p>
+<p>The 32-Bit signed integer.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.Int.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.Int.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Int.customize">
+<em class="property">classmethod </em><tt class="descclassname">Int.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Int.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Int.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">Int.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Int.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Int.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">Int.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Int.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Int.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">Int.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Int.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Int.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">Int.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Int.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Int.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">Int.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Int.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Integer">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Integer</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Integer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Integer" title="Permalink to this definition">¶</a></dt>
-<dd><p>The arbitrary-size signed integer.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.Decimal" title="rpclib.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.Decimal</span></tt></a></p>
+<p>The arbitrary-size signed integer.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.Integer.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.Integer.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Integer.customize">
+<em class="property">classmethod </em><tt class="descclassname">Integer.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Integer.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Integer.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">Integer.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Integer.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Integer.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">Integer.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Integer.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Integer.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">Integer.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Integer.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Integer.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">Integer.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Integer.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Integer.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">Integer.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Integer.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Mandatory">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Mandatory</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Mandatory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Mandatory" title="Permalink to this definition">¶</a></dt>
-<dd><p>Class that contains mandatory variants of primitives.</p>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>Class that contains mandatory variants of primitives.</p>
 <dl class="class">
 <dt id="rpclib.model.primitive.Mandatory.Integer">
 <em class="property">class </em><tt class="descname">Integer</tt><a class="headerlink" href="#rpclib.model.primitive.Mandatory.Integer" title="Permalink to this definition">¶</a></dt>
-<dd><p>The arbitrary-size signed integer.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.Decimal" title="rpclib.model.primitive.Decimal"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.Decimal</span></tt></a></p>
+<p>The arbitrary-size signed integer.</p>
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Mandatory.Integer.customize">
+<em class="property">classmethod </em><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.Integer.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Mandatory.Integer.get_namespace">
+<em class="property">classmethod </em><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.Integer.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Mandatory.Integer.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.Integer.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Mandatory.Integer.get_type_name">
+<em class="property">classmethod </em><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.Integer.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Mandatory.Integer.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.Integer.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Mandatory.Integer.resolve_namespace">
+<em class="property">static </em><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.Integer.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.Mandatory.String">
 <em class="property">class </em><tt class="descclassname">Mandatory.</tt><tt class="descname">String</tt><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String" title="Permalink to this definition">¶</a></dt>
-<dd><p>The type to represent human-readable data. Its native format is unicode.
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
+<p>The type to represent human-readable data. Its native format is unicode.
 Currently, it can read from only utf8-compatible encodings.</p>
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Mandatory.String.customize">
+<em class="property">classmethod </em><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Mandatory.String.get_namespace">
+<em class="property">classmethod </em><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Mandatory.String.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Mandatory.String.get_type_name">
+<em class="property">classmethod </em><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.Mandatory.String.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Mandatory.String.resolve_namespace">
+<em class="property">static </em><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.Mandatory.String.validate_native">
+<em class="property">static </em><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
 </dd></dl>
 
 </dd></dl>
@@ -287,38 +1280,372 @@ Currently, it can read from only utf8-compatible encodings.</p>
 <dl class="class">
 <dt id="rpclib.model.primitive.String">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">String</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#String"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.String" title="Permalink to this definition">¶</a></dt>
-<dd><p>The type to represent human-readable data. Its native format is unicode.
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
+<p>The type to represent human-readable data. Its native format is unicode.
 Currently, it can read from only utf8-compatible encodings.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.String.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.String.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.primitive.String.Attributes">
+<em class="property">class </em><tt class="descclassname">String.</tt><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#String.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.String.Attributes" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
+<p>The class that holds the constraints for the given type.</p>
+<dl class="attribute">
+<dt id="rpclib.model.primitive.String.Attributes.max_len">
+<tt class="descname">max_len</tt><a class="headerlink" href="#rpclib.model.primitive.String.Attributes.max_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum length of string. Can be set to &#8216;unbounded&#8217; to accept strings
+of arbitrary sizes. Also check <tt class="xref py py-const docutils literal"><span class="pre">rpclib.server.wsgi.MAX_CONTENT_LENGTH</span></tt>.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.model.primitive.String.Attributes.min_len">
+<tt class="descname">min_len</tt><a class="headerlink" href="#rpclib.model.primitive.String.Attributes.min_len" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum length of string. Can be set to any positive integer</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.model.primitive.String.Attributes.pattern">
+<tt class="descname">pattern</tt><a class="headerlink" href="#rpclib.model.primitive.String.Attributes.pattern" title="Permalink to this definition">¶</a></dt>
+<dd><p>A regular expression that matches the whole string. See here for more
+info: <a class="reference external" href="http://www.regular-expressions.info/xml.html">http://www.regular-expressions.info/xml.html</a></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.String.customize">
+<em class="property">classmethod </em><tt class="descclassname">String.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.String.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">String.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.String.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">String.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.String.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">String.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.String.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">String.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.String.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">String.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.String.validate_native">
+<em class="property">static </em><tt class="descclassname">String.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.validate_native" title="Permalink to this definition">¶</a></dt>
+<dd><p>Override this method to do your own input validation on the native
+value.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.UnsignedInteger">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#UnsignedInteger"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger" title="Permalink to this definition">¶</a></dt>
-<dd><p>The arbitrary-size unsigned integer.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.Integer" title="rpclib.model.primitive.Integer"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.Integer</span></tt></a></p>
+<p>The arbitrary-size unsigned integer.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.UnsignedInteger.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger.customize">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">UnsignedInteger.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.UnsignedInteger16">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger16</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#UnsignedInteger16"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger16" title="Permalink to this definition">¶</a></dt>
-<dd><p>The 16-bit unsigned integer.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.Integer" title="rpclib.model.primitive.Integer"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.Integer</span></tt></a></p>
+<p>The 16-bit unsigned integer.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.UnsignedInteger16.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger16.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger16.customize">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger16.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger16.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger16.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger16.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger16.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger16.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger16.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger16.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger16.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger16.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">UnsignedInteger16.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger16.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.UnsignedInteger32">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger32</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#UnsignedInteger32"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger32" title="Permalink to this definition">¶</a></dt>
-<dd><p>The 32-bit unsigned integer.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.UnsignedInteger" title="rpclib.model.primitive.UnsignedInteger"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.UnsignedInteger</span></tt></a></p>
+<p>The 32-bit unsigned integer.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.UnsignedInteger32.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger32.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger32.customize">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger32.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger32.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger32.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger32.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger32.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger32.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger32.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger32.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger32.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger32.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">UnsignedInteger32.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger32.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.UnsignedInteger64">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger64</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#UnsignedInteger64"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger64" title="Permalink to this definition">¶</a></dt>
-<dd><p>The 64-bit unsigned integer.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.UnsignedInteger" title="rpclib.model.primitive.UnsignedInteger"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.UnsignedInteger</span></tt></a></p>
+<p>The 64-bit unsigned integer.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.UnsignedInteger64.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger64.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger64.customize">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger64.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger64.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger64.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger64.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger64.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger64.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger64.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger64.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger64.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger64.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">UnsignedInteger64.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger64.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="class">
 <dt id="rpclib.model.primitive.UnsignedInteger8">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">UnsignedInteger8</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#UnsignedInteger8"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger8" title="Permalink to this definition">¶</a></dt>
-<dd><p>The 8-bit unsigned integer.</p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.Integer" title="rpclib.model.primitive.Integer"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.Integer</span></tt></a></p>
+<p>The 8-bit unsigned integer.</p>
+<dl class="class">
+<dt id="rpclib.model.primitive.UnsignedInteger8.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger8.Annotations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
+<p>The class that holds the annotations for the given type.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger8.customize">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger8.customize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
+<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger8.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger8.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace of the class. Defaults to the python module
+name.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger8.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger8.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the namespace prefix for the given interface. The
+get_namespace_prefix of the interface class generates a prefix if none
+is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger8.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger8.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger8.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger8.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="rpclib.model.primitive.UnsignedInteger8.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">UnsignedInteger8.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.UnsignedInteger8.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dd><p>This call finalizes the namespace assignment. The default namespace
+is not available until the application calls populate_interface method
+of the interface generator.</p>
+</dd></dl>
+
 </dd></dl>
 
 </div>
@@ -336,9 +1663,20 @@ rpclib or SQLAlchemy developers.</p>
 <dl class="class">
 <dt id="rpclib.model.table.TableModel">
 <em class="property">class </em><tt class="descclassname">rpclib.model.table.</tt><tt class="descname">TableModel</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/table.html#TableModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.table.TableModel" title="Permalink to this definition">¶</a></dt>
-<dd><p>The main base class for complex types shared by both SQLAlchemy and
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.complex.ComplexModelBase" title="rpclib.model.complex.ComplexModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.ComplexModelBase</span></tt></a></p>
+<p>The main base class for complex types shared by both SQLAlchemy and
 rpclib. Classes that inherit from this class should also inherit from
-an sqlalchemy.declarative base class.</p>
+an sqlalchemy.declarative base class. See the <a class="reference internal" href="../manual/sqlalchemy.html#manual-sqlalchemy"><em>SQLAlchemy Integration</em></a>
+section for more info.</p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.table.TableModelMeta">
+<em class="property">class </em><tt class="descclassname">rpclib.model.table.</tt><tt class="descname">TableModelMeta</tt><big>(</big><em>classname</em>, <em>bases</em>, <em>dict_</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/table.html#TableModelMeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.table.TableModelMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">sqlalchemy.ext.declarative.DeclarativeMeta</span></tt>, <a class="reference internal" href="#rpclib.model.complex.ComplexModelMeta" title="rpclib.model.complex.ComplexModelMeta"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.ComplexModelMeta</span></tt></a></p>
+<p>This class uses the information in class definition dictionary to build
+the _type_info dictionary that rpclib relies on. It otherwise leaves
+SQLAlchemy and its information alone.</p>
 </dd></dl>
 
 <dl class="attribute">
@@ -346,14 +1684,6 @@ an sqlalchemy.declarative base class.</p>
 <tt class="descclassname">rpclib.model.table.</tt><tt class="descname">TableSerializer</tt><a class="headerlink" href="#rpclib.model.table.TableSerializer" title="Permalink to this definition">¶</a></dt>
 <dd><p>DEPRECATED. Use TableModel instead.</p>
 <p>alias of <a class="reference internal" href="#rpclib.model.table.TableModel" title="rpclib.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">TableModel</span></tt></a></p>
-</dd></dl>
-
-<dl class="class">
-<dt id="rpclib.model.table.TableSerializerMeta">
-<em class="property">class </em><tt class="descclassname">rpclib.model.table.</tt><tt class="descname">TableSerializerMeta</tt><big>(</big><em>classname</em>, <em>bases</em>, <em>dict_</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/table.html#TableSerializerMeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.table.TableSerializerMeta" title="Permalink to this definition">¶</a></dt>
-<dd><p>This class uses the information in class definition dictionary to build
-the _type_info dictionary that rpclib relies on. It otherwise leaves
-SQLAlchemy and its information alone.</p>
 </dd></dl>
 
 </div>
@@ -368,6 +1698,7 @@ SQLAlchemy and its information alone.</p>
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Models</a><ul>
+<li><a class="reference internal" href="#module-rpclib.model">Base Classes</a></li>
 <li><a class="reference internal" href="#module-rpclib.model.binary">Binary</a></li>
 <li><a class="reference internal" href="#module-rpclib.model.complex">Complex</a></li>
 <li><a class="reference internal" href="#module-rpclib.model.enum">Enum</a></li>
@@ -421,7 +1752,7 @@ SQLAlchemy and its information alone.</p>
         <li class="right" >
           <a href="base.html" title="Fundamental Data Structures"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

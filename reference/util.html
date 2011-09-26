@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Miscellanous Rpclib Utilities &mdash; rpclib v2.3.3-beta documentation</title>
+    <title>Miscellanous Rpclib Utilities &mdash; rpclib v2.4.0-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.3.3-beta',
+        VERSION:     '2.4.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,9 +22,9 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.3.3-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
-    <link rel="next" title="Service Definition" href="service.html" />
+    <link rel="next" title="Application Definition" href="application.html" />
     <link rel="prev" title="Server Transports" href="server.html" /> 
   </head>
   <body>
@@ -38,12 +38,12 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="service.html" title="Service Definition"
+          <a href="application.html" title="Application Definition"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="server.html" title="Server Transports"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -104,39 +104,52 @@ the iterable. The xml attributes are ignored.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-rpclib.util.model_utils">
-<span id="model-utilities"></span><h2>Model Utilities<a class="headerlink" href="#module-rpclib.util.model_utils" title="Permalink to this headline">¶</a></h2>
-<p>This module contains the classes and methods for converting and validating
-rpclib.model.ComplexModel instances</p>
-<dl class="class">
-<dt id="rpclib.util.model_utils.ComplexModelConverter">
-<em class="property">class </em><tt class="descclassname">rpclib.util.model_utils.</tt><tt class="descname">ComplexModelConverter</tt><big>(</big><em>model_instance</em>, <em>tns</em>, <em>include_parent=False</em>, <em>parent_tag='root'</em>, <em>include_ns=True</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/model_utils.html#ComplexModelConverter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter" title="Permalink to this definition">¶</a></dt>
-<dd><p>A class to handle exporting a ComplexModel to different representations</p>
-<p>Currently supported export targets are lxml.etree.Element, string and
-xml documents.</p>
-<p>This functionality will most likely be moved into the ComplexModel itself if
-it proves useful and there is a willingness to modify the current
-ComplexModel API.</p>
-<dl class="method">
-<dt id="rpclib.util.model_utils.ComplexModelConverter.to_etree">
-<tt class="descname">to_etree</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/util/model_utils.html#ComplexModelConverter.to_etree"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_etree" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a lxml.etree.Element from a rpclib.model.complex.ComplexModel
-instance.</p>
+<div class="section" id="module-rpclib.util.xml">
+<span id="xml-utilities"></span><h2>Xml Utilities<a class="headerlink" href="#module-rpclib.util.xml" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="rpclib.util.xml.get_object_as_xml">
+<tt class="descclassname">rpclib.util.xml.</tt><tt class="descname">get_object_as_xml</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/xml.html#get_object_as_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.xml.get_object_as_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns an ElementTree representation of a <a class="reference internal" href="model.html#rpclib.model.complex.ComplexModel" title="rpclib.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.ComplexModel</span></tt></a>
+child.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>value</strong> &#8211; The instance of the class to be serialized.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="method">
-<dt id="rpclib.util.model_utils.ComplexModelConverter.to_file">
-<tt class="descname">to_file</tt><big>(</big><em>file_path</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/model_utils.html#ComplexModelConverter.to_file"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_file" title="Permalink to this definition">¶</a></dt>
-<dd><p>Writes a model instance to a XML document</p>
-<p>&#64;param The output file path for the xml file</p>
+<dl class="function">
+<dt id="rpclib.util.xml.get_schema_documents">
+<tt class="descclassname">rpclib.util.xml.</tt><tt class="descname">get_schema_documents</tt><big>(</big><em>models</em>, <em>default_namespace=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/xml.html#get_schema_documents"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.xml.get_schema_documents" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the schema documents in a dict whose keys are namespace prefixes
+and values are Element objects.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>models</strong> &#8211; A list of rpclib.model classes that will be represented in
+the schema.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
-<dl class="method">
-<dt id="rpclib.util.model_utils.ComplexModelConverter.to_xml">
-<tt class="descname">to_xml</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/util/model_utils.html#ComplexModelConverter.to_xml"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.model_utils.ComplexModelConverter.to_xml" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns a xml string from a rpclib.model.complex.ComplexModel instance.</p>
-</dd></dl>
-
+<dl class="function">
+<dt id="rpclib.util.xml.get_validation_schema">
+<tt class="descclassname">rpclib.util.xml.</tt><tt class="descname">get_validation_schema</tt><big>(</big><em>models</em>, <em>default_namespace=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/xml.html#get_validation_schema"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.xml.get_validation_schema" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the validation schema object for the given models.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Parameters:</th><td class="field-body"><strong>models</strong> &#8211; A list of rpclib.model classes that will be represented in
+the schema.</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -152,6 +165,24 @@ instance.</p>
 </div>
 <div class="section" id="module-rpclib.util.oset">
 <span id="ordered-set"></span><h2>Ordered Set<a class="headerlink" href="#module-rpclib.util.oset" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="rpclib.util.oset.oset">
+<em class="property">class </em><tt class="descclassname">rpclib.util.oset.</tt><tt class="descname">oset</tt><big>(</big><em>iterable=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/oset.html#oset"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.oset.oset" title="Permalink to this definition">¶</a></dt>
+<dd><p>An ordered set implementation.</p>
+<dl class="method">
+<dt id="rpclib.util.oset.oset.clear">
+<tt class="descname">clear</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.util.oset.oset.clear" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is slow (creates N new iterators!) but effective.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.util.oset.oset.remove">
+<tt class="descname">remove</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.util.oset.oset.remove" title="Permalink to this definition">¶</a></dt>
+<dd><p>Remove an element. If not a member, raise a KeyError.</p>
+</dd></dl>
+
+</dd></dl>
+
 </div>
 </div>
 
@@ -166,7 +197,7 @@ instance.</p>
 <li><a class="reference internal" href="#">Miscellanous Rpclib Utilities</a><ul>
 <li><a class="reference internal" href="#module-rpclib.util.cdict">Class Dictionary</a></li>
 <li><a class="reference internal" href="#module-rpclib.util.etreeconv">Element Tree Conversion</a></li>
-<li><a class="reference internal" href="#module-rpclib.util.model_utils">Model Utilities</a></li>
+<li><a class="reference internal" href="#module-rpclib.util.xml">Xml Utilities</a></li>
 <li><a class="reference internal" href="#module-rpclib.util.odict">Ordered Dictionary</a></li>
 <li><a class="reference internal" href="#module-rpclib.util.oset">Ordered Set</a></li>
 </ul>
@@ -177,8 +208,8 @@ instance.</p>
   <p class="topless"><a href="server.html"
                         title="previous chapter">Server Transports</a></p>
   <h4>Next topic</h4>
-  <p class="topless"><a href="service.html"
-                        title="next chapter">Service Definition</a></p>
+  <p class="topless"><a href="application.html"
+                        title="next chapter">Application Definition</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../sources/reference/util.txt"
@@ -211,12 +242,12 @@ instance.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="service.html" title="Service Definition"
+          <a href="application.html" title="Application Definition"
              >next</a> |</li>
         <li class="right" >
           <a href="server.html" title="Server Transports"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.3.3-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>
