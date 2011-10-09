@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Rpclib FAQ &mdash; rpclib v2.4.0-beta documentation</title>
+    <title>Rpclib FAQ &mdash; rpclib v2.4.1-beta documentation</title>
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.4.0-beta',
+        VERSION:     '2.4.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.4.0-beta documentation" href="index.html" />
+    <link rel="top" title="rpclib v2.4.1-beta documentation" href="index.html" />
     <link rel="next" title="History and Future" href="h_and_f.html" />
     <link rel="prev" title="Running Tests" href="tests.html" /> 
   </head>
@@ -42,7 +42,7 @@
         <li class="right" >
           <a href="tests.html" title="Running Tests"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -67,6 +67,54 @@ WSDL document to produce the necessary Python classes and method stubs.</p>
 <p>Patches are welcome. You can start by adapting the WSDL parser from
 <cite>RSL &lt;http://rsl.sf.net&gt;</cite>.</p>
 </div>
+<div class="section" id="is-it-possible-to-use-other-decorators-with-rpc-srpc">
+<h2>Is it possible to use other decorators with &#64;rpc/&#64;srpc?<a class="headerlink" href="#is-it-possible-to-use-other-decorators-with-rpc-srpc" title="Permalink to this headline">¶</a></h2>
+<p><strong>Short answer:</strong> Yes, but just use events. See the <a class="reference internal" href="manual/usermanager.html#manual-user-manager"><em>User Manager</em></a>
+tutorial and the <a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_basic.py">events example</a>
+to learn how to do so. They work almost the same, except for the syntax.</p>
+<p><strong>Long Answer:</strong> Here&#8217;s the magic from the <a class="reference internal" href="reference/decorator.html#module-rpclib.decorator" title="rpclib.decorator"><tt class="xref py py-mod docutils literal"><span class="pre">rpclib.decorator</span></tt></a>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">argcount</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">func_code</span><span class="o">.</span><span class="n">co_argcount</span>
+<span class="n">param_names</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">func_code</span><span class="o">.</span><span class="n">co_varnames</span><span class="p">[</span><span class="n">arg_start</span><span class="p">:</span><span class="n">argcount</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>So if <tt class="docutils literal"><span class="pre">f</span></tt> is your decorator, its signature should be the same as the user method,
+otherwise the parameter names and numbers in the interface are going to be wrong,
+which will cause weird errors.</p>
+<p>Please note that if you just intend to have a convenient way to set additional
+method metadata, you can use the <tt class="docutils literal"><span class="pre">_udp</span></tt> argument to the <a class="reference internal" href="reference/decorator.html#rpclib.decorator.srpc" title="rpclib.decorator.srpc"><tt class="xref py py-func docutils literal"><span class="pre">rpclib.decorator.srpc()</span></tt></a>
+to your liking.</p>
+<p>So if you&#8217;re hell bent on using decorators, you should use the <a class="reference external" href="http://pypi.python.org/pypi/decorator/">decorator package</a>.
+Here&#8217;s an example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="kn">from</span> <span class="nn">decorator</span> <span class="kn">import</span> <span class="n">decorator</span>
+
+<span class="k">def</span> <span class="nf">_do_something</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">):</span>
+    <span class="k">print</span> <span class="s">&quot;before call&quot;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kw</span><span class="p">)</span>
+    <span class="k">print</span> <span class="s">&quot;after call&quot;</span>
+    <span class="k">return</span> <span class="n">result</span>
+
+<span class="k">def</span> <span class="nf">my_decor</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">decorator</span><span class="p">(</span><span class="n">_do_something</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">tests</span><span class="p">(</span><span class="n">ServiceBase</span><span class="p">):</span>
+    <span class="nd">@my_decor</span>
+    <span class="nd">@srpc</span><span class="p">(</span><span class="n">ComplexTypes</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">_returns</span><span class="o">=</span><span class="n">ComplexTypes</span><span class="o">.</span><span class="n">Integer</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">testf</span><span class="p">(</span><span class="n">first</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">first</span>
+</pre></div>
+</div>
+<p>Note that the place of the decorator matters. Putting it before <tt class="docutils literal"><span class="pre">&#64;srpc</span></tt> will
+make it run once, on service initialization. Putting it after will make it run
+every time the method is called, but not on initialization.</p>
+<p>Original thread: <a class="reference external" href="http://mail.python.org/pipermail/soap/2011-September/000565.html">http://mail.python.org/pipermail/soap/2011-September/000565.html</a></p>
+<p>PS: The next faq entry is also probably relevant to you.</p>
+</div>
+<div class="section" id="how-do-i-alter-the-behaviour-of-a-user-method-without-using-decorators">
+<h2>How do I alter the behaviour of a user method without using decorators?<a class="headerlink" href="#how-do-i-alter-the-behaviour-of-a-user-method-without-using-decorators" title="Permalink to this headline">¶</a></h2>
+<p><tt class="docutils literal"><span class="pre">ctx.descriptor.function</span></tt> contains the handle to the original function. You
+can set that attribute to arbitrary callables to prevent the original user
+method from running.</p>
+</div>
 </div>
 
 
@@ -80,6 +128,8 @@ WSDL document to produce the necessary Python classes and method stubs.</p>
 <li><a class="reference internal" href="#">Rpclib FAQ</a><ul>
 <li><a class="reference internal" href="#does-rpclib-support-the-soap-1-2-standard">Does rpclib support the SOAP 1.2 standard?</a></li>
 <li><a class="reference internal" href="#how-do-i-implement-a-predefined-wsdl">How do I implement a predefined WSDL?</a></li>
+<li><a class="reference internal" href="#is-it-possible-to-use-other-decorators-with-rpc-srpc">Is it possible to use other decorators with &#64;rpc/&#64;srpc?</a></li>
+<li><a class="reference internal" href="#how-do-i-alter-the-behaviour-of-a-user-method-without-using-decorators">How do I alter the behaviour of a user method without using decorators?</a></li>
 </ul>
 </li>
 </ul>
@@ -127,7 +177,7 @@ WSDL document to produce the necessary Python classes and method stubs.</p>
         <li class="right" >
           <a href="tests.html" title="Running Tests"
              >previous</a> |</li>
-        <li><a href="index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

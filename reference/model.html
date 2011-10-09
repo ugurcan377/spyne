@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Models &mdash; rpclib v2.4.0-beta documentation</title>
+    <title>Models &mdash; rpclib v2.4.1-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.4.0-beta',
+        VERSION:     '2.4.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.4.1-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Interfaces" href="interface.html" />
     <link rel="prev" title="Fundamental Data Structures" href="base.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="base.html" title="Fundamental Data Structures"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -89,6 +89,12 @@ mainly used for defining constraints on input values.</p>
 <em class="property">class </em><tt class="descclassname">ModelBase.</tt><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.Attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>The class that holds the constraints for the given type.</p>
+<dl class="attribute">
+<dt id="rpclib.model._base.ModelBase.Attributes.default">
+<tt class="descname">default</tt><a class="headerlink" href="#rpclib.model._base.ModelBase.Attributes.default" title="Permalink to this definition">¶</a></dt>
+<dd><p>The default value if the input is None</p>
+</dd></dl>
+
 <dl class="attribute">
 <dt id="rpclib.model._base.ModelBase.Attributes.max_occurs">
 <tt class="descname">max_occurs</tt><a class="headerlink" href="#rpclib.model._base.ModelBase.Attributes.max_occurs" title="Permalink to this definition">¶</a></dt>
@@ -158,14 +164,16 @@ of the interface generator.</p>
 <dt id="rpclib.model._base.ModelBase.validate_native">
 <em class="property">static </em><tt class="descclassname">ModelBase.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.validate_native"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.validate_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the native
-value.</p>
+value. This is called after converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 <dl class="staticmethod">
 <dt id="rpclib.model._base.ModelBase.validate_string">
 <em class="property">static </em><tt class="descclassname">ModelBase.</tt><tt class="descname">validate_string</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/_base.html#ModelBase.validate_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model._base.ModelBase.validate_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the input
-string.</p>
+string. This is called before converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -324,6 +332,7 @@ the same name as the serialized class. It&#8217;s contained in a Python iterable
 <dt id="rpclib.model.complex.SimpleContent">
 <em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">SimpleContent</tt><a class="reference internal" href="../modules/rpclib/model/complex.html#SimpleContent"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.SimpleContent" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.ModelBase" title="rpclib.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.ModelBase</span></tt></a></p>
+<p>THIS DOES NOT WORK!</p>
 <p>Implementation of a limited version on SimpleContent ComplexType.
 Actually, it can only do the extension part (no restriction of simpleType)</p>
 </dd></dl>
@@ -428,7 +437,8 @@ of the interface generator.</p>
 <dt id="rpclib.model.primitive.AnyDict.validate_native">
 <em class="property">static </em><tt class="descclassname">AnyDict.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyDict.validate_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the native
-value.</p>
+value. This is called after converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -436,7 +446,7 @@ value.</p>
 <dl class="class">
 <dt id="rpclib.model.primitive.AnyUri">
 <em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">AnyUri</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#AnyUri"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.AnyUri" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.String" title="rpclib.model.primitive.String"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.String</span></tt></a></p>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.primitive.Unicode" title="rpclib.model.primitive.Unicode"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.Unicode</span></tt></a></p>
 <p>This is an xml schema type with is a special kind of String.</p>
 <dl class="class">
 <dt id="rpclib.model.primitive.AnyUri.Annotations">
@@ -498,7 +508,8 @@ of the interface generator.</p>
 <dt id="rpclib.model.primitive.AnyUri.validate_native">
 <em class="property">static </em><tt class="descclassname">AnyUri.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyUri.validate_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the native
-value.</p>
+value. This is called after converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -569,7 +580,8 @@ of the interface generator.</p>
 <dt id="rpclib.model.primitive.AnyXml.validate_native">
 <em class="property">static </em><tt class="descclassname">AnyXml.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.AnyXml.validate_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the native
-value.</p>
+value. This is called after converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -639,7 +651,8 @@ of the interface generator.</p>
 <dt id="rpclib.model.primitive.Boolean.validate_native">
 <em class="property">static </em><tt class="descclassname">Boolean.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Boolean.validate_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the native
-value.</p>
+value. This is called after converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -709,7 +722,8 @@ of the interface generator.</p>
 <dt id="rpclib.model.primitive.Date.validate_native">
 <em class="property">static </em><tt class="descclassname">Date.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Date.validate_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the native
-value.</p>
+value. This is called after converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -779,7 +793,8 @@ of the interface generator.</p>
 <dt id="rpclib.model.primitive.DateTime.validate_native">
 <em class="property">static </em><tt class="descclassname">DateTime.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.DateTime.validate_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the native
-value.</p>
+value. This is called after converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -907,7 +922,8 @@ of the interface generator.</p>
 <dt id="rpclib.model.primitive.Double.validate_native">
 <em class="property">static </em><tt class="descclassname">Double.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Double.validate_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the native
-value.</p>
+value. This is called after converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -977,7 +993,8 @@ of the interface generator.</p>
 <dt id="rpclib.model.primitive.Duration.validate_native">
 <em class="property">static </em><tt class="descclassname">Duration.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Duration.validate_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the native
-value.</p>
+value. This is called after converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1047,7 +1064,8 @@ of the interface generator.</p>
 <dt id="rpclib.model.primitive.Float.validate_native">
 <em class="property">static </em><tt class="descclassname">Float.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Float.validate_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the native
-value.</p>
+value. This is called after converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1218,99 +1236,54 @@ of the interface generator.</p>
 
 </dd></dl>
 
-<dl class="class">
+<dl class="attribute">
 <dt id="rpclib.model.primitive.Mandatory.String">
-<em class="property">class </em><tt class="descclassname">Mandatory.</tt><tt class="descname">String</tt><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
-<p>The type to represent human-readable data. Its native format is unicode.
-Currently, it can read from only utf8-compatible encodings.</p>
-<dl class="classmethod">
-<dt id="rpclib.model.primitive.Mandatory.String.customize">
-<em class="property">classmethod </em><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.customize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
-<tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="rpclib.model.primitive.Mandatory.String.get_namespace">
-<em class="property">classmethod </em><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.get_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace of the class. Defaults to the python module
-name.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="rpclib.model.primitive.Mandatory.String.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the namespace prefix for the given interface. The
-get_namespace_prefix of the interface class generates a prefix if none
-is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="rpclib.model.primitive.Mandatory.String.get_type_name">
-<em class="property">classmethod </em><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.get_type_name" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
-</dd></dl>
-
-<dl class="classmethod">
-<dt id="rpclib.model.primitive.Mandatory.String.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
-<dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="rpclib.model.primitive.Mandatory.String.resolve_namespace">
-<em class="property">static </em><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.resolve_namespace" title="Permalink to this definition">¶</a></dt>
-<dd><p>This call finalizes the namespace assignment. The default namespace
-is not available until the application calls populate_interface method
-of the interface generator.</p>
-</dd></dl>
-
-<dl class="staticmethod">
-<dt id="rpclib.model.primitive.Mandatory.String.validate_native">
-<em class="property">static </em><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String.validate_native" title="Permalink to this definition">¶</a></dt>
-<dd><p>Override this method to do your own input validation on the native
-value.</p>
+<tt class="descclassname">Mandatory.</tt><tt class="descname">String</tt><a class="headerlink" href="#rpclib.model.primitive.Mandatory.String" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#rpclib.model.primitive.Unicode" title="rpclib.model.primitive.Unicode"><tt class="xref py py-class docutils literal"><span class="pre">Unicode</span></tt></a></p>
 </dd></dl>
 
 </dd></dl>
 
-</dd></dl>
-
-<dl class="class">
+<dl class="attribute">
 <dt id="rpclib.model.primitive.String">
-<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">String</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#String"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.String" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">String</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#String"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.String" title="Permalink to this definition">¶</a></dt>
+<dd><p>alias of <a class="reference internal" href="#rpclib.model.primitive.Unicode" title="rpclib.model.primitive.Unicode"><tt class="xref py py-class docutils literal"><span class="pre">Unicode</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.primitive.Unicode">
+<em class="property">class </em><tt class="descclassname">rpclib.model.primitive.</tt><tt class="descname">Unicode</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Unicode"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Unicode" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.SimpleModel" title="rpclib.model._base.SimpleModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.SimpleModel</span></tt></a></p>
 <p>The type to represent human-readable data. Its native format is unicode.
 Currently, it can read from only utf8-compatible encodings.</p>
 <dl class="class">
-<dt id="rpclib.model.primitive.String.Annotations">
-<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.String.Annotations" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.Annotations">
+<em class="property">class </em><tt class="descname">Annotations</tt><a class="headerlink" href="#rpclib.model.primitive.Unicode.Annotations" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">object</span></tt></p>
 <p>The class that holds the annotations for the given type.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="rpclib.model.primitive.String.Attributes">
-<em class="property">class </em><tt class="descclassname">String.</tt><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#String.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.String.Attributes" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.Attributes">
+<em class="property">class </em><tt class="descclassname">Unicode.</tt><tt class="descname">Attributes</tt><a class="reference internal" href="../modules/rpclib/model/primitive.html#Unicode.Attributes"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.primitive.Unicode.Attributes" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.Attributes</span></tt></p>
 <p>The class that holds the constraints for the given type.</p>
 <dl class="attribute">
-<dt id="rpclib.model.primitive.String.Attributes.max_len">
-<tt class="descname">max_len</tt><a class="headerlink" href="#rpclib.model.primitive.String.Attributes.max_len" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.Attributes.max_len">
+<tt class="descname">max_len</tt><a class="headerlink" href="#rpclib.model.primitive.Unicode.Attributes.max_len" title="Permalink to this definition">¶</a></dt>
 <dd><p>Maximum length of string. Can be set to &#8216;unbounded&#8217; to accept strings
 of arbitrary sizes. Also check <tt class="xref py py-const docutils literal"><span class="pre">rpclib.server.wsgi.MAX_CONTENT_LENGTH</span></tt>.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.model.primitive.String.Attributes.min_len">
-<tt class="descname">min_len</tt><a class="headerlink" href="#rpclib.model.primitive.String.Attributes.min_len" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.Attributes.min_len">
+<tt class="descname">min_len</tt><a class="headerlink" href="#rpclib.model.primitive.Unicode.Attributes.min_len" title="Permalink to this definition">¶</a></dt>
 <dd><p>Minimum length of string. Can be set to any positive integer</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.model.primitive.String.Attributes.pattern">
-<tt class="descname">pattern</tt><a class="headerlink" href="#rpclib.model.primitive.String.Attributes.pattern" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.Attributes.pattern">
+<tt class="descname">pattern</tt><a class="headerlink" href="#rpclib.model.primitive.Unicode.Attributes.pattern" title="Permalink to this definition">¶</a></dt>
 <dd><p>A regular expression that matches the whole string. See here for more
 info: <a class="reference external" href="http://www.regular-expressions.info/xml.html">http://www.regular-expressions.info/xml.html</a></p>
 </dd></dl>
@@ -1318,52 +1291,53 @@ info: <a class="reference external" href="http://www.regular-expressions.info/xm
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="rpclib.model.primitive.String.customize">
-<em class="property">classmethod </em><tt class="descclassname">String.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.customize" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.customize">
+<em class="property">classmethod </em><tt class="descclassname">Unicode.</tt><tt class="descname">customize</tt><big>(</big><em>**kwargs</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Unicode.customize" title="Permalink to this definition">¶</a></dt>
 <dd><p>Duplicates cls and overwrites the values in <tt class="docutils literal"><span class="pre">cls.Attributes</span></tt> with
 <tt class="docutils literal"><span class="pre">**kwargs</span></tt> and returns the new class.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="rpclib.model.primitive.String.get_namespace">
-<em class="property">classmethod </em><tt class="descclassname">String.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.get_namespace" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.get_namespace">
+<em class="property">classmethod </em><tt class="descclassname">Unicode.</tt><tt class="descname">get_namespace</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Unicode.get_namespace" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the namespace of the class. Defaults to the python module
 name.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="rpclib.model.primitive.String.get_namespace_prefix">
-<em class="property">classmethod </em><tt class="descclassname">String.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.get_namespace_prefix">
+<em class="property">classmethod </em><tt class="descclassname">Unicode.</tt><tt class="descname">get_namespace_prefix</tt><big>(</big><em>interface</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Unicode.get_namespace_prefix" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the namespace prefix for the given interface. The
 get_namespace_prefix of the interface class generates a prefix if none
 is defined.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="rpclib.model.primitive.String.get_type_name">
-<em class="property">classmethod </em><tt class="descclassname">String.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.get_type_name" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.get_type_name">
+<em class="property">classmethod </em><tt class="descclassname">Unicode.</tt><tt class="descname">get_type_name</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Unicode.get_type_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the class name unless the __type_name__ attribute is defined.</p>
 </dd></dl>
 
 <dl class="classmethod">
-<dt id="rpclib.model.primitive.String.get_type_name_ns">
-<em class="property">classmethod </em><tt class="descclassname">String.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.get_type_name_ns">
+<em class="property">classmethod </em><tt class="descclassname">Unicode.</tt><tt class="descname">get_type_name_ns</tt><big>(</big><em>app</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Unicode.get_type_name_ns" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns the type name with a namespace prefix, separated by a column.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="rpclib.model.primitive.String.resolve_namespace">
-<em class="property">static </em><tt class="descclassname">String.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.resolve_namespace" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.resolve_namespace">
+<em class="property">static </em><tt class="descclassname">Unicode.</tt><tt class="descname">resolve_namespace</tt><big>(</big><em>default_ns</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Unicode.resolve_namespace" title="Permalink to this definition">¶</a></dt>
 <dd><p>This call finalizes the namespace assignment. The default namespace
 is not available until the application calls populate_interface method
 of the interface generator.</p>
 </dd></dl>
 
 <dl class="staticmethod">
-<dt id="rpclib.model.primitive.String.validate_native">
-<em class="property">static </em><tt class="descclassname">String.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.String.validate_native" title="Permalink to this definition">¶</a></dt>
+<dt id="rpclib.model.primitive.Unicode.validate_native">
+<em class="property">static </em><tt class="descclassname">Unicode.</tt><tt class="descname">validate_native</tt><big>(</big><em>value</em><big>)</big><a class="headerlink" href="#rpclib.model.primitive.Unicode.validate_native" title="Permalink to this definition">¶</a></dt>
 <dd><p>Override this method to do your own input validation on the native
-value.</p>
+value. This is called after converting the incoming string to the
+native python value.</p>
 </dd></dl>
 
 </dd></dl>
@@ -1752,7 +1726,7 @@ SQLAlchemy and its information alone.</p>
         <li class="right" >
           <a href="base.html" title="Fundamental Data Structures"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

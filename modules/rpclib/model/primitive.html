@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.model.primitive &mdash; rpclib v2.4.0-beta documentation</title>
+    <title>rpclib.model.primitive &mdash; rpclib v2.4.1-beta documentation</title>
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.4.0-beta',
+        VERSION:     '2.4.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib v2.4.1-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -127,7 +127,10 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">etree</span><span class="o">.</span><span class="n">fromstring</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">etree</span><span class="o">.</span><span class="n">XMLSyntaxError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">AnyDict</span><span class="p">(</span><span class="n">SimpleModel</span><span class="p">):</span></div>
 <div class="viewcode-block" id="AnyDict"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.AnyDict">[docs]</a>    <span class="sd">&quot;&quot;&quot;An xml node that can contain any number of sub nodes. It&#39;s represented by</span>
@@ -145,17 +148,20 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">pickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">String</span><span class="p">(</span><span class="n">SimpleModel</span><span class="p">):</span></div>
-<div class="viewcode-block" id="String"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.String">[docs]</a>    <span class="sd">&quot;&quot;&quot;The type to represent human-readable data. Its native format is unicode.</span>
+<span class="k">class</span> <span class="nc">Unicode</span><span class="p">(</span><span class="n">SimpleModel</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Unicode"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Unicode">[docs]</a>    <span class="sd">&quot;&quot;&quot;The type to represent human-readable data. Its native format is unicode.</span>
 <span class="sd">    Currently, it can read from only utf8-compatible encodings.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;string&#39;</span>
 
     <span class="k">class</span> <span class="nc">Attributes</span><span class="p">(</span><span class="n">SimpleModel</span><span class="o">.</span><span class="n">Attributes</span><span class="p">):</span>
-<div class="viewcode-block" id="String.Attributes"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.String.Attributes">[docs]</a>        <span class="sd">&quot;&quot;&quot;The class that holds the constraints for the given type.&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Unicode.Attributes"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Unicode.Attributes">[docs]</a>        <span class="sd">&quot;&quot;&quot;The class that holds the constraints for the given type.&quot;&quot;&quot;</span>
 
         <span class="n">min_len</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="sd">&quot;&quot;&quot;Minimum length of string. Can be set to any positive integer&quot;&quot;&quot;</span>
@@ -181,12 +187,15 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s">&#39;utf8&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span>
 
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s">&#39;utf8&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">is_default</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
@@ -197,14 +206,28 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">validate_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span>    <span class="n">SimpleModel</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-                <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">min_len</span>
-                <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_len</span>
+        <span class="k">return</span> <span class="p">(</span>     <span class="n">SimpleModel</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="p">(</span><span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="p">(</span>
+                        <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">min_len</span> <span class="ow">and</span>
+                        <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_len</span><span class="p">))</span>
                 <span class="ow">and</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">pattern</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span>
                             <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">pattern</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">)</span>
             <span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">AnyUri</span><span class="p">(</span><span class="n">String</span><span class="p">):</span></div>
+<span class="k">class</span> <span class="nc">String</span><span class="p">(</span><span class="n">Unicode</span><span class="p">):</span></div>
+<div class="viewcode-block" id="String"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.String">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="nd">@nillable_string</span>
+    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="nd">@nillable_string</span>
+    <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+<span class="n">String</span> <span class="o">=</span> <span class="n">Unicode</span> <span class="c"># FIXME: the string/unicode separation needs to be tested</span></div>
+
+<span class="k">class</span> <span class="nc">AnyUri</span><span class="p">(</span><span class="n">String</span><span class="p">):</span>
 <div class="viewcode-block" id="AnyUri"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.AnyUri">[docs]</a>    <span class="sd">&quot;&quot;&quot;This is an xml schema type with is a special kind of String.&quot;&quot;&quot;</span>
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;anyURI&#39;</span>
 
@@ -233,12 +256,13 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">validate_native</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span>    <span class="n">SimpleModel</span><span class="o">.</span><span class="n">validate_native</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-                <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;</span>  <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">gt</span>
-                <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">ge</span>
-                <span class="ow">and</span> <span class="n">value</span> <span class="o">&lt;</span>  <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">lt</span>
-                <span class="ow">and</span> <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">le</span>
-            <span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span>    <span class="n">SimpleModel</span><span class="o">.</span><span class="n">validate_native</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">and</span>
+                <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="p">(</span>
+                    <span class="n">value</span> <span class="o">&gt;</span>  <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">gt</span> <span class="ow">and</span>
+                    <span class="n">value</span> <span class="o">&gt;=</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">ge</span> <span class="ow">and</span>
+                    <span class="n">value</span> <span class="o">&lt;</span>  <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">lt</span> <span class="ow">and</span>
+                    <span class="n">value</span> <span class="o">&lt;=</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">le</span>
+            <span class="p">))</span>
 
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
@@ -250,7 +274,10 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">decimal</span><span class="o">.</span><span class="n">InvalidOperation</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Double</span><span class="p">(</span><span class="n">SimpleModel</span><span class="p">):</span></div>
 <div class="viewcode-block" id="Double"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Double">[docs]</a>    <span class="sd">&quot;&quot;&quot;This is serialized as the python float. So this type comes with its</span>
@@ -266,7 +293,10 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Float</span><span class="p">(</span><span class="n">Double</span><span class="p">):</span></div>
 <div class="viewcode-block" id="Float"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Float">[docs]</a>    <span class="sd">&quot;&quot;&quot;Synonym for Double. This is here for compatibility purposes.&quot;&quot;&quot;</span>
@@ -287,7 +317,10 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">Integer</span><span class="p">(</span><span class="n">Decimal</span><span class="p">):</span></div>
 <div class="viewcode-block" id="Integer"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Integer">[docs]</a>    <span class="sd">&quot;&quot;&quot;The arbitrary-size signed integer.&quot;&quot;&quot;</span>
@@ -297,10 +330,7 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="nb">long</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="nb">long</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c"># sanity check</span>
 
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
@@ -309,13 +339,17 @@
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">long</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">long</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">UnsignedInteger</span><span class="p">(</span><span class="n">Integer</span><span class="p">):</span></div>
 <div class="viewcode-block" id="UnsignedInteger"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger">[docs]</a>    <span class="sd">&quot;&quot;&quot;The arbitrary-size unsigned integer.&quot;&quot;&quot;</span>
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;unsignedLong&#39;</span>
     <span class="n">__length__</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="sd">&quot;&quot;&quot;length of the number, in bits&quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
@@ -324,17 +358,11 @@
 
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
-    <span class="nd">@classmethod</span>
-    <span class="nd">@nillable_string</span>
-    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">retval</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="n">retval</span> <span class="o">=</span> <span class="nb">long</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-
-        <span class="k">assert</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__length__</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">retval</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">cls</span><span class="o">.</span><span class="n">__length__</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">retval</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">validate_native</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>     <span class="n">Integer</span><span class="o">.</span><span class="n">validate_native</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__length__</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">cls</span><span class="o">.</span><span class="n">__length__</span><span class="p">))</span>
+            <span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">UnsignedInteger64</span><span class="p">(</span><span class="n">UnsignedInteger</span><span class="p">):</span></div>
 <div class="viewcode-block" id="UnsignedInteger64"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger64">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 64-bit unsigned integer.&quot;&quot;&quot;</span>
@@ -437,6 +465,8 @@
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
         <span class="n">duration</span> <span class="o">=</span> <span class="n">_duration_re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">string</span><span class="p">)</span><span class="o">.</span><span class="n">groupdict</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">duration</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
         <span class="n">days</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">duration</span><span class="p">[</span><span class="s">&#39;days&#39;</span><span class="p">])</span>
         <span class="n">days</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">duration</span><span class="p">[</span><span class="s">&#39;months&#39;</span><span class="p">])</span> <span class="o">*</span> <span class="mi">30</span>
@@ -549,7 +579,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

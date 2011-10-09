@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Fundamental Data Structures &mdash; rpclib v2.4.0-beta documentation</title>
+    <title>Fundamental Data Structures &mdash; rpclib v2.4.1-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.4.0-beta',
+        VERSION:     '2.4.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.4.1-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Models" href="model.html" />
     <link rel="prev" title="Rpclib API Reference" href="index.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="index.html" title="Rpclib API Reference"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -249,7 +249,7 @@ to their liking.</p>
 <h2>MethodDescriptor<a class="headerlink" href="#methoddescriptor" title="Permalink to this headline">¶</a></h2>
 <dl class="class">
 <dt id="rpclib.MethodDescriptor">
-<em class="property">class </em><tt class="descclassname">rpclib.</tt><tt class="descname">MethodDescriptor</tt><big>(</big><em>function</em>, <em>in_message</em>, <em>out_message</em>, <em>doc</em>, <em>is_callback=False</em>, <em>is_async=False</em>, <em>mtom=False</em>, <em>in_header=None</em>, <em>out_header=None</em>, <em>faults=None</em>, <em>port_type=None</em>, <em>no_ctx=False</em><big>)</big><a class="headerlink" href="#rpclib.MethodDescriptor" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.</tt><tt class="descname">MethodDescriptor</tt><big>(</big><em>function</em>, <em>in_message</em>, <em>out_message</em>, <em>doc</em>, <em>is_callback=False</em>, <em>is_async=False</em>, <em>mtom=False</em>, <em>in_header=None</em>, <em>out_header=None</em>, <em>faults=None</em>, <em>port_type=None</em>, <em>no_ctx=False</em>, <em>udp=None</em><big>)</big><a class="headerlink" href="#rpclib.MethodDescriptor" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class represents the method signature of a soap method,
 and is returned by the rpc decorator.</p>
 <dl class="attribute">
@@ -327,6 +327,13 @@ the function.</p>
 <dt id="rpclib.MethodDescriptor.port_type">
 <tt class="descname">port_type</tt><a class="headerlink" href="#rpclib.MethodDescriptor.port_type" title="Permalink to this definition">¶</a></dt>
 <dd><p>The portType this function belongs to.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.MethodDescriptor.udp">
+<tt class="descname">udp</tt><a class="headerlink" href="#rpclib.MethodDescriptor.udp" title="Permalink to this definition">¶</a></dt>
+<dd><p>Short for &#8220;User-Defined Properties&#8221;, it&#8217;s your own playground. You
+can use it to store custom metadata about the method.</p>
 </dd></dl>
 
 </dd></dl>
@@ -460,7 +467,7 @@ stored in ctx.event attribute.</li>
         <li class="right" >
           <a href="index.html" title="Rpclib API Reference"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

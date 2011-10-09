@@ -7,13 +7,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Hello World &mdash; rpclib v2.4.0-beta documentation</title>
+    <title>Hello World &mdash; rpclib v2.4.1-beta documentation</title>
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.4.0-beta',
+        VERSION:     '2.4.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.4.0-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib v2.4.1-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib Manual" href="index.html" />
     <link rel="next" title="User Manager" href="usermanager.html" />
     <link rel="prev" title="High-Level Introduction to Rpclib" href="highlevel.html" /> 
@@ -43,7 +43,7 @@
         <li class="right" >
           <a href="highlevel.html" title="High-Level Introduction to Rpclib"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>  
@@ -62,7 +62,7 @@ production purposes.</p>
 <h2>Defining an Rpclib Service<a class="headerlink" href="#defining-an-rpclib-service" title="Permalink to this headline">¶</a></h2>
 <p>Here we introduce the fundamental mechanisms the rpclib offers to expose your
 services.</p>
-<p>This example is available here: <a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/helloworld_soap.py">http://github.com/arskom/rpclib/blob/master/examples/helloworld_soap.py</a>.</p>
+<p>This example is available here: <a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/helloworld_soap.py">http://github.com/arskom/rpclib/blob/master/examples/helloworld_soap.py</a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
 
 <span class="kn">from</span> <span class="nn">rpclib.application</span> <span class="kn">import</span> <span class="n">Application</span>
@@ -214,6 +214,14 @@ handler to the wsgi server, and run the http server:</p>
 <span class="n">server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
 </pre></div>
 </div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<ul class="last simple">
+<li><strong>Django users:</strong> See this gist for a django wrapper example: <a class="reference external" href="https://gist.github.com/1242760">https://gist.github.com/1242760</a></li>
+<li><strong>Twisted users:</strong> See the this example that illustrates deploying an
+Rpclib application using twisted: <a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/helloworld_soap_twisted.py">http://github.com/arskom/rpclib/blob/master/examples/helloworld_soap_twisted.py</a></li>
+</ul>
+</div>
 <p>You can test your service using suds. Suds is a separate project for building
 pure-python soap clients. To learn more visit the project&#8217;s page:
 <a class="reference external" href="https://fedorahosted.org/suds/">https://fedorahosted.org/suds/</a>. You can simply install it using
@@ -337,7 +345,7 @@ defining complex objects and using events.</p>
         <li class="right" >
           <a href="highlevel.html" title="High-Level Introduction to Rpclib"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.4.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>
