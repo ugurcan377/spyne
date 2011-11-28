@@ -3,17 +3,20 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Protocols &mdash; rpclib v2.4.1-beta documentation</title>
+    <title>Protocols &mdash; rpclib 2.4.4-beta documentation</title>
+    
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.4.1-beta',
+        VERSION:     '2.4.4-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -22,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib v2.4.1-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib 2.4.4-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Client Transports" href="client.html" />
     <link rel="prev" title="Interfaces" href="interface.html" /> 
@@ -43,7 +46,7 @@
         <li class="right" >
           <a href="interface.html" title="Interfaces"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -121,7 +124,7 @@ attribute.</p>
 <dl class="method">
 <dt id="rpclib.protocol._base.ProtocolBase.serialize">
 <tt class="descname">serialize</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase.serialize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase.serialize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Takes a MethodContext instance and the object to be serialied in the
+<dd><p>Takes a MethodContext instance and the object to be serialized in the
 ctx.out_object attribute.</p>
 <p>Returns the corresponding document structure in the ctx.out_document
 attribute.</p>
@@ -153,6 +156,11 @@ validation on the parsed input document.</p>
 <dd><p>The so-called ReST-minus-the-verbs HttpRpc protocol implementation.
 It only works with the http server (wsgi) transport.</p>
 <p>It only parses GET requests where the whole data is in the &#8216;QUERY_STRING&#8217;.</p>
+<dl class="attribute">
+<dt id="rpclib.protocol.http.HttpRpc.allowed_http_verbs">
+<tt class="descname">allowed_http_verbs</tt><em class="property"> = ['GET', 'POST']</em><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.allowed_http_verbs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
 <dt id="rpclib.protocol.http.HttpRpc.app">
 <tt class="descname">app</tt><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.app" title="Permalink to this definition">¶</a></dt>
@@ -188,6 +196,11 @@ belongs to.</p>
 <dl class="method">
 <dt id="rpclib.protocol.http.HttpRpc.fault_to_http_response_code">
 <tt class="descname">fault_to_http_response_code</tt><big>(</big><em>fault</em><big>)</big><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.fault_to_http_response_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.protocol.http.HttpRpc.mime_type">
+<tt class="descname">mime_type</tt><em class="property"> = 'application/octet-stream'</em><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.mime_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -311,7 +324,7 @@ validation on the parsed input document.</p>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="../search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -340,13 +353,13 @@ validation on the parsed input document.</p>
         <li class="right" >
           <a href="interface.html" title="Interfaces"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib v2.4.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2011, Rpclib Contributors.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>
 </html>
