@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Models &mdash; rpclib 2.4.4-beta documentation</title>
+    <title>Models &mdash; rpclib 2.5.0-beta documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.4.4-beta',
+        VERSION:     '2.5.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.4.4-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib 2.5.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Interfaces" href="interface.html" />
     <link rel="prev" title="Fundamental Data Structures" href="base.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="base.html" title="Fundamental Data Structures"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -259,8 +259,8 @@ encode this as base64, while HttpRpc just hands it over.</p>
 </div>
 <div class="section" id="module-rpclib.model.complex">
 <span id="complex"></span><h2>Complex<a class="headerlink" href="#module-rpclib.model.complex" title="Permalink to this headline">¶</a></h2>
-<p>This module contains ComplexBase class and its helper objects like Array and
-Iterable that are container classes that organize other values.</p>
+<p>This module contains ComplexBase class and its helper objects that are
+mainly container classes that organize other values.</p>
 <dl class="class">
 <dt id="rpclib.model.complex.Alias">
 <em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">Alias</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#Alias"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.Alias" title="Permalink to this definition">¶</a></dt>
@@ -308,6 +308,13 @@ borrow the target&#8217;s _type_info.</p>
 </dd></dl>
 
 <dl class="staticmethod">
+<dt id="rpclib.model.complex.ComplexModelBase.get_simple_type_info">
+<em class="property">static </em><tt class="descname">get_simple_type_info</tt><big>(</big><em>retval=None</em>, <em>prefix=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase.get_simple_type_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.get_simple_type_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a _type_info dict that includes members from all base classes
+and whose types are only primitives.</p>
+</dd></dl>
+
+<dl class="staticmethod">
 <dt id="rpclib.model.complex.ComplexModelBase.produce">
 <em class="property">static </em><tt class="descname">produce</tt><big>(</big><em>namespace</em>, <em>type_name</em>, <em>members</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase.produce"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.produce" title="Permalink to this definition">¶</a></dt>
 <dd><p>Lets you create a class programmatically.</p>
@@ -340,17 +347,31 @@ the same name as the serialized class. It&#8217;s contained in a Python iterable
 Actually, it can only do the extension part (no restriction of simpleType)</p>
 </dd></dl>
 
-<dl class="class">
+<dl class="attribute">
 <dt id="rpclib.model.complex.XMLAttribute">
-<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XMLAttribute</tt><big>(</big><em>typ</em>, <em>use=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#XMLAttribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.XMLAttribute" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XMLAttribute</tt><a class="headerlink" href="#rpclib.model.complex.XMLAttribute" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED! Use <a class="reference internal" href="#rpclib.model.complex.XmlAttribute" title="rpclib.model.complex.XmlAttribute"><tt class="xref py py-class docutils literal"><span class="pre">XmlAttribute</span></tt></a> instead</p>
+<p>alias of <a class="reference internal" href="#rpclib.model.complex.XmlAttribute" title="rpclib.model.complex.XmlAttribute"><tt class="xref py py-class docutils literal"><span class="pre">XmlAttribute</span></tt></a></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.model.complex.XMLAttributeRef">
+<tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XMLAttributeRef</tt><a class="headerlink" href="#rpclib.model.complex.XMLAttributeRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED! Use <a class="reference internal" href="#rpclib.model.complex.XmlAttributeRef" title="rpclib.model.complex.XmlAttributeRef"><tt class="xref py py-class docutils literal"><span class="pre">XmlAttributeRef</span></tt></a> instead</p>
+<p>alias of <a class="reference internal" href="#rpclib.model.complex.XmlAttributeRef" title="rpclib.model.complex.XmlAttributeRef"><tt class="xref py py-class docutils literal"><span class="pre">XmlAttributeRef</span></tt></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="rpclib.model.complex.XmlAttribute">
+<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XmlAttribute</tt><big>(</big><em>typ</em>, <em>use=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#XmlAttribute"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.XmlAttribute" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#rpclib.model._base.ModelBase" title="rpclib.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.ModelBase</span></tt></a></p>
 <p>Items which are marshalled as attributes of the parent element.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="rpclib.model.complex.XMLAttributeRef">
-<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XMLAttributeRef</tt><big>(</big><em>ref</em>, <em>use=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#XMLAttributeRef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.XMLAttributeRef" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#rpclib.model.complex.XMLAttribute" title="rpclib.model.complex.XMLAttribute"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.XMLAttribute</span></tt></a></p>
+<dt id="rpclib.model.complex.XmlAttributeRef">
+<em class="property">class </em><tt class="descclassname">rpclib.model.complex.</tt><tt class="descname">XmlAttributeRef</tt><big>(</big><em>ref</em>, <em>use=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#XmlAttributeRef"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.XmlAttributeRef" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#rpclib.model.complex.XmlAttribute" title="rpclib.model.complex.XmlAttribute"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.XmlAttribute</span></tt></a></p>
 <p>Reference to stock XML attribute.</p>
 </dd></dl>
 
@@ -1805,7 +1826,7 @@ SQLAlchemy and its information alone.</p>
         <li class="right" >
           <a href="base.html" title="Fundamental Data Structures"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

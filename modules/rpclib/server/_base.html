@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.server._base &mdash; rpclib 2.4.4-beta documentation</title>
+    <title>rpclib.server._base &mdash; rpclib 2.5.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.4.4-beta',
+        VERSION:     '2.5.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.4.4-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib 2.5.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -90,26 +90,54 @@
     <span class="sd">&quot;&quot;&quot;The transport type, conventionally defined by the URI string to its</span>
 <span class="sd">    definition.&quot;&quot;&quot;</span>
 
+    <span class="n">supports_fanout_methods</span> <span class="o">=</span> <span class="bp">False</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">app</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">transport</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transport</span>
+        <span class="k">if</span> <span class="n">app</span><span class="o">.</span><span class="n">supports_fanout_methods</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">supports_fanout_methods</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s">&quot;&quot;&quot;Your application is in fanout mode.</span>
+<span class="s">            note that in fanout mode, only the response from the last</span>
+<span class="s">            call will be returned.&quot;&quot;&quot;</span><span class="p">)</span>
+
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span> <span class="o">=</span> <span class="n">EventManager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_in_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">in_string_charset</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
-<div class="viewcode-block" id="ServerBase.get_in_object"><a class="viewcode-back" href="../../../reference/server.html#rpclib.server._base.ServerBase.get_in_object">[docs]</a>        <span class="sd">&quot;&quot;&quot;Uses the ctx.in_string to set ctx.in_body_doc, which in turn is used</span>
-<span class="sd">        to set ctx.in_object.&quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">generate_contexts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">in_string_charset</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="ServerBase.generate_contexts"><a class="viewcode-back" href="../../../reference/server.html#rpclib.server._base.ServerBase.generate_contexts">[docs]</a>        <span class="sd">&quot;&quot;&quot;Calls create_in_document and decompose_incoming_envelope to get</span>
+<span class="sd">        method_request string in order to generate contexts.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="c"># sets ctx.in_document</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">create_in_document</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">in_string_charset</span><span class="p">)</span>
 
-            <span class="c"># sets ctx.in_body_doc and ctx.in_header_doc</span>
+            <span class="c"># sets ctx.in_body_doc, ctx.in_header_doc and ctx.method_request_string</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">decompose_incoming_envelope</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
 
+            <span class="c"># returns a list of contexts. multiple contexts are only returned</span>
+            <span class="c"># when supports_fanout_mode=True parameter is given to the</span>
+            <span class="c"># Application constructor and there&#39;s more than one method defined</span>
+            <span class="c"># for the given method_request_string here.</span>
+            <span class="n">retval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">generate_method_contexts</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="n">Fault</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="bp">None</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">in_error</span> <span class="o">=</span> <span class="n">e</span>
+            <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span> <span class="o">=</span> <span class="n">e</span>
+
+            <span class="n">retval</span> <span class="o">=</span> <span class="p">[</span><span class="n">ctx</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="n">retval</span>
+
+    <span class="k">def</span> <span class="nf">get_in_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
+<div class="viewcode-block" id="ServerBase.get_in_object"><a class="viewcode-back" href="../../../reference/server.html#rpclib.server._base.ServerBase.get_in_object">[docs]</a>        <span class="sd">&quot;&quot;&quot;Uses the ctx.in_string to set ctx.in_body_doc, which in turn is used</span>
+<span class="sd">        to set ctx.in_object.&quot;&quot;&quot;</span>
+
+        <span class="k">try</span><span class="p">:</span>
             <span class="c"># sets ctx.in_object and ctx.in_header</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">deserialize</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&#39;request&#39;</span><span class="p">)</span>
 
-        <span class="k">except</span> <span class="n">Fault</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
+        <span class="k">except</span> <span class="n">Fault</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="bp">None</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">in_error</span> <span class="o">=</span> <span class="n">e</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span> <span class="o">=</span> <span class="n">e</span>
@@ -118,7 +146,7 @@
 <div class="viewcode-block" id="ServerBase.get_out_object"><a class="viewcode-back" href="../../../reference/server.html#rpclib.server._base.ServerBase.get_out_object">[docs]</a>        <span class="sd">&quot;&quot;&quot;Calls the matched method using the ctx.in_object to get</span>
 <span class="sd">        ctx.out_object.&quot;&quot;&quot;</span>
 
-        <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_error</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">,</span><span class="s">&quot;There was an error processing input string&quot;</span>
+        <span class="k">assert</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_error</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">,</span> <span class="s">&quot;There was an error processing input string&quot;</span>
 
         <span class="c"># event firing is done in the rpclib.application.Application</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">process_request</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
@@ -185,7 +213,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

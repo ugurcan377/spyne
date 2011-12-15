@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Comparison with other rpc frameworks &mdash; rpclib 2.4.4-beta documentation</title>
+    <title>Comparison with other rpc frameworks &mdash; rpclib 2.5.0-beta documentation</title>
     
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.4.4-beta',
+        VERSION:     '2.5.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.4.4-beta documentation" href="index.html" />
+    <link rel="top" title="rpclib 2.5.0-beta documentation" href="index.html" />
     <link rel="prev" title="History and Future" href="h_and_f.html" /> 
   </head>
   <body>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="h_and_f.html" title="History and Future"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -52,7 +52,9 @@
             
   <div class="section" id="comparison-with-other-rpc-frameworks">
 <span id="manual-comparison"></span><h1>Comparison with other rpc frameworks<a class="headerlink" href="#comparison-with-other-rpc-frameworks" title="Permalink to this headline">¶</a></h1>
-<p>Oh my.</p>
+<p>RPC is a very popular subject. There&#8217;s a plethora of active and inactive
+projects that satisfy a wide arrange of requirements. Here are the main sources
+of information:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://pypi.python.org/pypi?%3Aaction=search&amp;term=rpc">http://pypi.python.org/pypi?%3Aaction=search&amp;term=rpc</a></li>
 <li><a class="reference external" href="http://www.ohloh.net/tags/python/rpc">http://www.ohloh.net/tags/python/rpc</a></li>
@@ -61,7 +63,7 @@
 <div class="section" id="ladon">
 <h2>Ladon<a class="headerlink" href="#ladon" title="Permalink to this headline">¶</a></h2>
 <p>The Ladon project has almost the same goals and same approach to the rpc-related
-issues.</p>
+issues as rpclib.</p>
 <p>Discussion thread: <a class="reference external" href="https://answers.launchpad.net/ladon/+question/171664">https://answers.launchpad.net/ladon/+question/171664</a></p>
 <ul>
 <li><dl class="first docutils">
@@ -98,7 +100,7 @@ standard protocol like SOAP is that clients are already out there.</p>
 </dd>
 </dl>
 </li>
-<li><p class="first">Rpclib uses own classes for denoting types, whereas ladon uses python
+<li><p class="first">Rpclib uses own classes for denoting types, whereas ladon uses Python
 callables. This lets ladon api to be simpler, but gives the rpclib api the
 power to have declarative restrictions on input types.</p>
 </li>
@@ -106,8 +108,23 @@ power to have declarative restrictions on input types.</p>
 </li>
 <li><p class="first">Does not support parsing and/or modifying protocol &amp; transport headers.</p>
 </li>
-<li><p class="first">Does not offer declarative constraints.</p>
-</li>
+</ul>
+</div>
+<div class="section" id="wsme">
+<h2>WSME<a class="headerlink" href="#wsme" title="Permalink to this headline">¶</a></h2>
+<p>&#8220;&#8221;&#8221;
+Web Service Made Easy (WSME) is a very easy way to implement webservices in your
+python web application. It is originally a rewrite of TGWebServices with focus
+on extensibility, framework-independance and better type handling.
+&#8220;&#8221;&#8220;</p>
+<ul class="simple">
+<li>Supports TurboGears</li>
+<li>Supports REST+Json, REST+Xml, (a subset of) SOAP and ExtDirect.</li>
+<li>Supports type validation.</li>
+<li>No client support.</li>
+<li>Does not test against ws-i.org deliverables for testing soap compatibility.</li>
+<li>Only supports http as transport.</li>
+<li>Uses genshi for Xml support.</li>
 </ul>
 </div>
 <div class="section" id="rpyc">
@@ -135,9 +152,12 @@ power to have declarative restrictions on input types.</p>
 <div class="section" id="suds">
 <h2>Suds<a class="headerlink" href="#suds" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Excellent wsdl parser, very easy to use.</li>
 <li>Soap 1.1 / Wsdl 1.1 Client only.</li>
-<li>Slow.</li>
+<li>Excellent wsdl parser, very easy to use.</li>
+<li>Recommended way to interface with rpclib services.</li>
+<li>Uses own pure-python xml implementation, so it&#8217;s roughly 10 times slower
+than rpclib.</li>
+<li>Only depends on pure-python solutions, so much easier to deploy.</li>
 </ul>
 </div>
 <div class="section" id="zsi">
@@ -155,8 +175,8 @@ power to have declarative restrictions on input types.</p>
 <div class="section" id="rsl">
 <h2>rsl<a class="headerlink" href="#rsl" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Unmaintained.</li>
 <li>Client only.</li>
+<li>Unmaintained.</li>
 </ul>
 </div>
 <div class="section" id="pyro">
@@ -177,6 +197,7 @@ power to have declarative restrictions on input types.</p>
   <ul>
 <li><a class="reference internal" href="#">Comparison with other rpc frameworks</a><ul>
 <li><a class="reference internal" href="#ladon">Ladon</a></li>
+<li><a class="reference internal" href="#wsme">WSME</a></li>
 <li><a class="reference internal" href="#rpyc">RPyC</a></li>
 <li><a class="reference internal" href="#rfoo">rfoo</a></li>
 <li><a class="reference internal" href="#suds">Suds</a></li>
@@ -225,7 +246,7 @@ power to have declarative restrictions on input types.</p>
         <li class="right" >
           <a href="h_and_f.html" title="History and Future"
              >previous</a> |</li>
-        <li><a href="index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

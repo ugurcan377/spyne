@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Rpclib FAQ &mdash; rpclib 2.4.4-beta documentation</title>
+    <title>Rpclib FAQ &mdash; rpclib 2.5.0-beta documentation</title>
     
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.4.4-beta',
+        VERSION:     '2.5.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.4.4-beta documentation" href="index.html" />
+    <link rel="top" title="rpclib 2.5.0-beta documentation" href="index.html" />
     <link rel="next" title="History and Future" href="h_and_f.html" />
     <link rel="prev" title="Running Tests" href="tests.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="tests.html" title="Running Tests"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -120,6 +120,9 @@ every time the method is called, but not on initialization.</p>
 <p><tt class="docutils literal"><span class="pre">ctx.descriptor.function</span></tt> contains the handle to the original function. You
 can set that attribute to arbitrary callables to prevent the original user
 method from running.</p>
+<p>Note that this property is initialized only when the process starts. So you
+should call <tt class="xref py py-func docutils literal"><span class="pre">ctx.descriptor.reset_function()</span></tt> to restore it to its
+original value</p>
 </div>
 </div>
 
@@ -183,7 +186,7 @@ method from running.</p>
         <li class="right" >
           <a href="tests.html" title="Running Tests"
              >previous</a> |</li>
-        <li><a href="index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.server.null &mdash; rpclib 2.4.4-beta documentation</title>
+    <title>rpclib.server.null &mdash; rpclib 2.5.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.4.4-beta',
+        VERSION:     '2.5.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.4.4-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib 2.5.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -70,7 +70,12 @@
 
 <span class="sd">&quot;&quot;&quot;This module contains the NullServer class and its helper objects.&quot;&quot;&quot;</span>
 
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
+
 <span class="kn">from</span> <span class="nn">rpclib.client._base</span> <span class="kn">import</span> <span class="n">Factory</span>
+<span class="kn">from</span> <span class="nn">rpclib.const.ansi_color</span> <span class="kn">import</span> <span class="n">LIGHT_RED</span>
+<span class="kn">from</span> <span class="nn">rpclib.const.ansi_color</span> <span class="kn">import</span> <span class="n">END_COLOR</span>
 <span class="kn">from</span> <span class="nn">rpclib._base</span> <span class="kn">import</span> <span class="n">MethodContext</span>
 <span class="kn">from</span> <span class="nn">rpclib.server</span> <span class="kn">import</span> <span class="n">ServerBase</span>
 
@@ -80,6 +85,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">transport</span> <span class="o">=</span> <span class="s">&#39;noconn://null.rpclib&#39;</span>
+    <span class="n">supports_fanout_methods</span> <span class="o">=</span> <span class="bp">False</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
         <span class="n">ServerBase</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span>
@@ -94,43 +100,69 @@
 <div class="viewcode-block" id="NullServer.set_options"><a class="viewcode-back" href="../../../reference/server.html#rpclib.server.null.NullServer.set_options">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">service</span><span class="o">.</span><span class="n">in_header</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;soapheaders&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">_FunctionProxy</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div></div>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">app</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__app</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__server</span> <span class="o">=</span> <span class="n">server</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">in_header</span> <span class="o">=</span> <span class="bp">None</span>
 
     <span class="k">def</span> <span class="nf">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">_FunctionCall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__app</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_header</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">_FunctionCall</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__app</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__server</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">in_header</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">_FunctionCall</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">in_header</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">server</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">in_header</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__key</span> <span class="o">=</span> <span class="n">key</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__app</span> <span class="o">=</span> <span class="n">app</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__server</span> <span class="o">=</span> <span class="n">server</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__in_header</span> <span class="o">=</span> <span class="n">in_header</span>
 
     <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">ctx</span> <span class="o">=</span> <span class="n">MethodContext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__app</span><span class="p">)</span>
-        <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key</span>
-        <span class="n">ctx</span><span class="o">.</span><span class="n">in_header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__in_header</span>
-        <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="n">args</span>
+        <span class="n">initial_ctx</span> <span class="o">=</span> <span class="n">MethodContext</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__app</span><span class="p">)</span>
+        <span class="n">initial_ctx</span><span class="o">.</span><span class="n">method_request_string</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__key</span>
+        <span class="n">initial_ctx</span><span class="o">.</span><span class="n">in_header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__in_header</span>
+        <span class="n">initial_ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="n">args</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">__app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">set_method_descriptor</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__app</span><span class="o">.</span><span class="n">process_request</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+        <span class="n">contexts</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">generate_method_contexts</span><span class="p">(</span><span class="n">initial_ctx</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">ctx</span> <span class="ow">in</span> <span class="n">contexts</span><span class="p">:</span>
+            <span class="c"># set logging.getLogger(&#39;rpclib.server.null&#39;).setLevel(logging.CRITICAL)</span>
+            <span class="c"># to hide the following</span>
+            <span class="n">_header</span> <span class="o">=</span> <span class="p">(</span><span class="s">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span> <span class="o">+</span> <span class="n">LIGHT_RED</span>
+            <span class="n">_footer</span> <span class="o">=</span> <span class="n">END_COLOR</span> <span class="o">+</span> <span class="p">(</span><span class="s">&#39;=&#39;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="c"># workaround to have the context disposed of when the caller is done</span>
-            <span class="c"># with the return value. the context is sometimes needed to fully</span>
-            <span class="c"># construct the return object (e.g. when the object is a sqlalchemy</span>
-            <span class="c"># object bound to a session that&#39;s defined in the context object).</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">ctx</span><span class="o">.</span><span class="n">out_object</span><span class="o">.</span><span class="n">__ctx__</span> <span class="o">=</span> <span class="n">ctx</span>
-            <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
-                <span class="c"># not all objects let this happen. (eg. built-in types like str)</span>
-                <span class="c"># which don&#39;t need the context anyway.</span>
-                <span class="k">pass</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s"> start request </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_header</span><span class="p">,</span> <span class="n">_footer</span><span class="p">)</span>  <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__app</span><span class="o">.</span><span class="n">process_request</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">  end request  </span><span class="si">%s</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">_header</span><span class="p">,</span> <span class="n">_footer</span><span class="p">)</span>  <span class="p">)</span>
 
-            <span class="k">return</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_object</span>
+            <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_error</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_message</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="n">retval</span> <span class="o">=</span> <span class="bp">None</span>
+
+                <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_message</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">retval</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_object</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+                    <span class="c"># workaround to have the context disposed of when the caller is done</span>
+                    <span class="c"># with the return value. the context is sometimes needed to fully</span>
+                    <span class="c"># construct the return object (e.g. when the object is a sqlalchemy</span>
+                    <span class="c"># object bound to a session that&#39;s defined in the context object).</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">retval</span><span class="o">.</span><span class="n">__ctx__</span> <span class="o">=</span> <span class="n">ctx</span>
+                    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                        <span class="c"># not all objects let this happen. (eg. built-in types like str)</span>
+                        <span class="c"># which don&#39;t need the context anyway.</span>
+                        <span class="k">pass</span>
+
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">retval</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_object</span>
+
+                    <span class="c"># same as above</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">retval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">__ctx__</span> <span class="o">=</span> <span class="n">ctx</span>
+                    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                        <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">retval</span>
 </pre></div>
 
           </div>
@@ -164,7 +196,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.protocol.http &mdash; rpclib 2.4.4-beta documentation</title>
+    <title>rpclib.protocol.http &mdash; rpclib 2.5.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.4.4-beta',
+        VERSION:     '2.5.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.4.4-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib 2.5.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -75,7 +75,10 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
-<span class="kn">import</span> <span class="nn">urlparse</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">urlparse</span> <span class="kn">import</span> <span class="n">parse_qs</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span> <span class="c"># Python 3</span>
+    <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">parse_qs</span>
 
 <span class="kn">from</span> <span class="nn">rpclib.protocol</span> <span class="kn">import</span> <span class="n">ProtocolBase</span>
 
@@ -84,7 +87,7 @@
 <span class="k">def</span> <span class="nf">_get_http_headers</span><span class="p">(</span><span class="n">req_env</span><span class="p">):</span>
     <span class="n">retval</span> <span class="o">=</span> <span class="p">{}</span>
 
-    <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">v</span> <span class="ow">in</span> <span class="n">req_env</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">req_env</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">k</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;HTTP_&quot;</span><span class="p">):</span>
             <span class="n">retval</span><span class="p">[</span><span class="n">k</span><span class="p">[</span><span class="mi">5</span><span class="p">:]</span><span class="o">.</span><span class="n">lower</span><span class="p">()]</span><span class="o">=</span> <span class="n">v</span>
 
@@ -109,12 +112,10 @@
     <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
 <div class="viewcode-block" id="HttpRpc.decompose_incoming_envelope"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.decompose_incoming_envelope">[docs]</a>        <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span> <span class="o">=</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">get_tns</span><span class="p">(),</span>
                               <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[92mMethod name: </span><span class="si">%r</span><span class="se">\033</span><span class="s">[0m&quot;</span> <span class="o">%</span> <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">in_protocol</span><span class="o">.</span><span class="n">set_method_descriptor</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">in_header_doc</span> <span class="o">=</span> <span class="n">_get_http_headers</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span><span class="p">)</span>
-        <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span> <span class="o">=</span> <span class="n">urlparse</span><span class="o">.</span><span class="n">parse_qs</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span><span class="p">[</span><span class="s">&#39;QUERY_STRING&#39;</span><span class="p">])</span>
+        <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span> <span class="o">=</span> <span class="n">parse_qs</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span><span class="p">[</span><span class="s">&#39;QUERY_STRING&#39;</span><span class="p">])</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">))</span>
 
@@ -151,8 +152,8 @@
                             <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
 
                         <span class="n">value</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">native_v2</span><span class="p">)</span>
-                        <span class="n">freq</span> <span class="o">=</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
-                        <span class="n">freq</span><span class="o">+=</span><span class="mi">1</span>
+                        <span class="n">freq</span> <span class="o">=</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                        <span class="n">freq</span> <span class="o">+=</span> <span class="mi">1</span>
                         <span class="n">frequencies</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span>
 
                     <span class="nb">setattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
@@ -175,7 +176,7 @@
                     <span class="n">frequencies</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">freq</span>
 
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">==</span> <span class="s">&#39;soft&#39;</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">k</span><span class="p">,</span><span class="n">c</span> <span class="ow">in</span> <span class="n">flat_type_info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">flat_type_info</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                     <span class="n">val</span> <span class="o">=</span> <span class="n">frequencies</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
                     <span class="k">if</span> <span class="n">val</span> <span class="o">&lt;</span> <span class="n">c</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">min_occurs</span> \
                             <span class="ow">or</span>  <span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_occurs</span> <span class="o">!=</span> <span class="s">&#39;unbounded&#39;</span>
@@ -245,7 +246,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

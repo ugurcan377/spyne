@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>History and Future &mdash; rpclib 2.4.4-beta documentation</title>
+    <title>History and Future &mdash; rpclib 2.5.0-beta documentation</title>
     
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.4.4-beta',
+        VERSION:     '2.5.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.4.4-beta documentation" href="index.html" />
+    <link rel="top" title="rpclib 2.5.0-beta documentation" href="index.html" />
     <link rel="next" title="Comparison with other rpc frameworks" href="comparison.html" />
     <link rel="prev" title="Rpclib FAQ" href="faq.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="faq.html" title="Rpclib FAQ"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -129,9 +129,6 @@ Soap to JsonRpc.</p>
 </div>
 <div class="section" id="miscellanous">
 <h3>Miscellanous<a class="headerlink" href="#miscellanous" title="Permalink to this headline">¶</a></h3>
-<p>First and foremost:</p>
-<blockquote>
-<div>Fix the tests that fail due to api changes!</div></blockquote>
 <p>The following would definitely be nice to have, but are just modules that should
 not cause a change in unrelated areas of rpclib. Those would increment the minor
 version number of the Rpclib version once implemented.</p>
@@ -158,7 +155,9 @@ and rewriting it as a wrapper to Werkzeug or a similar WSGI library.</li>
 </div>
 <div class="section" id="comparison-with-other-rpc-frameworks">
 <span id="manual-comparison"></span><h2>Comparison with other rpc frameworks<a class="headerlink" href="#comparison-with-other-rpc-frameworks" title="Permalink to this headline">¶</a></h2>
-<p>Oh my.</p>
+<p>RPC is a very popular subject. There&#8217;s a plethora of active and inactive
+projects that satisfy a wide arrange of requirements. Here are the main sources
+of information:</p>
 <ul class="simple">
 <li><a class="reference external" href="http://pypi.python.org/pypi?%3Aaction=search&amp;term=rpc">http://pypi.python.org/pypi?%3Aaction=search&amp;term=rpc</a></li>
 <li><a class="reference external" href="http://www.ohloh.net/tags/python/rpc">http://www.ohloh.net/tags/python/rpc</a></li>
@@ -167,7 +166,7 @@ and rewriting it as a wrapper to Werkzeug or a similar WSGI library.</li>
 <div class="section" id="ladon">
 <h3>Ladon<a class="headerlink" href="#ladon" title="Permalink to this headline">¶</a></h3>
 <p>The Ladon project has almost the same goals and same approach to the rpc-related
-issues.</p>
+issues as rpclib.</p>
 <p>Discussion thread: <a class="reference external" href="https://answers.launchpad.net/ladon/+question/171664">https://answers.launchpad.net/ladon/+question/171664</a></p>
 <ul>
 <li><dl class="first docutils">
@@ -204,7 +203,7 @@ standard protocol like SOAP is that clients are already out there.</p>
 </dd>
 </dl>
 </li>
-<li><p class="first">Rpclib uses own classes for denoting types, whereas ladon uses python
+<li><p class="first">Rpclib uses own classes for denoting types, whereas ladon uses Python
 callables. This lets ladon api to be simpler, but gives the rpclib api the
 power to have declarative restrictions on input types.</p>
 </li>
@@ -212,8 +211,23 @@ power to have declarative restrictions on input types.</p>
 </li>
 <li><p class="first">Does not support parsing and/or modifying protocol &amp; transport headers.</p>
 </li>
-<li><p class="first">Does not offer declarative constraints.</p>
-</li>
+</ul>
+</div>
+<div class="section" id="wsme">
+<h3>WSME<a class="headerlink" href="#wsme" title="Permalink to this headline">¶</a></h3>
+<p>&#8220;&#8221;&#8221;
+Web Service Made Easy (WSME) is a very easy way to implement webservices in your
+python web application. It is originally a rewrite of TGWebServices with focus
+on extensibility, framework-independance and better type handling.
+&#8220;&#8221;&#8220;</p>
+<ul class="simple">
+<li>Supports TurboGears</li>
+<li>Supports REST+Json, REST+Xml, (a subset of) SOAP and ExtDirect.</li>
+<li>Supports type validation.</li>
+<li>No client support.</li>
+<li>Does not test against ws-i.org deliverables for testing soap compatibility.</li>
+<li>Only supports http as transport.</li>
+<li>Uses genshi for Xml support.</li>
 </ul>
 </div>
 <div class="section" id="rpyc">
@@ -241,9 +255,12 @@ power to have declarative restrictions on input types.</p>
 <div class="section" id="suds">
 <h3>Suds<a class="headerlink" href="#suds" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Excellent wsdl parser, very easy to use.</li>
 <li>Soap 1.1 / Wsdl 1.1 Client only.</li>
-<li>Slow.</li>
+<li>Excellent wsdl parser, very easy to use.</li>
+<li>Recommended way to interface with rpclib services.</li>
+<li>Uses own pure-python xml implementation, so it&#8217;s roughly 10 times slower
+than rpclib.</li>
+<li>Only depends on pure-python solutions, so much easier to deploy.</li>
 </ul>
 </div>
 <div class="section" id="zsi">
@@ -261,8 +278,8 @@ power to have declarative restrictions on input types.</p>
 <div class="section" id="rsl">
 <h3>rsl<a class="headerlink" href="#rsl" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Unmaintained.</li>
 <li>Client only.</li>
+<li>Unmaintained.</li>
 </ul>
 </div>
 <div class="section" id="pyro">
@@ -274,6 +291,33 @@ power to have declarative restrictions on input types.</p>
 </div>
 <div class="section" id="id1">
 <h2>Changelog<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rpclib-2-5-0-beta">
+<h3>rpclib-2.5.0-beta<a class="headerlink" href="#rpclib-2-5-0-beta" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Implemented fanout support for transports and protocols that can handle
+that.</li>
+<li>Implemented a helper module that generates a Soap/Wsdl 1.1 application in
+<tt class="docutils literal"><span class="pre">rpclib.util.simple</span></tt></li>
+<li>Some work towards supporting Python3 using <tt class="docutils literal"><span class="pre">2to3</span></tt>. See issue #113.</li>
+<li><tt class="docutils literal"><span class="pre">ctx.descriptor.reset_function</span></tt> implemented. It&#8217;s now safe to fiddle
+with that value in event handlers.</li>
+<li>Incorporated a cleaned-up version of the Django wrapper: <a class="reference external" href="https://gist.github.com/1316025">https://gist.github.com/1316025</a></li>
+<li>Fix most of the tests that fail due to api changes.</li>
+<li>Fix Http soap client.</li>
+<li>Full change log: <a class="reference external" href="https://github.com/arskom/rpclib/pull/115">https://github.com/arskom/rpclib/pull/115</a></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="rpclib-2-4-7-beta">
+<h3>rpclib-2.4.7-beta<a class="headerlink" href="#rpclib-2-4-7-beta" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Made color in logs optional</li>
+<li>Fixed ByteArray serializer</li>
+</ul>
+</div></blockquote>
+</div>
 <div class="section" id="rpclib-2-4-5-beta">
 <h3>rpclib-2.4.5-beta<a class="headerlink" href="#rpclib-2-4-5-beta" title="Permalink to this headline">¶</a></h3>
 <blockquote>
@@ -732,6 +776,7 @@ on server start, and Service Definition is instantiated for each new request.</l
 </li>
 <li><a class="reference internal" href="#comparison-with-other-rpc-frameworks">Comparison with other rpc frameworks</a><ul>
 <li><a class="reference internal" href="#ladon">Ladon</a></li>
+<li><a class="reference internal" href="#wsme">WSME</a></li>
 <li><a class="reference internal" href="#rpyc">RPyC</a></li>
 <li><a class="reference internal" href="#rfoo">rfoo</a></li>
 <li><a class="reference internal" href="#suds">Suds</a></li>
@@ -742,6 +787,8 @@ on server start, and Service Definition is instantiated for each new request.</l
 </ul>
 </li>
 <li><a class="reference internal" href="#id1">Changelog</a><ul>
+<li><a class="reference internal" href="#rpclib-2-5-0-beta">rpclib-2.5.0-beta</a></li>
+<li><a class="reference internal" href="#rpclib-2-4-7-beta">rpclib-2.4.7-beta</a></li>
 <li><a class="reference internal" href="#rpclib-2-4-5-beta">rpclib-2.4.5-beta</a></li>
 <li><a class="reference internal" href="#rpclib-2-4-3-beta">rpclib-2.4.3-beta</a></li>
 <li><a class="reference internal" href="#rpclib-2-4-1-beta">rpclib-2.4.1-beta</a></li>
@@ -825,7 +872,7 @@ on server start, and Service Definition is instantiated for each new request.</l
         <li class="right" >
           <a href="faq.html" title="Rpclib FAQ"
              >previous</a> |</li>
-        <li><a href="index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Server Transports &mdash; rpclib 2.4.4-beta documentation</title>
+    <title>Server Transports &mdash; rpclib 2.5.0-beta documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.4.4-beta',
+        VERSION:     '2.5.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.4.4-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib 2.5.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Miscellanous Rpclib Utilities" href="util.html" />
     <link rel="prev" title="Client Transports" href="client.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="client.html" title="Client Transports"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -71,8 +71,15 @@ a pure-virtual method that needs to be implemented by all base classes.</p>
 <p>If there is a call to start the main loop, it&#8217;s conventionally called
 &#8216;serve_forever()&#8217;.</p>
 <dl class="method">
+<dt id="rpclib.server._base.ServerBase.generate_contexts">
+<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/_base.html#ServerBase.generate_contexts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server._base.ServerBase.generate_contexts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls create_in_document and decompose_incoming_envelope to get
+method_request string in order to generate contexts.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="rpclib.server._base.ServerBase.get_in_object">
-<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/_base.html#ServerBase.get_in_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server._base.ServerBase.get_in_object" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/_base.html#ServerBase.get_in_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server._base.ServerBase.get_in_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.in_string to set ctx.in_body_doc, which in turn is used
 to set ctx.in_object.</p>
 </dd></dl>
@@ -148,8 +155,15 @@ request.</p>
 </dd>
 </dl>
 <dl class="method">
+<dt id="rpclib.server.wsgi.WsgiApplication.generate_contexts">
+<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.generate_contexts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls create_in_document and decompose_incoming_envelope to get
+method_request string in order to generate contexts.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="rpclib.server.wsgi.WsgiApplication.get_in_object">
-<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.get_in_object" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.get_in_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.in_string to set ctx.in_body_doc, which in turn is used
 to set ctx.in_object.</p>
 </dd></dl>
@@ -167,6 +181,21 @@ ctx.out_object.</p>
 <dd><p>Uses the ctx.out_object to set ctx.out_document and later
 ctx.out_object.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="rpclib.server.wsgi.WsgiApplication.handle_error">
+<tt class="descname">handle_error</tt><big>(</big><em>ctx</em>, <em>error</em>, <em>start_response</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiApplication.handle_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.handle_error" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rpclib.server.wsgi.WsgiApplication.handle_rpc">
+<tt class="descname">handle_rpc</tt><big>(</big><em>req_env</em>, <em>start_response</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiApplication.handle_rpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.handle_rpc" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiApplication.supports_fanout_methods">
+<tt class="descname">supports_fanout_methods</tt><em class="property"> = False</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.supports_fanout_methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="rpclib.server.wsgi.WsgiApplication.transport">
@@ -260,8 +289,15 @@ transport.</p>
 <em class="property">class </em><tt class="descclassname">rpclib.server.zeromq.</tt><tt class="descname">ZeroMQServer</tt><big>(</big><em>app</em>, <em>app_url</em>, <em>wsdl_url=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/zeromq.html#ZeroMQServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer" title="Permalink to this definition">¶</a></dt>
 <dd><p>The ZeroMQ server transport.</p>
 <dl class="method">
+<dt id="rpclib.server.zeromq.ZeroMQServer.generate_contexts">
+<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.generate_contexts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls create_in_document and decompose_incoming_envelope to get
+method_request string in order to generate contexts.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="rpclib.server.zeromq.ZeroMQServer.get_in_object">
-<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.get_in_object" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.get_in_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.in_string to set ctx.in_body_doc, which in turn is used
 to set ctx.in_object.</p>
 </dd></dl>
@@ -285,6 +321,11 @@ ctx.out_object.</p>
 <tt class="descname">serve_forever</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/server/zeromq.html#ZeroMQServer.serve_forever"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.serve_forever" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs the ZeroMQ server.</p>
 </dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.zeromq.ZeroMQServer.supports_fanout_methods">
+<tt class="descname">supports_fanout_methods</tt><em class="property"> = False</em><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.supports_fanout_methods" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="rpclib.server.zeromq.ZeroMQServer.transport">
@@ -312,7 +353,7 @@ matched to.</p>
 
 <dl class="data">
 <dt id="rpclib.server.zeromq.context">
-<tt class="descclassname">rpclib.server.zeromq.</tt><tt class="descname">context</tt><em class="property"> = &lt;zmq.core.context.Context object at 0x2c73a70&gt;</em><a class="headerlink" href="#rpclib.server.zeromq.context" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">rpclib.server.zeromq.</tt><tt class="descname">context</tt><em class="property"> = &lt;zmq.core.context.Context object at 0x9ef192c&gt;</em><a class="headerlink" href="#rpclib.server.zeromq.context" title="Permalink to this definition">¶</a></dt>
 <dd><p>The ZeroMQ context.</p>
 </dd></dl>
 
@@ -326,8 +367,15 @@ matched to.</p>
 <dd><p>A server that doesn&#8217;t support any transport at all &#8211; it&#8217;s implemented
 for testing services without running a server.</p>
 <dl class="method">
+<dt id="rpclib.server.null.NullServer.generate_contexts">
+<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#rpclib.server.null.NullServer.generate_contexts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calls create_in_document and decompose_incoming_envelope to get
+method_request string in order to generate contexts.</p>
+</dd></dl>
+
+<dl class="method">
 <dt id="rpclib.server.null.NullServer.get_in_object">
-<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#rpclib.server.null.NullServer.get_in_object" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.null.NullServer.get_in_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.in_string to set ctx.in_body_doc, which in turn is used
 to set ctx.in_object.</p>
 </dd></dl>
@@ -354,6 +402,11 @@ ctx.out_object.</p>
 <dl class="method">
 <dt id="rpclib.server.null.NullServer.set_options">
 <tt class="descname">set_options</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/null.html#NullServer.set_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.null.NullServer.set_options" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.null.NullServer.supports_fanout_methods">
+<tt class="descname">supports_fanout_methods</tt><em class="property"> = False</em><a class="headerlink" href="#rpclib.server.null.NullServer.supports_fanout_methods" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -426,7 +479,7 @@ ctx.out_object.</p>
         <li class="right" >
           <a href="client.html" title="Client Transports"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

@@ -10,7 +10,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index &mdash; rpclib 2.4.4-beta documentation</title>
+    <title>Index &mdash; rpclib 2.5.0-beta documentation</title>
     
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -18,7 +18,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.4.4-beta',
+        VERSION:     '2.5.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -27,7 +27,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.4.4-beta documentation" href="index.html" /> 
+    <link rel="top" title="rpclib 2.5.0-beta documentation" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -39,7 +39,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -530,12 +530,12 @@
   <dt><a href="reference/base.html#rpclib.EventManager.fire_event">fire_event() (rpclib.EventManager method)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/model.html#rpclib.model.primitive.Float">Float (class in rpclib.model.primitive)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/model.html#rpclib.model.primitive.Float.Annotations">Float.Annotations (class in rpclib.model.primitive)</a>
   </dt>
@@ -558,16 +558,44 @@
   </dt>
 
       </dl></dd>
-      
-  <dt><a href="reference/base.html#rpclib.MethodDescriptor.function">function (rpclib.MethodDescriptor attribute)</a>
-  </dt>
-
   </dl></td>
 </tr></table>
 
 <h2 id="G">G</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/server.html#rpclib.server._base.ServerBase.generate_contexts">generate_contexts() (rpclib.server._base.ServerBase method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/server.html#rpclib.server.null.NullServer.generate_contexts">(rpclib.server.null.NullServer method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiApplication.generate_contexts">(rpclib.server.wsgi.WsgiApplication method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/server.html#rpclib.server.zeromq.ZeroMQServer.generate_contexts">(rpclib.server.zeromq.ZeroMQServer method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase.generate_method_contexts">generate_method_contexts() (rpclib.protocol._base.ProtocolBase method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.generate_method_contexts">(rpclib.protocol.http.HttpRpc method)</a>
+  </dt>
+
+        
+  <dt><a href="reference/protocol.html#rpclib.protocol.soap.soap11.Soap11.generate_method_contexts">(rpclib.protocol.soap.soap11.Soap11 method)</a>
+  </dt>
+
+      </dl></dd>
       
   <dt><a href="reference/interface.html#rpclib.interface._base.InterfaceBase.get_class">get_class() (rpclib.interface._base.InterfaceBase method)</a>
   </dt>
@@ -828,6 +856,8 @@
   <dt><a href="reference/util.html#rpclib.util.xml.get_object_as_xml">get_object_as_xml() (in module rpclib.util.xml)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/client.html#rpclib.client._base.RemoteProcedureBase.get_out_object">get_out_object() (rpclib.client._base.RemoteProcedureBase method)</a>
   </dt>
@@ -850,8 +880,6 @@
   </dt>
 
       </dl></dd>
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/client.html#rpclib.client._base.RemoteProcedureBase.get_out_string">get_out_string() (rpclib.client._base.RemoteProcedureBase method)</a>
   </dt>
@@ -902,6 +930,10 @@
   </dt>
 
       </dl></dd>
+      
+  <dt><a href="reference/model.html#rpclib.model.complex.ComplexModelBase.get_simple_type_info">get_simple_type_info() (rpclib.model.complex.ComplexModelBase static method)</a>
+  </dt>
+
       
   <dt><a href="reference/interface.html#rpclib.interface._base.InterfaceBase.get_tns">get_tns() (rpclib.interface._base.InterfaceBase method)</a>
   </dt>
@@ -1103,15 +1135,23 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/interface.html#rpclib.interface._base.InterfaceBase.has_class">has_class() (rpclib.interface._base.InterfaceBase method)</a>
+  <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiApplication.handle_error">handle_error() (rpclib.server.wsgi.WsgiApplication method)</a>
   </dt>
 
       
-  <dt><a href="reference/client.html#rpclib.client.http.HttpClient">HttpClient (class in rpclib.client.http)</a>
+  <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiApplication.handle_rpc">handle_rpc() (rpclib.server.wsgi.WsgiApplication method)</a>
+  </dt>
+
+      
+  <dt><a href="reference/interface.html#rpclib.interface._base.InterfaceBase.has_class">has_class() (rpclib.interface._base.InterfaceBase method)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/client.html#rpclib.client.http.HttpClient">HttpClient (class in rpclib.client.http)</a>
+  </dt>
+
       
   <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc">HttpRpc (class in rpclib.protocol.http)</a>
   </dt>
@@ -1580,12 +1620,12 @@
   <dt><a href="reference/model.html#module-rpclib.model._base">rpclib.model._base (module)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/model.html#module-rpclib.model.binary">rpclib.model.binary (module)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/model.html#module-rpclib.model.complex">rpclib.model.complex (module)</a>
   </dt>
@@ -1655,6 +1695,10 @@
   </dt>
 
       
+  <dt><a href="reference/util.html#module-rpclib.util.simple">rpclib.util.simple (module)</a>, <a href="reference/util.html#module-rpclib.util.simple">[1]</a>
+  </dt>
+
+      
   <dt><a href="reference/util.html#module-rpclib.util.xml">rpclib.util.xml (module)</a>
   </dt>
 
@@ -1706,8 +1750,6 @@
   <dt><a href="reference/protocol.html#rpclib.protocol.http.HttpRpc.set_app">set_app() (rpclib.protocol.http.HttpRpc method)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/protocol.html#rpclib.protocol._base.ProtocolBase.set_method_descriptor">set_method_descriptor() (rpclib.protocol._base.ProtocolBase method)</a>
   </dt>
@@ -1722,6 +1764,8 @@
   </dt>
 
       </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="reference/client.html#rpclib.client._base.ClientBase.set_options">set_options() (rpclib.client._base.ClientBase method)</a>
   </dt>
@@ -1767,6 +1811,20 @@
       <dd><dl>
         
   <dt><a href="reference/model.html#rpclib.model.primitive.Mandatory.String">(rpclib.model.primitive.Mandatory attribute)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="reference/server.html#rpclib.server.null.NullServer.supports_fanout_methods">supports_fanout_methods (rpclib.server.null.NullServer attribute)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiApplication.supports_fanout_methods">(rpclib.server.wsgi.WsgiApplication attribute)</a>
+  </dt>
+
+        
+  <dt><a href="reference/server.html#rpclib.server.zeromq.ZeroMQServer.supports_fanout_methods">(rpclib.server.zeromq.ZeroMQServer attribute)</a>
   </dt>
 
       </dl></dd>
@@ -2012,6 +2070,10 @@
   <dt><a href="reference/server.html#rpclib.server.wsgi.WsgiTransportContext.wsdl_error">wsdl_error (rpclib.server.wsgi.WsgiTransportContext attribute)</a>
   </dt>
 
+      
+  <dt><a href="reference/util.html#rpclib.util.simple.wsgi_soap11_application">wsgi_soap11_application() (in module rpclib.util.simple)</a>, <a href="reference/util.html#rpclib.util.simple.wsgi_soap11_application">[1]</a>
+  </dt>
+
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
@@ -2033,15 +2095,23 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="reference/model.html#rpclib.model.complex.XMLAttribute">XMLAttribute (class in rpclib.model.complex)</a>
+  <dt><a href="reference/model.html#rpclib.model.complex.XmlAttribute">XmlAttribute (class in rpclib.model.complex)</a>
   </dt>
 
       
-  <dt><a href="reference/model.html#rpclib.model.complex.XMLAttributeRef">XMLAttributeRef (class in rpclib.model.complex)</a>
+  <dt><a href="reference/model.html#rpclib.model.complex.XMLAttribute">XMLAttribute (in module rpclib.model.complex)</a>
+  </dt>
+
+      
+  <dt><a href="reference/model.html#rpclib.model.complex.XmlAttributeRef">XmlAttributeRef (class in rpclib.model.complex)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="reference/model.html#rpclib.model.complex.XMLAttributeRef">XMLAttributeRef (in module rpclib.model.complex)</a>
+  </dt>
+
       
   <dt><a href="reference/interface.html#rpclib.interface.xml_schema._base.XmlSchema">XmlSchema (class in rpclib.interface.xml_schema._base)</a>
   </dt>
@@ -2105,7 +2175,7 @@
         <li class="right" >
           <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="index.html">rpclib 2.4.4-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
