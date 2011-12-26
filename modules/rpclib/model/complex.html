@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.model.complex &mdash; rpclib 2.5.0-beta documentation</title>
+    <title>rpclib.model.complex &mdash; rpclib 2.5.1-beta documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.5.0-beta',
+        VERSION:     '2.5.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.0-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -81,6 +81,15 @@
 
 <span class="kn">from</span> <span class="nn">rpclib.util.odict</span> <span class="kn">import</span> <span class="n">odict</span> <span class="k">as</span> <span class="n">TypeInfo</span>
 <span class="kn">from</span> <span class="nn">rpclib.const</span> <span class="kn">import</span> <span class="n">xml_ns</span> <span class="k">as</span> <span class="n">namespace</span>
+
+
+<span class="k">class</span> <span class="nc">_SimpleTypeInfoElement</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="n">__slots__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;path&#39;</span><span class="p">,</span> <span class="s">&#39;parent&#39;</span><span class="p">,</span> <span class="s">&#39;type&#39;</span><span class="p">]</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">type_</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="n">type_</span>
+
 
 <span class="k">class</span> <span class="nc">XmlAttribute</span><span class="p">(</span><span class="n">ModelBase</span><span class="p">):</span>
 <div class="viewcode-block" id="XmlAttribute"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.complex.XmlAttribute">[docs]</a>    <span class="sd">&quot;&quot;&quot;Items which are marshalled as attributes of the parent element.&quot;&quot;&quot;</span>
@@ -206,17 +215,22 @@
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_type_info</span><span class="o">.</span><span class="n">keys</span><span class="p">()[</span><span class="n">i</span><span class="p">],</span> <span class="bp">None</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">(</span><span class="si">%r</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_type_name</span><span class="p">(),</span>
-                           <span class="p">[</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">=</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
-                           <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">_type_info</span><span class="p">])</span>
+        <span class="k">return</span> <span class="s">&quot;</span><span class="si">%s</span><span class="s">(</span><span class="si">%s</span><span class="s">)&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_type_name</span><span class="p">(),</span> <span class="s">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span>
+                           <span class="p">[</span><span class="s">&#39;</span><span class="si">%s</span><span class="s">=</span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="bp">None</span><span class="p">))</span>
+                                            <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">__class__</span><span class="o">.</span><span class="n">_type_info</span><span class="p">]))</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_serialization_instance</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<div class="viewcode-block" id="ComplexModelBase.get_serialization_instance"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.complex.ComplexModelBase.get_serialization_instance">[docs]</a>        <span class="sd">&quot;&quot;&quot;The value argument can be:</span>
+<span class="sd">            * A list of native types aligned with cls._type_info.</span>
+<span class="sd">            * A dict of native types</span>
+<span class="sd">            * The native type itself.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="c"># if the instance is a list, convert it to a cls instance.</span>
-        <span class="c"># this is only useful when deserializing method arguments which is the</span>
-        <span class="c"># only time when the member order is not arbitrary (as the members</span>
-        <span class="c"># are declared and passed around as sequences of arguments, unlike</span>
-        <span class="c"># dictionaries in a regular class definition).</span>
+        <span class="c"># this is only useful when deserializing method arguments for a client</span>
+        <span class="c"># request which is the only time when the member order is not arbitrary</span>
+        <span class="c"># (as the members are declared and passed around as sequences of</span>
+        <span class="c"># arguments, unlike dictionaries in a regular class definition).</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">_type_info</span><span class="p">)</span>
 
@@ -237,11 +251,14 @@
 
         <span class="k">return</span> <span class="n">inst</span>
 
-    <span class="nd">@classmethod</span>
+    <span class="nd">@classmethod</span></div>
     <span class="k">def</span> <span class="nf">get_deserialization_instance</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="ComplexModelBase.get_deserialization_instance"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.complex.ComplexModelBase.get_deserialization_instance">[docs]</a>        <span class="sd">&quot;&quot;&quot;Get an empty native type so that the deserialization logic can set</span>
+<span class="sd">        its attributes.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">cls</span><span class="p">()</span>
 
-    <span class="nd">@classmethod</span>
+    <span class="nd">@classmethod</span></div>
     <span class="k">def</span> <span class="nf">get_members_pairs</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">inst</span><span class="p">):</span>
         <span class="n">parent_cls</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="s">&#39;__extends__&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">parent_cls</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
@@ -283,7 +300,7 @@
         <span class="k">return</span> <span class="n">retval</span>
 
     <span class="nd">@staticmethod</span></div>
-    <span class="k">def</span> <span class="nf">get_simple_type_info</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">retval</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_simple_type_info</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">retval</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">prefix</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 <div class="viewcode-block" id="ComplexModelBase.get_simple_type_info"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.complex.ComplexModelBase.get_simple_type_info">[docs]</a>        <span class="sd">&quot;&quot;&quot;Returns a _type_info dict that includes members from all base classes</span>
 <span class="sd">        and whose types are only primitives.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -292,23 +309,28 @@
 
         <span class="k">if</span> <span class="n">retval</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">retval</span> <span class="o">=</span> <span class="p">{}</span>
-
-        <span class="k">if</span> <span class="n">prefix</span><span class="p">:</span>
-            <span class="n">prefix</span> <span class="o">+=</span> <span class="s">&quot;_&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">prefix</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">prefix</span> <span class="o">=</span> <span class="p">[]</span>
 
         <span class="n">fti</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">get_flat_type_info</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">fti</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="s">&#39;get_flat_type_info&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-                <span class="n">key</span> <span class="o">=</span> <span class="n">prefix</span> <span class="o">+</span> <span class="n">k</span>
+                <span class="n">new_prefix</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+                <span class="n">new_prefix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                <span class="n">key</span> <span class="o">=</span> <span class="s">&#39;_&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">new_prefix</span><span class="p">)</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">retval</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+
                 <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s">&quot;</span><span class="si">%r</span><span class="s">.</span><span class="si">%s</span><span class="s"> conflicts with </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
+
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">retval</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+                    <span class="n">retval</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">_SimpleTypeInfoElement</span><span class="p">(</span>
+                                        <span class="n">path</span><span class="o">=</span><span class="nb">tuple</span><span class="p">(</span><span class="n">new_prefix</span><span class="p">),</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">,</span> <span class="n">type_</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
+
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">v</span><span class="o">.</span><span class="n">get_simple_type_info</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">retval</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+                <span class="n">new_prefix</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+                <span class="n">new_prefix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+                <span class="n">v</span><span class="o">.</span><span class="n">get_simple_type_info</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">retval</span><span class="p">,</span> <span class="n">new_prefix</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">cls</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">retval</span>
 
@@ -382,7 +404,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">serializer</span><span class="p">,</span> <span class="o">**</span> <span class="n">kwargs</span><span class="p">):</span>
-        <span class="n">retval</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">customize</span><span class="p">(</span> <span class="o">**</span> <span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">customize</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
         <span class="c"># hack to default to unbounded arrays when the user didn&#39;t specify</span>
         <span class="c"># max_occurs. We should find a better way.</span>
@@ -428,6 +450,11 @@
         <span class="nb">setattr</span><span class="p">(</span><span class="n">inst</span><span class="p">,</span> <span class="n">member_name</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">inst</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_deserialization_instance</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">[]</span>
+
 
 <span class="k">class</span> <span class="nc">Iterable</span><span class="p">(</span><span class="n">Array</span><span class="p">):</span></div>
 <div class="viewcode-block" id="Iterable"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.complex.Iterable">[docs]</a>    <span class="sd">&quot;&quot;&quot;This class generates a ComplexModel child that has one attribute that has</span>
@@ -544,7 +571,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

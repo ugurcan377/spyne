@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.server.wsgi &mdash; rpclib 2.5.0-beta documentation</title>
+    <title>rpclib.server.wsgi &mdash; rpclib 2.5.1-beta documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.5.0-beta',
+        VERSION:     '2.5.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.0-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -113,7 +113,7 @@
         <span class="k">yield</span> <span class="n">data</span>
 
 <span class="k">def</span> <span class="nf">reconstruct_wsgi_request</span><span class="p">(</span><span class="n">http_env</span><span class="p">):</span>
-<div class="viewcode-block" id="reconstruct_wsgi_request"><a class="viewcode-back" href="../../../reference/server.html#rpclib.server.wsgi.reconstruct_wsgi_request">[docs]</a>    <span class="sd">&quot;&quot;&quot;Reconstruct http payload using information in the http header&quot;&quot;&quot;</span>
+<div class="viewcode-block" id="reconstruct_wsgi_request"><a class="viewcode-back" href="../../../reference/server.html#rpclib.server.wsgi.reconstruct_wsgi_request">[docs]</a>    <span class="sd">&quot;&quot;&quot;Reconstruct http payload using information in the http header.&quot;&quot;&quot;</span>
 
     <span class="c"># fyi, here&#39;s what the parse_header function returns:</span>
     <span class="c"># &gt;&gt;&gt; import cgi; cgi.parse_header(&quot;text/xml; charset=utf-8&quot;)</span>
@@ -153,10 +153,25 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">wsdl_error</span> <span class="o">=</span> <span class="bp">None</span>
         <span class="sd">&quot;&quot;&quot;The error when handling WSDL requests.&quot;&quot;&quot;</span>
 
+    <span class="k">def</span> <span class="nf">get_mime_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="WsgiTransportContext.get_mime_type"><a class="viewcode-back" href="../../../reference/server.html#rpclib.server.wsgi.WsgiTransportContext.get_mime_type">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">resp_headers</span><span class="p">[</span><span class="s">&#39;Content-Type&#39;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">set_mime_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">what</span><span class="p">):</span></div>
+<div class="viewcode-block" id="WsgiTransportContext.set_mime_type"><a class="viewcode-back" href="../../../reference/server.html#rpclib.server.wsgi.WsgiTransportContext.set_mime_type">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">resp_headers</span><span class="p">[</span><span class="s">&#39;Content-Type&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">what</span>
+
+    <span class="n">mime_type</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_mime_type</span><span class="p">,</span> <span class="n">set_mime_type</span><span class="p">)</span></div>
+    <span class="sd">&quot;&quot;&quot;Provides an easy way to set outgoing mime type. Synonym for</span>
+<span class="sd">    `content_type`&quot;&quot;&quot;</span>
+
+    <span class="n">content_type</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_mime_type</span><span class="p">,</span> <span class="n">set_mime_type</span><span class="p">)</span>
+    <span class="sd">&quot;&quot;&quot;Provides an easy way to set outgoing mime type. Synonym for</span>
+<span class="sd">    `mime_type`&quot;&quot;&quot;</span>
+
 
 <span class="k">class</span> <span class="nc">WsgiMethodContext</span><span class="p">(</span><span class="n">MethodContext</span><span class="p">):</span></div>
 <div class="viewcode-block" id="WsgiMethodContext"><a class="viewcode-back" href="../../../reference/server.html#rpclib.server.wsgi.WsgiMethodContext">[docs]</a>    <span class="sd">&quot;&quot;&quot;The WSGI-Specific method context. WSGI-Specific information is stored in</span>
-<span class="sd">    the transport attribute using the :class:`WsgiTransportContext` class.&quot;&quot;&quot;</span>
+<span class="sd">    the transport attribute using the :class:`WsgiTransportContext` class.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">req_env</span><span class="p">,</span> <span class="n">content_type</span><span class="p">):</span>
         <span class="n">MethodContext</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">)</span>
@@ -295,6 +310,7 @@
 
             <span class="bp">self</span><span class="o">.</span><span class="n">get_in_object</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_error</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_error</span><span class="p">)</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">handle_error</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_error</span><span class="p">,</span> <span class="n">start_response</span><span class="p">)</span>
 
             <span class="bp">self</span><span class="o">.</span><span class="n">get_out_object</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
@@ -367,7 +383,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

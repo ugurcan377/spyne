@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Rpclib FAQ &mdash; rpclib 2.5.0-beta documentation</title>
+    <title>Rpclib FAQ &mdash; rpclib 2.5.1-beta documentation</title>
     
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.5.0-beta',
+        VERSION:     '2.5.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.0-beta documentation" href="index.html" />
+    <link rel="top" title="rpclib 2.5.1-beta documentation" href="index.html" />
     <link rel="next" title="History and Future" href="h_and_f.html" />
     <link rel="prev" title="Running Tests" href="tests.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="tests.html" title="Running Tests"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -124,6 +124,54 @@ method from running.</p>
 should call <tt class="xref py py-func docutils literal"><span class="pre">ctx.descriptor.reset_function()</span></tt> to restore it to its
 original value</p>
 </div>
+<div class="section" id="how-do-i-use-variable-names-that-are-also-python-keywords">
+<h2>How do I use variable names that are also python keywords?<a class="headerlink" href="#how-do-i-use-variable-names-that-are-also-python-keywords" title="Permalink to this headline">¶</a></h2>
+<p>Due to restrictions of the python language, you can&#8217;t do this:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>class SomeClass(ComplexModel):</dt>
+<dd>and = String
+or = Integer
+import = Datetime</dd>
+</dl>
+</div></blockquote>
+<p>The workaround is as follows:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>class SomeClass(ComplexModel):</dt>
+<dd><dl class="first docutils">
+<dt>_type_info = {</dt>
+<dd>&#8216;and&#8217;: String
+&#8216;or&#8217;: Integer
+&#8216;import&#8217;: Datetime</dd>
+</dl>
+<p class="last">}</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>You also can&#8217;t do this:</p>
+<blockquote>
+<div><p>&#64;rpc(String, String, String, _returns=String)
+def f(ctx, from, import):</p>
+<blockquote>
+<div>return &#8216;1234&#8217;</div></blockquote>
+</div></blockquote>
+<p>The workaround is as follows:</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>&#64;rpc(String, String, String, _returns=String,</dt>
+<dd><dl class="first docutils">
+<dt>_in_variable_names={&#8216;_from&#8217;: &#8216;from&#8217;,</dt>
+<dd>&#8216;_import&#8217;: &#8216;import&#8217;},</dd>
+</dl>
+<p class="last">_out_variable_name=&#8221;return&#8221;</p>
+</dd>
+<dt>def f(ctx, _from, _import):</dt>
+<dd>return &#8216;1234&#8217;</dd>
+</dl>
+</div></blockquote>
+<p>See here: <a class="reference external" href="https://github.com/arskom/rpclib/blob/rpclib-2.5.0-beta/src/rpclib/test/test_service.py#L114">https://github.com/arskom/rpclib/blob/rpclib-2.5.0-beta/src/rpclib/test/test_service.py#L114</a></p>
+</div>
 </div>
 
 
@@ -139,6 +187,7 @@ original value</p>
 <li><a class="reference internal" href="#how-do-i-implement-a-predefined-wsdl">How do I implement a predefined WSDL?</a></li>
 <li><a class="reference internal" href="#is-it-possible-to-use-other-decorators-with-rpc-srpc">Is it possible to use other decorators with &#64;rpc/&#64;srpc?</a></li>
 <li><a class="reference internal" href="#how-do-i-alter-the-behaviour-of-a-user-method-without-using-decorators">How do I alter the behaviour of a user method without using decorators?</a></li>
+<li><a class="reference internal" href="#how-do-i-use-variable-names-that-are-also-python-keywords">How do I use variable names that are also python keywords?</a></li>
 </ul>
 </li>
 </ul>
@@ -186,7 +235,7 @@ original value</p>
         <li class="right" >
           <a href="tests.html" title="Running Tests"
              >previous</a> |</li>
-        <li><a href="index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

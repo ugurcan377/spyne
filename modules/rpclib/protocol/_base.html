@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.protocol._base &mdash; rpclib 2.5.0-beta documentation</title>
+    <title>rpclib.protocol._base &mdash; rpclib 2.5.1-beta documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.5.0-beta',
+        VERSION:     '2.5.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.0-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -87,6 +87,7 @@
 <span class="kn">from</span> <span class="nn">rpclib.const.http</span> <span class="kn">import</span> <span class="n">HTTP_404</span>
 <span class="kn">from</span> <span class="nn">rpclib.const.http</span> <span class="kn">import</span> <span class="n">HTTP_413</span>
 <span class="kn">from</span> <span class="nn">rpclib.const.http</span> <span class="kn">import</span> <span class="n">HTTP_500</span>
+
 <span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">ResourceNotFoundError</span>
 <span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">RequestTooLongError</span>
 <span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">Fault</span>
@@ -113,13 +114,16 @@
     <span class="n">allowed_http_verbs</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;GET&#39;</span><span class="p">,</span> <span class="s">&#39;POST&#39;</span><span class="p">]</span>
     <span class="n">mime_type</span> <span class="o">=</span> <span class="s">&#39;application/octet-stream&#39;</span>
 
+    <span class="n">SOFT_VALIDATION</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s">&quot;soft&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,),</span> <span class="p">{})</span>
+    <span class="n">REQUEST</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s">&quot;request&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,),</span> <span class="p">{})</span>
+    <span class="n">RESPONSE</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="s">&quot;response&quot;</span><span class="p">,</span> <span class="p">(</span><span class="nb">object</span><span class="p">,),</span> <span class="p">{})</span>
+
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__app</span> <span class="o">=</span> <span class="bp">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">set_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span> <span class="o">=</span> <span class="n">EventManager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="n">validator</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">check_validator</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_validator</span><span class="p">(</span><span class="n">validator</span><span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">app</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -206,6 +210,8 @@
         <span class="k">for</span> <span class="n">sc</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">call_handles</span><span class="p">:</span>
             <span class="n">c</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
 
+            <span class="k">assert</span> <span class="n">d</span> <span class="o">!=</span> <span class="bp">None</span>
+
             <span class="n">c</span><span class="o">.</span><span class="n">descriptor</span> <span class="o">=</span> <span class="n">d</span>
             <span class="n">c</span><span class="o">.</span><span class="n">service_class</span> <span class="o">=</span> <span class="n">sc</span>
 
@@ -218,16 +224,19 @@
             <span class="k">return</span> <span class="n">HTTP_413</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fault</span><span class="p">,</span> <span class="n">ResourceNotFoundError</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">HTTP_404</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fault</span><span class="p">,</span> <span class="n">Fault</span><span class="p">)</span> <span class="ow">and</span> <span class="n">fault</span><span class="o">.</span><span class="n">faultcode</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;Client.&#39;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fault</span><span class="p">,</span> <span class="n">Fault</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">fault</span><span class="o">.</span><span class="n">faultcode</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;Client.&#39;</span><span class="p">)</span>
+                                                <span class="ow">or</span> <span class="n">fault</span><span class="o">.</span><span class="n">faultcode</span> <span class="o">==</span> <span class="s">&#39;Client&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">HTTP_400</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">HTTP_500</span>
 
-    <span class="k">def</span> <span class="nf">check_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<div class="viewcode-block" id="ProtocolBase.check_validator"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol._base.ProtocolBase.check_validator">[docs]</a>        <span class="sd">&quot;&quot;&quot;You must override this function if your protocol supports validation.</span>
+    <span class="k">def</span> <span class="nf">set_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtocolBase.set_validator"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol._base.ProtocolBase.set_validator">[docs]</a>        <span class="sd">&quot;&quot;&quot;You must override this function if your protocol supports validation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="ow">is</span> <span class="bp">None</span>
+        <span class="k">assert</span> <span class="n">validator</span> <span class="ow">is</span> <span class="bp">None</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="bp">None</span>
 </pre></div></div></div>
 
           </div>
@@ -261,7 +270,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Models &mdash; rpclib 2.5.0-beta documentation</title>
+    <title>Models &mdash; rpclib 2.5.1-beta documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.5.0-beta',
+        VERSION:     '2.5.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.0-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Interfaces" href="interface.html" />
     <link rel="prev" title="Fundamental Data Structures" href="base.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="base.html" title="Fundamental Data Structures"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -301,15 +301,31 @@ from.</p>
 borrow the target&#8217;s _type_info.</p>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="rpclib.model.complex.ComplexModelBase.get_deserialization_instance">
+<em class="property">classmethod </em><tt class="descname">get_deserialization_instance</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase.get_deserialization_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.get_deserialization_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get an empty native type so that the deserialization logic can set
+its attributes.</p>
+</dd></dl>
+
 <dl class="staticmethod">
 <dt id="rpclib.model.complex.ComplexModelBase.get_flat_type_info">
 <em class="property">static </em><tt class="descname">get_flat_type_info</tt><big>(</big><em>retval=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase.get_flat_type_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.get_flat_type_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a _type_info dict that includes members from all base classes.</p>
 </dd></dl>
 
+<dl class="classmethod">
+<dt id="rpclib.model.complex.ComplexModelBase.get_serialization_instance">
+<em class="property">classmethod </em><tt class="descname">get_serialization_instance</tt><big>(</big><em>value</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase.get_serialization_instance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.get_serialization_instance" title="Permalink to this definition">¶</a></dt>
+<dd><p>The value argument can be:
+* A list of native types aligned with cls._type_info.
+* A dict of native types
+* The native type itself.</p>
+</dd></dl>
+
 <dl class="staticmethod">
 <dt id="rpclib.model.complex.ComplexModelBase.get_simple_type_info">
-<em class="property">static </em><tt class="descname">get_simple_type_info</tt><big>(</big><em>retval=None</em>, <em>prefix=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase.get_simple_type_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.get_simple_type_info" title="Permalink to this definition">¶</a></dt>
+<em class="property">static </em><tt class="descname">get_simple_type_info</tt><big>(</big><em>retval=None</em>, <em>prefix=None</em>, <em>parent=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/model/complex.html#ComplexModelBase.get_simple_type_info"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.model.complex.ComplexModelBase.get_simple_type_info" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a _type_info dict that includes members from all base classes
 and whose types are only primitives.</p>
 </dd></dl>
@@ -1826,7 +1842,7 @@ SQLAlchemy and its information alone.</p>
         <li class="right" >
           <a href="base.html" title="Fundamental Data Structures"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

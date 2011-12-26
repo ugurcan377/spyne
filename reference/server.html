@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Server Transports &mdash; rpclib 2.5.0-beta documentation</title>
+    <title>Server Transports &mdash; rpclib 2.5.1-beta documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.5.0-beta',
+        VERSION:     '2.5.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.0-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Miscellanous Rpclib Utilities" href="util.html" />
     <link rel="prev" title="Client Transports" href="client.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="client.html" title="Client Transports"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -235,6 +235,25 @@ matched to.</p>
 <dd><p>The class that is used in the transport attribute of the
 <a class="reference internal" href="#rpclib.server.wsgi.WsgiMethodContext" title="rpclib.server.wsgi.WsgiMethodContext"><tt class="xref py py-class docutils literal"><span class="pre">WsgiMethodContext</span></tt></a> class.</p>
 <dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiTransportContext.content_type">
+<tt class="descname">content_type</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.content_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides an easy way to set outgoing mime type. Synonym for
+<cite>mime_type</cite></p>
+</dd></dl>
+
+<dl class="method">
+<dt id="rpclib.server.wsgi.WsgiTransportContext.get_mime_type">
+<tt class="descname">get_mime_type</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiTransportContext.get_mime_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.get_mime_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiTransportContext.mime_type">
+<tt class="descname">mime_type</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.mime_type" title="Permalink to this definition">¶</a></dt>
+<dd><p>Provides an easy way to set outgoing mime type. Synonym for
+<cite>content_type</cite></p>
+</dd></dl>
+
+<dl class="attribute">
 <dt id="rpclib.server.wsgi.WsgiTransportContext.req_env">
 <tt class="descname">req_env</tt><em class="property"> = None</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.req_env" title="Permalink to this definition">¶</a></dt>
 <dd><p>WSGI Request environment</p>
@@ -258,6 +277,11 @@ matched to.</p>
 <dd><p>HTTP Response headers.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="rpclib.server.wsgi.WsgiTransportContext.set_mime_type">
+<tt class="descname">set_mime_type</tt><big>(</big><em>what</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiTransportContext.set_mime_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.set_mime_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 <dl class="attribute">
 <dt id="rpclib.server.wsgi.WsgiTransportContext.wsdl">
 <tt class="descname">wsdl</tt><em class="property"> = None</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.wsdl" title="Permalink to this definition">¶</a></dt>
@@ -276,7 +300,7 @@ WSDL requests.</p>
 <dl class="function">
 <dt id="rpclib.server.wsgi.reconstruct_wsgi_request">
 <tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">reconstruct_wsgi_request</tt><big>(</big><em>http_env</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#reconstruct_wsgi_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.reconstruct_wsgi_request" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reconstruct http payload using information in the http header</p>
+<dd><p>Reconstruct http payload using information in the http header.</p>
 </dd></dl>
 
 </div>
@@ -353,7 +377,7 @@ matched to.</p>
 
 <dl class="data">
 <dt id="rpclib.server.zeromq.context">
-<tt class="descclassname">rpclib.server.zeromq.</tt><tt class="descname">context</tt><em class="property"> = &lt;zmq.core.context.Context object at 0x9ef192c&gt;</em><a class="headerlink" href="#rpclib.server.zeromq.context" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">rpclib.server.zeromq.</tt><tt class="descname">context</tt><em class="property"> = &lt;zmq.core.context.Context object at 0x3e2dd10&gt;</em><a class="headerlink" href="#rpclib.server.zeromq.context" title="Permalink to this definition">¶</a></dt>
 <dd><p>The ZeroMQ context.</p>
 </dd></dl>
 
@@ -479,7 +503,7 @@ ctx.out_object.</p>
         <li class="right" >
           <a href="client.html" title="Client Transports"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

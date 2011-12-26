@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.protocol.soap.soap11 &mdash; rpclib 2.5.0-beta documentation</title>
+    <title>rpclib.protocol.soap.soap11 &mdash; rpclib 2.5.1-beta documentation</title>
     
     <link rel="stylesheet" href="../../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '2.5.0-beta',
+        VERSION:     '2.5.1-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.0-beta documentation" href="../../../../index.html" />
+    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../../../../index.html" />
     <link rel="up" title="rpclib" href="../../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -201,7 +201,7 @@
 
         <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span> <span class="o">=</span> <span class="n">_parse_xml_string</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_string</span><span class="p">,</span> <span class="n">charset</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s">&#39;request&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="n">XmlObject</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">):</span>
         <span class="n">envelope_xml</span><span class="p">,</span> <span class="n">xmlids</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span>
         <span class="n">header_document</span><span class="p">,</span> <span class="n">body_document</span> <span class="o">=</span> <span class="n">_from_soap</span><span class="p">(</span><span class="n">envelope_xml</span><span class="p">,</span> <span class="n">xmlids</span><span class="p">)</span>
 
@@ -224,7 +224,7 @@
 <span class="sd">        Not meant to be overridden.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;request&#39;</span><span class="p">,</span> <span class="s">&#39;response&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">RESPONSE</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;before_deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
@@ -233,11 +233,11 @@
             <span class="n">ctx</span><span class="o">.</span><span class="n">in_error</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">from_element</span><span class="p">(</span><span class="n">Fault</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">message</span> <span class="o">==</span> <span class="s">&#39;request&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">message</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">:</span>
                 <span class="n">header_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_header</span>
                 <span class="n">body_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_message</span>
 
-            <span class="k">elif</span> <span class="n">message</span> <span class="o">==</span> <span class="s">&#39;response&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">message</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">RESPONSE</span><span class="p">:</span>
                 <span class="n">header_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_header</span>
                 <span class="n">body_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_message</span>
 
@@ -272,7 +272,7 @@
 <span class="sd">        Not meant to be overridden.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;request&#39;</span><span class="p">,</span> <span class="s">&#39;response&#39;</span><span class="p">)</span>
+        <span class="k">assert</span> <span class="n">message</span> <span class="ow">in</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">RESPONSE</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;before_serialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
@@ -288,11 +288,11 @@
                                     <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">get_tns</span><span class="p">(),</span> <span class="n">out_body_doc</span><span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">message</span> <span class="o">==</span> <span class="s">&#39;request&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">message</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">:</span>
                 <span class="n">header_message_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_header</span>
                 <span class="n">body_message_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_message</span>
 
-            <span class="k">elif</span> <span class="n">message</span> <span class="o">==</span> <span class="s">&#39;response&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">message</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">RESPONSE</span><span class="p">:</span>
                 <span class="n">header_message_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_header</span>
                 <span class="n">body_message_class</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">out_message</span>
 
@@ -356,9 +356,9 @@
                                     <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">get_tns</span><span class="p">(),</span> <span class="n">out_body_doc</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">log_messages</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">message</span> <span class="o">==</span> <span class="s">&#39;request&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">message</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">REQUEST</span><span class="p">:</span>
                 <span class="n">line_header</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">Request</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">LIGHT_GREEN</span><span class="p">,</span> <span class="n">END_COLOR</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">message</span> <span class="o">==</span> <span class="s">&#39;response&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">message</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">RESPONSE</span><span class="p">:</span>
                 <span class="n">line_header</span> <span class="o">=</span> <span class="s">&#39;</span><span class="si">%s</span><span class="s">Response</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">LIGHT_RED</span><span class="p">,</span> <span class="n">END_COLOR</span><span class="p">)</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;</span><span class="si">%s</span><span class="s"> </span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">line_header</span><span class="p">,</span> <span class="n">etree</span><span class="o">.</span><span class="n">tostring</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">out_document</span><span class="p">,</span>
                                         <span class="n">xml_declaration</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">pretty_print</span><span class="o">=</span><span class="bp">True</span><span class="p">)))</span>
@@ -399,7 +399,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../../index.html">rpclib 2.5.0-beta documentation</a> &raquo;</li>
+        <li><a href="../../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>
