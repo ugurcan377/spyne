@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Server Transports &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>Server Transports &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Miscellanous Rpclib Utilities" href="util.html" />
     <link rel="prev" title="Client Transports" href="client.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="client.html" title="Client Transports"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -113,7 +113,7 @@ definition.</p>
 <p>An rpc server that uses http as transport, and wsgi as bridge api.</p>
 <dl class="class">
 <dt id="rpclib.server.wsgi.WsgiApplication">
-<em class="property">class </em><tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">WsgiApplication</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiApplication"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">WsgiApplication</tt><big>(</big><em>app</em>, <em>chunked=True</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiApplication"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication" title="Permalink to this definition">¶</a></dt>
 <dd><p>A <a class="reference external" href="http://www.python.org/dev/peps/pep-3333/#preface-for-readers-of-pep-333">PEP-3333</a>
 compliant callable class.</p>
 <dl class="docutils">
@@ -210,8 +210,18 @@ ctx.out_object.</p>
 <dd><p>The WSGI-Specific method context. WSGI-Specific information is stored in
 the transport attribute using the <a class="reference internal" href="#rpclib.server.wsgi.WsgiTransportContext" title="rpclib.server.wsgi.WsgiTransportContext"><tt class="xref py py-class docutils literal"><span class="pre">WsgiTransportContext</span></tt></a> class.</p>
 <dl class="attribute">
+<dt id="rpclib.server.wsgi.WsgiMethodContext.descriptor">
+<tt class="descname">descriptor</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.descriptor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="rpclib.server.wsgi.WsgiMethodContext.frozen">
 <tt class="descname">frozen</tt><em class="property"> = False</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.frozen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rpclib.server.wsgi.WsgiMethodContext.get_descriptor">
+<tt class="descname">get_descriptor</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.get_descriptor" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -220,6 +230,11 @@ the transport attribute using the <a class="reference internal" href="#rpclib.se
 <dd><p>The public name of the method the <tt class="docutils literal"><span class="pre">method_request_string</span></tt> was
 matched to.</p>
 </dd></dl>
+
+<dl class="method">
+<dt id="rpclib.server.wsgi.WsgiMethodContext.set_descriptor">
+<tt class="descname">set_descriptor</tt><big>(</big><em>descriptor</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.set_descriptor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="rpclib.server.wsgi.WsgiMethodContext.transport">
@@ -362,8 +377,18 @@ ctx.out_object.</p>
 <dt id="rpclib.server.zeromq.ZmqMethodContext">
 <em class="property">class </em><tt class="descclassname">rpclib.server.zeromq.</tt><tt class="descname">ZmqMethodContext</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/zeromq.html#ZmqMethodContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.zeromq.ZmqMethodContext" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="attribute">
+<dt id="rpclib.server.zeromq.ZmqMethodContext.descriptor">
+<tt class="descname">descriptor</tt><a class="headerlink" href="#rpclib.server.zeromq.ZmqMethodContext.descriptor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
 <dt id="rpclib.server.zeromq.ZmqMethodContext.frozen">
 <tt class="descname">frozen</tt><em class="property"> = False</em><a class="headerlink" href="#rpclib.server.zeromq.ZmqMethodContext.frozen" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rpclib.server.zeromq.ZmqMethodContext.get_descriptor">
+<tt class="descname">get_descriptor</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.server.zeromq.ZmqMethodContext.get_descriptor" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
@@ -373,11 +398,16 @@ ctx.out_object.</p>
 matched to.</p>
 </dd></dl>
 
+<dl class="method">
+<dt id="rpclib.server.zeromq.ZmqMethodContext.set_descriptor">
+<tt class="descname">set_descriptor</tt><big>(</big><em>descriptor</em><big>)</big><a class="headerlink" href="#rpclib.server.zeromq.ZmqMethodContext.set_descriptor" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
 </dd></dl>
 
 <dl class="data">
 <dt id="rpclib.server.zeromq.context">
-<tt class="descclassname">rpclib.server.zeromq.</tt><tt class="descname">context</tt><em class="property"> = &lt;zmq.core.context.Context object at 0x3e2dd10&gt;</em><a class="headerlink" href="#rpclib.server.zeromq.context" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">rpclib.server.zeromq.</tt><tt class="descname">context</tt><em class="property"> = &lt;zmq.core.context.Context object at 0x44a7b90&gt;</em><a class="headerlink" href="#rpclib.server.zeromq.context" title="Permalink to this definition">¶</a></dt>
 <dd><p>The ZeroMQ context.</p>
 </dd></dl>
 
@@ -503,7 +533,7 @@ ctx.out_object.</p>
         <li class="right" >
           <a href="client.html" title="Client Transports"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.model._base &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>rpclib.model._base &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -74,6 +74,7 @@
 <span class="sd">defining models.</span>
 <span class="sd">&quot;&quot;&quot;</span>
 
+
 <span class="k">def</span> <span class="nf">nillable_dict</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
 <div class="viewcode-block" id="nillable_dict"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model._base.nillable_dict">[docs]</a>    <span class="sd">&quot;&quot;&quot;Decorator that retuns empty dictionary if input is None&quot;&quot;&quot;</span>
 
@@ -103,6 +104,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">wrapper</span>
+
 
 <span class="k">class</span> <span class="nc">ModelBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
 <div class="viewcode-block" id="ModelBase"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model._base.ModelBase">[docs]</a>    <span class="sd">&quot;&quot;&quot;The base class for type markers. It defines the model interface for the</span>
@@ -143,8 +145,13 @@
         <span class="n">doc</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
         <span class="sd">&quot;&quot;&quot;The documentation for the given type.&quot;&quot;&quot;</span>
 
+        <span class="n">appinfo</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="sd">&quot;&quot;&quot;Any object that carries app-specific info.&quot;&quot;&quot;</span>
+
     <span class="k">class</span> <span class="nc">Empty</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
         <span class="k">pass</span>
+
+    <span class="n">_force_own_namespace</span> <span class="o">=</span> <span class="bp">None</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">is_default</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
@@ -186,7 +193,7 @@
 
         <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">__namespace__</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
             <span class="n">cls</span><span class="o">.</span><span class="n">__namespace__</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">__module__</span>
-
+ 
     <span class="nd">@classmethod</span></div>
     <span class="k">def</span> <span class="nf">get_type_name</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
 <div class="viewcode-block" id="ModelBase.get_type_name"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model._base.ModelBase.get_type_name">[docs]</a>        <span class="sd">&quot;&quot;&quot;Returns the class name unless the __type_name__ attribute is defined.</span>
@@ -285,7 +292,9 @@
 <div class="viewcode-block" id="ModelBase.validate_native"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model._base.ModelBase.validate_native">[docs]</a>        <span class="sd">&quot;&quot;&quot;Override this method to do your own input validation on the native</span>
 <span class="sd">        value. This is called after converting the incoming string to the</span>
 <span class="sd">        native python value.&quot;&quot;&quot;</span>
+
         <span class="k">return</span> <span class="bp">True</span>
+
 
 <span class="k">class</span> <span class="nc">Null</span><span class="p">(</span><span class="n">ModelBase</span><span class="p">):</span></div></div>
     <span class="nd">@classmethod</span>
@@ -295,6 +304,7 @@
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">None</span>
+
 
 <span class="k">class</span> <span class="nc">SimpleModel</span><span class="p">(</span><span class="n">ModelBase</span><span class="p">):</span>
 <div class="viewcode-block" id="SimpleModel"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model._base.SimpleModel">[docs]</a>    <span class="sd">&quot;&quot;&quot;The base class for primitives.&quot;&quot;&quot;</span>
@@ -308,7 +318,7 @@
         <span class="n">values</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
         <span class="sd">&quot;&quot;&quot;The set of possible values for this type.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span> <span class="n">kwargs</span><span class="p">):</span></div>
+    <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></div>
         <span class="sd">&quot;&quot;&quot;Overriden so that any attempt to instantiate a primitive will return</span>
 <span class="sd">        a customized class instead of an instance.</span>
 
@@ -318,7 +328,11 @@
         <span class="n">retval</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">customize</span><span class="p">(</span> <span class="o">**</span> <span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">retval</span><span class="o">.</span><span class="n">is_default</span><span class="p">(</span><span class="n">retval</span><span class="p">):</span>
-            <span class="n">retval</span><span class="o">.</span><span class="n">__base_type__</span> <span class="o">=</span> <span class="n">cls</span>
+            <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="s">&#39;_is_clone_of&#39;</span><span class="p">):</span>
+                <span class="n">retval</span><span class="o">.</span><span class="n">__base_type__</span> <span class="o">=</span> <span class="n">cls</span><span class="o">.</span><span class="n">_is_clone_of</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">retval</span><span class="o">.</span><span class="n">__base_type__</span> <span class="o">=</span> <span class="n">cls</span>
+
             <span class="n">retval</span><span class="o">.</span><span class="n">__type_name__</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;type_name&quot;</span><span class="p">,</span> <span class="n">ModelBase</span><span class="o">.</span><span class="n">Empty</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="n">retval</span>
@@ -329,7 +343,7 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">validate_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span>    <span class="n">ModelBase</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span>     <span class="n">ModelBase</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
                 <span class="ow">and</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">values</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span>
                                                 <span class="n">value</span> <span class="ow">in</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
             <span class="p">)</span>
@@ -366,7 +380,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

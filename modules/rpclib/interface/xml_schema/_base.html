@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.interface.xml_schema._base &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>rpclib.interface.xml_schema._base &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../../../../index.html" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../../../../index.html" />
     <link rel="up" title="rpclib" href="../../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -159,7 +159,7 @@
                     <span class="n">import_</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s">&#39;schemaLocation&#39;</span><span class="p">,</span> <span class="n">sl</span><span class="p">)</span>
 
             <span class="c"># append simpleType and complexType tags</span>
-            <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">namespaces</span><span class="p">[</span><span class="n">pref</span><span class="p">]</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">namespaces</span><span class="p">[</span><span class="n">pref</span><span class="p">]</span><span class="o">.</span><span class="n">types</span><span class="o">.</span><span class="n">values</span><span class="p">()):</span>
                 <span class="n">schema</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
 
             <span class="c"># append element tags</span>
@@ -318,6 +318,9 @@
                 <span class="k">if</span> <span class="n">r_pref</span> <span class="ow">and</span> <span class="n">is_valid_import</span><span class="p">(</span><span class="n">r_pref</span><span class="p">):</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">imports</span><span class="p">[</span><span class="n">pref_tns</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nsmap</span><span class="p">[</span><span class="n">r_pref</span><span class="p">])</span>
 
+            <span class="k">elif</span> <span class="n">seq</span><span class="o">.</span><span class="n">tag</span> <span class="o">==</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}annotation&#39;</span> <span class="o">%</span> <span class="n">_ns_xsd</span><span class="p">:</span>
+                <span class="k">pass</span>
+
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;i guess you need to hack some more&quot;</span><span class="p">)</span>
 </pre></div></div>
@@ -353,7 +356,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

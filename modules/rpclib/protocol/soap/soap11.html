@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.protocol.soap.soap11 &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>rpclib.protocol.soap.soap11 &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../../',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../../../../index.html" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../../../../index.html" />
     <link rel="up" title="rpclib" href="../../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -78,18 +78,19 @@
 <span class="kn">import</span> <span class="nn">cgi</span>
 
 <span class="kn">import</span> <span class="nn">rpclib.const.xml_ns</span> <span class="kn">as</span> <span class="nn">ns</span>
-<span class="kn">from</span> <span class="nn">rpclib.const.ansi_color</span> <span class="kn">import</span> <span class="n">LIGHT_GREEN</span>
-<span class="kn">from</span> <span class="nn">rpclib.const.ansi_color</span> <span class="kn">import</span> <span class="n">LIGHT_RED</span>
-<span class="kn">from</span> <span class="nn">rpclib.const.ansi_color</span> <span class="kn">import</span> <span class="n">END_COLOR</span>
 
 <span class="kn">from</span> <span class="nn">lxml</span> <span class="kn">import</span> <span class="n">etree</span>
 <span class="kn">from</span> <span class="nn">lxml.etree</span> <span class="kn">import</span> <span class="n">XMLSyntaxError</span>
 
+<span class="kn">from</span> <span class="nn">rpclib.const.http</span> <span class="kn">import</span> <span class="n">HTTP_405</span>
 <span class="kn">from</span> <span class="nn">rpclib.const.http</span> <span class="kn">import</span> <span class="n">HTTP_500</span>
+<span class="kn">from</span> <span class="nn">rpclib.const.ansi_color</span> <span class="kn">import</span> <span class="n">LIGHT_GREEN</span>
+<span class="kn">from</span> <span class="nn">rpclib.const.ansi_color</span> <span class="kn">import</span> <span class="n">LIGHT_RED</span>
+<span class="kn">from</span> <span class="nn">rpclib.const.ansi_color</span> <span class="kn">import</span> <span class="n">END_COLOR</span>
+<span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">RequestNotAllowed</span>
+<span class="kn">from</span> <span class="nn">rpclib.model.fault</span> <span class="kn">import</span> <span class="n">Fault</span>
 <span class="kn">from</span> <span class="nn">rpclib.protocol.xml</span> <span class="kn">import</span> <span class="n">XmlObject</span>
 <span class="kn">from</span> <span class="nn">rpclib.protocol.soap.mime</span> <span class="kn">import</span> <span class="n">collapse_swa</span>
-
-<span class="kn">from</span> <span class="nn">rpclib.model.fault</span> <span class="kn">import</span> <span class="n">Fault</span>
 
 <span class="k">def</span> <span class="nf">_from_soap</span><span class="p">(</span><span class="n">in_envelope_xml</span><span class="p">,</span> <span class="n">xmlids</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Parses the xml string into the header and payload.&#39;&#39;&#39;</span>
@@ -196,7 +197,17 @@
 
     <span class="k">def</span> <span class="nf">create_in_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">charset</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">type</span> <span class="o">==</span> <span class="s">&#39;wsgi&#39;</span><span class="p">:</span>
-            <span class="n">content_type</span> <span class="o">=</span> <span class="n">cgi</span><span class="o">.</span><span class="n">parse_header</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;CONTENT_TYPE&quot;</span><span class="p">))</span>
+            <span class="c"># according to the soap via http standard, soap requests must only</span>
+            <span class="c"># work with proper POST requests.</span>
+            <span class="n">content_type</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&quot;CONTENT_TYPE&quot;</span><span class="p">)</span>
+            <span class="n">http_verb</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span><span class="p">[</span><span class="s">&#39;REQUEST_METHOD&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">content_type</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">http_verb</span> <span class="o">!=</span> <span class="s">&quot;POST&quot;</span><span class="p">:</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">resp_code</span> <span class="o">=</span> <span class="n">HTTP_405</span>
+                <span class="k">raise</span> <span class="n">RequestNotAllowed</span><span class="p">(</span>
+                        <span class="s">&quot;You must issue a POST request with the Content-Type &quot;</span>
+                        <span class="s">&quot;header properly set.&quot;</span><span class="p">)</span>
+
+            <span class="n">content_type</span> <span class="o">=</span> <span class="n">cgi</span><span class="o">.</span><span class="n">parse_header</span><span class="p">(</span><span class="n">content_type</span><span class="p">)</span>
             <span class="n">collapse_swa</span><span class="p">(</span><span class="n">content_type</span><span class="p">,</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_string</span><span class="p">)</span>
 
         <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span> <span class="o">=</span> <span class="n">_parse_xml_string</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_string</span><span class="p">,</span> <span class="n">charset</span><span class="p">)</span>
@@ -399,7 +410,7 @@
         <li class="right" >
           <a href="../../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>High-Level Introduction to Rpclib &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>High-Level Introduction to Rpclib &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib Manual" href="index.html" />
     <link rel="next" title="Hello World" href="helloworld.html" />
     <link rel="prev" title="Rpclib Manual" href="index.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="index.html" title="Rpclib Manual"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>  
@@ -58,7 +58,10 @@
             
   <div class="section" id="high-level-introduction-to-rpclib">
 <span id="manual-highlevel"></span><h1>High-Level Introduction to Rpclib<a class="headerlink" href="#high-level-introduction-to-rpclib" title="Permalink to this headline">¶</a></h1>
-<p>The impatient can just jump to the <a class="reference internal" href="#manual-highlevel-nutshell"><em>In a nutshell</em></a> section.</p>
+<p>The impatient can just jump to the <a class="reference internal" href="#manual-highlevel-nutshell"><em>In a nutshell</em></a> section,
+or read a small
+<a href="#id1"><span class="problematic" id="id2">`</span></a>presentation &lt;<a class="reference external" href="http://arskom.github.com/rpclib/multiple_protocols_presentation.pdf">http://arskom.github.com/rpclib/multiple_protocols_presentation.pdf</a>&gt;&#8217;_
+that illustrates the following concepts by examples.</p>
 <div class="section" id="concepts">
 <h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
 <p>The following is a quick introduction to the Rpclib way of naming things:</p>
@@ -78,8 +81,8 @@ free-form data sections. They are
 children of either <a class="reference internal" href="../reference/client.html#rpclib.client._base.ClientBase" title="rpclib.client._base.ClientBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.client._base.ClientBase</span></tt></a> or
 <a class="reference internal" href="../reference/server.html#rpclib.server._base.ServerBase" title="rpclib.server._base.ServerBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server._base.ServerBase</span></tt></a> classes.</p>
 <p>For example, Http is used as a transport for Soap, by
-tucking a Soap message in the Http byte-stream part of a Http POST request.
-The same Http is exposed as a &#8220;protocol&#8221; using the
+tucking a Soap message in the arbitrary byte-stream part of a Http POST
+request. The same Http is exposed as a &#8220;protocol&#8221; using the
 <a class="reference internal" href="../reference/protocol.html#rpclib.protocol.http.HttpRpc" title="rpclib.protocol.http.HttpRpc"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.protocol.http.HttpRpc</span></tt></a>
 class. One could use Soap as a transport by tucking a protocol message in its
 base64-encoded ByteArray container.</p>
@@ -276,7 +279,7 @@ coding. You can start by <a class="reference internal" href="helloworld.html#man
         <li class="right" >
           <a href="index.html" title="Rpclib Manual"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib Manual</a> &raquo;</li> 
       </ul>
     </div>

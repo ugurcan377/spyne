@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Miscellanous Rpclib Utilities &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>Miscellanous Rpclib Utilities &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Application Definition" href="application.html" />
     <link rel="prev" title="Server Transports" href="server.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="server.html" title="Server Transports"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -118,6 +118,12 @@ combinations</p>
 interface document and Soap 1.1 and both input and output protocols.</p>
 </dd></dl>
 
+<dl class="function">
+<dt id="rpclib.util.simple.wsgi_soap_application">
+<tt class="descclassname">rpclib.util.simple.</tt><tt class="descname">wsgi_soap_application</tt><big>(</big><em>services</em>, <em>tns='rpclib.simple.soap'</em>, <em>validator=None</em><big>)</big><a class="headerlink" href="#rpclib.util.simple.wsgi_soap_application" title="Permalink to this definition">¶</a></dt>
+<dd><p>DEPRECATED! Use <a class="reference internal" href="#rpclib.util.simple.wsgi_soap11_application" title="rpclib.util.simple.wsgi_soap11_application"><tt class="xref py py-func docutils literal"><span class="pre">wsgi_soap11_application()</span></tt></a> instead.</p>
+</dd></dl>
+
 </div>
 <div class="section" id="module-rpclib.util.xml">
 <span id="xml-utilities"></span><h2>Xml Utilities<a class="headerlink" href="#module-rpclib.util.xml" title="Permalink to this headline">¶</a></h2>
@@ -167,6 +173,25 @@ the schema.</td>
 </table>
 </dd></dl>
 
+<dl class="function">
+<dt id="rpclib.util.xml.get_xml_as_object">
+<tt class="descclassname">rpclib.util.xml.</tt><tt class="descname">get_xml_as_object</tt><big>(</big><em>cls</em>, <em>value</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/xml.html#get_xml_as_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.util.xml.get_xml_as_object" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a native <a class="reference internal" href="model.html#rpclib.model.complex.ComplexModel" title="rpclib.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.ComplexModel</span></tt></a> child from an
+ElementTree representation of the same class.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>value</strong> &#8211; The class the xml document represents.</li>
+<li><strong>value</strong> &#8211; The xml document to be deserialized.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
 </div>
 <div class="section" id="module-rpclib.util.odict">
 <span id="ordered-dictionary"></span><h2>Ordered Dictionary<a class="headerlink" href="#module-rpclib.util.odict" title="Permalink to this headline">¶</a></h2>
@@ -190,6 +215,12 @@ combinations</p>
 <tt class="descclassname">rpclib.util.simple.</tt><tt class="descname">wsgi_soap11_application</tt><big>(</big><em>services</em>, <em>tns='rpclib.simple.soap'</em>, <em>validator=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/util/simple.html#wsgi_soap11_application"><span class="viewcode-link">[source]</span></a></dt>
 <dd><p>Wraps <cite>services</cite> argument inside a WsgiApplication that uses Wsdl 1.1 as
 interface document and Soap 1.1 and both input and output protocols.</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<tt class="descclassname">rpclib.util.simple.</tt><tt class="descname">wsgi_soap_application</tt><big>(</big><em>services</em>, <em>tns='rpclib.simple.soap'</em>, <em>validator=None</em><big>)</big></dt>
+<dd><p>DEPRECATED! Use <a class="reference internal" href="#rpclib.util.simple.wsgi_soap11_application" title="rpclib.util.simple.wsgi_soap11_application"><tt class="xref py py-func docutils literal"><span class="pre">wsgi_soap11_application()</span></tt></a> instead.</p>
 </dd></dl>
 
 </div>
@@ -258,7 +289,7 @@ interface document and Soap 1.1 and both input and output protocols.</p>
         <li class="right" >
           <a href="server.html" title="Server Transports"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

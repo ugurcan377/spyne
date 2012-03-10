@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.protocol.http &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>rpclib.protocol.http &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -75,17 +75,40 @@
 <span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="n">__name__</span><span class="p">)</span>
 
+<span class="kn">import</span> <span class="nn">tempfile</span>
+<span class="n">TEMPORARY_DIR</span> <span class="o">=</span> <span class="bp">None</span>
+
 <span class="k">try</span><span class="p">:</span>
     <span class="kn">from</span> <span class="nn">urlparse</span> <span class="kn">import</span> <span class="n">parse_qs</span>
+    <span class="kn">from</span> <span class="nn">cStringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
 <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span> <span class="c"># Python 3</span>
     <span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">parse_qs</span>
 
+<span class="k">try</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">cStringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+<span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="kn">from</span> <span class="nn">StringIO</span> <span class="kn">import</span> <span class="n">StringIO</span>
+    <span class="k">except</span> <span class="ne">ImportError</span><span class="p">:</span> <span class="c"># Python 3</span>
+        <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
+
 <span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">ValidationError</span>
-<span class="kn">from</span> <span class="nn">rpclib.model.complex</span> <span class="kn">import</span> <span class="n">Array</span>
+<span class="kn">from</span> <span class="nn">rpclib.model.binary</span> <span class="kn">import</span> <span class="n">File</span>
+<span class="kn">from</span> <span class="nn">rpclib.model.binary</span> <span class="kn">import</span> <span class="n">ByteArray</span>
 <span class="kn">from</span> <span class="nn">rpclib.model.fault</span> <span class="kn">import</span> <span class="n">Fault</span>
 <span class="kn">from</span> <span class="nn">rpclib.protocol</span> <span class="kn">import</span> <span class="n">ProtocolBase</span>
 
-<span class="k">def</span> <span class="nf">_get_http_headers</span><span class="p">(</span><span class="n">req_env</span><span class="p">):</span>
+<span class="kn">from</span> <span class="nn">werkzeug.formparser</span> <span class="kn">import</span> <span class="n">parse_form_data</span>
+
+<span class="n">STREAM_READ_BLOCK_SIZE</span> <span class="o">=</span> <span class="mi">16384</span>
+
+<span class="k">def</span> <span class="nf">yield_stream</span><span class="p">(</span><span class="n">istr</span><span class="p">):</span>
+<div class="viewcode-block" id="yield_stream"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.yield_stream">[docs]</a>    <span class="n">data</span> <span class="o">=</span> <span class="n">istr</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">STREAM_READ_BLOCK_SIZE</span><span class="p">)</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">yield</span> <span class="n">data</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">istr</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">STREAM_READ_BLOCK_SIZE</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">_get_http_headers</span><span class="p">(</span><span class="n">req_env</span><span class="p">):</span></div>
     <span class="n">retval</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">req_env</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -94,13 +117,44 @@
 
     <span class="k">return</span> <span class="n">retval</span>
 
-<span class="k">class</span> <span class="nc">HttpRpc</span><span class="p">(</span><span class="n">ProtocolBase</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">get_stream_factory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="get_stream_factory"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.get_stream_factory">[docs]</a>    <span class="k">def</span> <span class="nf">stream_factory</span><span class="p">(</span><span class="n">total_content_length</span><span class="p">,</span> <span class="n">filename</span><span class="p">,</span> <span class="n">content_type</span><span class="p">,</span>
+                                                               <span class="n">content_length</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">total_content_length</span> <span class="o">&gt;=</span> <span class="mi">512</span> <span class="o">*</span> <span class="mi">1024</span> <span class="ow">or</span> <span class="n">delete</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">delete</span> <span class="o">==</span> <span class="bp">False</span><span class="p">:</span>
+                <span class="n">retval</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="s">&#39;wb+&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="nb">dir</span><span class="p">,</span> <span class="n">delete</span><span class="o">=</span><span class="n">delete</span><span class="p">)</span> <span class="c"># You need python &gt;= 2.6 for this.</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">retval</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="s">&#39;wb+&#39;</span><span class="p">,</span> <span class="nb">dir</span><span class="o">=</span><span class="nb">dir</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">retval</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">retval</span>
+    <span class="k">return</span> <span class="n">stream_factory</span>
+
+<span class="k">class</span> <span class="nc">HttpRpc</span><span class="p">(</span><span class="n">ProtocolBase</span><span class="p">):</span></div>
 <div class="viewcode-block" id="HttpRpc"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc">[docs]</a>    <span class="sd">&quot;&quot;&quot;The so-called REST-minus-the-verbs HttpRpc protocol implementation.</span>
 <span class="sd">    It only works with the http server (wsgi) transport.</span>
 
 <span class="sd">    It only parses requests where the whole data is in the &#39;QUERY_STRING&#39;, i.e.</span>
 <span class="sd">    the part after &#39;?&#39; character in a URI string.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">mime_type</span> <span class="o">=</span> <span class="s">&#39;text/plain&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">tmp_dir</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">tmp_delete_on_close</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+        <span class="n">ProtocolBase</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="p">,</span> <span class="n">validator</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">tmp_dir</span> <span class="o">=</span> <span class="n">tmp_dir</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tmp_delete_on_close</span> <span class="o">=</span> <span class="n">tmp_delete_on_close</span>
+
+    <span class="k">def</span> <span class="nf">get_tmp_delete_on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="HttpRpc.get_tmp_delete_on_close"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.get_tmp_delete_on_close">[docs]</a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span>
+
+    <span class="k">def</span> <span class="nf">set_tmp_delete_on_close</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.set_tmp_delete_on_close"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.set_tmp_delete_on_close">[docs]</a>        <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stream_factory</span> <span class="o">=</span> <span class="n">get_stream_factory</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">tmp_dir</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tmp_delete_on_close</span><span class="p">)</span>
+
+    <span class="n">tmp_delete_on_close</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_tmp_delete_on_close</span><span class="p">,</span> <span class="n">set_tmp_delete_on_close</span><span class="p">)</span></div>
 
     <span class="k">def</span> <span class="nf">set_validator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">validator</span><span class="p">):</span>
 <div class="viewcode-block" id="HttpRpc.set_validator"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.set_validator">[docs]</a>        <span class="k">if</span> <span class="n">validator</span> <span class="o">==</span> <span class="s">&#39;soft&#39;</span> <span class="ow">or</span> <span class="n">validator</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span><span class="p">:</span>
@@ -119,16 +173,41 @@
     <span class="k">def</span> <span class="nf">decompose_incoming_envelope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
 <div class="viewcode-block" id="HttpRpc.decompose_incoming_envelope"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.decompose_incoming_envelope">[docs]</a>        <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span> <span class="o">=</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">get_tns</span><span class="p">(),</span>
                               <span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span><span class="p">[</span><span class="s">&#39;PATH_INFO&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s">&#39;/&#39;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\033</span><span class="s">[92mMethod name: </span><span class="si">%r</span><span class="se">\033</span><span class="s">[0m&quot;</span> <span class="o">%</span> <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span><span class="p">)</span>
 
         <span class="n">ctx</span><span class="o">.</span><span class="n">in_header_doc</span> <span class="o">=</span> <span class="n">_get_http_headers</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span><span class="p">)</span>
         <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span> <span class="o">=</span> <span class="n">parse_qs</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_document</span><span class="p">[</span><span class="s">&#39;QUERY_STRING&#39;</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span><span class="p">[</span><span class="s">&#39;REQUEST_METHOD&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s">&#39;post&#39;</span><span class="p">,</span> <span class="s">&#39;put&#39;</span><span class="p">,</span> <span class="s">&#39;patch&#39;</span><span class="p">):</span>
+            <span class="n">stream</span><span class="p">,</span> <span class="n">form</span><span class="p">,</span> <span class="n">files</span> <span class="o">=</span> <span class="n">parse_form_data</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">transport</span><span class="o">.</span><span class="n">req_env</span><span class="p">,</span>
+                                            <span class="n">stream_factory</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">stream_factory</span><span class="p">)</span>
+
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">form</span><span class="o">.</span><span class="n">lists</span><span class="p">():</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">[])</span>
+                <span class="n">val</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+                <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">files</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="p">[])</span>
+
+                <span class="n">mime_type</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">&#39;Content-Type&#39;</span><span class="p">,</span> <span class="s">&#39;application/octet-stream&#39;</span><span class="p">)</span>
+
+                <span class="n">path</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">stream</span><span class="p">,</span> <span class="s">&#39;name&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                    <span class="n">val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">File</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">mime_type</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()]))</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">v</span><span class="o">.</span><span class="n">stream</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                    <span class="n">val</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">File</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">filename</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="n">mime_type</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">,</span> <span class="n">handle</span><span class="o">=</span><span class="n">v</span><span class="o">.</span><span class="n">stream</span><span class="p">))</span>
+
+                <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
 
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">header : </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_header_doc</span><span class="p">))</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&#39;</span><span class="se">\t</span><span class="s">body   : </span><span class="si">%r</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">dict_to_object</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">doc</span><span class="p">,</span> <span class="n">inst_class</span><span class="p">):</span></div>
 <div class="viewcode-block" id="HttpRpc.dict_to_object"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.dict_to_object">[docs]</a>        <span class="n">simple_type_info</span> <span class="o">=</span> <span class="n">inst_class</span><span class="o">.</span><span class="n">get_simple_type_info</span><span class="p">(</span><span class="n">inst_class</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">simple_type_info</span><span class="p">))</span>
         <span class="n">inst</span> <span class="o">=</span> <span class="n">inst_class</span><span class="o">.</span><span class="n">get_deserialization_instance</span><span class="p">()</span>
 
         <span class="c"># this is for validating cls.Attributes.{min,max}_occurs</span>
@@ -148,11 +227,23 @@
                 <span class="k">raise</span> <span class="n">Fault</span><span class="p">(</span><span class="s">&#39;Client.ValidationError&#39;</span><span class="p">,</span>
                         <span class="s">&#39;&quot;</span><span class="si">%s</span><span class="s">&quot; member must occur at most </span><span class="si">%d</span><span class="s"> times&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">max_o</span><span class="p">))</span>
 
+            <span class="c"># extract native values from the list of strings that comes from the</span>
+            <span class="c"># http dict.</span>
             <span class="k">for</span> <span class="n">v2</span> <span class="ow">in</span> <span class="n">v</span><span class="p">:</span>
                 <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span> <span class="ow">and</span> <span class="ow">not</span>
                             <span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">validate_string</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">v2</span><span class="p">)):</span>
                     <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
-                <span class="n">native_v2</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+
+                <span class="k">if</span> <span class="n">member</span><span class="o">.</span><span class="n">type</span> <span class="ow">is</span> <span class="n">File</span> <span class="ow">or</span> <span class="n">member</span><span class="o">.</span><span class="n">type</span> <span class="ow">is</span> <span class="n">ByteArray</span> <span class="ow">or</span> \
+                        <span class="nb">getattr</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s">&#39;_is_clone_of&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">File</span> <span class="ow">or</span> \
+                        <span class="nb">getattr</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="s">&#39;_is_clone_of&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">ByteArray</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v2</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
+                        <span class="n">native_v2</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">native_v2</span> <span class="o">=</span> <span class="n">v2</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">native_v2</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">from_string</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
+
                 <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span> <span class="ow">and</span> <span class="ow">not</span>
                             <span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="n">validate_native</span><span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">type</span><span class="p">,</span> <span class="n">native_v2</span><span class="p">)):</span>
                     <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span>
@@ -173,6 +264,8 @@
             <span class="k">if</span> <span class="n">mo</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">value</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
 
+            <span class="c"># assign the native value to the relevant class in the nested object</span>
+            <span class="c"># structure.</span>
             <span class="n">cinst</span> <span class="o">=</span> <span class="n">inst</span>
             <span class="n">ctype_info</span> <span class="o">=</span> <span class="n">inst_class</span><span class="o">.</span><span class="n">get_flat_type_info</span><span class="p">(</span><span class="n">inst_class</span><span class="p">)</span>
             <span class="n">pkey</span> <span class="o">=</span> <span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -198,11 +291,6 @@
                 <span class="nb">setattr</span><span class="p">(</span><span class="n">cinst</span><span class="p">,</span> <span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;</span><span class="se">\t</span><span class="s">set default </span><span class="si">%r</span><span class="s">(</span><span class="si">%r</span><span class="s">) = </span><span class="si">%r</span><span class="s">&quot;</span> <span class="o">%</span>
                                                     <span class="p">(</span><span class="n">member</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">pkey</span><span class="p">,</span> <span class="n">value</span><span class="p">))</span>
-
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">print</span> <span class="n">inst</span><span class="o">.</span><span class="n">qo</span><span class="o">.</span><span class="n">vehicles</span>
-        <span class="k">except</span> <span class="ne">Exception</span><span class="p">,</span><span class="n">e</span><span class="p">:</span>
-            <span class="k">print</span> <span class="n">e</span>
 
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="ow">is</span> <span class="bp">self</span><span class="o">.</span><span class="n">SOFT_VALIDATION</span><span class="p">:</span>
             <span class="n">sti</span> <span class="o">=</span> <span class="n">simple_type_info</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
@@ -250,17 +338,12 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;before_deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_header_doc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_header</span><span class="p">:</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">in_header</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_to_object</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_header_doc</span><span class="p">,</span>
                                                     <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_header</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_message</span><span class="p">:</span>
             <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dict_to_object</span><span class="p">(</span><span class="n">ctx</span><span class="o">.</span><span class="n">in_body_doc</span><span class="p">,</span>
                                                     <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_message</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">ctx</span><span class="o">.</span><span class="n">in_object</span> <span class="o">=</span> <span class="p">[</span><span class="bp">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span>
-                        <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_message</span><span class="o">.</span><span class="n">get_flat_type_info</span><span class="p">(</span>
-                                                    <span class="n">ctx</span><span class="o">.</span><span class="n">descriptor</span><span class="o">.</span><span class="n">in_message</span><span class="p">))</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">fire_event</span><span class="p">(</span><span class="s">&#39;after_deserialize&#39;</span><span class="p">,</span> <span class="n">ctx</span><span class="p">)</span>
 
@@ -291,6 +374,14 @@
 
     <span class="k">def</span> <span class="nf">create_out_string</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">,</span> <span class="n">out_string_encoding</span><span class="o">=</span><span class="s">&#39;utf8&#39;</span><span class="p">):</span></div>
 <div class="viewcode-block" id="HttpRpc.create_out_string"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.create_out_string">[docs]</a>        <span class="n">ctx</span><span class="o">.</span><span class="n">out_string</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">out_document</span>
+
+    <span class="k">def</span> <span class="nf">get_call_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
+<div class="viewcode-block" id="HttpRpc.get_call_handles"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol.http.HttpRpc.get_call_handles">[docs]</a>        <span class="n">retval</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">HttpRpc</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">get_call_handles</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">retval</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">pass</span>
+
+        <span class="k">return</span> <span class="n">retval</span>
 </pre></div></div></div>
 
           </div>
@@ -324,7 +415,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

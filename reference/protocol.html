@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Protocols &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>Protocols &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../index.html" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
     <link rel="up" title="Rpclib API Reference" href="index.html" />
     <link rel="next" title="Client Transports" href="client.html" />
     <link rel="prev" title="Interfaces" href="interface.html" /> 
@@ -46,7 +46,7 @@
         <li class="right" >
           <a href="interface.html" title="Interfaces"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>  
@@ -117,10 +117,10 @@ attribute.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.protocol._base.ProtocolBase.generate_method_contexts">
-<tt class="descname">generate_method_contexts</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase.generate_method_contexts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase.generate_method_contexts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to be overriden to perform any sort of custom matching between
-the method_request_string and the methods. Returns a list of contexts.
+<dt id="rpclib.protocol._base.ProtocolBase.get_call_handles">
+<tt class="descname">get_call_handles</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase.get_call_handles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase.get_call_handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to be overriden to perform any sort of custom method mapping
+using any data in the method context. Returns a list of contexts.
 Can return multiple contexts if a method_request_string matches more
 than one function. (This is called the fanout mode.)</p>
 </dd></dl>
@@ -137,7 +137,7 @@ attribute.</p>
 <dl class="method">
 <dt id="rpclib.protocol._base.ProtocolBase.set_method_descriptor">
 <tt class="descname">set_method_descriptor</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/_base.html#ProtocolBase.set_method_descriptor"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol._base.ProtocolBase.set_method_descriptor" title="Permalink to this definition">¶</a></dt>
-<dd><p>DEPRECATED! Use <a class="reference internal" href="#rpclib.protocol._base.ProtocolBase.generate_method_contexts" title="rpclib.protocol._base.ProtocolBase.generate_method_contexts"><tt class="xref py py-func docutils literal"><span class="pre">generate_method_contexts()</span></tt></a> instead.</p>
+<dd><p>DEPRECATED! Use <tt class="xref py py-func docutils literal"><span class="pre">generate_method_contexts()</span></tt> instead.</p>
 <p>Method to be overriden to perform any sort of custom matching between
 the method_request_string and the methods.</p>
 </dd></dl>
@@ -164,7 +164,7 @@ validation on the parsed input document.</p>
 Rest, because it ignores Http verbs.</p>
 <dl class="class">
 <dt id="rpclib.protocol.http.HttpRpc">
-<em class="property">class </em><tt class="descclassname">rpclib.protocol.http.</tt><tt class="descname">HttpRpc</tt><big>(</big><em>app=None</em>, <em>validator=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><tt class="descclassname">rpclib.protocol.http.</tt><tt class="descname">HttpRpc</tt><big>(</big><em>app=None</em>, <em>validator=None</em>, <em>tmp_dir=None</em>, <em>tmp_delete_on_close=True</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc" title="Permalink to this definition">¶</a></dt>
 <dd><p>The so-called REST-minus-the-verbs HttpRpc protocol implementation.
 It only works with the http server (wsgi) transport.</p>
 <p>It only parses requests where the whole data is in the &#8216;QUERY_STRING&#8217;, i.e.
@@ -232,15 +232,21 @@ belongs to.</p>
 <dl class="method">
 <dt id="rpclib.protocol.http.HttpRpc.generate_method_contexts">
 <tt class="descname">generate_method_contexts</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.generate_method_contexts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to be overriden to perform any sort of custom matching between
-the method_request_string and the methods. Returns a list of contexts.
-Can return multiple contexts if a method_request_string matches more
-than one function. (This is called the fanout mode.)</p>
-</dd></dl>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rpclib.protocol.http.HttpRpc.get_call_handles">
+<tt class="descname">get_call_handles</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc.get_call_handles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.get_call_handles" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="rpclib.protocol.http.HttpRpc.get_tmp_delete_on_close">
+<tt class="descname">get_tmp_delete_on_close</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc.get_tmp_delete_on_close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.get_tmp_delete_on_close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="attribute">
 <dt id="rpclib.protocol.http.HttpRpc.mime_type">
-<tt class="descname">mime_type</tt><em class="property"> = 'application/octet-stream'</em><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.mime_type" title="Permalink to this definition">¶</a></dt>
+<tt class="descname">mime_type</tt><em class="property"> = 'text/plain'</em><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.mime_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -262,8 +268,18 @@ the method_request_string and the methods.</p>
 </dd></dl>
 
 <dl class="method">
+<dt id="rpclib.protocol.http.HttpRpc.set_tmp_delete_on_close">
+<tt class="descname">set_tmp_delete_on_close</tt><big>(</big><em>val</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc.set_tmp_delete_on_close"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.set_tmp_delete_on_close" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
 <dt id="rpclib.protocol.http.HttpRpc.set_validator">
 <tt class="descname">set_validator</tt><big>(</big><em>validator</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#HttpRpc.set_validator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.set_validator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="rpclib.protocol.http.HttpRpc.tmp_delete_on_close">
+<tt class="descname">tmp_delete_on_close</tt><a class="headerlink" href="#rpclib.protocol.http.HttpRpc.tmp_delete_on_close" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
@@ -274,6 +290,16 @@ validation on the parsed input document.</p>
 </dd></dl>
 
 </dd></dl>
+
+<dl class="function">
+<dt id="rpclib.protocol.http.get_stream_factory">
+<tt class="descclassname">rpclib.protocol.http.</tt><tt class="descname">get_stream_factory</tt><big>(</big><em>dir=None</em>, <em>delete=True</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#get_stream_factory"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.get_stream_factory" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="rpclib.protocol.http.yield_stream">
+<tt class="descclassname">rpclib.protocol.http.</tt><tt class="descname">yield_stream</tt><big>(</big><em>istr</em><big>)</big><a class="reference internal" href="../modules/rpclib/protocol/http.html#yield_stream"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.protocol.http.yield_stream" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 </div>
 <div class="section" id="module-rpclib.protocol.soap.soap11">
@@ -307,10 +333,10 @@ Returns the corresponding native python object</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.protocol.soap.soap11.Soap11.generate_method_contexts">
-<tt class="descname">generate_method_contexts</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11.generate_method_contexts" title="Permalink to this definition">¶</a></dt>
-<dd><p>Method to be overriden to perform any sort of custom matching between
-the method_request_string and the methods. Returns a list of contexts.
+<dt id="rpclib.protocol.soap.soap11.Soap11.get_call_handles">
+<tt class="descname">get_call_handles</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11.get_call_handles" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method to be overriden to perform any sort of custom method mapping
+using any data in the method context. Returns a list of contexts.
 Can return multiple contexts if a method_request_string matches more
 than one function. (This is called the fanout mode.)</p>
 </dd></dl>
@@ -327,7 +353,7 @@ lxml.etree._Element instance.</p>
 <dl class="method">
 <dt id="rpclib.protocol.soap.soap11.Soap11.set_method_descriptor">
 <tt class="descname">set_method_descriptor</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.protocol.soap.soap11.Soap11.set_method_descriptor" title="Permalink to this definition">¶</a></dt>
-<dd><p>DEPRECATED! Use <a class="reference internal" href="#rpclib.protocol.soap.soap11.Soap11.generate_method_contexts" title="rpclib.protocol.soap.soap11.Soap11.generate_method_contexts"><tt class="xref py py-func docutils literal"><span class="pre">generate_method_contexts()</span></tt></a> instead.</p>
+<dd><p>DEPRECATED! Use <tt class="xref py py-func docutils literal"><span class="pre">generate_method_contexts()</span></tt> instead.</p>
 <p>Method to be overriden to perform any sort of custom matching between
 the method_request_string and the methods.</p>
 </dd></dl>
@@ -410,7 +436,7 @@ validation on the parsed input document.</p>
         <li class="right" >
           <a href="interface.html" title="Interfaces"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
       </ul>
     </div>

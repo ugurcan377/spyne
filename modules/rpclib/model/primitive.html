@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.model.primitive &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>rpclib.model.primitive &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -91,6 +91,7 @@
 <span class="kn">from</span> <span class="nn">rpclib.model</span> <span class="kn">import</span> <span class="n">SimpleModel</span>
 <span class="kn">from</span> <span class="nn">rpclib.model</span> <span class="kn">import</span> <span class="n">nillable_string</span>
 <span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">ValidationError</span>
+<span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">Fault</span>
 
 <span class="n">string_encoding</span> <span class="o">=</span> <span class="s">&#39;utf8&#39;</span>
 
@@ -180,6 +181,13 @@
         <span class="sd">&quot;&quot;&quot;A regular expression that matches the whole string. See here for more</span>
 <span class="sd">        info: http://www.regular-expressions.info/xml.html&quot;&quot;&quot;</span>
 
+        <span class="n">encoding</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="sd">&quot;&quot;&quot;The encoding of `str` objects this class may have to deal with.&quot;&quot;&quot;</span>
+
+        <span class="n">unicode_errors</span> <span class="o">=</span> <span class="s">&#39;strict&#39;</span>
+        <span class="sd">&quot;&quot;&quot;The argument to the ``unicode`` builtin; one of &#39;strict&#39;, &#39;replace&#39; or</span>
+<span class="sd">        &#39;ignore&#39;.&quot;&quot;&quot;</span>
+
     <span class="k">def</span> <span class="nf">__new__</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span></div>
         <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="mi">1</span>
 
@@ -193,19 +201,29 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">value</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="n">retval</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">errors</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">unicode_errors</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">retval</span> <span class="o">=</span> <span class="nb">unicode</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">encoding</span><span class="p">,</span>
+                                        <span class="n">errors</span><span class="o">=</span><span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">unicode_errors</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">retval</span>
 
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">value</span>
+        <span class="n">retval</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
+            <span class="n">retval</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">retval</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">is_default</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span>    <span class="n">SimpleModel</span><span class="o">.</span><span class="n">is_default</span><span class="p">(</span><span class="n">cls</span><span class="p">)</span>
-                <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">min_len</span> <span class="o">==</span> <span class="n">String</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">min_len</span>
-                <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_len</span> <span class="o">==</span> <span class="n">String</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_len</span>
-                <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">pattern</span> <span class="o">==</span> <span class="n">String</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">min_len</span> <span class="o">==</span> <span class="n">Unicode</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">min_len</span>
+                <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_len</span> <span class="o">==</span> <span class="n">Unicode</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">max_len</span>
+                <span class="ow">and</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">pattern</span> <span class="o">==</span> <span class="n">Unicode</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">pattern</span><span class="p">)</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">validate_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
@@ -218,33 +236,22 @@
             <span class="p">)</span>
 
 
-<span class="c"># the undocumented string type, for those who want not-so-implicit encoding</span>
-<span class="c"># conversions.</span>
-<span class="k">class</span> <span class="nc">_String</span><span class="p">(</span><span class="n">Unicode</span><span class="p">):</span></div>
-    <span class="k">class</span> <span class="nc">Attributes</span><span class="p">(</span><span class="n">Unicode</span><span class="o">.</span><span class="n">Attributes</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Customizable attributes of the :class:`rpclib.model.primitive.String`</span>
-<span class="sd">        type.&quot;&quot;&quot;</span>
-
-        <span class="n">encoding</span> <span class="o">=</span> <span class="s">&#39;utf8&#39;</span>
-        <span class="sd">&quot;&quot;&quot;The encoding of the passed `str` object.&quot;&quot;&quot;</span>
-
+<span class="k">class</span> <span class="nc">String</span><span class="p">(</span><span class="n">Unicode</span><span class="p">):</span></div>
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="n">retval</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">retval</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">unicode</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;You need to define an encoding to convert the &quot;</span>
+                                <span class="s">&quot;incoming unicode values to.&quot;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">retval</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
+
         <span class="k">return</span> <span class="n">retval</span>
 
-    <span class="nd">@classmethod</span>
-    <span class="nd">@nillable_string</span>
-    <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="n">retval</span> <span class="o">=</span> <span class="n">value</span>
-        <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">Attribute</span><span class="o">.</span><span class="n">encoding</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="n">retval</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">Attributes</span><span class="o">.</span><span class="n">encoding</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">retval</span>
-
-<span class="n">String</span> <span class="o">=</span> <span class="n">Unicode</span> <span class="c"># FIXME: the string/unicode separation needs to be tested</span>
+<span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">version</span> <span class="o">&gt;</span> <span class="s">&#39;3&#39;</span><span class="p">:</span>
+    <span class="n">String</span> <span class="o">=</span> <span class="n">Unicode</span>
 
 <span class="k">class</span> <span class="nc">AnyUri</span><span class="p">(</span><span class="n">Unicode</span><span class="p">):</span>
 <div class="viewcode-block" id="AnyUri"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.AnyUri">[docs]</a>    <span class="sd">&quot;&quot;&quot;This is an xml schema type with is a special kind of String.&quot;&quot;&quot;</span>
@@ -257,6 +264,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;decimal&#39;</span>
+    <span class="n">__max_str_len__</span> <span class="o">=</span> <span class="mi">1024</span>
 
     <span class="k">class</span> <span class="nc">Attributes</span><span class="p">(</span><span class="n">SimpleModel</span><span class="o">.</span><span class="n">Attributes</span><span class="p">):</span>
         <span class="n">gt</span> <span class="o">=</span> <span class="o">-</span><span class="nb">float</span><span class="p">(</span><span class="s">&#39;inf&#39;</span><span class="p">)</span> <span class="c"># minExclusive</span>
@@ -293,6 +301,9 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">__max_str_len__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">cls</span><span class="o">.</span><span class="n">__max_str_len__</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="s">&#39;string too long.&#39;</span><span class="p">)</span>
+
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">decimal</span><span class="o">.</span><span class="n">Decimal</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">decimal</span><span class="o">.</span><span class="n">InvalidOperation</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span>
@@ -322,33 +333,17 @@
 
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;float&#39;</span>
 
-<span class="k">class</span> <span class="nc">Int</span><span class="p">(</span><span class="n">Decimal</span><span class="p">):</span></div>
-<div class="viewcode-block" id="Int"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Int">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 32-Bit signed integer.&quot;&quot;&quot;</span>
-
-    <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;int&#39;</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="nd">@nillable_string</span>
-    <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c"># for validation purposes.</span>
-        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="nd">@nillable_string</span>
-    <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
-
 <span class="k">class</span> <span class="nc">Integer</span><span class="p">(</span><span class="n">Decimal</span><span class="p">):</span></div>
 <div class="viewcode-block" id="Integer"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Integer">[docs]</a>    <span class="sd">&quot;&quot;&quot;The arbitrary-size signed integer.&quot;&quot;&quot;</span>
 
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;integer&#39;</span>
+    <span class="n">__length__</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="sd">&quot;&quot;&quot;length of the number, in bits&quot;&quot;&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">assert</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__length__</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">**</span> <span class="n">cls</span><span class="o">.</span><span class="n">__length__</span><span class="p">)</span>
         <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="c"># sanity check</span>
 
         <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
@@ -356,6 +351,10 @@
     <span class="nd">@classmethod</span>
     <span class="nd">@nillable_string</span>
     <span class="k">def</span> <span class="nf">from_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">cls</span><span class="o">.</span><span class="n">__max_str_len__</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">cls</span><span class="o">.</span><span class="n">__max_str_len__</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">Fault</span><span class="p">(</span><span class="s">&#39;Client.ValidationError&#39;</span><span class="p">,</span> <span class="s">&#39;String longer than &#39;</span>
+                        <span class="s">&#39;</span><span class="si">%d</span><span class="s"> characters.&#39;</span> <span class="o">%</span> <span class="n">cls</span><span class="o">.</span><span class="n">__max_str_len__</span><span class="p">)</span>
+
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
@@ -364,50 +363,100 @@
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">ValidationError</span><span class="p">(</span><span class="n">string</span><span class="p">)</span>
 
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">validate_native</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>     <span class="n">Decimal</span><span class="o">.</span><span class="n">validate_native</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__length__</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span>
+                    <span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="o">**</span><span class="p">(</span> <span class="n">cls</span><span class="o">.</span><span class="n">__length__</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__length__</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+                <span class="p">)</span>
+            <span class="p">)</span>
+
 <span class="k">class</span> <span class="nc">UnsignedInteger</span><span class="p">(</span><span class="n">Integer</span><span class="p">):</span></div>
-<div class="viewcode-block" id="UnsignedInteger"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger">[docs]</a>    <span class="sd">&quot;&quot;&quot;The arbitrary-size unsigned integer.&quot;&quot;&quot;</span>
-    <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;unsignedLong&#39;</span>
-    <span class="n">__length__</span> <span class="o">=</span> <span class="bp">None</span>
-    <span class="sd">&quot;&quot;&quot;length of the number, in bits&quot;&quot;&quot;</span>
-
-    <span class="nd">@classmethod</span>
-    <span class="nd">@nillable_string</span>
-    <span class="k">def</span> <span class="nf">to_string</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="k">assert</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__length__</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">**</span><span class="n">cls</span><span class="o">.</span><span class="n">__length__</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+<div class="viewcode-block" id="UnsignedInteger"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger">[docs]</a>    <span class="sd">&quot;&quot;&quot;The arbitrary-size unsigned integer, aka nonNegativeInteger.&quot;&quot;&quot;</span>
+    <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;nonNegativeInteger&#39;</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">validate_native</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="k">return</span> <span class="p">(</span>     <span class="n">Integer</span><span class="o">.</span><span class="n">validate_native</span><span class="p">(</span><span class="n">cls</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-                <span class="ow">and</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__length__</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">cls</span><span class="o">.</span><span class="n">__length__</span><span class="p">))</span>
+                <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;=</span> <span class="mi">0</span>
+                <span class="ow">and</span> <span class="p">(</span><span class="n">cls</span><span class="o">.</span><span class="n">__length__</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">or</span> <span class="p">(</span><span class="n">value</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="o">**</span> <span class="n">cls</span><span class="o">.</span><span class="n">__length__</span><span class="p">))</span>
             <span class="p">)</span>
 
-<span class="k">class</span> <span class="nc">UnsignedInteger64</span><span class="p">(</span><span class="n">UnsignedInteger</span><span class="p">):</span></div>
-<div class="viewcode-block" id="UnsignedInteger64"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger64">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 64-bit unsigned integer.&quot;&quot;&quot;</span>
+<span class="n">NonNegativeInteger</span> <span class="o">=</span> <span class="n">UnsignedInteger</span></div>
+
+<span class="k">class</span> <span class="nc">Integer64</span><span class="p">(</span><span class="n">Integer</span><span class="p">):</span>
+<div class="viewcode-block" id="Integer64"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Integer64">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 64-bit signed integer, aka long.&quot;&quot;&quot;</span>
+
+    <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;long&#39;</span>
+    <span class="n">__length__</span> <span class="o">=</span> <span class="mi">64</span>
+    <span class="n">__max_str_len__</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">__length__</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">Long</span> <span class="o">=</span> <span class="n">Integer64</span></div>
+
+<span class="k">class</span> <span class="nc">Integer32</span><span class="p">(</span><span class="n">Integer</span><span class="p">):</span>
+<div class="viewcode-block" id="Integer32"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Integer32">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 32-bit signed integer, aka int.&quot;&quot;&quot;</span>
+
+    <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;int&#39;</span>
+    <span class="n">__length__</span> <span class="o">=</span> <span class="mi">32</span>
+    <span class="n">__max_str_len__</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">__length__</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">Int</span> <span class="o">=</span> <span class="n">Integer32</span></div>
+
+<span class="k">class</span> <span class="nc">Integer16</span><span class="p">(</span><span class="n">Integer</span><span class="p">):</span>
+<div class="viewcode-block" id="Integer16"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Integer16">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 8-bit signed integer, aka short.&quot;&quot;&quot;</span>
+
+    <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;short&#39;</span>
+    <span class="n">__length__</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">__max_str_len__</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">__length__</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">Short</span> <span class="o">=</span> <span class="n">Integer64</span></div>
+
+<span class="k">class</span> <span class="nc">Integer8</span><span class="p">(</span><span class="n">Integer</span><span class="p">):</span>
+<div class="viewcode-block" id="Integer8"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Integer8">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 8-bit signed integer, aka byte.&quot;&quot;&quot;</span>
+
+    <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;byte&#39;</span>
+    <span class="n">__length__</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">__max_str_len__</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">__length__</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
+
+<span class="n">Byte</span> <span class="o">=</span> <span class="n">Integer8</span></div>
+
+<span class="k">class</span> <span class="nc">UnsignedInteger64</span><span class="p">(</span><span class="n">UnsignedInteger</span><span class="p">):</span>
+<div class="viewcode-block" id="UnsignedInteger64"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger64">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 64-bit unsigned integer, aka unsignedLong.&quot;&quot;&quot;</span>
 
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;unsignedLong&#39;</span>
     <span class="n">__length__</span> <span class="o">=</span> <span class="mi">64</span>
+    <span class="n">__max_str_len__</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">__length__</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
 
-<span class="k">class</span> <span class="nc">UnsignedInteger32</span><span class="p">(</span><span class="n">UnsignedInteger</span><span class="p">):</span></div>
-<div class="viewcode-block" id="UnsignedInteger32"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger32">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 32-bit unsigned integer.&quot;&quot;&quot;</span>
+<span class="n">UnsignedLong</span> <span class="o">=</span> <span class="n">UnsignedInteger64</span></div>
 
-    <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;unsignedLong&#39;</span>
+<span class="k">class</span> <span class="nc">UnsignedInteger32</span><span class="p">(</span><span class="n">UnsignedInteger</span><span class="p">):</span>
+<div class="viewcode-block" id="UnsignedInteger32"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger32">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 32-bit unsigned integer, aka unsignedInt.&quot;&quot;&quot;</span>
+
+    <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;unsignedInt&#39;</span>
     <span class="n">__length__</span> <span class="o">=</span> <span class="mi">32</span>
+    <span class="n">__max_str_len__</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">__length__</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
 
-<span class="k">class</span> <span class="nc">UnsignedInteger16</span><span class="p">(</span><span class="n">Integer</span><span class="p">):</span></div>
-<div class="viewcode-block" id="UnsignedInteger16"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger16">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 16-bit unsigned integer.&quot;&quot;&quot;</span>
+<span class="n">UnsignedInt</span> <span class="o">=</span> <span class="n">UnsignedInteger32</span></div>
+
+<span class="k">class</span> <span class="nc">UnsignedInteger16</span><span class="p">(</span><span class="n">Integer</span><span class="p">):</span>
+<div class="viewcode-block" id="UnsignedInteger16"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger16">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 16-bit unsigned integer, aka unsignedShort.&quot;&quot;&quot;</span>
 
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;unsignedShort&#39;</span>
     <span class="n">__length__</span> <span class="o">=</span> <span class="mi">16</span>
+    <span class="n">__max_str_len__</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">__length__</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
 
-<span class="k">class</span> <span class="nc">UnsignedInteger8</span><span class="p">(</span><span class="n">Integer</span><span class="p">):</span></div>
-<div class="viewcode-block" id="UnsignedInteger8"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger8">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 8-bit unsigned integer.&quot;&quot;&quot;</span>
+<span class="n">UnsignedShort</span> <span class="o">=</span> <span class="n">UnsignedInteger16</span></div>
+
+<span class="k">class</span> <span class="nc">UnsignedInteger8</span><span class="p">(</span><span class="n">Integer</span><span class="p">):</span>
+<div class="viewcode-block" id="UnsignedInteger8"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.UnsignedInteger8">[docs]</a>    <span class="sd">&quot;&quot;&quot;The 8-bit unsigned integer, aka unsignedByte.&quot;&quot;&quot;</span>
 
     <span class="n">__type_name__</span> <span class="o">=</span> <span class="s">&#39;unsignedByte&#39;</span>
     <span class="n">__length__</span> <span class="o">=</span> <span class="mi">8</span>
+    <span class="n">__max_str_len__</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="n">__length__</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span>
 
-<span class="k">class</span> <span class="nc">Time</span><span class="p">(</span><span class="n">SimpleModel</span><span class="p">):</span></div>
+<span class="n">UnsignedByte</span> <span class="o">=</span> <span class="n">UnsignedInteger8</span></div>
+
+<span class="k">class</span> <span class="nc">Time</span><span class="p">(</span><span class="n">SimpleModel</span><span class="p">):</span>
 <div class="viewcode-block" id="Time"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Time">[docs]</a>    <span class="sd">&quot;&quot;&quot;Just that, Time. No time zone support.</span>
 
 <span class="sd">    Native type is :class:`datetime.time`.</span>
@@ -603,8 +652,10 @@
 <span class="k">class</span> <span class="nc">Mandatory</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
 <div class="viewcode-block" id="Mandatory"><a class="viewcode-back" href="../../../reference/model.html#rpclib.model.primitive.Mandatory">[docs]</a>    <span class="sd">&quot;&quot;&quot;Class that contains mandatory variants of primitives.&quot;&quot;&quot;</span>
 
-    <span class="n">String</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">min_len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">Integer</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">String</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_string&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">min_len</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">Integer</span> <span class="o">=</span> <span class="n">Integer</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_integer&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">UnsignedInteger</span> <span class="o">=</span> <span class="n">UnsignedInteger</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_unsigned_integer&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">UnsignedLong</span> <span class="o">=</span> <span class="n">UnsignedLong</span><span class="p">(</span><span class="n">type_name</span><span class="o">=</span><span class="s">&quot;mandatory_unsigned_integer&quot;</span><span class="p">,</span> <span class="n">min_occurs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">nillable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div></div>
 
           </div>
@@ -638,7 +689,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

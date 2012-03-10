@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.interface._base &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>rpclib.interface._base &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -78,6 +78,10 @@
 
 <span class="kn">import</span> <span class="nn">rpclib.const.xml_ns</span>
 <span class="n">_ns_xsd</span> <span class="o">=</span> <span class="n">rpclib</span><span class="o">.</span><span class="n">const</span><span class="o">.</span><span class="n">xml_ns</span><span class="o">.</span><span class="n">xsd</span>
+
+<span class="kn">from</span> <span class="nn">rpclib.const.suffix</span> <span class="kn">import</span> <span class="n">TYPE_SUFFIX</span>
+<span class="kn">from</span> <span class="nn">rpclib.const.suffix</span> <span class="kn">import</span> <span class="n">RESULT_SUFFIX</span>
+<span class="kn">from</span> <span class="nn">rpclib.const.suffix</span> <span class="kn">import</span> <span class="n">RESPONSE_SUFFIX</span>
 
 <span class="k">class</span> <span class="nc">SchemaInfo</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -183,7 +187,16 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">tns</span>
 
-    <span class="k">def</span> <span class="nf">populate_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span></div>
+    <span class="k">def</span> <span class="nf">__test_type_name_validity</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">c</span><span class="p">):</span></div>
+        <span class="k">if</span> <span class="n">c</span> <span class="ow">and</span>  <span class="p">(</span> <span class="n">c</span><span class="o">.</span><span class="n">get_type_name</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">RESULT_SUFFIX</span><span class="p">)</span> <span class="ow">or</span>
+                    <span class="n">c</span><span class="o">.</span><span class="n">get_type_name</span><span class="p">()</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="n">RESPONSE_SUFFIX</span><span class="p">)</span> <span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">Exception</span><span class="p">(</span><span class="s">&quot;You can&#39;t use any type or method name ending &quot;</span>
+                                <span class="s">&quot;with one of </span><span class="si">%r</span><span class="s"> unless you should alter the &quot;</span>
+                                <span class="s">&quot;constants in the &#39;rpclib.const.suffix&#39; module.</span><span class="se">\n</span><span class="s">&quot;</span>
+                                <span class="s">&quot;This is for class </span><span class="si">%r</span><span class="s">.&quot;</span>
+                            <span class="o">%</span> <span class="p">((</span><span class="n">TYPE_SUFFIX</span><span class="p">,</span> <span class="n">RESULT_SUFFIX</span><span class="p">,</span> <span class="n">RESPONSE_SUFFIX</span><span class="p">),</span><span class="n">c</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">populate_interface</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">types</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
 <div class="viewcode-block" id="InterfaceBase.populate_interface"><a class="viewcode-back" href="../../../reference/interface.html#rpclib.interface._base.InterfaceBase.populate_interface">[docs]</a>        <span class="sd">&quot;&quot;&quot;Harvests the information stored in individual classes&#39; _type_info</span>
 <span class="sd">        dictionaries. It starts from function definitions and includes only</span>
 <span class="sd">        the used objects.</span>
@@ -194,10 +207,14 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">reset_interface</span><span class="p">()</span>
 
+        <span class="n">classes</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c"># populate types</span>
         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;populating &#39;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s"> (</span><span class="si">%s</span><span class="s">) &#39; types...&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">get_service_key</span><span class="p">()))</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s">&quot;populating &#39;</span><span class="si">%s</span><span class="s">.</span><span class="si">%s</span><span class="s"> (</span><span class="si">%s</span><span class="s">) &#39; types...&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span>
+                                                <span class="n">s</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">get_service_key</span><span class="p">()))</span>
+
             <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">s</span><span class="o">.</span><span class="n">public_methods</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+
                 <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">in_header</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="n">method</span><span class="o">.</span><span class="n">in_header</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">__in_header__</span>
                 <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">out_header</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
@@ -209,8 +226,9 @@
                     <span class="k">else</span><span class="p">:</span>
                         <span class="n">in_headers</span> <span class="o">=</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">in_header</span><span class="p">,)</span>
                     <span class="k">for</span> <span class="n">in_header</span> <span class="ow">in</span> <span class="n">in_headers</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__test_type_name_validity</span><span class="p">(</span><span class="n">in_header</span><span class="p">)</span>
                         <span class="n">in_header</span><span class="o">.</span><span class="n">resolve_namespace</span><span class="p">(</span><span class="n">in_header</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tns</span><span class="p">())</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">in_header</span><span class="p">)</span>
+                        <span class="n">classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">in_header</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">out_header</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">):</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">out_header</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
@@ -219,8 +237,9 @@
                         <span class="n">out_headers</span> <span class="o">=</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">out_header</span><span class="p">,)</span>
 
                     <span class="k">for</span> <span class="n">out_header</span> <span class="ow">in</span> <span class="n">out_headers</span><span class="p">:</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">__test_type_name_validity</span><span class="p">(</span><span class="n">out_header</span><span class="p">)</span>
                         <span class="n">out_header</span><span class="o">.</span><span class="n">resolve_namespace</span><span class="p">(</span><span class="n">out_header</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tns</span><span class="p">())</span>
-                        <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">out_header</span><span class="p">)</span>
+                        <span class="n">classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">out_header</span><span class="p">)</span>
 
                 <span class="k">if</span> <span class="n">method</span><span class="o">.</span><span class="n">faults</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
                     <span class="n">method</span><span class="o">.</span><span class="n">faults</span> <span class="o">=</span> <span class="p">[]</span>
@@ -229,16 +248,22 @@
 
                 <span class="k">for</span> <span class="n">fault</span> <span class="ow">in</span> <span class="n">method</span><span class="o">.</span><span class="n">faults</span><span class="p">:</span>
                     <span class="n">fault</span><span class="o">.</span><span class="n">__namespace__</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_tns</span><span class="p">()</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">fault</span><span class="p">)</span>
+                    <span class="n">classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fault</span><span class="p">)</span>
 
+                <span class="bp">self</span><span class="o">.</span><span class="n">__test_type_name_validity</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">in_message</span><span class="p">)</span>
                 <span class="n">method</span><span class="o">.</span><span class="n">in_message</span><span class="o">.</span><span class="n">resolve_namespace</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">in_message</span><span class="p">,</span>
                                                                  <span class="bp">self</span><span class="o">.</span><span class="n">get_tns</span><span class="p">())</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">in_message</span><span class="p">)</span>
+                <span class="n">classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">in_message</span><span class="p">)</span>
 
+                <span class="c"># we are not testing out_message with __test_type_name_validity</span>
+                <span class="c"># because they have RESPONSE_SUFFIX and RESULT_SUFFIX added</span>
+                <span class="c"># automatically. actually, they&#39;re what we&#39;re trying to protect.</span>
                 <span class="n">method</span><span class="o">.</span><span class="n">out_message</span><span class="o">.</span><span class="n">resolve_namespace</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">out_message</span><span class="p">,</span>
                                                                  <span class="bp">self</span><span class="o">.</span><span class="n">get_tns</span><span class="p">())</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">out_message</span><span class="p">)</span>
+                <span class="n">classes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">out_message</span><span class="p">)</span>
 
+        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">classes</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 
         <span class="c"># populate call routes</span>
         <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">services</span><span class="p">:</span>
@@ -262,6 +287,9 @@
                                 <span class="o">%</span> <span class="p">(</span><span class="n">method</span><span class="o">.</span><span class="n">key</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
                                                <span class="n">os</span><span class="o">.</span><span class="n">__module__</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">__name__</span><span class="p">,</span>
                                 <span class="p">))</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s">&quot;From this point on, you&#39;re not supposed to make any changes &quot;</span>
+                    <span class="s">&quot;to the class &amp; method structure of the exposed services.&quot;</span><span class="p">)</span>
 
     <span class="n">tns</span> <span class="o">=</span> <span class="nb">property</span><span class="p">(</span><span class="n">get_tns</span><span class="p">)</span></div>
 
@@ -352,7 +380,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>

@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Rpclib Documentation &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>Rpclib Documentation &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="#" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="#" />
     <link rel="next" title="Rpclib Manual" href="manual/index.html" /> 
   </head>
   <body>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="manual/index.html" title="Rpclib Manual"
              accesskey="N">next</a> |</li>
-        <li><a href="#">rpclib 2.5.1-beta documentation</a> &raquo;</li> 
+        <li><a href="#">rpclib 2.7.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -112,7 +112,10 @@ that Rpclib supports:</p>
 <a class="reference internal" href="reference/client.html#rpclib.client.zeromq.ZeroMQClient" title="rpclib.client.zeromq.ZeroMQClient"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.client.zeromq.ZeroMQClient</span></tt></a> and
 <a class="reference internal" href="reference/server.html#rpclib.server.zeromq.ZeroMQServer" title="rpclib.server.zeromq.ZeroMQServer"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server.zeromq.ZeroMQServer</span></tt></a>.</li>
 <li>A Wsgi server of your choice to wrap <a class="reference internal" href="reference/server.html#rpclib.server.wsgi.WsgiApplication" title="rpclib.server.wsgi.WsgiApplication"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server.wsgi.WsgiApplication</span></tt></a>.</li>
+<li><cite>Werkzeug &lt;http://werkzeug.pocoo.org/&gt;</cite> is needed for <a class="reference internal" href="reference/protocol.html#rpclib.protocol.http.HttpRpc" title="rpclib.protocol.http.HttpRpc"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.protocol.http.HttpRpc</span></tt></a>.</li>
 </ul>
+<p>You are advised to add these as requirements to your own projects, as these are
+only &#8220;soft&#8221; dependencies of rpclib, thus not handled in its setup script.</p>
 </div>
 <div class="section" id="installing">
 <h2>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h2>
@@ -141,7 +144,7 @@ in python.org, <a class="reference external" href="http://mail.python.org/mailma
 That&#8217;s mostly because rpclib is the continuation of soaplib, but also
 because soap is an important part of rpclib.</p>
 <p>If you wish to contribute to rpclib&#8217;s development, create a personal fork
-on GitHub.  When you are ready to push to the mainstream repository,
+on GitHub.  When you are ready to push to the upstream repository,
 submit a pull request to bring your work to the attention of the core
 committers. They will respond to review your patch and act accordingly.</p>
 <p>To save both parties time, make sure the existing tests pass. If you are
@@ -219,6 +222,7 @@ request to be reviewed.</p>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#is-it-possible-to-use-other-decorators-with-rpc-srpc">Is it possible to use other decorators with &#64;rpc/&#64;srpc?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-alter-the-behaviour-of-a-user-method-without-using-decorators">How do I alter the behaviour of a user method without using decorators?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="faq.html#how-do-i-use-variable-names-that-are-also-python-keywords">How do I use variable names that are also python keywords?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="faq.html#how-does-rpclib-behave-in-a-multi-threaded-environment">How does rpclib behave in a multi-threaded environment?</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="h_and_f.html">History and Future</a><ul>
@@ -307,7 +311,7 @@ request to be reviewed.</p>
         <li class="right" >
           <a href="manual/index.html" title="Rpclib Manual"
              >next</a> |</li>
-        <li><a href="#">rpclib 2.5.1-beta documentation</a> &raquo;</li> 
+        <li><a href="#">rpclib 2.7.0-beta documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

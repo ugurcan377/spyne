@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>rpclib.protocol._base &mdash; rpclib 2.5.1-beta documentation</title>
+    <title>rpclib.protocol._base &mdash; rpclib 2.7.0-beta documentation</title>
     
     <link rel="stylesheet" href="../../../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../../../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../../../',
-        VERSION:     '2.5.1-beta',
+        VERSION:     '2.7.0-beta',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../../../static/jquery.js"></script>
     <script type="text/javascript" src="../../../static/underscore.js"></script>
     <script type="text/javascript" src="../../../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.5.1-beta documentation" href="../../../index.html" />
+    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../../../index.html" />
     <link rel="up" title="rpclib" href="../../rpclib.html" /> 
   </head>
   <body>
@@ -38,7 +38,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" accesskey="U">rpclib</a> &raquo;</li> 
       </ul>
@@ -85,11 +85,13 @@
 
 <span class="kn">from</span> <span class="nn">rpclib.const.http</span> <span class="kn">import</span> <span class="n">HTTP_400</span>
 <span class="kn">from</span> <span class="nn">rpclib.const.http</span> <span class="kn">import</span> <span class="n">HTTP_404</span>
+<span class="kn">from</span> <span class="nn">rpclib.const.http</span> <span class="kn">import</span> <span class="n">HTTP_405</span>
 <span class="kn">from</span> <span class="nn">rpclib.const.http</span> <span class="kn">import</span> <span class="n">HTTP_413</span>
 <span class="kn">from</span> <span class="nn">rpclib.const.http</span> <span class="kn">import</span> <span class="n">HTTP_500</span>
 
 <span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">ResourceNotFoundError</span>
 <span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">RequestTooLongError</span>
+<span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">RequestNotAllowed</span>
 <span class="kn">from</span> <span class="nn">rpclib.error</span> <span class="kn">import</span> <span class="n">Fault</span>
 
 <span class="k">class</span> <span class="nc">ProtocolBase</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -120,6 +122,7 @@
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">app</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">validator</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__app</span> <span class="o">=</span> <span class="bp">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="o">=</span> <span class="bp">None</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">set_app</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">event_manager</span> <span class="o">=</span> <span class="n">EventManager</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -192,19 +195,9 @@
             <span class="k">raise</span> <span class="n">ResourceNotFoundError</span><span class="p">(</span><span class="s">&#39;Method </span><span class="si">%r</span><span class="s"> not found.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">generate_method_contexts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span></div>
-<div class="viewcode-block" id="ProtocolBase.generate_method_contexts"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol._base.ProtocolBase.generate_method_contexts">[docs]</a>        <span class="sd">&quot;&quot;&quot;Method to be overriden to perform any sort of custom matching between</span>
-<span class="sd">        the method_request_string and the methods. Returns a list of contexts.</span>
-<span class="sd">        Can return multiple contexts if a method_request_string matches more</span>
-<span class="sd">        than one function. (This is called the fanout mode.)</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-
-        <span class="n">name</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;{&quot;</span><span class="p">):</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">get_tns</span><span class="p">(),</span> <span class="n">name</span><span class="p">)</span>
-
-        <span class="n">call_handles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">service_method_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">[])</span>
+        <span class="n">call_handles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_call_handles</span><span class="p">(</span><span class="n">ctx</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">call_handles</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ResourceNotFoundError</span><span class="p">(</span><span class="s">&#39;Method </span><span class="si">%r</span><span class="s"> not found.&#39;</span> <span class="o">%</span> <span class="n">name</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ResourceNotFoundError</span><span class="p">(</span><span class="s">&#39;Method </span><span class="si">%r</span><span class="s"> not found.&#39;</span> <span class="o">%</span> <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span><span class="p">)</span>
 
         <span class="n">retval</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">sc</span><span class="p">,</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">call_handles</span><span class="p">:</span>
@@ -219,11 +212,28 @@
 
         <span class="k">return</span> <span class="n">retval</span>
 
+    <span class="k">def</span> <span class="nf">get_call_handles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ctx</span><span class="p">):</span>
+<div class="viewcode-block" id="ProtocolBase.get_call_handles"><a class="viewcode-back" href="../../../reference/protocol.html#rpclib.protocol._base.ProtocolBase.get_call_handles">[docs]</a>        <span class="sd">&quot;&quot;&quot;Method to be overriden to perform any sort of custom method mapping</span>
+<span class="sd">        using any data in the method context. Returns a list of contexts.</span>
+<span class="sd">        Can return multiple contexts if a method_request_string matches more</span>
+<span class="sd">        than one function. (This is called the fanout mode.)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">name</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">method_request_string</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&quot;{&quot;</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="s">&#39;{</span><span class="si">%s</span><span class="s">}</span><span class="si">%s</span><span class="s">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">get_tns</span><span class="p">(),</span> <span class="n">name</span><span class="p">)</span>
+
+        <span class="n">call_handles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">interface</span><span class="o">.</span><span class="n">service_method_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="p">[])</span>
+
+        <span class="k">return</span> <span class="n">call_handles</span>
+
     <span class="k">def</span> <span class="nf">fault_to_http_response_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fault</span><span class="p">):</span></div>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fault</span><span class="p">,</span> <span class="n">RequestTooLongError</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">HTTP_413</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fault</span><span class="p">,</span> <span class="n">ResourceNotFoundError</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">HTTP_404</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fault</span><span class="p">,</span> <span class="n">RequestNotAllowed</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">HTTP_405</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fault</span><span class="p">,</span> <span class="n">Fault</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">fault</span><span class="o">.</span><span class="n">faultcode</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s">&#39;Client.&#39;</span><span class="p">)</span>
                                                 <span class="ow">or</span> <span class="n">fault</span><span class="o">.</span><span class="n">faultcode</span> <span class="o">==</span> <span class="s">&#39;Client&#39;</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">HTTP_400</span>
@@ -270,7 +280,7 @@
         <li class="right" >
           <a href="../../../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
-        <li><a href="../../../index.html">rpclib 2.5.1-beta documentation</a> &raquo;</li>
+        <li><a href="../../../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
           <li><a href="../../index.html" >Module code</a> &raquo;</li>
           <li><a href="../../rpclib.html" >rpclib</a> &raquo;</li> 
       </ul>
