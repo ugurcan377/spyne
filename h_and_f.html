@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>History and Future &mdash; rpclib 2.7.0-beta documentation</title>
+    <title>History and Future &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.7.0-beta',
+        VERSION:     '2.8.0-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.7.0-beta documentation" href="index.html" />
+    <link rel="top" title="spyne 2.8.0-rc documentation" href="index.html" />
     <link rel="next" title="Comparison with other rpc frameworks" href="comparison.html" />
-    <link rel="prev" title="Rpclib FAQ" href="faq.html" /> 
+    <link rel="prev" title="Spyne FAQ" href="faq.html" /> 
   </head>
   <body>
     <div class="related">
@@ -43,9 +43,9 @@
           <a href="comparison.html" title="Comparison with other rpc frameworks"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="faq.html" title="Rpclib FAQ"
+          <a href="faq.html" title="Spyne FAQ"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,19 +58,19 @@
 <span id="changelog"></span><h1>History and Future<a class="headerlink" href="#history-and-future" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="versioning">
 <h2>Versioning<a class="headerlink" href="#versioning" title="Permalink to this headline">¶</a></h2>
-<p>Rpclib respects the &#8220;Semantic Versioning&#8221; rules outlined in <a class="reference external" href="http://semver.org">http://semver.org</a>.</p>
-<p>This means  you can do better than just adding <tt class="docutils literal"><span class="pre">'rpclib'</span></tt> to your list of
-dependencies. Assuming the current version of rpclib is 2.4.8,
+<p>Spyne respects the &#8220;Semantic Versioning&#8221; rules outlined in <a class="reference external" href="http://semver.org">http://semver.org</a>.</p>
+<p>This means  you can do better than just adding <tt class="docutils literal"><span class="pre">'spyne'</span></tt> to your list of
+dependencies. Assuming the current version of spyne is 2.4.8,
 you can use the following as dependency string:</p>
 <ul class="simple">
-<li><tt class="docutils literal"><span class="pre">rpclib</span></tt> if you feel adventurous or are willing to work on rpclib itself.</li>
-<li><tt class="docutils literal"><span class="pre">rpclib&lt;3</span></tt> if you only want backwards-compatible bug fixes and new features.</li>
-<li><tt class="docutils literal"><span class="pre">rpclib&lt;2.5</span></tt> if you only want backwards-compatible bug fixes.</li>
-<li><tt class="docutils literal"><span class="pre">rpclib=2.4.8</span></tt> if you rather like that version.</li>
+<li><tt class="docutils literal"><span class="pre">spyne</span></tt> if you feel adventurous or are willing to work on spyne itself.</li>
+<li><tt class="docutils literal"><span class="pre">spyne&lt;3</span></tt> if you only want backwards-compatible bug fixes and new features.</li>
+<li><tt class="docutils literal"><span class="pre">spyne&lt;2.5</span></tt> if you only want backwards-compatible bug fixes.</li>
+<li><tt class="docutils literal"><span class="pre">spyne=2.4.8</span></tt> if you rather like that version.</li>
 </ul>
 <p>We have a policy of pushing to pypi as soon as possible, so be sure to at
 least use the second option to prevent things from breaking unexpectedly.</p>
-<p>Rpclib project uses -alpha -beta and -rc labels to denote unfinished code. We
+<p>Spyne project uses -alpha -beta and -rc labels to denote unfinished code. We
 don&#8217;t prefer using separate integers for experimental labels. So for example,
 instead of having 2.0.0-alpha47, we&#8217;ll have 2.2.5-alpha.</p>
 <ul class="simple">
@@ -89,39 +89,39 @@ clearly denote experimental code in its documentation.</p>
 <div class="section" id="roadmap-and-criticism">
 <h2>Roadmap and Criticism<a class="headerlink" href="#roadmap-and-criticism" title="Permalink to this headline">¶</a></h2>
 <p>This is an attempt to make a free-for-all area to display opinions about the
-feature direction of rpclib. Doing it in a text file in the source repository
+feature direction of spyne. Doing it in a text file in the source repository
 may not be the best approach for the job, but it should be enough to at least
 spark a discussion around this topic.</p>
-<p>So the following is missing in Rpclib:</p>
+<p>So the following is missing in Spyne:</p>
 <div class="section" id="processing-pipeline">
 <h3>Processing Pipeline<a class="headerlink" href="#processing-pipeline" title="Permalink to this headline">¶</a></h3>
-<p>We think rpclib package has one last missing element whose addition can result
+<p>We think spyne package has one last missing element whose addition can result
 in touching most of the codebase: A proper lazily-evaluated pipeline for
 request processing.</p>
 <p>Currently, every artifact of the rpc processing pipeline remain in memory for the
 entire life time of the context object. This also results in having the whole
 message in memory while processing. While this is not a problem for small
-messages, which is rpclib&#8217;s main target, it limits rpclib capabilities.</p>
+messages, which is spyne&#8217;s main target, it limits spyne capabilities.</p>
 <p>A prerequisite of having such a lazy pipeline is to have ProtocolBase offer a
 <tt class="docutils literal"><span class="pre">.feed()</span></tt> call, which accepts data fragments coming in from socket stream.
-Currently, rpclib can only work with transports who support message semantics
+Currently, spyne can only work with transports who support message semantics
 &#8211; i.e. those that offer a way of delimiting messages using without having to
 parse the contents. While the most popular transports support this, it prevents
-rpclib from making use of low-level operating system primitives like tcp
+spyne from making use of low-level operating system primitives like tcp
 sockets.</p>
 </div>
 <div class="section" id="serializer-support">
 <h3>Serializer Support<a class="headerlink" href="#serializer-support" title="Permalink to this headline">¶</a></h3>
-<p>See the <a class="reference internal" href="manual/highlevel.html#manual-highlevel"><em>High-Level Introduction to Rpclib</em></a> section for a small introductory paragraph about
+<p>See the <a class="reference internal" href="manual/highlevel.html#manual-highlevel"><em>High-Level Introduction to Spyne</em></a> section for a small introductory paragraph about
 serializers.</p>
-<p>Currently, serializers are not distinguished in the rpclib source code. Making
+<p>Currently, serializers are not distinguished in the spyne source code. Making
 them pluggable would:</p>
 <ol class="arabic simple">
-<li>Make rpclib more flexible</li>
+<li>Make spyne more flexible</li>
 <li>Make it easy to share code between protocols.</li>
 </ol>
 <p>An initial attempt to make them pluggable would result in the lxml dependency
-for Soap being relaxed, which would make it possible to deploy rpclib in
+for Soap being relaxed, which would make it possible to deploy spyne in
 pure-python environments. However, this is comparatively easy to do, given
 the fact that the ElementTree api is a well-known de-facto standard in the
 Python world.</p>
@@ -136,29 +136,29 @@ Soap to JsonRpc.</p>
 </div>
 <div class="section" id="models-need-yet-another-overhaul">
 <h3>Models need (yet another) overhaul<a class="headerlink" href="#models-need-yet-another-overhaul" title="Permalink to this headline">¶</a></h3>
-<p>Rpclib should rely less on a class inheriting from ModelBase and more on a
+<p>Spyne should rely less on a class inheriting from ModelBase and more on a
 class having a predetermined attribute (like _type_info). The ComplexModel
 metaclass should just be responsible for filling out this information if it&#8217;s
-not already there (which is mostly the case now) and other parts of rpclib
+not already there (which is mostly the case now) and other parts of spyne
 should rely on this <em>one</em> class attribute to do all (de)serialization and
 constraint checking.</p>
 <p>When you call :func:<tt class="docutils literal"><span class="pre">customize</span></tt> function on a ModelBase child, a shallow
 copy of that class definition is created. While this works great if the class
-does not leave rpclib code, (simply because rpclib also looks for
-rpclib-specific <tt class="docutils literal"><span class="pre">_is_clone_of</span></tt> attribute to match classes) it turned out that
+does not leave spyne code, (simply because spyne also looks for
+spyne-specific <tt class="docutils literal"><span class="pre">_is_clone_of</span></tt> attribute to match classes) it turned out that
 this is not what libraries that make heavy use of Python&#8217;s powerful
-metaprogramming features (like SQLAlchemy) expect. So the way Rpclib breaks
-the &#8220;is&#8221; operator hinders Rpclib&#8217;s interoperability prospects with other
+metaprogramming features (like SQLAlchemy) expect. So the way Spyne breaks
+the &#8220;is&#8221; operator hinders Spyne&#8217;s interoperability prospects with other
 libraries.</p>
 </div>
 <div class="section" id="miscellanous">
 <h3>Miscellanous<a class="headerlink" href="#miscellanous" title="Permalink to this headline">¶</a></h3>
 <p>The following would definitely be nice to have, but are just modules that should
-not cause a change in unrelated areas of rpclib. Those would increment the minor
-version number of the Rpclib version once implemented.</p>
+not cause a change in unrelated areas of spyne. Those would increment the minor
+version number of the Spyne version once implemented.</p>
 <ul class="simple">
 <li>Support for polymorphism in XML Schema.</li>
-<li>Support for the JsonObject (à la XmlObject) and JsonRpc protocols.</li>
+<li>Support for the JsonRpc protocol.</li>
 <li>Support for the JsonSchema interface document standard.</li>
 <li>Support for the Thrift binary protocol.</li>
 <li>Support for the Thrift IDL &#8211; The Thrift Interface Definition Language.</li>
@@ -189,11 +189,11 @@ of information:</p>
 <div class="section" id="ladon">
 <h3>Ladon<a class="headerlink" href="#ladon" title="Permalink to this headline">¶</a></h3>
 <p>The Ladon project has almost the same goals and same approach to the rpc-related
-issues as rpclib.</p>
+issues as Spyne.</p>
 <p>Discussion thread: <a class="reference external" href="https://answers.launchpad.net/ladon/+question/171664">https://answers.launchpad.net/ladon/+question/171664</a></p>
 <ul>
 <li><dl class="first docutils">
-<dt>Supports JsonWSP protocol, which rpclib does not support.</dt>
+<dt>Supports JsonWSP protocol, which Spyne does not support.</dt>
 <dd><p class="first last">The main motive for designing JSON-WSP was the need for a JSON-based RPC
 protocol with a service description specification with built-in service /
 method documentation.</p>
@@ -203,14 +203,14 @@ method documentation.</p>
 <li><p class="first">Supports both Python 2 and Python 3.</p>
 </li>
 <li><p class="first">Auto-generates human-readable API documentation.
-(example: <a class="reference external" href="http://ladonize.org/python-demos/AlbumService">http://ladonize.org/python-demos/AlbumService</a>) In Rpclib, you need
+(example: <a class="reference external" href="http://ladonize.org/python-demos/AlbumService">http://ladonize.org/python-demos/AlbumService</a>) In Spyne, you need
 to do with the ugliness of a raw wsdl document.</p>
 </li>
 <li><p class="first">Does not support ZeroMQ.</p>
 </li>
 <li><p class="first">Uses standard python tools for xml parsing which is good for pure-python
-deployments. Rpclib uses lxml, due to its excellent namespace support and
-speed. So Rpclib-based solutions are easier to develop and faster to work with
+deployments. Spyne uses lxml, due to its excellent namespace support and
+speed. So Spyne-based solutions are easier to develop and faster to work with
 but more difficult to deploy.</p>
 </li>
 <li><p class="first">Does not do input validation for SOAP.</p>
@@ -226,8 +226,8 @@ standard protocol like SOAP is that clients are already out there.</p>
 </dd>
 </dl>
 </li>
-<li><p class="first">Rpclib uses own classes for denoting types, whereas ladon uses Python
-callables. This lets ladon api to be simpler, but gives the rpclib api the
+<li><p class="first">Spyne uses own classes for denoting types, whereas ladon uses Python
+callables. This lets ladon api to be simpler, but gives the Spyne api the
 power to have declarative restrictions on input types.</p>
 </li>
 <li><p class="first">Does not test against ws-i.org deliverables for testing soap compatibility.</p>
@@ -280,10 +280,10 @@ on extensibility, framework-independance and better type handling.
 <ul class="simple">
 <li>Soap 1.1 / Wsdl 1.1 Client only.</li>
 <li>Excellent wsdl parser, very easy to use.</li>
-<li>Recommended way to interface with rpclib services.</li>
+<li>Recommended way to interface with Spyne&#8217;s Soap services.</li>
 <li>Uses own pure-python xml implementation, so it&#8217;s roughly 10 times slower
-than rpclib.</li>
-<li>Only depends on pure-python solutions, so much easier to deploy.</li>
+than Spyne&#8217;s Soap client.</li>
+<li>Pure-python library, so much easier to deploy.</li>
 </ul>
 </div>
 <div class="section" id="zsi">
@@ -315,12 +315,82 @@ than rpclib.</li>
 <div class="section" id="pyro">
 <h3>PyRo<a class="headerlink" href="#pyro" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
+<li>Python Remote Objects</li>
 <li>???</li>
 </ul>
 </div>
 </div>
 <div class="section" id="id1">
 <h2>Changelog<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="rpclib-2-8-0-rc-spyne-2-8-0-rc">
+<h3>rpclib-2.8.0-rc -&gt; spyne-2.8.0-rc<a class="headerlink" href="#rpclib-2-8-0-rc-spyne-2-8-0-rc" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><ul>
+<li><p class="first">Rpclib is dead. Long live Spyne!</p>
+</li>
+<li><p class="first">Add support for JsonObject protocol.</p>
+</li>
+<li><p class="first">Make DateTime string format customizable.</p>
+</li>
+<li><p class="first">Implement the server transport that exposes <tt class="docutils literal"><span class="pre">Application</span></tt> as a
+<tt class="docutils literal"><span class="pre">twisted.web.resource.Resource</span></tt> child.</p>
+</li>
+<li><p class="first">Remove Deprecated XMLAttribute and XMLAttributeRef. Use <tt class="docutils literal"><span class="pre">XmlAttribute</span></tt>
+and <tt class="docutils literal"><span class="pre">XmlAttributeRef</span></tt> instead.</p>
+</li>
+<li><p class="first">Xml Schema: Add support for the &lt;any&gt; tag.</p>
+</li>
+<li><p class="first">Add a chapter about Validation to the manual.</p>
+</li>
+<li><p class="first">Interface documents are no longer subclasses of InterfaceBase. It&#8217;s up
+to the transport to expose the application using a given interface document
+standard now. The <tt class="docutils literal"><span class="pre">interface</span></tt> argument to the <tt class="docutils literal"><span class="pre">Application</span></tt> ctor is
+now ignored.</p>
+</li>
+<li><p class="first">Html: Added a very simple lxml-based templating scheme called _HtmlPage.</p>
+</li>
+<li><p class="first">Html: Added row-based tables: They show fields in rows. It&#8217;s good for
+showing one object per table.</p>
+</li>
+<li><p class="first">Html: Added ImageUri support. They now render as &lt;img&gt; tags.</p>
+</li>
+<li><p class="first">Html: Added support for locales. You can now render field names as human
+readable strings.</p>
+</li>
+<li><p class="first">Add support for async methods, which execute after the primary user code
+returns. Currently, the only async execution method is via threads.</p>
+</li>
+<li><p class="first">Xml &amp; friends: Start tags are now in the same namespace as the definitions
+themselves. Intermediate tags are in the parent&#8217;s namespace, just as before.</p>
+</li>
+<li><p class="first">Xml &amp; friends: Make the &#8216;bare&#8217; mode work.</p>
+</li>
+<li><p class="first">rpclib.util.xml: <cite>get_object_as_xml</cite> can also get class suggestion.</p>
+</li>
+<li><p class="first">rpclib.util.xml: <cite>get_xml_as_object</cite> has argument order swapped:
+cls, elt -&gt; elt, cls. See ab91a3e2ad4756b71d1a2752e5b0d2af8551e061.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Relevant pull requests:</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/128">https://github.com/arskom/spyne/pull/128</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/129">https://github.com/arskom/spyne/pull/129</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/133">https://github.com/arskom/spyne/pull/133</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/137">https://github.com/arskom/spyne/pull/137</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/138">https://github.com/arskom/spyne/pull/138</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/139">https://github.com/arskom/spyne/pull/139</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/141">https://github.com/arskom/spyne/pull/141</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/142">https://github.com/arskom/spyne/pull/142</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/144">https://github.com/arskom/spyne/pull/144</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/146">https://github.com/arskom/spyne/pull/146</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/145">https://github.com/arskom/spyne/pull/145</a></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+</div>
 <div class="section" id="rpclib-2-7-0-beta">
 <h3>rpclib-2.7.0-beta<a class="headerlink" href="#rpclib-2-7-0-beta" title="Permalink to this headline">¶</a></h3>
 <blockquote>
@@ -344,14 +414,14 @@ than rpclib.</li>
 <blockquote>
 <div><p>in_protocol, out_protocol, interface</p>
 </div></blockquote>
-<p>See here: <a class="reference external" href="https://github.com/arskom/rpclib/commit/45f5af70aa826640008222bda96299d51c9df980#diff-1">https://github.com/arskom/rpclib/commit/45f5af70aa826640008222bda96299d51c9df980#diff-1</a></p>
+<p>See here: <a class="reference external" href="https://github.com/arskom/spyne/commit/45f5af70aa826640008222bda96299d51c9df980#diff-1">https://github.com/arskom/spyne/commit/45f5af70aa826640008222bda96299d51c9df980#diff-1</a></p>
 </li>
 <li><dl class="first docutils">
 <dt>Full changelog:</dt>
 <dd><ul class="first last simple">
-<li><a class="reference external" href="https://github.com/arskom/rpclib/pull/123">https://github.com/arskom/rpclib/pull/123</a></li>
-<li><a class="reference external" href="https://github.com/arskom/rpclib/pull/124">https://github.com/arskom/rpclib/pull/124</a></li>
-<li><a class="reference external" href="https://github.com/arskom/rpclib/pull/125">https://github.com/arskom/rpclib/pull/125</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/123">https://github.com/arskom/spyne/pull/123</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/124">https://github.com/arskom/spyne/pull/124</a></li>
+<li><a class="reference external" href="https://github.com/arskom/spyne/pull/125">https://github.com/arskom/spyne/pull/125</a></li>
 </ul>
 </dd>
 </dl>
@@ -376,7 +446,7 @@ Uses werkzeug to do that, which is now a soft dependency.</li>
 <li>ByteArray now child of SimpleModel. It&#8217;s now possible to customize it simply
 by calling it.</li>
 <li>Fix race condition in wsgi server wsdl request.</li>
-<li>Full change log: <a class="reference external" href="https://github.com/arskom/rpclib/pull/122">https://github.com/arskom/rpclib/pull/122</a></li>
+<li>Full change log: <a class="reference external" href="https://github.com/arskom/spyne/pull/122">https://github.com/arskom/spyne/pull/122</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -385,7 +455,7 @@ by calling it.</li>
 <blockquote>
 <div><ul class="simple">
 <li>Misc. fixes.</li>
-<li>Full change log: <a class="reference external" href="https://github.com/arskom/rpclib/pull/118">https://github.com/arskom/rpclib/pull/118</a></li>
+<li>Full change log: <a class="reference external" href="https://github.com/arskom/spyne/pull/118">https://github.com/arskom/spyne/pull/118</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -404,8 +474,8 @@ by calling it.</li>
 <li><p class="first">HttpRpc now works with arrays of simple types as well.</p>
 </li>
 <li><dl class="first docutils">
-<dt>Full change log: <a class="reference external" href="https://github.com/arskom/rpclib/pull/117">https://github.com/arskom/rpclib/pull/117</a></dt>
-<dd><p class="first last"><a class="reference external" href="https://github.com/arskom/rpclib/pull/116">https://github.com/arskom/rpclib/pull/116</a></p>
+<dt>Full change log: <a class="reference external" href="https://github.com/arskom/spyne/pull/117">https://github.com/arskom/spyne/pull/117</a></dt>
+<dd><p class="first last"><a class="reference external" href="https://github.com/arskom/spyne/pull/116">https://github.com/arskom/spyne/pull/116</a></p>
 </dd>
 </dl>
 </li>
@@ -426,7 +496,7 @@ with that value in event handlers.</li>
 <li>Incorporated a cleaned-up version of the Django wrapper: <a class="reference external" href="https://gist.github.com/1316025">https://gist.github.com/1316025</a></li>
 <li>Fix most of the tests that fail due to api changes.</li>
 <li>Fix Http soap client.</li>
-<li>Full change log: <a class="reference external" href="https://github.com/arskom/rpclib/pull/115">https://github.com/arskom/rpclib/pull/115</a></li>
+<li>Full change log: <a class="reference external" href="https://github.com/arskom/spyne/pull/115">https://github.com/arskom/spyne/pull/115</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -446,7 +516,7 @@ with that value in event handlers.</li>
 <li>Time primitive was implemented.</li>
 <li>Fix for multiple ports was integrated.</li>
 <li>Added http cookie authentication example with suds.</li>
-<li>Full change log: <a class="reference external" href="https://github.com/arskom/rpclib/pull/109">https://github.com/arskom/rpclib/pull/109</a></li>
+<li>Full change log: <a class="reference external" href="https://github.com/arskom/spyne/pull/109">https://github.com/arskom/spyne/pull/109</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -483,7 +553,7 @@ null values for elements with min_occurs=0 (the default value).</li>
 <li>Native value for <tt class="docutils literal"><span class="pre">rpclib.model.primitive.String</span></tt> was changed to
 <tt class="docutils literal"><span class="pre">unicode</span></tt>. To exchange raw data, you should use
 <tt class="docutils literal"><span class="pre">rpclib.model.binary.ByteArray</span></tt>.</li>
-<li>Full change log: <a class="reference external" href="https://github.com/arskom/rpclib/pull/90">https://github.com/arskom/rpclib/pull/90</a></li>
+<li>Full change log: <a class="reference external" href="https://github.com/arskom/spyne/pull/90">https://github.com/arskom/spyne/pull/90</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -497,7 +567,7 @@ constants to rpclib.server.wsgi module.</li>
 The native format of ByteArray is an iterable of strings.</li>
 <li>Exception handling was formalized. HTTP return codes can be set by exception
 classes from rpclib.error or custom exceptions.</li>
-<li>Full change log: <a class="reference external" href="https://github.com/arskom/rpclib/pull/88">https://github.com/arskom/rpclib/pull/88</a></li>
+<li>Full change log: <a class="reference external" href="https://github.com/arskom/spyne/pull/88">https://github.com/arskom/spyne/pull/88</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -508,7 +578,7 @@ classes from rpclib.error or custom exceptions.</li>
 <li>Limited support for sqlalchemy.orm.relationship (no string arguments)</li>
 <li>Added missing event firings.</li>
 <li>Documented event api and fundamental data structures (rpclib._base)</li>
-<li>Full change log: <a class="reference external" href="https://github.com/arskom/rpclib/pull/87">https://github.com/arskom/rpclib/pull/87</a></li>
+<li>Full change log: <a class="reference external" href="https://github.com/arskom/spyne/pull/87">https://github.com/arskom/spyne/pull/87</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -518,7 +588,7 @@ classes from rpclib.error or custom exceptions.</li>
 <div><ul class="simple">
 <li>HttpRpc protocol now returns 404 when a requested resource was not found.</li>
 <li>New tests added for HttpRpc protocol.</li>
-<li>Miscellanous other fixes. See: <a class="reference external" href="https://github.com/arskom/rpclib/pull/86">https://github.com/arskom/rpclib/pull/86</a></li>
+<li>Miscellanous other fixes. See: <a class="reference external" href="https://github.com/arskom/spyne/pull/86">https://github.com/arskom/spyne/pull/86</a></li>
 </ul>
 </div></blockquote>
 </div>
@@ -576,7 +646,7 @@ XmlSchema and Wsdl11 classes. &#8216;add_to_schema&#8217; calls were renamed to 
 <li>Interface and Protocol assignment of an rpclib application is now more
 explicit. Both are also configurable during instantion. This doesn&#8217;t mean
 there&#8217;s much to configure :)</li>
-<li>WS-I Conformance is back!. See <a class="reference external" href="https://github.com/arskom/rpclib/blob/master/src/rpclib/test/interop/wsi-report-rpclib.xml">https://github.com/arskom/rpclib/blob/master/src/rpclib/test/interop/wsi-report-rpclib.xml</a>
+<li>WS-I Conformance is back!. See <a class="reference external" href="https://github.com/arskom/spyne/blob/master/src/rpclib/test/interop/wsi-report-rpclib.xml">https://github.com/arskom/spyne/blob/master/src/rpclib/test/interop/wsi-report-rpclib.xml</a>
 for the latest conformance report.</li>
 <li>Numeric types now support range restrictions. e.g. Integer(ge=0) will only
 accept positive integers.</li>
@@ -739,7 +809,7 @@ application)</li>
 <li>rpclib.model._base.Base -&gt; rpclib.model._base.ModelBase</li>
 <li>rpclib.protocol._base.Base -&gt; rpclib.protocol._base.ProtocolBase</li>
 <li>rpclib.server._base.Base -&gt; rpclib.server._base.ServerBase</li>
-<li>rpclic.service.DefinitionBase -&gt; rpclib.service.ServiceBase</li>
+<li>rpclib.service.DefinitionBase -&gt; rpclib.service.ServiceBase</li>
 <li>rpclib.server.wsgi.Application  -&gt; rpclib.server.wsgi.WsgiApplication</li>
 </ul>
 </dd>
@@ -909,6 +979,7 @@ on server start, and Service Definition is instantiated for each new request.</l
 </ul>
 </li>
 <li><a class="reference internal" href="#id1">Changelog</a><ul>
+<li><a class="reference internal" href="#rpclib-2-8-0-rc-spyne-2-8-0-rc">rpclib-2.8.0-rc -&gt; spyne-2.8.0-rc</a></li>
 <li><a class="reference internal" href="#rpclib-2-7-0-beta">rpclib-2.7.0-beta</a></li>
 <li><a class="reference internal" href="#rpclib-2-6-1-beta">rpclib-2.6.1-beta</a></li>
 <li><a class="reference internal" href="#rpclib-2-6-0-beta">rpclib-2.6.0-beta</a></li>
@@ -958,7 +1029,7 @@ on server start, and Service Definition is instantiated for each new request.</l
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="faq.html"
-                        title="previous chapter">Rpclib FAQ</a></p>
+                        title="previous chapter">Spyne FAQ</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="comparison.html"
                         title="next chapter">Comparison with other rpc frameworks</a></p>
@@ -997,13 +1068,13 @@ on server start, and Service Definition is instantiated for each new request.</l
           <a href="comparison.html" title="Comparison with other rpc frameworks"
              >next</a> |</li>
         <li class="right" >
-          <a href="faq.html" title="Rpclib FAQ"
+          <a href="faq.html" title="Spyne FAQ"
              >previous</a> |</li>
-        <li><a href="index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Rpclib Contributors.
+        &copy; Copyright 2011, Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

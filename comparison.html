@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Comparison with other rpc frameworks &mdash; rpclib 2.7.0-beta documentation</title>
+    <title>Comparison with other rpc frameworks &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="static/default.css" type="text/css" />
     <link rel="stylesheet" href="static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.7.0-beta',
+        VERSION:     '2.8.0-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="static/jquery.js"></script>
     <script type="text/javascript" src="static/underscore.js"></script>
     <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.7.0-beta documentation" href="index.html" />
+    <link rel="top" title="spyne 2.8.0-rc documentation" href="index.html" />
     <link rel="prev" title="History and Future" href="h_and_f.html" /> 
   </head>
   <body>
@@ -41,7 +41,7 @@
         <li class="right" >
           <a href="h_and_f.html" title="History and Future"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -63,11 +63,11 @@ of information:</p>
 <div class="section" id="ladon">
 <h2>Ladon<a class="headerlink" href="#ladon" title="Permalink to this headline">¶</a></h2>
 <p>The Ladon project has almost the same goals and same approach to the rpc-related
-issues as rpclib.</p>
+issues as Spyne.</p>
 <p>Discussion thread: <a class="reference external" href="https://answers.launchpad.net/ladon/+question/171664">https://answers.launchpad.net/ladon/+question/171664</a></p>
 <ul>
 <li><dl class="first docutils">
-<dt>Supports JsonWSP protocol, which rpclib does not support.</dt>
+<dt>Supports JsonWSP protocol, which Spyne does not support.</dt>
 <dd><p class="first last">The main motive for designing JSON-WSP was the need for a JSON-based RPC
 protocol with a service description specification with built-in service /
 method documentation.</p>
@@ -77,14 +77,14 @@ method documentation.</p>
 <li><p class="first">Supports both Python 2 and Python 3.</p>
 </li>
 <li><p class="first">Auto-generates human-readable API documentation.
-(example: <a class="reference external" href="http://ladonize.org/python-demos/AlbumService">http://ladonize.org/python-demos/AlbumService</a>) In Rpclib, you need
+(example: <a class="reference external" href="http://ladonize.org/python-demos/AlbumService">http://ladonize.org/python-demos/AlbumService</a>) In Spyne, you need
 to do with the ugliness of a raw wsdl document.</p>
 </li>
 <li><p class="first">Does not support ZeroMQ.</p>
 </li>
 <li><p class="first">Uses standard python tools for xml parsing which is good for pure-python
-deployments. Rpclib uses lxml, due to its excellent namespace support and
-speed. So Rpclib-based solutions are easier to develop and faster to work with
+deployments. Spyne uses lxml, due to its excellent namespace support and
+speed. So Spyne-based solutions are easier to develop and faster to work with
 but more difficult to deploy.</p>
 </li>
 <li><p class="first">Does not do input validation for SOAP.</p>
@@ -100,8 +100,8 @@ standard protocol like SOAP is that clients are already out there.</p>
 </dd>
 </dl>
 </li>
-<li><p class="first">Rpclib uses own classes for denoting types, whereas ladon uses Python
-callables. This lets ladon api to be simpler, but gives the rpclib api the
+<li><p class="first">Spyne uses own classes for denoting types, whereas ladon uses Python
+callables. This lets ladon api to be simpler, but gives the Spyne api the
 power to have declarative restrictions on input types.</p>
 </li>
 <li><p class="first">Does not test against ws-i.org deliverables for testing soap compatibility.</p>
@@ -154,10 +154,10 @@ on extensibility, framework-independance and better type handling.
 <ul class="simple">
 <li>Soap 1.1 / Wsdl 1.1 Client only.</li>
 <li>Excellent wsdl parser, very easy to use.</li>
-<li>Recommended way to interface with rpclib services.</li>
+<li>Recommended way to interface with Spyne&#8217;s Soap services.</li>
 <li>Uses own pure-python xml implementation, so it&#8217;s roughly 10 times slower
-than rpclib.</li>
-<li>Only depends on pure-python solutions, so much easier to deploy.</li>
+than Spyne&#8217;s Soap client.</li>
+<li>Pure-python library, so much easier to deploy.</li>
 </ul>
 </div>
 <div class="section" id="zsi">
@@ -189,6 +189,7 @@ than rpclib.</li>
 <div class="section" id="pyro">
 <h2>PyRo<a class="headerlink" href="#pyro" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
+<li>Python Remote Objects</li>
 <li>???</li>
 </ul>
 </div>
@@ -253,11 +254,11 @@ than rpclib.</li>
         <li class="right" >
           <a href="h_and_f.html" title="History and Future"
              >previous</a> |</li>
-        <li><a href="index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li> 
+        <li><a href="index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Rpclib Contributors.
+        &copy; Copyright 2011, Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

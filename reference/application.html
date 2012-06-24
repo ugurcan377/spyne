@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Application Definition &mdash; rpclib 2.7.0-beta documentation</title>
+    <title>Application Definition &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.7.0-beta',
+        VERSION:     '2.8.0-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
-    <link rel="up" title="Rpclib API Reference" href="index.html" />
+    <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
+    <link rel="up" title="Spyne API Reference" href="index.html" />
     <link rel="next" title="Service Definition" href="service.html" />
-    <link rel="prev" title="Miscellanous Rpclib Utilities" href="util.html" /> 
+    <link rel="prev" title="Miscellanous Spyne Utilities" href="util.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,10 +44,10 @@
           <a href="service.html" title="Service Definition"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="util.html" title="Miscellanous Rpclib Utilities"
+          <a href="util.html" title="Miscellanous Spyne Utilities"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,13 +56,13 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-rpclib.application">
-<span id="application-definition"></span><h1>Application Definition<a class="headerlink" href="#module-rpclib.application" title="Permalink to this headline">¶</a></h1>
-<p>This module contains the Application class, to which every other rpclib
+  <div class="section" id="module-spyne.application">
+<span id="application-definition"></span><h1>Application Definition<a class="headerlink" href="#module-spyne.application" title="Permalink to this headline">¶</a></h1>
+<p>This module contains the Application class, to which every other spyne
 component is integrated.</p>
 <dl class="class">
-<dt id="rpclib.application.Application">
-<em class="property">class </em><tt class="descclassname">rpclib.application.</tt><tt class="descname">Application</tt><big>(</big><em>services</em>, <em>tns</em>, <em>in_protocol</em>, <em>out_protocol</em>, <em>interface=None</em>, <em>name=None</em>, <em>supports_fanout_methods=False</em><big>)</big><a class="reference internal" href="../modules/rpclib/application.html#Application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.application.Application" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.application.Application">
+<em class="property">class </em><tt class="descclassname">spyne.application.</tt><tt class="descname">Application</tt><big>(</big><em>services</em>, <em>tns</em>, <em>in_protocol</em>, <em>out_protocol</em>, <em>interface=None</em>, <em>name=None</em><big>)</big><a class="reference internal" href="../modules/spyne/application.html#Application"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.application.Application" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class is the glue between one or more service definitions,
 interface and protocol choices.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -74,8 +74,7 @@ interface and protocol choices.</p>
 the exposed services.</li>
 <li><strong>tns</strong> &#8211; The targetNamespace attribute of the exposed
 service.</li>
-<li><strong>interface</strong> &#8211; An InterfaceBase instance that sets the service
-definition document standard.</li>
+<li><strong>interface</strong> &#8211; Ignored.</li>
 <li><strong>in_protocol</strong> &#8211; A ProtocolBase instance that defines the input
 protocol.</li>
 <li><strong>out_protocol</strong> &#8211; A ProtocolBase instance that defines the output
@@ -92,32 +91,32 @@ which is, by default, &#8216;Application&#8217;.</li>
 <dt>Supported events:</dt>
 <dd><ul class="first last">
 <li><dl class="first docutils">
-<dt>method_call</dt>
+<dt>method_call:</dt>
 <dd><p class="first last">Called right before the service method is executed</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>method_return_object</dt>
+<dt>method_return_object:</dt>
 <dd><p class="first last">Called right after the service method is executed</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>method_exception_object</dt>
+<dt>method_exception_object:</dt>
 <dd><p class="first last">Called when an exception occurred in a service method, before the
 exception is serialized.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>method_context_constructed</dt>
+<dt>method_context_constructed:</dt>
 <dd><p class="first last">Called from the constructor of the MethodContext instance.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt>method_context_destroyed</dt>
+<dt>method_context_destroyed:</dt>
 <dd><p class="first last">Called from the destructor of the MethodContext instance.</p>
 </dd>
 </dl>
@@ -126,16 +125,16 @@ exception is serialized.</p>
 </dd>
 </dl>
 <dl class="method">
-<dt id="rpclib.application.Application.call_wrapper">
-<tt class="descname">call_wrapper</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/application.html#Application.call_wrapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.application.Application.call_wrapper" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.application.Application.call_wrapper">
+<tt class="descname">call_wrapper</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/spyne/application.html#Application.call_wrapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.application.Application.call_wrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>This method calls the call_wrapper method in the service definition.
 This can be overridden to make an application-wide custom exception
 management.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.application.Application.process_request">
-<tt class="descname">process_request</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/application.html#Application.process_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.application.Application.process_request" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.application.Application.process_request">
+<tt class="descname">process_request</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/spyne/application.html#Application.process_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.application.Application.process_request" title="Permalink to this definition">¶</a></dt>
 <dd><p>Takes a MethodContext instance. Returns the response to the request
 as a native python object. If the function throws an exception, it
 returns None and sets the exception object to ctx.out_error.</p>
@@ -155,7 +154,7 @@ meant to be overridden unless you know what you&#8217;re doing.</p>
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
   <p class="topless"><a href="util.html"
-                        title="previous chapter">Miscellanous Rpclib Utilities</a></p>
+                        title="previous chapter">Miscellanous Spyne Utilities</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="service.html"
                         title="next chapter">Service Definition</a></p>
@@ -194,14 +193,14 @@ meant to be overridden unless you know what you&#8217;re doing.</p>
           <a href="service.html" title="Service Definition"
              >next</a> |</li>
         <li class="right" >
-          <a href="util.html" title="Miscellanous Rpclib Utilities"
+          <a href="util.html" title="Miscellanous Spyne Utilities"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" >Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Rpclib Contributors.
+        &copy; Copyright 2011, Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

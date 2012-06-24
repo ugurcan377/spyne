@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>SQLAlchemy Integration &mdash; rpclib 2.7.0-beta documentation</title>
+    <title>SQLAlchemy Integration &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.7.0-beta',
+        VERSION:     '2.8.0-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,8 +25,8 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
-    <link rel="up" title="Rpclib Manual" href="index.html" />
+    <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
+    <link rel="up" title="Spyne Manual" href="index.html" />
     <link rel="next" title="Input Validation" href="validation.html" />
     <link rel="prev" title="User Manager" href="usermanager.html" /> 
   </head>
@@ -46,8 +46,8 @@
         <li class="right" >
           <a href="usermanager.html" title="User Manager"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Rpclib Manual</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Spyne Manual</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -60,13 +60,13 @@
 <span id="manual-sqlalchemy"></span><h1>SQLAlchemy Integration<a class="headerlink" href="#sqlalchemy-integration" title="Permalink to this headline">¶</a></h1>
 <p>This tutorial builds on the <a class="reference internal" href="usermanager.html#manual-user-manager"><em>User Manager</em></a> tutorial. If you haven&#8217;t
 done so, we recommended you to read it first.</p>
-<p>In this tutorial, we talk about using Rpclib tools that make it easy to deal with
-database-related operations. We will show how to integrate SQLAlchemy and Rpclib
-object definitions, and how to do painless transaction management using Rpclib events.</p>
-<p>The full example is available here: <a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_sqlalchemy.py">http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_sqlalchemy.py</a></p>
+<p>In this tutorial, we talk about using Spyne tools that make it easy to deal with
+database-related operations. We will show how to integrate SQLAlchemy and Spyne
+object definitions, and how to do painless transaction management using Spyne events.</p>
+<p>The full example is available here: <a class="reference external" href="http://github.com/arskom/spyne/blob/master/examples/user_manager/server_sqlalchemy.py">http://github.com/arskom/spyne/blob/master/examples/user_manager/server_sqlalchemy.py</a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;rpclib.protocol.xml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;spyne.protocol.xml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;sqlalchemy.engine.base.Engine&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">sqlalchemy</span>
@@ -78,15 +78,15 @@ object definitions, and how to do painless transaction management using Rpclib e
 <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">MetaData</span>
 <span class="kn">from</span> <span class="nn">sqlalchemy</span> <span class="kn">import</span> <span class="n">Column</span>
 
-<span class="kn">from</span> <span class="nn">rpclib.application</span> <span class="kn">import</span> <span class="n">Application</span>
-<span class="kn">from</span> <span class="nn">rpclib.decorator</span> <span class="kn">import</span> <span class="n">rpc</span>
-<span class="kn">from</span> <span class="nn">rpclib.interface.wsdl</span> <span class="kn">import</span> <span class="n">Wsdl11</span>
-<span class="kn">from</span> <span class="nn">rpclib.protocol.soap</span> <span class="kn">import</span> <span class="n">Soap11</span>
-<span class="kn">from</span> <span class="nn">rpclib.model.complex</span> <span class="kn">import</span> <span class="n">Iterable</span>
-<span class="kn">from</span> <span class="nn">rpclib.model.primitive</span> <span class="kn">import</span> <span class="n">Integer</span>
-<span class="kn">from</span> <span class="nn">rpclib.model.table</span> <span class="kn">import</span> <span class="n">TableSerializer</span>
-<span class="kn">from</span> <span class="nn">rpclib.server.wsgi</span> <span class="kn">import</span> <span class="n">WsgiApplication</span>
-<span class="kn">from</span> <span class="nn">rpclib.service</span> <span class="kn">import</span> <span class="n">ServiceBase</span>
+<span class="kn">from</span> <span class="nn">spyne.application</span> <span class="kn">import</span> <span class="n">Application</span>
+<span class="kn">from</span> <span class="nn">spyne.decorator</span> <span class="kn">import</span> <span class="n">rpc</span>
+<span class="kn">from</span> <span class="nn">spyne.interface.wsdl</span> <span class="kn">import</span> <span class="n">Wsdl11</span>
+<span class="kn">from</span> <span class="nn">spyne.protocol.soap</span> <span class="kn">import</span> <span class="n">Soap11</span>
+<span class="kn">from</span> <span class="nn">spyne.model.complex</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">spyne.model.primitive</span> <span class="kn">import</span> <span class="n">Integer</span>
+<span class="kn">from</span> <span class="nn">spyne.model.table</span> <span class="kn">import</span> <span class="n">TableSerializer</span>
+<span class="kn">from</span> <span class="nn">spyne.server.wsgi</span> <span class="kn">import</span> <span class="n">WsgiApplication</span>
+<span class="kn">from</span> <span class="nn">spyne.service</span> <span class="kn">import</span> <span class="n">ServiceBase</span>
 
 <span class="n">_user_database</span> <span class="o">=</span> <span class="n">create_engine</span><span class="p">(</span><span class="s">&#39;sqlite:///:memory:&#39;</span><span class="p">)</span>
 <span class="n">metadata</span> <span class="o">=</span> <span class="n">MetaData</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">_user_database</span><span class="p">)</span>
@@ -94,8 +94,8 @@ object definitions, and how to do painless transaction management using Rpclib e
 <span class="n">Session</span> <span class="o">=</span> <span class="n">sessionmaker</span><span class="p">(</span><span class="n">bind</span><span class="o">=</span><span class="n">_user_database</span><span class="p">)</span>
 
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">TableSerializer</span><span class="p">,</span> <span class="n">DeclarativeBase</span><span class="p">):</span>
-    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;rpclib.examples.user_manager&#39;</span>
-    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;rpclib_user&#39;</span>
+    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;spyne.examples.user_manager&#39;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;spyne_user&#39;</span>
 
     <span class="n">user_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">user_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
@@ -105,7 +105,7 @@ object definitions, and how to do painless transaction management using Rpclib e
 <span class="c"># this is the same as the above user object. Use this method of declaring</span>
 <span class="c"># objects for tables that have to be defined elsewhere.</span>
 <span class="k">class</span> <span class="nc">AlternativeUser</span><span class="p">(</span><span class="n">TableSerializer</span><span class="p">,</span> <span class="n">DeclarativeBase</span><span class="p">):</span>
-    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;rpclib.examples.user_manager&#39;</span>
+    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;spyne.examples.user_manager&#39;</span>
     <span class="n">__table__</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">__table__</span>
 
 <span class="k">class</span> <span class="nc">UserManagerService</span><span class="p">(</span><span class="n">ServiceBase</span><span class="p">):</span>
@@ -147,7 +147,7 @@ object definitions, and how to do painless transaction management using Rpclib e
     <span class="c"># the client in case the commit fails.</span>
     <span class="n">ctx</span><span class="o">.</span><span class="n">udc</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
 
-<span class="n">application</span> <span class="o">=</span> <span class="n">Application</span><span class="p">([</span><span class="n">UserManagerService</span><span class="p">],</span> <span class="s">&#39;rpclib.examples.user_manager&#39;</span><span class="p">,</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">Application</span><span class="p">([</span><span class="n">UserManagerService</span><span class="p">],</span> <span class="s">&#39;spyne.examples.user_manager&#39;</span><span class="p">,</span>
             <span class="n">interface</span><span class="o">=</span><span class="n">Wsdl11</span><span class="p">(),</span> <span class="n">in_protocol</span><span class="o">=</span><span class="n">Soap11</span><span class="p">(),</span> <span class="n">out_protocol</span><span class="o">=</span><span class="n">Soap11</span><span class="p">())</span>
 
 <span class="n">application</span><span class="o">.</span><span class="n">event_manager</span><span class="o">.</span><span class="n">add_listener</span><span class="p">(</span><span class="s">&#39;method_call&#39;</span><span class="p">,</span> <span class="n">_on_method_call</span><span class="p">)</span>
@@ -172,8 +172,8 @@ object definitions, and how to do painless transaction management using Rpclib e
 <p>Again, focusing on what&#8217;s different from previous <a class="reference internal" href="usermanager.html#manual-user-manager"><em>User Manager</em></a>
 example:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">TableModel</span><span class="p">,</span> <span class="n">DeclarativeBase</span><span class="p">):</span>
-    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;rpclib.examples.user_manager&#39;</span>
-    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;rpclib_user&#39;</span>
+    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;spyne.examples.user_manager&#39;</span>
+    <span class="n">__tablename__</span> <span class="o">=</span> <span class="s">&#39;spyne_user&#39;</span>
 
     <span class="n">user_id</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
     <span class="n">user_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
@@ -181,13 +181,13 @@ example:</p>
     <span class="n">last_name</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">sqlalchemy</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">256</span><span class="p">))</span>
 </pre></div>
 </div>
-<p>Defined this way, SQLAlchemy objects are regular Rpclib objects that can be used
-anywhere the regular Rpclib types go. The definition for the <cite>User</cite> object is
+<p>Defined this way, SQLAlchemy objects are regular Spyne objects that can be used
+anywhere the regular Spyne types go. The definition for the <cite>User</cite> object is
 quite similar to vanilla SQLAlchemy declarative syntax, save for two elements:</p>
 <blockquote>
 <div><ol class="arabic simple">
-<li>The object also bases on <a class="reference internal" href="../reference/model.html#rpclib.model.table.TableModel" title="rpclib.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.table.TableModel</span></tt></a>, which
-bridges SQLAlchemy and Rpclib types.</li>
+<li>The object also bases on <a class="reference internal" href="../reference/model.html#spyne.model.table.TableModel" title="spyne.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.table.TableModel</span></tt></a>, which
+bridges SQLAlchemy and Spyne types.</li>
 <li>It has a namespace declaration, which is just so the service looks good
 on wsdl.</li>
 </ol>
@@ -201,11 +201,11 @@ on wsdl.</li>
 form of <cite>relationship</cite> (no string arguments) are not supported.</li>
 </ul>
 </div></blockquote>
-<p>If you need any of the above features, you need to separate the rpclib and
+<p>If you need any of the above features, you need to separate the spyne and
 sqlalchemy object definitions.</p>
-<p>Rpclib makes it easy to an extent with the following syntax:</p>
+<p>Spyne makes it easy to an extent with the following syntax:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AlternativeUser</span><span class="p">(</span><span class="n">TableSerializer</span><span class="p">,</span> <span class="n">DeclarativeBase</span><span class="p">):</span>
-    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;rpclib.examples.user_manager&#39;</span>
+    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;spyne.examples.user_manager&#39;</span>
     <span class="n">__table__</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">__table__</span>
 </pre></div>
 </div>
@@ -308,12 +308,12 @@ list if you have further questions.</p>
         <li class="right" >
           <a href="usermanager.html" title="User Manager"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" >Rpclib Manual</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" >Spyne Manual</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Rpclib Contributors.
+        &copy; Copyright 2011, Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

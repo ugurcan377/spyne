@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Service Definition &mdash; rpclib 2.7.0-beta documentation</title>
+    <title>Service Definition &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.7.0-beta',
+        VERSION:     '2.8.0-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,8 +25,8 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
-    <link rel="up" title="Rpclib API Reference" href="index.html" />
+    <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
+    <link rel="up" title="Spyne API Reference" href="index.html" />
     <link rel="next" title="RPC Decorators" href="decorator.html" />
     <link rel="prev" title="Application Definition" href="application.html" /> 
   </head>
@@ -46,8 +46,8 @@
         <li class="right" >
           <a href="application.html" title="Application Definition"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,18 +56,18 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-rpclib.service">
-<span id="service-definition"></span><h1>Service Definition<a class="headerlink" href="#module-rpclib.service" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-spyne.service">
+<span id="service-definition"></span><h1>Service Definition<a class="headerlink" href="#module-spyne.service" title="Permalink to this headline">¶</a></h1>
 <dl class="class">
-<dt id="rpclib.service.ServiceBase">
-<em class="property">class </em><tt class="descclassname">rpclib.service.</tt><tt class="descname">ServiceBase</tt><a class="reference internal" href="../modules/rpclib/service.html#ServiceBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.service.ServiceBase" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.service.ServiceBase">
+<em class="property">class </em><tt class="descclassname">spyne.service.</tt><tt class="descname">ServiceBase</tt><a class="reference internal" href="../modules/spyne/service.html#ServiceBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.service.ServiceBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class serves as the base for all service definitions. Subclasses of
 this class will use the srpc decorator or its wrappers to flag methods to be
 exposed.</p>
 <p>It is a natural abstract base class, because it&#8217;s of no use without any
 method definitions, hence the &#8216;Base&#8217; suffix in the name.</p>
 <dl class="docutils">
-<dt>The WsgiApplication class supports the following events:</dt>
+<dt>This class supports the following events:</dt>
 <dd><ul class="first last">
 <li><dl class="first docutils">
 <dt><tt class="docutils literal"><span class="pre">method_call</span></tt></dt>
@@ -127,8 +127,8 @@ the client.</p>
 </dd>
 </dl>
 <dl class="classmethod">
-<dt id="rpclib.service.ServiceBase.call_wrapper">
-<em class="property">classmethod </em><tt class="descname">call_wrapper</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/service.html#ServiceBase.call_wrapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.service.ServiceBase.call_wrapper" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.service.ServiceBase.call_wrapper">
+<em class="property">classmethod </em><tt class="descname">call_wrapper</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/spyne/service.html#ServiceBase.call_wrapper"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.service.ServiceBase.call_wrapper" title="Permalink to this definition">¶</a></dt>
 <dd><p>Called in place of the original method call. You can override this to
 do your own exception handling.</p>
 <table class="docutils field-list" frame="void" rules="none">
@@ -145,13 +145,13 @@ do your own exception handling.</p>
 </dd></dl>
 
 <dl class="class">
-<dt id="rpclib.service.ServiceBaseMeta">
-<em class="property">class </em><tt class="descclassname">rpclib.service.</tt><tt class="descname">ServiceBaseMeta</tt><big>(</big><em>cls_name</em>, <em>cls_bases</em>, <em>cls_dict</em><big>)</big><a class="reference internal" href="../modules/rpclib/service.html#ServiceBaseMeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.service.ServiceBaseMeta" title="Permalink to this definition">¶</a></dt>
-<dd><p>Creates the <a class="reference internal" href="base.html#rpclib.MethodDescriptor" title="rpclib.MethodDescriptor"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.MethodDescriptor</span></tt></a> objects by iterating over
+<dt id="spyne.service.ServiceBaseMeta">
+<em class="property">class </em><tt class="descclassname">spyne.service.</tt><tt class="descname">ServiceBaseMeta</tt><big>(</big><em>cls_name</em>, <em>cls_bases</em>, <em>cls_dict</em><big>)</big><a class="reference internal" href="../modules/spyne/service.html#ServiceBaseMeta"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.service.ServiceBaseMeta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Creates the <a class="reference internal" href="base.html#spyne.MethodDescriptor" title="spyne.MethodDescriptor"><tt class="xref py py-class docutils literal"><span class="pre">spyne.MethodDescriptor</span></tt></a> objects by iterating over
 tagged methods.</p>
 <dl class="method">
-<dt id="rpclib.service.ServiceBaseMeta.mro">
-<tt class="descname">mro</tt><big>(</big><big>)</big> &rarr; list<a class="headerlink" href="#rpclib.service.ServiceBaseMeta.mro" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.service.ServiceBaseMeta.mro">
+<tt class="descname">mro</tt><big>(</big><big>)</big> &rarr; list<a class="headerlink" href="#spyne.service.ServiceBaseMeta.mro" title="Permalink to this definition">¶</a></dt>
 <dd><p>return a type&#8217;s method resolution order</p>
 </dd></dl>
 
@@ -208,12 +208,12 @@ tagged methods.</p>
         <li class="right" >
           <a href="application.html" title="Application Definition"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" >Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Rpclib Contributors.
+        &copy; Copyright 2011, Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

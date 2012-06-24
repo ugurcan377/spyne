@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Implementing Transports and Protocols &mdash; rpclib 2.7.0-beta documentation</title>
+    <title>Implementing Transports and Protocols &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.7.0-beta',
+        VERSION:     '2.8.0-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
-    <link rel="up" title="Rpclib Manual" href="index.html" />
-    <link rel="next" title="Rpclib API Reference" href="../reference/index.html" />
+    <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
+    <link rel="up" title="Spyne Manual" href="index.html" />
+    <link rel="next" title="Spyne API Reference" href="../reference/index.html" />
     <link rel="prev" title="Working with RPC Metadata" href="metadata.html" /> 
   </head>
   <body>
@@ -41,13 +41,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../reference/index.html" title="Rpclib API Reference"
+          <a href="../reference/index.html" title="Spyne API Reference"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="metadata.html" title="Working with RPC Metadata"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Rpclib Manual</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Spyne Manual</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -61,7 +61,7 @@
 <p>Some preliminary information would be handy before delving into details:</p>
 <div class="section" id="how-exactly-is-user-code-wrapped">
 <h2>How Exactly is User Code Wrapped?<a class="headerlink" href="#how-exactly-is-user-code-wrapped" title="Permalink to this headline">¶</a></h2>
-<p>Here&#8217;s what happens when a request arrives to an Rpclib server:</p>
+<p>Here&#8217;s what happens when a request arrives to an Spyne server:</p>
 <p>The server transport decides whether this is a simple interface document request
 or a remote procedure call request. Every transport has its own way of dealing
 with this.</p>
@@ -69,15 +69,15 @@ with this.</p>
 document needs to be generated and returned as a nice chunk of string to the
 client.
 The server transport first calls
-<a class="reference internal" href="../reference/interface.html#rpclib.interface._base.InterfaceBase.build_interface_document" title="rpclib.interface._base.InterfaceBase.build_interface_document"><tt class="xref py py-func docutils literal"><span class="pre">rpclib.interface._base.InterfaceBase.build_interface_document()</span></tt></a>
+<tt class="xref py py-func docutils literal"><span class="pre">spyne.interface._base.InterfaceBase.build_interface_document()</span></tt>
 which builds and caches the document and later calls the
-<a class="reference internal" href="../reference/interface.html#rpclib.interface._base.InterfaceBase.get_interface_document" title="rpclib.interface._base.InterfaceBase.get_interface_document"><tt class="xref py py-func docutils literal"><span class="pre">rpclib.interface._base.InterfaceBase.get_interface_document()</span></tt></a> that returns
+<tt class="xref py py-func docutils literal"><span class="pre">spyne.interface._base.InterfaceBase.get_interface_document()</span></tt> that returns
 the cached document.</p>
 <p>If it was an RPC request, here&#8217;s what happens:</p>
 <ol class="arabic simple">
 <li>The server must set the <tt class="docutils literal"><span class="pre">ctx.in_string</span></tt> attribute to an iterable of
 strings. This will contain the incoming byte stream.</li>
-<li>The server calls the <a class="reference internal" href="../reference/server.html#rpclib.server._base.ServerBase.get_in_object" title="rpclib.server._base.ServerBase.get_in_object"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server._base.ServerBase.get_in_object</span></tt></a> function
+<li>The server calls the <a class="reference internal" href="../reference/server.html#spyne.server._base.ServerBase.get_in_object" title="spyne.server._base.ServerBase.get_in_object"><tt class="xref py py-class docutils literal"><span class="pre">spyne.server._base.ServerBase.get_in_object</span></tt></a> function
 from its parent class.</li>
 <li>The server then calls the <tt class="docutils literal"><span class="pre">create_in_document</span></tt>,
 <tt class="docutils literal"><span class="pre">decompose_incoming_envelope</span></tt>
@@ -88,16 +88,16 @@ is then split to header and body parts by the second call and deserialized to
 the native python representation by the third call.</li>
 <li>Once the protocol performs its voodoo, the server calls <tt class="docutils literal"><span class="pre">get_out_object</span></tt>
 which in turn calls the
-<a class="reference internal" href="../reference/application.html#rpclib.application.Application.process_request" title="rpclib.application.Application.process_request"><tt class="xref py py-func docutils literal"><span class="pre">rpclib.application.Application.process_request()</span></tt></a>
+<a class="reference internal" href="../reference/application.html#spyne.application.Application.process_request" title="spyne.application.Application.process_request"><tt class="xref py py-func docutils literal"><span class="pre">spyne.application.Application.process_request()</span></tt></a>
 function.</li>
 <li>The <tt class="docutils literal"><span class="pre">process_request</span></tt> function fires relevant events and calls the
-<a class="reference internal" href="../reference/application.html#rpclib.application.Application.call_wrapper" title="rpclib.application.Application.call_wrapper"><tt class="xref py py-func docutils literal"><span class="pre">rpclib.application.Application.call_wrapper()</span></tt></a> function.
+<a class="reference internal" href="../reference/application.html#spyne.application.Application.call_wrapper" title="spyne.application.Application.call_wrapper"><tt class="xref py py-func docutils literal"><span class="pre">spyne.application.Application.call_wrapper()</span></tt></a> function.
 This function is overridable by user, but the overriding function must call
-the one in <a class="reference internal" href="../reference/application.html#rpclib.application.Application" title="rpclib.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.application.Application</span></tt></a>.</li>
+the one in <a class="reference internal" href="../reference/application.html#spyne.application.Application" title="spyne.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">spyne.application.Application</span></tt></a>.</li>
 <li>The <tt class="docutils literal"><span class="pre">call_wrapper</span></tt> function in
-turn calls the <a class="reference internal" href="../reference/service.html#rpclib.service.ServiceBase.call_wrapper" title="rpclib.service.ServiceBase.call_wrapper"><tt class="xref py py-func docutils literal"><span class="pre">rpclib.service.ServiceBase.call_wrapper()</span></tt></a> function,
+turn calls the <a class="reference internal" href="../reference/service.html#spyne.service.ServiceBase.call_wrapper" title="spyne.service.ServiceBase.call_wrapper"><tt class="xref py py-func docutils literal"><span class="pre">spyne.service.ServiceBase.call_wrapper()</span></tt></a> function,
 which has has the same requirements.</li>
-<li>The <a class="reference internal" href="../reference/service.html#rpclib.service.ServiceBase.call_wrapper" title="rpclib.service.ServiceBase.call_wrapper"><tt class="xref py py-func docutils literal"><span class="pre">rpclib.service.ServiceBase.call_wrapper()</span></tt></a> finally calls the user
+<li>The <a class="reference internal" href="../reference/service.html#spyne.service.ServiceBase.call_wrapper" title="spyne.service.ServiceBase.call_wrapper"><tt class="xref py py-func docutils literal"><span class="pre">spyne.service.ServiceBase.call_wrapper()</span></tt></a> finally calls the user
 function, and the value is returned to <tt class="docutils literal"><span class="pre">process_request</span></tt> call, which sets
 the return value to <tt class="docutils literal"><span class="pre">ctx.out_object</span></tt>.</li>
 <li>The server object now calls the <tt class="docutils literal"><span class="pre">get_out_string</span></tt> function to put the
@@ -113,7 +113,7 @@ to subclass the relevant base class and implement the missing methods.</p>
 <div class="section" id="a-transport-example-a-db-backed-fan-out-queue">
 <h2>A Transport Example: A DB-Backed Fan-Out Queue<a class="headerlink" href="#a-transport-example-a-db-backed-fan-out-queue" title="Permalink to this headline">¶</a></h2>
 <p>Here&#8217;s the source code in one file:
-<a class="reference external" href="https://github.com/arskom/rpclib/blob/master/examples/queue.py">https://github.com/arskom/rpclib/blob/master/examples/queue.py</a></p>
+<a class="reference external" href="https://github.com/arskom/spyne/blob/master/examples/queue.py">https://github.com/arskom/spyne/blob/master/examples/queue.py</a></p>
 <p>The following block of code is SQLAlchemy
 boilerplate for creating the database and other related machinery. Under normal
 conditions, you should pass the sqlalchemy url to the Producer and Consumer
@@ -145,7 +145,7 @@ is stored. Workers are identified by an integer.</p>
                                                              <span class="n">nullable</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The consumer is a <a class="reference internal" href="../reference/server.html#rpclib.server._base.ServerBase" title="rpclib.server._base.ServerBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server._base.ServerBase</span></tt></a> child that receives
+<p>The consumer is a <a class="reference internal" href="../reference/server.html#spyne.server._base.ServerBase" title="spyne.server._base.ServerBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.server._base.ServerBase</span></tt></a> child that receives
 requests by polling the database.</p>
 <p>The transport is for displaying it in the Wsdl. While it&#8217;s irrelevant here, it&#8217;s
 nice to put it in:</p>
@@ -187,7 +187,7 @@ there is no record for own worker id, the server starts from the beginning:</p>
         <span class="o">.</span><span class="n">order_by</span><span class="p">(</span><span class="n">TaskQueue</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Each task is an rpc request, so we create a <a class="reference internal" href="../reference/base.html#rpclib.MethodContext" title="rpclib.MethodContext"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.MethodContext</span></tt></a>
+<p>Each task is an rpc request, so we create a <a class="reference internal" href="../reference/base.html#spyne.MethodContext" title="spyne.MethodContext"><tt class="xref py py-class docutils literal"><span class="pre">spyne.MethodContext</span></tt></a>
 instance for each task and set transport-specific data to the <tt class="docutils literal"><span class="pre">ctx.transport</span></tt>
 object:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">for</span> <span class="n">task</span> <span class="ow">in</span> <span class="n">task_queue</span><span class="p">:</span>
@@ -241,10 +241,10 @@ time before polling the database for new tasks:</p>
 </pre></div>
 </div>
 <p>This concludes the worker implementation. But how do we put tasks in the task
-queue? That&#8217;s the job of the <tt class="docutils literal"><span class="pre">Producer</span></tt> class that is implemented as an Rpclib
+queue? That&#8217;s the job of the <tt class="docutils literal"><span class="pre">Producer</span></tt> class that is implemented as an Spyne
 client.</p>
 <p>Implementing clients is a two-stage operation. The main transport logic is in
-the <tt class="xref py py-class docutils literal"><span class="pre">rpclib.client.RemoteProcedureBase</span></tt> child that is a native Python
+the <tt class="xref py py-class docutils literal"><span class="pre">spyne.client.RemoteProcedureBase</span></tt> child that is a native Python
 callable whose function is to serialize the arguments, send it to the server,
 receive the reply, deserialize it and pass the return value to the python
 caller. However, in our case, the client does not return anything as calls are
@@ -259,7 +259,7 @@ connection factory:</p>
 </pre></div>
 </div>
 <p>The implementation of the client is much simpler because we trust that the
-Rpclib code will do The Right Thing. Here, we serialize the arguments:</p>
+Spyne code will do The Right Thing. Here, we serialize the arguments:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="n">session</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Session</span><span class="p">()</span>
 
@@ -312,7 +312,7 @@ creating the necessary sql tables:</p>
 </pre></div>
 </div>
 <p>We then initialize our application:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">application</span> <span class="o">=</span> <span class="n">Application</span><span class="p">([</span><span class="n">AsyncService</span><span class="p">],</span> <span class="s">&#39;rpclib.async&#39;</span><span class="p">,</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">application</span> <span class="o">=</span> <span class="n">Application</span><span class="p">([</span><span class="n">AsyncService</span><span class="p">],</span> <span class="s">&#39;spyne.async&#39;</span><span class="p">,</span>
         <span class="n">interface</span><span class="o">=</span><span class="n">Wsdl11</span><span class="p">(),</span> <span class="n">in_protocol</span><span class="o">=</span><span class="n">Soap11</span><span class="p">(),</span> <span class="n">out_protocol</span><span class="o">=</span><span class="n">Soap11</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -362,7 +362,7 @@ questions.</p>
                         title="previous chapter">Working with RPC Metadata</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../reference/index.html"
-                        title="next chapter">Rpclib API Reference</a></p>
+                        title="next chapter">Spyne API Reference</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../sources/manual/t_and_p.txt"
@@ -395,17 +395,17 @@ questions.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../reference/index.html" title="Rpclib API Reference"
+          <a href="../reference/index.html" title="Spyne API Reference"
              >next</a> |</li>
         <li class="right" >
           <a href="metadata.html" title="Working with RPC Metadata"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" >Rpclib Manual</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" >Spyne Manual</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Rpclib Contributors.
+        &copy; Copyright 2011, Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

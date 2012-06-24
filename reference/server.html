@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Server Transports &mdash; rpclib 2.7.0-beta documentation</title>
+    <title>Server Transports &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.7.0-beta',
+        VERSION:     '2.8.0-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
-    <link rel="up" title="Rpclib API Reference" href="index.html" />
-    <link rel="next" title="Miscellanous Rpclib Utilities" href="util.html" />
+    <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
+    <link rel="up" title="Spyne API Reference" href="index.html" />
+    <link rel="next" title="Miscellanous Spyne Utilities" href="util.html" />
     <link rel="prev" title="Client Transports" href="client.html" /> 
   </head>
   <body>
@@ -41,13 +41,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="util.html" title="Miscellanous Rpclib Utilities"
+          <a href="util.html" title="Miscellanous Spyne Utilities"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="client.html" title="Client Transports"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -58,49 +58,49 @@
             
   <div class="section" id="server-transports">
 <h1>Server Transports<a class="headerlink" href="#server-transports" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="module-rpclib.server._base">
-<span id="server-base-class"></span><h2>Server Base Class<a class="headerlink" href="#module-rpclib.server._base" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-spyne.server._base">
+<span id="server-base-class"></span><h2>Server Base Class<a class="headerlink" href="#module-spyne.server._base" title="Permalink to this headline">¶</a></h2>
 <p>This module contains the ServerBase class, the abstract base class for all
 server transport implementations.</p>
 <dl class="class">
-<dt id="rpclib.server._base.ServerBase">
-<em class="property">class </em><tt class="descclassname">rpclib.server._base.</tt><tt class="descname">ServerBase</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/_base.html#ServerBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server._base.ServerBase" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server._base.ServerBase">
+<em class="property">class </em><tt class="descclassname">spyne.server._base.</tt><tt class="descname">ServerBase</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../modules/spyne/server/_base.html#ServerBase"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server._base.ServerBase" title="Permalink to this definition">¶</a></dt>
 <dd><p>This class is the abstract base class for all server transport
 implementations. Unlike the client transports, this class does not define
 a pure-virtual method that needs to be implemented by all base classes.</p>
 <p>If there is a call to start the main loop, it&#8217;s conventionally called
 &#8216;serve_forever()&#8217;.</p>
 <dl class="method">
-<dt id="rpclib.server._base.ServerBase.generate_contexts">
-<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/_base.html#ServerBase.generate_contexts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server._base.ServerBase.generate_contexts" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server._base.ServerBase.generate_contexts">
+<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="reference internal" href="../modules/spyne/server/_base.html#ServerBase.generate_contexts"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server._base.ServerBase.generate_contexts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls create_in_document and decompose_incoming_envelope to get
 method_request string in order to generate contexts.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server._base.ServerBase.get_in_object">
-<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/_base.html#ServerBase.get_in_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server._base.ServerBase.get_in_object" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server._base.ServerBase.get_in_object">
+<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/spyne/server/_base.html#ServerBase.get_in_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server._base.ServerBase.get_in_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.in_string to set ctx.in_body_doc, which in turn is used
 to set ctx.in_object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server._base.ServerBase.get_out_object">
-<tt class="descname">get_out_object</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/_base.html#ServerBase.get_out_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server._base.ServerBase.get_out_object" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server._base.ServerBase.get_out_object">
+<tt class="descname">get_out_object</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/spyne/server/_base.html#ServerBase.get_out_object"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server._base.ServerBase.get_out_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls the matched method using the ctx.in_object to get
 ctx.out_object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server._base.ServerBase.get_out_string">
-<tt class="descname">get_out_string</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/_base.html#ServerBase.get_out_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server._base.ServerBase.get_out_string" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server._base.ServerBase.get_out_string">
+<tt class="descname">get_out_string</tt><big>(</big><em>ctx</em><big>)</big><a class="reference internal" href="../modules/spyne/server/_base.html#ServerBase.get_out_string"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server._base.ServerBase.get_out_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.out_object to set ctx.out_document and later
 ctx.out_object.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server._base.ServerBase.transport">
-<tt class="descname">transport</tt><em class="property"> = None</em><a class="headerlink" href="#rpclib.server._base.ServerBase.transport" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server._base.ServerBase.transport">
+<tt class="descname">transport</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.server._base.ServerBase.transport" title="Permalink to this definition">¶</a></dt>
 <dd><p>The transport type, conventionally defined by the URI string to its
 definition.</p>
 </dd></dl>
@@ -108,12 +108,12 @@ definition.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-rpclib.server.wsgi">
-<span id="http-wsgi"></span><h2>HTTP (WSGI)<a class="headerlink" href="#module-rpclib.server.wsgi" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-spyne.server.wsgi">
+<span id="http-wsgi"></span><h2>HTTP (WSGI)<a class="headerlink" href="#module-spyne.server.wsgi" title="Permalink to this headline">¶</a></h2>
 <p>An rpc server that uses http as transport, and wsgi as bridge api.</p>
 <dl class="class">
-<dt id="rpclib.server.wsgi.WsgiApplication">
-<em class="property">class </em><tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">WsgiApplication</tt><big>(</big><em>app</em>, <em>chunked=True</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiApplication"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiApplication">
+<em class="property">class </em><tt class="descclassname">spyne.server.wsgi.</tt><tt class="descname">WsgiApplication</tt><big>(</big><em>app</em>, <em>chunked=True</em><big>)</big><a class="reference internal" href="../modules/spyne/server/wsgi.html#WsgiApplication"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.wsgi.WsgiApplication" title="Permalink to this definition">¶</a></dt>
 <dd><p>A <a class="reference external" href="http://www.python.org/dev/peps/pep-3333/#preface-for-readers-of-pep-333">PEP-3333</a>
 compliant callable class.</p>
 <dl class="docutils">
@@ -154,318 +154,276 @@ request.</p>
 </ul>
 </dd>
 </dl>
+<dl class="staticmethod">
+<dt id="spyne.server.wsgi.WsgiApplication.decompose_incoming_envelope">
+<em class="property">static </em><tt class="descname">decompose_incoming_envelope</tt><big>(</big><em>prot</em>, <em>ctx</em>, <em>message</em><big>)</big><a class="reference internal" href="../modules/spyne/server/wsgi.html#WsgiApplication.decompose_incoming_envelope"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.wsgi.WsgiApplication.decompose_incoming_envelope" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function is only called by the HttpRpc protocol to have the wsgi
+environment parsed into <tt class="docutils literal"><span class="pre">ctx.in_body_doc</span></tt> and <tt class="docutils literal"><span class="pre">ctx.in_header_doc</span></tt>.</p>
+</dd></dl>
+
 <dl class="method">
-<dt id="rpclib.server.wsgi.WsgiApplication.generate_contexts">
-<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.generate_contexts" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiApplication.generate_contexts">
+<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#spyne.server.wsgi.WsgiApplication.generate_contexts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls create_in_document and decompose_incoming_envelope to get
 method_request string in order to generate contexts.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.wsgi.WsgiApplication.get_in_object">
-<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.get_in_object" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiApplication.get_in_object">
+<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#spyne.server.wsgi.WsgiApplication.get_in_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.in_string to set ctx.in_body_doc, which in turn is used
 to set ctx.in_object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.wsgi.WsgiApplication.get_out_object">
-<tt class="descname">get_out_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.get_out_object" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiApplication.get_out_object">
+<tt class="descname">get_out_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#spyne.server.wsgi.WsgiApplication.get_out_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls the matched method using the ctx.in_object to get
 ctx.out_object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.wsgi.WsgiApplication.get_out_string">
-<tt class="descname">get_out_string</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.get_out_string" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiApplication.get_out_string">
+<tt class="descname">get_out_string</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#spyne.server.wsgi.WsgiApplication.get_out_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.out_object to set ctx.out_document and later
 ctx.out_object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.wsgi.WsgiApplication.handle_error">
-<tt class="descname">handle_error</tt><big>(</big><em>ctx</em>, <em>error</em>, <em>start_response</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiApplication.handle_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.handle_error" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiApplication.handle_error">
+<tt class="descname">handle_error</tt><big>(</big><em>p_ctx</em>, <em>others</em>, <em>error</em>, <em>start_response</em><big>)</big><a class="reference internal" href="../modules/spyne/server/wsgi.html#WsgiApplication.handle_error"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.wsgi.WsgiApplication.handle_error" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.wsgi.WsgiApplication.handle_rpc">
-<tt class="descname">handle_rpc</tt><big>(</big><em>req_env</em>, <em>start_response</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiApplication.handle_rpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.handle_rpc" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiApplication.handle_rpc">
+<tt class="descname">handle_rpc</tt><big>(</big><em>req_env</em>, <em>start_response</em><big>)</big><a class="reference internal" href="../modules/spyne/server/wsgi.html#WsgiApplication.handle_rpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.wsgi.WsgiApplication.handle_rpc" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiApplication.supports_fanout_methods">
-<tt class="descname">supports_fanout_methods</tt><em class="property"> = False</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.supports_fanout_methods" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiApplication.transport">
-<tt class="descname">transport</tt><em class="property"> = 'http://schemas.xmlsoap.org/soap/http'</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiApplication.transport" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiApplication.transport">
+<tt class="descname">transport</tt><em class="property"> = 'http://schemas.xmlsoap.org/soap/http'</em><a class="headerlink" href="#spyne.server.wsgi.WsgiApplication.transport" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="rpclib.server.wsgi.WsgiMethodContext">
-<em class="property">class </em><tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">WsgiMethodContext</tt><big>(</big><em>app</em>, <em>req_env</em>, <em>content_type</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiMethodContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiMethodContext">
+<em class="property">class </em><tt class="descclassname">spyne.server.wsgi.</tt><tt class="descname">WsgiMethodContext</tt><big>(</big><em>transport</em>, <em>req_env</em>, <em>content_type</em><big>)</big><a class="reference internal" href="../modules/spyne/server/wsgi.html#WsgiMethodContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.wsgi.WsgiMethodContext" title="Permalink to this definition">¶</a></dt>
 <dd><p>The WSGI-Specific method context. WSGI-Specific information is stored in
-the transport attribute using the <a class="reference internal" href="#rpclib.server.wsgi.WsgiTransportContext" title="rpclib.server.wsgi.WsgiTransportContext"><tt class="xref py py-class docutils literal"><span class="pre">WsgiTransportContext</span></tt></a> class.</p>
+the transport attribute using the <a class="reference internal" href="#spyne.server.wsgi.WsgiTransportContext" title="spyne.server.wsgi.WsgiTransportContext"><tt class="xref py py-class docutils literal"><span class="pre">WsgiTransportContext</span></tt></a> class.</p>
 <dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiMethodContext.descriptor">
-<tt class="descname">descriptor</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.descriptor" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiMethodContext.descriptor">
+<tt class="descname">descriptor</tt><a class="headerlink" href="#spyne.server.wsgi.WsgiMethodContext.descriptor" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiMethodContext.frozen">
-<tt class="descname">frozen</tt><em class="property"> = False</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.frozen" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiMethodContext.frozen">
+<tt class="descname">frozen</tt><em class="property"> = False</em><a class="headerlink" href="#spyne.server.wsgi.WsgiMethodContext.frozen" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.wsgi.WsgiMethodContext.get_descriptor">
-<tt class="descname">get_descriptor</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.get_descriptor" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiMethodContext.get_descriptor">
+<tt class="descname">get_descriptor</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.server.wsgi.WsgiMethodContext.get_descriptor" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiMethodContext.method_name">
-<tt class="descname">method_name</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.method_name" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiMethodContext.method_name">
+<tt class="descname">method_name</tt><a class="headerlink" href="#spyne.server.wsgi.WsgiMethodContext.method_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>The public name of the method the <tt class="docutils literal"><span class="pre">method_request_string</span></tt> was
 matched to.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.wsgi.WsgiMethodContext.set_descriptor">
-<tt class="descname">set_descriptor</tt><big>(</big><em>descriptor</em><big>)</big><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.set_descriptor" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiMethodContext.set_descriptor">
+<tt class="descname">set_descriptor</tt><big>(</big><em>descriptor</em><big>)</big><a class="headerlink" href="#spyne.server.wsgi.WsgiMethodContext.set_descriptor" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiMethodContext.transport">
-<tt class="descname">transport</tt><em class="property"> = None</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiMethodContext.transport" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiMethodContext.transport">
+<tt class="descname">transport</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.server.wsgi.WsgiMethodContext.transport" title="Permalink to this definition">¶</a></dt>
 <dd><p>Holds the WSGI-specific information</p>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="rpclib.server.wsgi.WsgiTransportContext">
-<em class="property">class </em><tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">WsgiTransportContext</tt><big>(</big><em>req_env</em>, <em>content_type</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiTransportContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiTransportContext">
+<em class="property">class </em><tt class="descclassname">spyne.server.wsgi.</tt><tt class="descname">WsgiTransportContext</tt><big>(</big><em>transport</em>, <em>req_env</em>, <em>content_type</em><big>)</big><a class="reference internal" href="../modules/spyne/server/wsgi.html#WsgiTransportContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.wsgi.WsgiTransportContext" title="Permalink to this definition">¶</a></dt>
 <dd><p>The class that is used in the transport attribute of the
-<a class="reference internal" href="#rpclib.server.wsgi.WsgiMethodContext" title="rpclib.server.wsgi.WsgiMethodContext"><tt class="xref py py-class docutils literal"><span class="pre">WsgiMethodContext</span></tt></a> class.</p>
+<a class="reference internal" href="#spyne.server.wsgi.WsgiMethodContext" title="spyne.server.wsgi.WsgiMethodContext"><tt class="xref py py-class docutils literal"><span class="pre">WsgiMethodContext</span></tt></a> class.</p>
 <dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiTransportContext.content_type">
-<tt class="descname">content_type</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.content_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Provides an easy way to set outgoing mime type. Synonym for
-<cite>mime_type</cite></p>
-</dd></dl>
+<dt id="spyne.server.wsgi.WsgiTransportContext.content_type">
+<tt class="descname">content_type</tt><a class="headerlink" href="#spyne.server.wsgi.WsgiTransportContext.content_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.wsgi.WsgiTransportContext.get_mime_type">
-<tt class="descname">get_mime_type</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiTransportContext.get_mime_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.get_mime_type" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiTransportContext.get_mime_type">
+<tt class="descname">get_mime_type</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.server.wsgi.WsgiTransportContext.get_mime_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiTransportContext.mime_type">
-<tt class="descname">mime_type</tt><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.mime_type" title="Permalink to this definition">¶</a></dt>
-<dd><p>Provides an easy way to set outgoing mime type. Synonym for
-<cite>content_type</cite></p>
-</dd></dl>
+<dt id="spyne.server.wsgi.WsgiTransportContext.mime_type">
+<tt class="descname">mime_type</tt><a class="headerlink" href="#spyne.server.wsgi.WsgiTransportContext.mime_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiTransportContext.req_env">
-<tt class="descname">req_env</tt><em class="property"> = None</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.req_env" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiTransportContext.req_env">
+<tt class="descname">req_env</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.server.wsgi.WsgiTransportContext.req_env" title="Permalink to this definition">¶</a></dt>
 <dd><p>WSGI Request environment</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiTransportContext.req_method">
-<tt class="descname">req_method</tt><em class="property"> = None</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.req_method" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiTransportContext.req_method">
+<tt class="descname">req_method</tt><em class="property"> = None</em><a class="headerlink" href="#spyne.server.wsgi.WsgiTransportContext.req_method" title="Permalink to this definition">¶</a></dt>
 <dd><p>HTTP Request verb, as a convenience to users.</p>
 </dd></dl>
 
-<dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiTransportContext.resp_code">
-<tt class="descname">resp_code</tt><em class="property"> = None</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.resp_code" title="Permalink to this definition">¶</a></dt>
-<dd><p>HTTP Response code.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiTransportContext.resp_headers">
-<tt class="descname">resp_headers</tt><em class="property"> = None</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.resp_headers" title="Permalink to this definition">¶</a></dt>
-<dd><p>HTTP Response headers.</p>
-</dd></dl>
-
 <dl class="method">
-<dt id="rpclib.server.wsgi.WsgiTransportContext.set_mime_type">
-<tt class="descname">set_mime_type</tt><big>(</big><em>what</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#WsgiTransportContext.set_mime_type"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.set_mime_type" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.wsgi.WsgiTransportContext.set_mime_type">
+<tt class="descname">set_mime_type</tt><big>(</big><em>what</em><big>)</big><a class="headerlink" href="#spyne.server.wsgi.WsgiTransportContext.set_mime_type" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
-<dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiTransportContext.wsdl">
-<tt class="descname">wsdl</tt><em class="property"> = None</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.wsdl" title="Permalink to this definition">¶</a></dt>
-<dd><p>The WSDL document that is being returned. Only relevant when handling
-WSDL requests.</p>
-</dd></dl>
-
-<dl class="attribute">
-<dt id="rpclib.server.wsgi.WsgiTransportContext.wsdl_error">
-<tt class="descname">wsdl_error</tt><em class="property"> = None</em><a class="headerlink" href="#rpclib.server.wsgi.WsgiTransportContext.wsdl_error" title="Permalink to this definition">¶</a></dt>
-<dd><p>The error when handling WSDL requests.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="function">
-<dt id="rpclib.server.wsgi.reconstruct_wsgi_request">
-<tt class="descclassname">rpclib.server.wsgi.</tt><tt class="descname">reconstruct_wsgi_request</tt><big>(</big><em>http_env</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/wsgi.html#reconstruct_wsgi_request"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.wsgi.reconstruct_wsgi_request" title="Permalink to this definition">¶</a></dt>
-<dd><p>Reconstruct http payload using information in the http header.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-rpclib.server.zeromq">
-<span id="zeromq"></span><h2>ZeroMQ<a class="headerlink" href="#module-rpclib.server.zeromq" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-spyne.server.zeromq">
+<span id="zeromq"></span><h2>ZeroMQ<a class="headerlink" href="#module-spyne.server.zeromq" title="Permalink to this headline">¶</a></h2>
 <p>This module contains a server implementation that uses ZeroMQ (zmq.REP) as
 transport.</p>
 <dl class="class">
-<dt id="rpclib.server.zeromq.ZeroMQServer">
-<em class="property">class </em><tt class="descclassname">rpclib.server.zeromq.</tt><tt class="descname">ZeroMQServer</tt><big>(</big><em>app</em>, <em>app_url</em>, <em>wsdl_url=None</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/zeromq.html#ZeroMQServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZeroMQServer">
+<em class="property">class </em><tt class="descclassname">spyne.server.zeromq.</tt><tt class="descname">ZeroMQServer</tt><big>(</big><em>app</em>, <em>app_url</em>, <em>wsdl_url=None</em><big>)</big><a class="reference internal" href="../modules/spyne/server/zeromq.html#ZeroMQServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.zeromq.ZeroMQServer" title="Permalink to this definition">¶</a></dt>
 <dd><p>The ZeroMQ server transport.</p>
 <dl class="method">
-<dt id="rpclib.server.zeromq.ZeroMQServer.generate_contexts">
-<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.generate_contexts" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZeroMQServer.generate_contexts">
+<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#spyne.server.zeromq.ZeroMQServer.generate_contexts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls create_in_document and decompose_incoming_envelope to get
 method_request string in order to generate contexts.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.zeromq.ZeroMQServer.get_in_object">
-<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.get_in_object" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZeroMQServer.get_in_object">
+<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#spyne.server.zeromq.ZeroMQServer.get_in_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.in_string to set ctx.in_body_doc, which in turn is used
 to set ctx.in_object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.zeromq.ZeroMQServer.get_out_object">
-<tt class="descname">get_out_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.get_out_object" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZeroMQServer.get_out_object">
+<tt class="descname">get_out_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#spyne.server.zeromq.ZeroMQServer.get_out_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls the matched method using the ctx.in_object to get
 ctx.out_object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.zeromq.ZeroMQServer.get_out_string">
-<tt class="descname">get_out_string</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.get_out_string" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZeroMQServer.get_out_string">
+<tt class="descname">get_out_string</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#spyne.server.zeromq.ZeroMQServer.get_out_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.out_object to set ctx.out_document and later
 ctx.out_object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.zeromq.ZeroMQServer.serve_forever">
-<tt class="descname">serve_forever</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/server/zeromq.html#ZeroMQServer.serve_forever"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.serve_forever" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZeroMQServer.serve_forever">
+<tt class="descname">serve_forever</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/spyne/server/zeromq.html#ZeroMQServer.serve_forever"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.zeromq.ZeroMQServer.serve_forever" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs the ZeroMQ server.</p>
 </dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server.zeromq.ZeroMQServer.supports_fanout_methods">
-<tt class="descname">supports_fanout_methods</tt><em class="property"> = False</em><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.supports_fanout_methods" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="rpclib.server.zeromq.ZeroMQServer.transport">
-<tt class="descname">transport</tt><em class="property"> = 'http://rfc.zeromq.org/'</em><a class="headerlink" href="#rpclib.server.zeromq.ZeroMQServer.transport" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZeroMQServer.transport">
+<tt class="descname">transport</tt><em class="property"> = 'http://rfc.zeromq.org/'</em><a class="headerlink" href="#spyne.server.zeromq.ZeroMQServer.transport" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="class">
-<dt id="rpclib.server.zeromq.ZmqMethodContext">
-<em class="property">class </em><tt class="descclassname">rpclib.server.zeromq.</tt><tt class="descname">ZmqMethodContext</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/zeromq.html#ZmqMethodContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.zeromq.ZmqMethodContext" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZmqMethodContext">
+<em class="property">class </em><tt class="descclassname">spyne.server.zeromq.</tt><tt class="descname">ZmqMethodContext</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../modules/spyne/server/zeromq.html#ZmqMethodContext"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.zeromq.ZmqMethodContext" title="Permalink to this definition">¶</a></dt>
 <dd><dl class="attribute">
-<dt id="rpclib.server.zeromq.ZmqMethodContext.descriptor">
-<tt class="descname">descriptor</tt><a class="headerlink" href="#rpclib.server.zeromq.ZmqMethodContext.descriptor" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZmqMethodContext.descriptor">
+<tt class="descname">descriptor</tt><a class="headerlink" href="#spyne.server.zeromq.ZmqMethodContext.descriptor" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server.zeromq.ZmqMethodContext.frozen">
-<tt class="descname">frozen</tt><em class="property"> = False</em><a class="headerlink" href="#rpclib.server.zeromq.ZmqMethodContext.frozen" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZmqMethodContext.frozen">
+<tt class="descname">frozen</tt><em class="property"> = False</em><a class="headerlink" href="#spyne.server.zeromq.ZmqMethodContext.frozen" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.zeromq.ZmqMethodContext.get_descriptor">
-<tt class="descname">get_descriptor</tt><big>(</big><big>)</big><a class="headerlink" href="#rpclib.server.zeromq.ZmqMethodContext.get_descriptor" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZmqMethodContext.get_descriptor">
+<tt class="descname">get_descriptor</tt><big>(</big><big>)</big><a class="headerlink" href="#spyne.server.zeromq.ZmqMethodContext.get_descriptor" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server.zeromq.ZmqMethodContext.method_name">
-<tt class="descname">method_name</tt><a class="headerlink" href="#rpclib.server.zeromq.ZmqMethodContext.method_name" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZmqMethodContext.method_name">
+<tt class="descname">method_name</tt><a class="headerlink" href="#spyne.server.zeromq.ZmqMethodContext.method_name" title="Permalink to this definition">¶</a></dt>
 <dd><p>The public name of the method the <tt class="docutils literal"><span class="pre">method_request_string</span></tt> was
 matched to.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.zeromq.ZmqMethodContext.set_descriptor">
-<tt class="descname">set_descriptor</tt><big>(</big><em>descriptor</em><big>)</big><a class="headerlink" href="#rpclib.server.zeromq.ZmqMethodContext.set_descriptor" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.ZmqMethodContext.set_descriptor">
+<tt class="descname">set_descriptor</tt><big>(</big><em>descriptor</em><big>)</big><a class="headerlink" href="#spyne.server.zeromq.ZmqMethodContext.set_descriptor" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
 
 <dl class="data">
-<dt id="rpclib.server.zeromq.context">
-<tt class="descclassname">rpclib.server.zeromq.</tt><tt class="descname">context</tt><em class="property"> = &lt;zmq.core.context.Context object at 0x485eb90&gt;</em><a class="headerlink" href="#rpclib.server.zeromq.context" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.zeromq.context">
+<tt class="descclassname">spyne.server.zeromq.</tt><tt class="descname">context</tt><em class="property"> = &lt;zmq.core.context.Context object at 0x49d9050&gt;</em><a class="headerlink" href="#spyne.server.zeromq.context" title="Permalink to this definition">¶</a></dt>
 <dd><p>The ZeroMQ context.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-rpclib.server.null">
-<span id="nullserver"></span><h2>NullServer<a class="headerlink" href="#module-rpclib.server.null" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-spyne.server.null">
+<span id="nullserver"></span><h2>NullServer<a class="headerlink" href="#module-spyne.server.null" title="Permalink to this headline">¶</a></h2>
 <p>This module contains the NullServer class and its helper objects.</p>
 <dl class="class">
-<dt id="rpclib.server.null.NullServer">
-<em class="property">class </em><tt class="descclassname">rpclib.server.null.</tt><tt class="descname">NullServer</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/null.html#NullServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.null.NullServer" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.null.NullServer">
+<em class="property">class </em><tt class="descclassname">spyne.server.null.</tt><tt class="descname">NullServer</tt><big>(</big><em>app</em><big>)</big><a class="reference internal" href="../modules/spyne/server/null.html#NullServer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.null.NullServer" title="Permalink to this definition">¶</a></dt>
 <dd><p>A server that doesn&#8217;t support any transport at all &#8211; it&#8217;s implemented
-for testing services without running a server.</p>
+to test services without having to run a server.</p>
+<p>It implicitly uses the &#8216;sync&#8217; auxiliary processing mode.</p>
 <dl class="method">
-<dt id="rpclib.server.null.NullServer.generate_contexts">
-<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#rpclib.server.null.NullServer.generate_contexts" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.null.NullServer.generate_contexts">
+<tt class="descname">generate_contexts</tt><big>(</big><em>ctx</em>, <em>in_string_charset=None</em><big>)</big><a class="headerlink" href="#spyne.server.null.NullServer.generate_contexts" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls create_in_document and decompose_incoming_envelope to get
 method_request string in order to generate contexts.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.null.NullServer.get_in_object">
-<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.null.NullServer.get_in_object" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.null.NullServer.get_in_object">
+<tt class="descname">get_in_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#spyne.server.null.NullServer.get_in_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.in_string to set ctx.in_body_doc, which in turn is used
 to set ctx.in_object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.null.NullServer.get_out_object">
-<tt class="descname">get_out_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.null.NullServer.get_out_object" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.null.NullServer.get_out_object">
+<tt class="descname">get_out_object</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#spyne.server.null.NullServer.get_out_object" title="Permalink to this definition">¶</a></dt>
 <dd><p>Calls the matched method using the ctx.in_object to get
 ctx.out_object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.null.NullServer.get_out_string">
-<tt class="descname">get_out_string</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#rpclib.server.null.NullServer.get_out_string" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.null.NullServer.get_out_string">
+<tt class="descname">get_out_string</tt><big>(</big><em>ctx</em><big>)</big><a class="headerlink" href="#spyne.server.null.NullServer.get_out_string" title="Permalink to this definition">¶</a></dt>
 <dd><p>Uses the ctx.out_object to set ctx.out_document and later
 ctx.out_object.</p>
 </dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.null.NullServer.get_wsdl">
-<tt class="descname">get_wsdl</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/rpclib/server/null.html#NullServer.get_wsdl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.null.NullServer.get_wsdl" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.null.NullServer.get_wsdl">
+<tt class="descname">get_wsdl</tt><big>(</big><big>)</big><a class="reference internal" href="../modules/spyne/server/null.html#NullServer.get_wsdl"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.null.NullServer.get_wsdl" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="method">
-<dt id="rpclib.server.null.NullServer.set_options">
-<tt class="descname">set_options</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/rpclib/server/null.html#NullServer.set_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.server.null.NullServer.set_options" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.null.NullServer.set_options">
+<tt class="descname">set_options</tt><big>(</big><em>**kwargs</em><big>)</big><a class="reference internal" href="../modules/spyne/server/null.html#NullServer.set_options"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.server.null.NullServer.set_options" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="attribute">
-<dt id="rpclib.server.null.NullServer.supports_fanout_methods">
-<tt class="descname">supports_fanout_methods</tt><em class="property"> = False</em><a class="headerlink" href="#rpclib.server.null.NullServer.supports_fanout_methods" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="attribute">
-<dt id="rpclib.server.null.NullServer.transport">
-<tt class="descname">transport</tt><em class="property"> = 'noconn://null.rpclib'</em><a class="headerlink" href="#rpclib.server.null.NullServer.transport" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.server.null.NullServer.transport">
+<tt class="descname">transport</tt><em class="property"> = 'noconn://null.spyne'</em><a class="headerlink" href="#spyne.server.null.NullServer.transport" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -482,10 +440,10 @@ ctx.out_object.</p>
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Server Transports</a><ul>
-<li><a class="reference internal" href="#module-rpclib.server._base">Server Base Class</a></li>
-<li><a class="reference internal" href="#module-rpclib.server.wsgi">HTTP (WSGI)</a></li>
-<li><a class="reference internal" href="#module-rpclib.server.zeromq">ZeroMQ</a></li>
-<li><a class="reference internal" href="#module-rpclib.server.null">NullServer</a></li>
+<li><a class="reference internal" href="#module-spyne.server._base">Server Base Class</a></li>
+<li><a class="reference internal" href="#module-spyne.server.wsgi">HTTP (WSGI)</a></li>
+<li><a class="reference internal" href="#module-spyne.server.zeromq">ZeroMQ</a></li>
+<li><a class="reference internal" href="#module-spyne.server.null">NullServer</a></li>
 </ul>
 </li>
 </ul>
@@ -495,7 +453,7 @@ ctx.out_object.</p>
                         title="previous chapter">Client Transports</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="util.html"
-                        title="next chapter">Miscellanous Rpclib Utilities</a></p>
+                        title="next chapter">Miscellanous Spyne Utilities</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../sources/reference/server.txt"
@@ -528,17 +486,17 @@ ctx.out_object.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="util.html" title="Miscellanous Rpclib Utilities"
+          <a href="util.html" title="Miscellanous Spyne Utilities"
              >next</a> |</li>
         <li class="right" >
           <a href="client.html" title="Client Transports"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" >Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Rpclib Contributors.
+        &copy; Copyright 2011, Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

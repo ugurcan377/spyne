@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>High-Level Introduction to Rpclib &mdash; rpclib 2.7.0-beta documentation</title>
+    <title>High-Level Introduction to Spyne &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.7.0-beta',
+        VERSION:     '2.8.0-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,10 +25,10 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
-    <link rel="up" title="Rpclib Manual" href="index.html" />
+    <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
+    <link rel="up" title="Spyne Manual" href="index.html" />
     <link rel="next" title="Hello World" href="helloworld.html" />
-    <link rel="prev" title="Rpclib Manual" href="index.html" /> 
+    <link rel="prev" title="Spyne Manual" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -44,10 +44,10 @@
           <a href="helloworld.html" title="Hello World"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Rpclib Manual"
+          <a href="index.html" title="Spyne Manual"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Rpclib Manual</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Spyne Manual</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,21 +56,21 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="high-level-introduction-to-rpclib">
-<span id="manual-highlevel"></span><h1>High-Level Introduction to Rpclib<a class="headerlink" href="#high-level-introduction-to-rpclib" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="high-level-introduction-to-spyne">
+<span id="manual-highlevel"></span><h1>High-Level Introduction to Spyne<a class="headerlink" href="#high-level-introduction-to-spyne" title="Permalink to this headline">¶</a></h1>
 <p>The impatient can just jump to the <a class="reference internal" href="#manual-highlevel-nutshell"><em>In a nutshell</em></a> section,
 or read a small
-<a class="reference external" href="http://arskom.github.com/rpclib/multiple_protocols_presentation.pdf">presentation</a>
+<a class="reference external" href="http://arskom.github.com/spyne/multiple_protocols_presentation.pdf">presentation</a>
 that illustrates the following concepts by examples.</p>
 <div class="section" id="concepts">
 <h2>Concepts<a class="headerlink" href="#concepts" title="Permalink to this headline">¶</a></h2>
-<p>The following is a quick introduction to the Rpclib way of naming things:</p>
+<p>The following is a quick introduction to the Spyne way of naming things:</p>
 <ul>
 <li><dl class="first docutils">
 <dt><strong>Protocols:</strong></dt>
 <dd><p class="first">Protocols define the rules for transmission of structured data. They are
-children of <a class="reference internal" href="../reference/protocol.html#rpclib.protocol._base.ProtocolBase" title="rpclib.protocol._base.ProtocolBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.protocol._base.ProtocolBase</span></tt></a> class.</p>
-<p class="last">For example: Rpclib implements a subset of the Soap 1.1 protocol.</p>
+children of <a class="reference internal" href="../reference/protocol.html#spyne.protocol._base.ProtocolBase" title="spyne.protocol._base.ProtocolBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol._base.ProtocolBase</span></tt></a> class.</p>
+<p class="last">For example: Spyne implements a subset of the Soap 1.1 protocol.</p>
 </dd>
 </dl>
 </li>
@@ -78,16 +78,16 @@ children of <a class="reference internal" href="../reference/protocol.html#rpcli
 <dt><strong>Transports:</strong></dt>
 <dd><p class="first">Transports, also protocols themselves, encapsulate protocol data in their
 free-form data sections. They are
-children of either <a class="reference internal" href="../reference/client.html#rpclib.client._base.ClientBase" title="rpclib.client._base.ClientBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.client._base.ClientBase</span></tt></a> or
-<a class="reference internal" href="../reference/server.html#rpclib.server._base.ServerBase" title="rpclib.server._base.ServerBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server._base.ServerBase</span></tt></a> classes.</p>
+children of either <a class="reference internal" href="../reference/client.html#spyne.client._base.ClientBase" title="spyne.client._base.ClientBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.client._base.ClientBase</span></tt></a> or
+<a class="reference internal" href="../reference/server.html#spyne.server._base.ServerBase" title="spyne.server._base.ServerBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.server._base.ServerBase</span></tt></a> classes.</p>
 <p>For example, Http is used as a transport for Soap, by
 tucking a Soap message in the arbitrary byte-stream part of a Http POST
 request. The same Http is exposed as a &#8220;protocol&#8221; using the
-<a class="reference internal" href="../reference/protocol.html#rpclib.protocol.http.HttpRpc" title="rpclib.protocol.http.HttpRpc"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.protocol.http.HttpRpc</span></tt></a>
+<a class="reference internal" href="../reference/protocol.html#spyne.protocol.http.HttpRpc" title="spyne.protocol.http.HttpRpc"><tt class="xref py py-class docutils literal"><span class="pre">spyne.protocol.http.HttpRpc</span></tt></a>
 class. One could use Soap as a transport by tucking a protocol message in its
 base64-encoded ByteArray container.</p>
-<p class="last">Transports appear under two packages in Rpclib source code:
-<tt class="xref py py-mod docutils literal"><span class="pre">rpclib.client</span></tt> and <tt class="xref py py-mod docutils literal"><span class="pre">rpclib.server</span></tt>.</p>
+<p class="last">Transports appear under two packages in Spyne source code:
+<tt class="xref py py-mod docutils literal"><span class="pre">spyne.client</span></tt> and <tt class="xref py py-mod docutils literal"><span class="pre">spyne.server</span></tt>.</p>
 </dd>
 </dl>
 </li>
@@ -95,30 +95,30 @@ base64-encoded ByteArray container.</p>
 <dt><strong>Models:</strong></dt>
 <dd><p class="first">Models are used to define schemas. They are mere magic cookies that contain
 very little amount of serialization logic. They are
-children of <a class="reference internal" href="../reference/model.html#rpclib.model._base.ModelBase" title="rpclib.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model._base.ModelBase</span></tt></a> class.</p>
+children of <a class="reference internal" href="../reference/model.html#spyne.model._base.ModelBase" title="spyne.model._base.ModelBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model._base.ModelBase</span></tt></a> class.</p>
 <p class="last">Types like <tt class="docutils literal"><span class="pre">String</span></tt>, <tt class="docutils literal"><span class="pre">Integer</span></tt> or <tt class="docutils literal"><span class="pre">ByteArray</span></tt> are all models. They
 reside in the
-<a class="reference internal" href="../reference/model.html#module-rpclib.model" title="rpclib.model"><tt class="xref py py-mod docutils literal"><span class="pre">rpclib.model</span></tt></a> package,</p>
+<a class="reference internal" href="../reference/model.html#module-spyne.model" title="spyne.model"><tt class="xref py py-mod docutils literal"><span class="pre">spyne.model</span></tt></a> package,</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><strong>Interfaces:</strong></dt>
+<dt><strong>Interface Documents:</strong></dt>
 <dd><p class="first">Interface documents provide a machine-readable description of the input
 the services expect and output they emit. It thus serves a roughly similar
 purpose as a method signature in a programming language. They are
-children of <a class="reference internal" href="../reference/interface.html#rpclib.interface._base.InterfaceBase" title="rpclib.interface._base.InterfaceBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.interface._base.InterfaceBase</span></tt></a> class.</p>
-<p class="last"><tt class="xref py py-mod docutils literal"><span class="pre">rpclib.interface</span></tt> package is where you can find them.</p>
+children of <a class="reference internal" href="../reference/interface.html#spyne.interface._base.InterfaceDocumentBase" title="spyne.interface._base.InterfaceDocumentBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.interface._base.InterfaceDocumentBase</span></tt></a> class.</p>
+<p class="last"><tt class="xref py py-mod docutils literal"><span class="pre">spyne.interface</span></tt> package is where you can find them.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>Serializers:</strong></dt>
-<dd><p class="first">Serializers are currently not distinguished in rpclib code. They are the
+<dd><p class="first">Serializers are currently not distinguished in spyne code. They are the
 protocol-specific representations of a serialized python object.</p>
 <p class="last">They can be anything between an lxml.etree.Element instance to a gzipped
-byte stream. Apis around pickle, simplejson, YaML and the like also
-fall in this category.</p>
+byte stream. Apis around pickle, simplejson, YaML and the like that serialize
+hieararchies of dicts also fall in this category.</p>
 </dd>
 </dl>
 </li>
@@ -126,22 +126,23 @@ fall in this category.</p>
 </div>
 <div class="section" id="how-your-code-is-wrapped">
 <h2>How your code is wrapped<a class="headerlink" href="#how-your-code-is-wrapped" title="Permalink to this headline">¶</a></h2>
-<p>While the information in the previous section gave you an idea about how Rpclib
+<p>While the information in the previous section gave you an idea about how Spyne
 code is organized, this section is supposed to give you an idea about how <em>you</em>
-should organize your code using the tools provided by Rpclib.</p>
-<p>A typical Rpclib user will just write methods that will be exposed as remote
+should organize your code using the tools provided by Spyne.</p>
+<p>A typical Spyne user will just write methods that will be exposed as remote
 procedure calls to the outside world. The following is used to wrap that
 code:</p>
 <ul>
 <li><dl class="first docutils">
-<dt><strong>User Methods</strong>: User methods are the code that you wrote and decided to use</dt>
-<dd><p class="first last">rpclib to expose to the outside world.</p>
+<dt><strong>User Methods</strong> or <strong>User Code</strong>:</dt>
+<dd><p class="first last">User methods are the code that you wrote and decided to use spyne to
+expose to the outside world.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>Decorators</strong>:</dt>
-<dd><p class="first last">the <tt class="docutils literal"><span class="pre">&#64;rpc</span></tt> and <tt class="docutils literal"><span class="pre">&#64;srpc</span></tt> decorators from <a class="reference internal" href="../reference/decorator.html#module-rpclib.decorator" title="rpclib.decorator"><tt class="xref py py-mod docutils literal"><span class="pre">rpclib.decorator</span></tt></a> module
+<dd><p class="first last">the <tt class="docutils literal"><span class="pre">&#64;rpc</span></tt> and <tt class="docutils literal"><span class="pre">&#64;srpc</span></tt> decorators from <a class="reference internal" href="../reference/decorator.html#module-spyne.decorator" title="spyne.decorator"><tt class="xref py py-mod docutils literal"><span class="pre">spyne.decorator</span></tt></a> module
 are used to flag methods that will be exposed to the outside world by
 marking their input and output types, as well as other properties.</p>
 </dd>
@@ -149,8 +150,8 @@ marking their input and output types, as well as other properties.</p>
 </li>
 <li><dl class="first docutils">
 <dt><strong>Service Definition</strong>:</dt>
-<dd><p class="first">The <a class="reference internal" href="../reference/service.html#rpclib.service.ServiceBase" title="rpclib.service.ServiceBase"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.service.ServiceBase</span></tt></a> is an abstract base class for
-service definitions, which are the smallest exposable service unit in rpclib.
+<dd><p class="first">The <a class="reference internal" href="../reference/service.html#spyne.service.ServiceBase" title="spyne.service.ServiceBase"><tt class="xref py py-class docutils literal"><span class="pre">spyne.service.ServiceBase</span></tt></a> is an abstract base class for
+service definitions, which are the smallest exposable service unit in spyne.
 You can use one service class per method definition or you can use, say, a
 service class for read-only or read/write services or you can cram
 everything into one service class, it&#8217;s up to you.</p>
@@ -158,39 +159,40 @@ everything into one service class, it&#8217;s up to you.</p>
 for grouping services that have common properties like logging, transaction
 management and security policy. It&#8217;s often a good idea to base your
 service definitions on your own ServiceBase children instead of using the
-vanilla <tt class="docutils literal"><span class="pre">ServiceBase</span></tt> class offered by Rpclib.</p>
+vanilla <tt class="docutils literal"><span class="pre">ServiceBase</span></tt> class offered by Spyne.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
 <dt><strong>Application</strong>:</dt>
-<dd><p class="first">The <a class="reference internal" href="../reference/application.html#rpclib.application.Application" title="rpclib.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.application.Application</span></tt></a> class is what ties services,
-interfaces and protocols together, ready to be wrapped by a transport.
+<dd><p class="first">The <a class="reference internal" href="../reference/application.html#spyne.application.Application" title="spyne.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">spyne.application.Application</span></tt></a> class is what ties services,
+and protocols together, ready to be wrapped by a transport.
 It also lets you define events and hooks like ServiceBase does, so you can
 do more general, application-wide customizations like exception management.</p>
 <div class="last admonition note">
 <p class="first admonition-title">Note</p>
-<p>You may know that rpclib is a generalized version of a
+<p>You may know that spyne is a generalized version of a
 soap library. So inevitably, some artifacts of the Soap world creep in
 from here and there.</p>
 <p>One of those artifacts is xml namespaces. There are varying
 opinions about the usefulness of the concept of the namespace in the
 Xml standard, but we generally think it to be A Nice Thing, so we chose
 to keep it around.</p>
-<p>When instantiating the <a class="reference internal" href="../reference/application.html#rpclib.application.Application" title="rpclib.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.application.Application</span></tt></a> class,
+<p>When instantiating the <a class="reference internal" href="../reference/application.html#spyne.application.Application" title="spyne.application.Application"><tt class="xref py py-class docutils literal"><span class="pre">spyne.application.Application</span></tt></a> class,
 you should also give it a targetNamespace (the <tt class="docutils literal"><span class="pre">tns</span></tt> argument to its
 constructor) string and an optional application name (the <tt class="docutils literal"><span class="pre">name</span></tt>
 argument to the <tt class="xref py py-class docutils literal"><span class="pre">Application</span></tt> constructor), which are used to
-generally distinguish your application from other applications. While
-it&#8217;s conventionally the URL and the name of the class of your
+generally distinguish your application from other applications
+<em>in the universe</em>.
+While it&#8217;s conventionally the URL and the name of the class of your
 application, you can put <tt class="docutils literal"><span class="pre">tns=&quot;Hogwarts&quot;,</span> <span class="pre">name=&quot;Harry&quot;</span></tt> there and
 just be done with it.</p>
-<p class="last">Every object in the Rpclib world has a name and belongs to a namespace.
-Public functions (and the implicit <a class="reference internal" href="../reference/model.html#rpclib.model.complex.ComplexModel" title="rpclib.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.complex.ComplexModel</span></tt></a>
+<p class="last">Every object in the Spyne world has a name and belongs to a namespace.
+Public functions (and the implicit <a class="reference internal" href="../reference/model.html#spyne.model.complex.ComplexModel" title="spyne.model.complex.ComplexModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.complex.ComplexModel</span></tt></a>
 children that are created for the input and output types of the
 functions you defined) are forced to be in the Application namespace,
 and have whatever you give them as public name in the
-<a class="reference internal" href="../reference/decorator.html#rpclib.decorator.srpc" title="rpclib.decorator.srpc"><tt class="xref py py-func docutils literal"><span class="pre">rpclib.decorator.srpc()</span></tt></a> decorator. Rpclib-defined types generally
+<a class="reference internal" href="../reference/decorator.html#spyne.decorator.srpc" title="spyne.decorator.srpc"><tt class="xref py py-func docutils literal"><span class="pre">spyne.decorator.srpc()</span></tt></a> decorator. Spyne-defined types generally
 belong to a pre-defined namespace by default. User-defined objects
 have the module name as namespace string and class name as name string
 by default.</p>
@@ -212,7 +214,7 @@ around.</p>
 </div>
 <div class="section" id="what-s-next">
 <h2>What&#8217;s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
-<p>Now that you have a general idea about how Rpclib is supposed to work, let&#8217;s get
+<p>Now that you have a general idea about how Spyne is supposed to work, let&#8217;s get
 coding. You can start by <a class="reference internal" href="helloworld.html#manual-helloworld"><em>Hello World</em></a> tutorial right now.</p>
 </div>
 </div>
@@ -225,7 +227,7 @@ coding. You can start by <a class="reference internal" href="helloworld.html#man
         <div class="sphinxsidebarwrapper">
   <h3><a href="../index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">High-Level Introduction to Rpclib</a><ul>
+<li><a class="reference internal" href="#">High-Level Introduction to Spyne</a><ul>
 <li><a class="reference internal" href="#concepts">Concepts</a></li>
 <li><a class="reference internal" href="#how-your-code-is-wrapped">How your code is wrapped</a><ul>
 <li><a class="reference internal" href="#in-a-nutshell">In a nutshell</a></li>
@@ -238,7 +240,7 @@ coding. You can start by <a class="reference internal" href="helloworld.html#man
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">Rpclib Manual</a></p>
+                        title="previous chapter">Spyne Manual</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="helloworld.html"
                         title="next chapter">Hello World</a></p>
@@ -277,14 +279,14 @@ coding. You can start by <a class="reference internal" href="helloworld.html#man
           <a href="helloworld.html" title="Hello World"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Rpclib Manual"
+          <a href="index.html" title="Spyne Manual"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" >Rpclib Manual</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" >Spyne Manual</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Rpclib Contributors.
+        &copy; Copyright 2011, Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

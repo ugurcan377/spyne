@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Rpclib API Reference &mdash; rpclib 2.7.0-beta documentation</title>
+    <title>Spyne API Reference &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.7.0-beta',
+        VERSION:     '2.8.0-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,7 +25,7 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
+    <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
     <link rel="next" title="Fundamental Data Structures" href="base.html" />
     <link rel="prev" title="Implementing Transports and Protocols" href="../manual/t_and_p.html" /> 
   </head>
@@ -45,7 +45,7 @@
         <li class="right" >
           <a href="../manual/t_and_p.html" title="Implementing Transports and Protocols"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -54,8 +54,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="rpclib-api-reference">
-<span id="reference-index"></span><h1>Rpclib API Reference<a class="headerlink" href="#rpclib-api-reference" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="spyne-api-reference">
+<span id="reference-index"></span><h1>Spyne API Reference<a class="headerlink" href="#spyne-api-reference" title="Permalink to this headline">¶</a></h1>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="base.html">Fundamental Data Structures</a><ul>
@@ -65,48 +65,48 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="model.html">Models</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="model.html#module-rpclib.model">Base Classes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html#module-rpclib.model.binary">Binary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html#module-rpclib.model.complex">Complex</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html#module-rpclib.model.enum">Enum</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html#module-rpclib.model.fault">Fault</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html#module-rpclib.model.primitive">Primitives</a></li>
-<li class="toctree-l2"><a class="reference internal" href="model.html#module-rpclib.model.table">SQL Table</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model">Base Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.binary">Binary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.complex">Complex</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.enum">Enum</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.fault">Fault</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.primitive">Primitives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html#module-spyne.model.table">SQL Table</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="interface.html">Interfaces</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="interface.html#module-rpclib.interface._base">Interface Base Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="interface.html#module-rpclib.interface.xml_schema._base">XML Schema</a></li>
-<li class="toctree-l2"><a class="reference internal" href="interface.html#module-rpclib.interface.wsdl.wsdl11">Wsdl 1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#module-spyne.interface._base">Interface Base Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#module-spyne.interface.xml_schema._base">XML Schema</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html#module-spyne.interface.wsdl.wsdl11">Wsdl 1.1</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="protocol.html">Protocols</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="protocol.html#module-rpclib.protocol._base">Protocol Base Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol.html#module-rpclib.protocol.http">HttRpc</a></li>
-<li class="toctree-l2"><a class="reference internal" href="protocol.html#module-rpclib.protocol.soap.soap11">Soap 1.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol.html#module-spyne.protocol._base">Protocol Base Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol.html#module-spyne.protocol.http">HttRpc</a></li>
+<li class="toctree-l2"><a class="reference internal" href="protocol.html#module-spyne.protocol.soap.soap11">Soap 1.1</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="client.html">Client Transports</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="client.html#module-rpclib.client._base">Client Base Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="client.html#module-rpclib.client.http">HTTP</a></li>
-<li class="toctree-l2"><a class="reference internal" href="client.html#module-rpclib.client.zeromq">ZeroMQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client.html#module-spyne.client._base">Client Base Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client.html#module-spyne.client.http">HTTP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="client.html#module-spyne.client.zeromq">ZeroMQ</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="server.html">Server Transports</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="server.html#module-rpclib.server._base">Server Base Class</a></li>
-<li class="toctree-l2"><a class="reference internal" href="server.html#module-rpclib.server.wsgi">HTTP (WSGI)</a></li>
-<li class="toctree-l2"><a class="reference internal" href="server.html#module-rpclib.server.zeromq">ZeroMQ</a></li>
-<li class="toctree-l2"><a class="reference internal" href="server.html#module-rpclib.server.null">NullServer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server.html#module-spyne.server._base">Server Base Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server.html#module-spyne.server.wsgi">HTTP (WSGI)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server.html#module-spyne.server.zeromq">ZeroMQ</a></li>
+<li class="toctree-l2"><a class="reference internal" href="server.html#module-spyne.server.null">NullServer</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="util.html">Miscellanous Rpclib Utilities</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util.html#module-rpclib.util.cdict">Class Dictionary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#module-rpclib.util.etreeconv">Element Tree Conversion</a></li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#module-rpclib.util.simple">Simple Wrappers</a></li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#module-rpclib.util.xml">Xml Utilities</a></li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#module-rpclib.util.odict">Ordered Dictionary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#module-rpclib.util.oset">Ordered Set</a></li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#module-rpclib.util.simple">Helpers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">Miscellanous Spyne Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="util.html#module-spyne.util.cdict">Class Dictionary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#module-spyne.util.etreeconv">Element Tree Conversion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#module-spyne.util.simple">Simple Wrappers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#module-spyne.util.xml">Xml Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#module-spyne.util.odict">Ordered Dictionary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#module-spyne.util.oset">Ordered Set</a></li>
+<li class="toctree-l2"><a class="reference internal" href="util.html#module-spyne.util.simple">Helpers</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="application.html">Application Definition</a></li>
@@ -165,11 +165,11 @@
         <li class="right" >
           <a href="../manual/t_and_p.html" title="Implementing Transports and Protocols"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Rpclib Contributors.
+        &copy; Copyright 2011, Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

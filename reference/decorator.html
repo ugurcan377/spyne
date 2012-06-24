@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>RPC Decorators &mdash; rpclib 2.7.0-beta documentation</title>
+    <title>RPC Decorators &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.7.0-beta',
+        VERSION:     '2.8.0-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,9 +25,9 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
-    <link rel="up" title="Rpclib API Reference" href="index.html" />
-    <link rel="next" title="Running Tests" href="../tests.html" />
+    <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
+    <link rel="up" title="Spyne API Reference" href="index.html" />
+    <link rel="next" title="&lt;no title&gt;" href="../tests.html" />
     <link rel="prev" title="Service Definition" href="service.html" /> 
   </head>
   <body>
@@ -41,13 +41,13 @@
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../tests.html" title="Running Tests"
+          <a href="../tests.html" title="&lt;no title&gt;"
              accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="service.html" title="Service Definition"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Rpclib API Reference</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -56,8 +56,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="module-rpclib.decorator">
-<span id="rpc-decorators"></span><h1>RPC Decorators<a class="headerlink" href="#module-rpclib.decorator" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-spyne.decorator">
+<span id="rpc-decorators"></span><h1>RPC Decorators<a class="headerlink" href="#module-spyne.decorator" title="Permalink to this headline">¶</a></h1>
 <p>This module contains the the &#64;srpc decorator and its helper methods. The
 &#64;srpc decorator is responsible for tagging methods as remote procedure calls,
 and also for dynamically defining complex objects that carry the method&#8217;s input
@@ -66,14 +66,33 @@ parameters and output value(s).</p>
 to have a more elegant way of passing frequently-used parameter values. The &#64;rpc
 decorator is a simple example of this.</p>
 <dl class="function">
-<dt id="rpclib.decorator.srpc">
-<tt class="descclassname">rpclib.decorator.</tt><tt class="descname">srpc</tt><big>(</big><em>*params</em>, <em>**kparams</em><big>)</big><a class="reference internal" href="../modules/rpclib/decorator.html#srpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#rpclib.decorator.srpc" title="Permalink to this definition">¶</a></dt>
+<dt id="spyne.decorator.srpc">
+<tt class="descclassname">spyne.decorator.</tt><tt class="descname">srpc</tt><big>(</big><em>*params</em>, <em>**kparams</em><big>)</big><a class="reference internal" href="../modules/spyne/decorator.html#srpc"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#spyne.decorator.srpc" title="Permalink to this definition">¶</a></dt>
 <dd><p>Method decorator to tag a method as a remote procedure call.</p>
 <p>The methods tagged with this decorator do not behave like a normal python
 method but return &#8216;MethodDescriptor&#8217; object when called.</p>
-<p>You should use the <a class="reference internal" href="server.html#rpclib.server.null.NullServer" title="rpclib.server.null.NullServer"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.server.null.NullServer</span></tt></a> transport if you
+<p>You should use the <a class="reference internal" href="server.html#spyne.server.null.NullServer" title="spyne.server.null.NullServer"><tt class="xref py py-class docutils literal"><span class="pre">spyne.server.null.NullServer</span></tt></a> transport if you
 want to call the methods directly. You can also use the &#8216;function&#8217; attribute
 of the returned object to call the function itself.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>_in_header</strong> &#8211; A type or an iterable of types that that this method
+accepts as incoming header.</li>
+<li><strong>_out_header</strong> &#8211; A type or an iterable of types that that this method
+sends as outgoing header.</li>
+<li><strong>_port_type</strong> &#8211; SOAP Port type.</li>
+<li><strong>_no_ctx</strong> &#8211; Don&#8217;t pass implicit ctx object to the user method.</li>
+<li><strong>_udp</strong> &#8211; Short for UserDefinedProperties, you can use this to mark the
+method with arbitrary metadata.</li>
+<li><strong>_aux</strong> &#8211; The auxiliary backend to run this method.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 </dd></dl>
 
 </div>
@@ -89,7 +108,7 @@ of the returned object to call the function itself.</p>
                         title="previous chapter">Service Definition</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="../tests.html"
-                        title="next chapter">Running Tests</a></p>
+                        title="next chapter">&lt;no title&gt;</a></p>
   <h3>This Page</h3>
   <ul class="this-page-menu">
     <li><a href="../sources/reference/decorator.txt"
@@ -122,17 +141,17 @@ of the returned object to call the function itself.</p>
           <a href="../py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
         <li class="right" >
-          <a href="../tests.html" title="Running Tests"
+          <a href="../tests.html" title="&lt;no title&gt;"
              >next</a> |</li>
         <li class="right" >
           <a href="service.html" title="Service Definition"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" >Rpclib API Reference</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" >Spyne API Reference</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Rpclib Contributors.
+        &copy; Copyright 2011, Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>

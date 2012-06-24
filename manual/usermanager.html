@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>User Manager &mdash; rpclib 2.7.0-beta documentation</title>
+    <title>User Manager &mdash; spyne 2.8.0-rc documentation</title>
     
     <link rel="stylesheet" href="../static/default.css" type="text/css" />
     <link rel="stylesheet" href="../static/pygments.css" type="text/css" />
@@ -16,7 +16,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '../',
-        VERSION:     '2.7.0-beta',
+        VERSION:     '2.8.0-rc',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -25,8 +25,8 @@
     <script type="text/javascript" src="../static/jquery.js"></script>
     <script type="text/javascript" src="../static/underscore.js"></script>
     <script type="text/javascript" src="../static/doctools.js"></script>
-    <link rel="top" title="rpclib 2.7.0-beta documentation" href="../index.html" />
-    <link rel="up" title="Rpclib Manual" href="index.html" />
+    <link rel="top" title="spyne 2.8.0-rc documentation" href="../index.html" />
+    <link rel="up" title="Spyne Manual" href="index.html" />
     <link rel="next" title="SQLAlchemy Integration" href="sqlalchemy.html" />
     <link rel="prev" title="Hello World" href="helloworld.html" /> 
   </head>
@@ -46,8 +46,8 @@
         <li class="right" >
           <a href="helloworld.html" title="Hello World"
              accesskey="P">previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" accesskey="U">Rpclib Manual</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Spyne Manual</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -67,34 +67,34 @@ done so, we recommended you to read it first.</p>
 <li>Defining events.</li>
 </ul>
 <p>The following is an simple example using complex, nested data. It&#8217;s available
-here: <a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_basic.py">http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_basic.py</a></p>
+here: <a class="reference external" href="http://github.com/arskom/spyne/blob/master/examples/user_manager/server_basic.py">http://github.com/arskom/spyne/blob/master/examples/user_manager/server_basic.py</a></p>
 <div class="highlight-python"><div class="highlight"><pre><span class="kn">import</span> <span class="nn">logging</span>
 <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;rpclib.protocol.xml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">&#39;spyne.protocol.xml&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
 
-<span class="kn">from</span> <span class="nn">rpclib.application</span> <span class="kn">import</span> <span class="n">Application</span>
-<span class="kn">from</span> <span class="nn">rpclib.decorator</span> <span class="kn">import</span> <span class="n">rpc</span>
-<span class="kn">from</span> <span class="nn">rpclib.interface.wsdl</span> <span class="kn">import</span> <span class="n">Wsdl11</span>
-<span class="kn">from</span> <span class="nn">rpclib.protocol.soap</span> <span class="kn">import</span> <span class="n">Soap11</span>
-<span class="kn">from</span> <span class="nn">rpclib.model.primitive</span> <span class="kn">import</span> <span class="n">String</span>
-<span class="kn">from</span> <span class="nn">rpclib.model.primitive</span> <span class="kn">import</span> <span class="n">Integer</span>
-<span class="kn">from</span> <span class="nn">rpclib.model.complex</span> <span class="kn">import</span> <span class="n">Array</span>
-<span class="kn">from</span> <span class="nn">rpclib.model.complex</span> <span class="kn">import</span> <span class="n">Iterable</span>
-<span class="kn">from</span> <span class="nn">rpclib.model.complex</span> <span class="kn">import</span> <span class="n">ComplexModel</span>
-<span class="kn">from</span> <span class="nn">rpclib.server.wsgi</span> <span class="kn">import</span> <span class="n">WsgiApplication</span>
-<span class="kn">from</span> <span class="nn">rpclib.service</span> <span class="kn">import</span> <span class="n">ServiceBase</span>
+<span class="kn">from</span> <span class="nn">spyne.application</span> <span class="kn">import</span> <span class="n">Application</span>
+<span class="kn">from</span> <span class="nn">spyne.decorator</span> <span class="kn">import</span> <span class="n">rpc</span>
+<span class="kn">from</span> <span class="nn">spyne.interface.wsdl</span> <span class="kn">import</span> <span class="n">Wsdl11</span>
+<span class="kn">from</span> <span class="nn">spyne.protocol.soap</span> <span class="kn">import</span> <span class="n">Soap11</span>
+<span class="kn">from</span> <span class="nn">spyne.model.primitive</span> <span class="kn">import</span> <span class="n">String</span>
+<span class="kn">from</span> <span class="nn">spyne.model.primitive</span> <span class="kn">import</span> <span class="n">Integer</span>
+<span class="kn">from</span> <span class="nn">spyne.model.complex</span> <span class="kn">import</span> <span class="n">Array</span>
+<span class="kn">from</span> <span class="nn">spyne.model.complex</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="kn">from</span> <span class="nn">spyne.model.complex</span> <span class="kn">import</span> <span class="n">ComplexModel</span>
+<span class="kn">from</span> <span class="nn">spyne.server.wsgi</span> <span class="kn">import</span> <span class="n">WsgiApplication</span>
+<span class="kn">from</span> <span class="nn">spyne.service</span> <span class="kn">import</span> <span class="n">ServiceBase</span>
 
 <span class="n">_user_database</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="n">_user_id_seq</span> <span class="o">=</span> <span class="mi">1</span>
 
 <span class="k">class</span> <span class="nc">Permission</span><span class="p">(</span><span class="n">ComplexModel</span><span class="p">):</span>
-    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;rpclib.examples.user_manager&#39;</span>
+    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;spyne.examples.user_manager&#39;</span>
 
     <span class="n">application</span> <span class="o">=</span> <span class="n">String</span>
     <span class="n">operation</span> <span class="o">=</span> <span class="n">String</span>
 
 <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">ComplexModel</span><span class="p">):</span>
-    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;rpclib.examples.user_manager&#39;</span>
+    <span class="n">__namespace__</span> <span class="o">=</span> <span class="s">&#39;spyne.examples.user_manager&#39;</span>
 
     <span class="n">user_id</span> <span class="o">=</span> <span class="n">Integer</span>
     <span class="n">user_name</span> <span class="o">=</span> <span class="n">String</span>
@@ -126,7 +126,7 @@ here: <a class="reference external" href="http://github.com/arskom/rpclib/blob/m
     <span class="k">def</span> <span class="nf">get_all_users</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">ctx</span><span class="o">.</span><span class="n">udc</span><span class="o">.</span><span class="n">users</span><span class="o">.</span><span class="n">itervalues</span><span class="p">()</span>
 
-<span class="n">application</span> <span class="o">=</span> <span class="n">Application</span><span class="p">([</span><span class="n">UserManagerService</span><span class="p">],</span> <span class="s">&#39;rpclib.examples.user_manager&#39;</span><span class="p">,</span>
+<span class="n">application</span> <span class="o">=</span> <span class="n">Application</span><span class="p">([</span><span class="n">UserManagerService</span><span class="p">],</span> <span class="s">&#39;spyne.examples.user_manager&#39;</span><span class="p">,</span>
             <span class="n">interface</span><span class="o">=</span><span class="n">Wsdl11</span><span class="p">(),</span> <span class="n">in_protocol</span><span class="o">=</span><span class="n">Soap11</span><span class="p">(),</span> <span class="n">out_protocol</span><span class="o">=</span><span class="n">Soap11</span><span class="p">())</span>
 
 <span class="k">def</span> <span class="nf">_on_method_call</span><span class="p">(</span><span class="n">ctx</span><span class="p">):</span>
@@ -160,7 +160,7 @@ here: <a class="reference external" href="http://github.com/arskom/rpclib/blob/m
     <span class="n">server</span><span class="o">.</span><span class="n">serve_forever</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Juping into what&#8217;s new: Rpclib uses <tt class="docutils literal"><span class="pre">ComplexModel</span></tt> as a general type that when extended will produce complex
+<p>Juping into what&#8217;s new: Spyne uses <tt class="docutils literal"><span class="pre">ComplexModel</span></tt> as a general type that when extended will produce complex
 serializable types that can be used in a public service. The <tt class="docutils literal"><span class="pre">Permission</span></tt> class is a
 fairly simple class with just two members:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Permission</span><span class="p">(</span><span class="n">ComplexModel</span><span class="p">):</span>
@@ -179,7 +179,7 @@ fairly simple class with just two members:</p>
 <p>Nothing new so far.</p>
 <p>Below, you can see that the <tt class="docutils literal"><span class="pre">email</span></tt> member which has a regular expression
 restriction defined. The String type accepts other restrictions, please refer to
-the <tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.primitive.String</span></tt> documentation for more information:</p>
+the <tt class="xref py py-class docutils literal"><span class="pre">spyne.model.primitive.String</span></tt> documentation for more information:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">email</span> <span class="o">=</span> <span class="n">String</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s">r&#39;\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[A-Z]{2,4}\b&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -199,7 +199,7 @@ representations.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="n">permissions</span> <span class="o">=</span> <span class="n">Permission</span><span class="o">.</span><span class="n">customize</span><span class="p">(</span><span class="n">max_occurs</span><span class="o">=</span><span class="s">&#39;unbounded&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Here, we need to use the <a class="reference internal" href="../reference/model.html#rpclib.model._base.ModelBase.customize" title="rpclib.model._base.ModelBase.customize"><tt class="xref py py-func docutils literal"><span class="pre">rpclib.model._base.ModelBase.customize()</span></tt></a> call
+<p>Here, we need to use the <a class="reference internal" href="../reference/model.html#spyne.model._base.ModelBase.customize" title="spyne.model._base.ModelBase.customize"><tt class="xref py py-func docutils literal"><span class="pre">spyne.model._base.ModelBase.customize()</span></tt></a> call
 because calling a <tt class="docutils literal"><span class="pre">ComplexModel</span></tt> child instantiates that class, whereas
 calling a <tt class="docutils literal"><span class="pre">SimpleModel</span></tt> child returns a duplicate of that class. The
 <tt class="docutils literal"><span class="pre">customize</span></tt> function just sets given arguments as class attributes to
@@ -238,14 +238,14 @@ with no specific api it should adhere to, other than your own.</p>
 </div>
 <p>Such custom objects could be used to manage everything from transactions to
 logging or to performance measurements. You can have a look at the
-<a class="reference external" href="http://github.com/arskom/rpclib/blob/master/examples/user_manager/server_basic.py">events.py example</a>
+<a class="reference external" href="http://github.com/arskom/spyne/blob/master/examples/user_manager/server_basic.py">events.py example</a>
 in the examples directory in the source distribution for an example on using
 events to measure method performance)</p>
 <div class="section" id="what-s-next">
 <h2>What&#8217;s next?<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial walks you through what you need to know to expose basic
 services. You can read the <a class="reference internal" href="sqlalchemy.html#manual-sqlalchemy"><em>SQLAlchemy Integration</em></a> document where the
-<a class="reference internal" href="../reference/model.html#rpclib.model.table.TableModel" title="rpclib.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">rpclib.model.table.TableModel</span></tt></a> class and its helpers are introduced.
+<a class="reference internal" href="../reference/model.html#spyne.model.table.TableModel" title="spyne.model.table.TableModel"><tt class="xref py py-class docutils literal"><span class="pre">spyne.model.table.TableModel</span></tt></a> class and its helpers are introduced.
 You can also have look at the <a class="reference internal" href="metadata.html#manual-metadata"><em>Working with RPC Metadata</em></a> section where service
 metadata management apis are introduced.</p>
 <p>Otherwise, please refer to the rest of the documentation or the mailing list
@@ -310,12 +310,12 @@ if you have further questions.</p>
         <li class="right" >
           <a href="helloworld.html" title="Hello World"
              >previous</a> |</li>
-        <li><a href="../index.html">rpclib 2.7.0-beta documentation</a> &raquo;</li>
-          <li><a href="index.html" >Rpclib Manual</a> &raquo;</li> 
+        <li><a href="../index.html">spyne 2.8.0-rc documentation</a> &raquo;</li>
+          <li><a href="index.html" >Spyne Manual</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Rpclib Contributors.
+        &copy; Copyright 2011, Spyne Contributors.
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.2.
     </div>
   </body>
