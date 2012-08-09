@@ -224,6 +224,40 @@ class HtmlMicroFormat(HtmlBase):
         yield '</%s>' % self.root_tag
 
 
+def _subvalue_to_html(cls, value):
+    if issubclass(cls, AnyUri):
+        href = getattr(value, 'href', None)
+        if href is None: # this is not a UriValue instance.
+            href = value
+            text = getattr(cls.Attributes, 'text', None)
+            content = None
+
+        else:
+            text = getattr(value, 'text', None)
+            if text is None:
+                text = getattr(cls.Attributes, 'text', None)
+
+            content = getattr(value, 'content', None)
+
+        if issubclass(cls, ImageUri):
+            retval = E.img(src=href)
+
+            if text is not None:
+                retval.attrib['alt'] = text
+            # content is ignored with ImageUri.
+
+        else:
+            retval = E.a(href=href)
+            retval.text = text
+            if content is not None:
+                retval.append(content)
+
+    else:
+        retval = cls.to_string(value)
+
+    return retval
+
+
 def HtmlTable(app=None, validator=None, produce_header=True,
                     table_name_attr='class', field_name_attr=None, border=0,
                         fields_as='columns', row_class=None, cell_class=None,
@@ -422,38 +456,6 @@ class _HtmlColumnTable(_HtmlTableBase):
                 yield row
 
 
-def _subvalue_to_html(cls, value):
-    if issubclass(cls.type, AnyUri):
-        href = getattr(value, 'href', None)
-        if href is None: # this is not a UriValue instance.
-            href = value
-            text = getattr(cls.type.Attributes, 'text', None)
-            content = None
-
-        else:
-            text = getattr(value, 'text', None)
-            if text is None:
-                text = getattr(cls.type.Attributes, 'text', None)
-
-            content = getattr(value, 'content', None)
-
-        if issubclass(cls.type, ImageUri):
-            retval = E.img(src=href)
-
-            if text is not None:
-                retval.attrib['alt'] = text
-            # content is ignored with ImageUri.
-
-        else:
-            retval = E.a(href=href)
-            retval.text = text
-            if content is not None:
-                retval.append(content)
-
-    else:
-        retval = cls.type.to_string(value)
-
-    return retval
 
 class _HtmlRowTable(_HtmlTableBase):
     def serialize_complex_model(self, cls, value, locale):
