@@ -411,7 +411,7 @@ class _HtmlColumnTable(_HtmlTableBase):
                         else:
                             subvalue = ""
                     else:
-                        subvalue = _subvalue_to_html(v, subvalue)
+                        subvalue = _subvalue_to_html(v.type, subvalue)
 
                     if self.field_name_attr is None:
                         row.append(E.td(subvalue, **td))
@@ -523,7 +523,7 @@ class _HtmlRowTable(_HtmlTableBase):
                     else:
                         subvalue = ""
                 else:
-                    subvalue = _subvalue_to_html(v, subvalue)
+                    subvalue = _subvalue_to_html(v.type, subvalue)
 
                 if self.produce_header:
                     header_text = translate(v.type, locale, k)
