@@ -19,6 +19,7 @@
 
 HTTP_200 = '200 OK'
 HTTP_400 = '400 Bad Request'
+HTTP_403 = '403 Forbidden'
 HTTP_404 = '404 Method Not Found'
 HTTP_405 = '405 Method Not Allowed'
 HTTP_413 = '413 Request Too Long'

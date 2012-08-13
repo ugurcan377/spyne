@@ -16,6 +16,11 @@ class RequestNotAllowed(Fault):
     def __init__(self, faultstring=""):
         Fault.__init__(self, 'Client.RequestNotAllowed', faultstring)
 
+class RequestForbidden(Fault):
+    """Raised when the request is not authorized."""
+    def __init__(self, faultstring=""):
+        Fault.__init__(self, 'Client.RequestForbidden', faultstring)
+
 class ArgumentError(Fault):
     """Raised when there is a general problem with input data."""
     def __init__(self, faultstring=""):

@@ -29,6 +29,7 @@ from copy import copy
 from spyne import EventManager
 
 from spyne.const.http import HTTP_400
+from spyne.const.http import HTTP_403
 from spyne.const.http import HTTP_404
 from spyne.const.http import HTTP_405
 from spyne.const.http import HTTP_413
@@ -38,6 +39,7 @@ from spyne.error import Fault
 from spyne.error import ResourceNotFoundError
 from spyne.error import RequestTooLongError
 from spyne.error import RequestNotAllowed
+from spyne.error import RequestForbidden
 from spyne.error import ValidationError
 
 from spyne.model.binary import File
@@ -228,6 +230,8 @@ class ProtocolBase(object):
             return HTTP_404
         if isinstance(fault, RequestNotAllowed):
             return HTTP_405
+        if isinstance(fault, RequestForbidden):
+            return HTTP_403
         if isinstance(fault, Fault) and (fault.faultcode.startswith('Client.')
                                                 or fault.faultcode == 'Client'):
             return HTTP_400
