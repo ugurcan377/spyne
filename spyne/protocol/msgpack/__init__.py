@@ -17,10 +17,13 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301
 #
 
-"""This module contains implementations for protocols that use MessagePack as
-serializer.
+"""The ``spyne.protocol.msgpack`` module contains implementations for protocols
+that use MessagePack as serializer.
 
-This protocol is EXPERIMENTAL.
+Initially released in 2.8.0-rc.
+
+This module is EXPERIMENTAL. You may not recognize the code here next time you
+look at it.
 """
 
 import logging
@@ -31,7 +34,7 @@ import msgpack
 from spyne.model.complex import Array
 from spyne.model.fault import Fault
 from spyne.protocol import ProtocolBase
-from spyne.protocol import DictObject
+from spyne.protocol.dictobj import DictObject
 
 
 class MessagePackDecodeError(Fault):
@@ -46,9 +49,10 @@ class MessagePackObject(DictObject):
 
     def create_in_document(self, ctx, in_string_encoding=None):
         """Sets ``ctx.in_document``,  using ``ctx.in_string``.
-            :param ctx: The MethodContext object
-            :param in_string_encoding: MessagePack is a binary protocol. So this
-                argument is ignored.
+
+        :param ctx: The MethodContext object
+        :param in_string_encoding: MessagePack is a binary protocol. So this
+            argument is ignored.
         """
 
         ctx.in_document = msgpack.unpackb(''.join(ctx.in_string))
@@ -71,9 +75,10 @@ class MessagePackRpc(MessagePackObject):
 
     def create_in_document(self, ctx, in_string_encoding=None):
         """Sets ``ctx.in_document``,  using ``ctx.in_string``.
-            :param ctx: The MethodContext object
-            :param in_string_encoding: MessagePack is a binary protocol. So this
-                argument is ignored.
+
+        :param ctx: The MethodContext object
+        :param in_string_encoding: MessagePack is a binary protocol. So this
+            argument is ignored.
         """
 
         # TODO: Use feed api
